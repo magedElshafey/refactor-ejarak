@@ -358,3 +358,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.main {
+    min-height: calc(100vh - 583px);
+}

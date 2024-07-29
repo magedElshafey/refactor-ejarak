@@ -27,15 +27,15 @@ const AllRealStates = () => {
     bathrooms,
     area,
     priceCreate,
-    review,
-    latest,
+
     name,
     sortCreate,
     sort,
   } = useSelector((state) => state.filterSlice);
+
   const { isLoading, data } = useQuery(
     [
-      "all realstates",
+      "all-realstates",
       categoryId,
       subCategoryId,
       highPrice,
@@ -43,28 +43,24 @@ const AllRealStates = () => {
       roomNumbers,
       bathrooms,
       area,
-      priceCreate,
-      review,
-      latest,
       name,
-      sortCreate,
+      priceCreate,
       sort,
+      sortCreate,
     ],
     () =>
       getAllRealstates(
-        categoryId,
-        subCategoryId,
-        highPrice,
-        lowPrice,
+        name,
         roomNumbers,
         bathrooms,
+        highPrice,
+        lowPrice,
         area,
+        categoryId,
+        subCategoryId,
+        sort,
         priceCreate,
-        review,
-        latest,
-        name,
-        sortCreate,
-        sort
+        sortCreate
       )
   );
 
@@ -112,7 +108,7 @@ const AllRealStates = () => {
               data?.data?.data
                 .slice(offset, offset + itemsPerPage)
                 .map((item, index) => (
-                  <RealstateCard key={index} data={item} dep="all realstates" />
+                  <RealstateCard key={index} data={item} dep="all-realstates" />
                 ))
             ) : (
               <NoDataTitle />

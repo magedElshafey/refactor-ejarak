@@ -3,37 +3,34 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { request } from "../services/axios";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
-const useWishlist = (realStateId, dependencies) => {
+const useWishlist = (realStateId, queryKey) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const isLogin = "true"; // logic to check if the user is logged in
+  const { isLogin } = useSelector((state) => state.authSlice);
 
-  const handleAddToWishlist = async (id, data) => {
+  const handleAddToWishlist = async (id) => {
     return await request({
       url: `/favorites/toggle/${id}`,
       method: "POST",
-      data,
     });
   };
 
-  const { mutate } = useMutation(
-    (data) => handleAddToWishlist(realStateId, data),
-    {
-      onSuccess: (data) => {
-        if (data?.data?.status) {
-          Swal.fire({
-            title: data.data.message,
-            icon: "success",
-          });
+  const { mutate } = useMutation(() => handleAddToWishlist(realStateId), {
+    onSuccess: (data) => {
+      if (data?.data?.status) {
+        Swal.fire({
+          title: data.data.message,
+          icon: "success",
+        });
 
-          queryClient.invalidateQueries(dependencies);
-          queryClient.invalidateQueries("favorites");
-        }
-      },
-    }
-  );
+        queryClient.invalidateQueries(queryKey);
+        queryClient.invalidateQueries("favorites");
+      }
+    },
+  });
 
   const handleClick = () => {
     if (!isLogin) {
@@ -47,14 +44,11 @@ const useWishlist = (realStateId, dependencies) => {
         cancelButtonText: t("cancel"),
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/login");
-        } else {
-          return;
+          navigate("/auth/login");
         }
       });
     } else {
-      const data = {};
-      mutate(data);
+      mutate();
     }
   };
 

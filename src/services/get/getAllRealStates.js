@@ -1,15 +1,15 @@
 import { request } from "../axios";
 export const getAllRealstates = async (
-  categoryId,
-  subCtegoryId,
-  highPrice,
-  lowPrice,
+  name,
   rooms,
   bathrooms,
+  highPrice,
+  lowPrice,
   area,
-  name,
-  sortPrice,
+  categoryId,
+  subCtegoryId,
   sort,
+  sortPrice,
   sortCreate
 ) => {
   return await request({

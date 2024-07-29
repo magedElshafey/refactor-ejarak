@@ -10,22 +10,9 @@ import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import useWishlist from "../../hooks/useWishlist";
 import { Link } from "react-router-dom";
 const RealStateCard = ({ data, dep }) => {
-  console.log("data fro mthe card", data);
   const { t, i18n } = useTranslation();
-  const { handleClick } = useWishlist(data.id, [
-    dep,
-    data.name,
-    data.categoryId,
-    data.subCtegoryId,
-    data.sort,
-    data.sortPrice,
-    data.sortCreate,
-    data.highPrice,
-    data.lowPrice,
-    data.area,
-    data.bedrooms,
-    data.bathrooms,
-  ]);
+
+  const { handleClick } = useWishlist(data.id, dep);
   return (
     <div className="w-full bg-white rounded-xl shadow-xl mb-3">
       <div className="flex items-center gap-3 justify-end mb-1">

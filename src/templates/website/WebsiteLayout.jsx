@@ -6,7 +6,11 @@ const WebsiteLayout = () => {
   return (
     <div>
       <Navbar bg="bg-[#e7ebe7]" />
-      {<Outlet />}
+      {
+        <div className="main">
+          <Outlet />
+        </div>
+      }
       <Footer isHome={false} />
     </div>
   );

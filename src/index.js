@@ -14,7 +14,16 @@ import { Provider } from "react-redux";
 // global context
 import GlobalContext from "./hooks/GlobalContext";
 import store from "./store/store";
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5000, // Adjust this based on your requirements
+      cacheTime: 1000, // Adjust this based on your requirements
+
+      refetchOnMount: true,
+    },
+  },
+});
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <QueryClientProvider client={queryClient}>
