@@ -27,7 +27,7 @@ const MainInput = ({
         className={`w-full p-3 h-[40px] relative ${
           border ? border : "border border-[#9399A3]"
         } ${
-          bg ? bg : "bg-white"
+          bg ? `${bg} border-none` : "bg-white"
         } rounded-xl my-3 flex items-center justify-between gap-2`}
       >
         <input

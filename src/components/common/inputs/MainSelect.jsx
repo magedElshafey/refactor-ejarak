@@ -48,15 +48,17 @@ const MainSelect = ({
         onClick={toggleShowOptions}
       >
         <div
-          className={`w-full p-2 rounded-xl flex items-center justify-between ${
-            bg ? bg : "bg-transparent"
-          } ${border ? border : "border border-[#9399A3]"}`}
+          className={`w-full p-2 rounded-xl flex items-center justify-between  ${
+            border ? border : "border border-[#9399A3]"
+          } ${bg ? `${bg} border-none` : "bg-transparent"}`}
         >
-          {selectedOption}
-          {!disabled ? <IoMdArrowDropdown size={30} /> : null}
+          <p>{selectedOption}</p>
+          {!disabled ? (
+            <IoMdArrowDropdown size={30} className="text-end" />
+          ) : null}
         </div>
         <div
-          className={`absolute bottom-[-70px] min-w-[180px] duration-300 bg-white border border-slate-400 rounded-lg shadow-lg z-40 ${
+          className={`absolute bottom-[-70px] w-full duration-300 bg-white border border-slate-400 rounded-lg shadow-lg z-40 ${
             i18n.language === "ar" ? "right-0" : "left-0"
           } ${showOptions ? "block" : "hidden"} `}
         >

@@ -19,6 +19,7 @@ import AuthLayout from "../templates/auth/AuthLayout";
 import Login from "../pages/auth/Login";
 import Regester from "../pages/auth/Regester";
 import EmailVerfication from "../pages/auth/EmailVerfication";
+import AddRealstate from "../pages/website/AddRealstate";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <Whishlist />,
+      },
+      {
+        path: "add-realstate",
+        element: <AddRealstate />,
       },
     ],
   },

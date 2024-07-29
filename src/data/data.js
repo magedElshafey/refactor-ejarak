@@ -18,7 +18,7 @@ export const navLinks = [
   {
     arTitle: "اعلن عن عقارك",
     enTitle: "Advertise",
-    path: "/addreal/step1",
+    path: "/website/add-realstate",
     icon: <BsFillHouseLockFill size={20} />,
     onClick: (e, isLoggedIn, navigate, setActiveLink, type) => {
       if (!isLoggedIn) {
