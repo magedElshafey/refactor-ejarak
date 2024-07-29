@@ -1,0 +1,15 @@
+import React from "react";
+import Navbar from "../common/navbar/Navbar";
+import { Outlet } from "react-router-dom";
+import Footer from "../common/footer/Footer";
+const WebsiteLayout = () => {
+  return (
+    <div>
+      <Navbar bg="bg-[#e7ebe7]" />
+      {<Outlet />}
+      <Footer isHome={false} />
+    </div>
+  );
+};
+
+export default WebsiteLayout;

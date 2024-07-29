@@ -1,0 +1,84 @@
+import React, { useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import useClickOutside from "../../../hooks/useClickOutside";
+import { IoMdArrowDropdown } from "react-icons/io";
+
+const MainSelect = ({
+  border,
+  bg,
+  label,
+  options,
+  onSelect,
+  disabled,
+  loading,
+  value,
+}) => {
+  const { t, i18n } = useTranslation();
+  const [showOptions, setShowOptions] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const toggleShowOptions = () => {
+    if (disabled) {
+      return;
+    } else {
+      setShowOptions(!showOptions);
+    }
+  };
+  const optionRef = useRef(null);
+  useClickOutside(optionRef, () => setShowOptions(false));
+  const handleSelectChange = (option) => {
+    setSelectedOption(option.name);
+    onSelect(option);
+    setShowOptions(false);
+  };
+  useEffect(() => {
+    if (value) {
+      setSelectedOption(value);
+    } else {
+      return;
+    }
+  }, [value]);
+  return (
+    <div>
+      <label className="block mb-1 text-textColor text-md font-medium">
+        {t(label)}
+      </label>
+      <div
+        ref={optionRef}
+        className="relative cursor-pointer"
+        onClick={toggleShowOptions}
+      >
+        <div
+          className={`w-full p-2 rounded-xl flex items-center justify-between ${
+            bg ? bg : "bg-transparent"
+          } ${border ? border : "border border-[#9399A3]"}`}
+        >
+          {selectedOption}
+          {!disabled ? <IoMdArrowDropdown size={30} /> : null}
+        </div>
+        <div
+          className={`absolute bottom-[-70px] min-w-[180px] duration-300 bg-white border border-slate-400 rounded-lg shadow-lg z-40 ${
+            i18n.language === "ar" ? "right-0" : "left-0"
+          } ${showOptions ? "block" : "hidden"} `}
+        >
+          {loading ? (
+            <div className="spinner2"></div>
+          ) : options.length ? (
+            options.map((item) => (
+              <p
+                key={item.id}
+                onClick={() => handleSelectChange(item)}
+                className=" p-2 cursor-pointer rounded-[13px] hover:bg-[#BDC7BC4D]"
+              >
+                {item.name}
+              </p>
+            ))
+          ) : (
+            <p className="text-center">{t("no data")}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MainSelect;

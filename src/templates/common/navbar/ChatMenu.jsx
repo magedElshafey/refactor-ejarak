@@ -1,0 +1,50 @@
+import React, { useRef, useState } from "react";
+import { MdOutlineMessage } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+import useClickOutside from "../../../hooks/useClickOutside";
+const ChatMenu = ({ bg }) => {
+  const { i18n, t } = useTranslation();
+  const [showMenu, setShowMenu] = useState(false);
+  const menu = useRef(null);
+  const handleChangeLang = (v) => {
+    localStorage.setItem("lang", JSON.stringify(v));
+    i18n.changeLanguage(v);
+    window.location.reload();
+  };
+  const closeMenu = () => setShowMenu(false);
+  useClickOutside(menu, closeMenu);
+  return (
+    <div
+      onClick={() => setShowMenu(!showMenu)}
+      ref={menu}
+      className="cursor-pointer relative"
+    >
+      <div
+        className={`w-12 h-12 p-2 flex items-center rounded-md justify-center border  ${
+          bg ? `${bg} text-slate-500` : "border-white text-white bg-transparent"
+        }`}
+      >
+        <MdOutlineMessage size={20} />
+      </div>
+      <ul
+        className={`absolute duration-300 ${
+          i18n.language === "ar" ? "right-0" : "left-0"
+        } bottom-[-80px] bg-white shadow-lg z-50 p-3 rounded-md ${
+          showMenu ? "block" : "hidden"
+        }`}
+      >
+        <li
+          onClick={() => handleChangeLang("ar")}
+          className=" cursor-pointer mb-3"
+        >
+          {t("ar")}
+        </li>
+        <li onClick={() => handleChangeLang("en")} className=" cursor-pointer ">
+          {t("en")}
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default ChatMenu;
