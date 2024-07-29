@@ -14,7 +14,7 @@ const MapView = () => {
   const { pathname } = useLocation();
   const { lat, lng } = useSelector((state) => state.filterSlice);
   const [isSatelliteView, setIsSatelliteView] = useState(false);
-  const { nearestRealStates, loadinNearRealStates } = useMap();
+  const { nearestRealStates, loadinNearRealStates, markers } = useMap();
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const [activeId, setActiveId] = useState(null);
   // default props of map zoom and coordinates(lat , lng)
@@ -47,7 +47,7 @@ const MapView = () => {
   return (
     <div
       className={`relative w-full  ${
-        pathname === "/" ? "h-[450px] md:h-[600px]" : "h-[250px]"
+        pathname === "/" ? "h-[450px] md:h-[600px]" : "h-[450px]"
       } `}
     >
       <button
@@ -69,7 +69,7 @@ const MapView = () => {
           {t("loading")}
         </div>
       ) : null}
-      {!loadinNearRealStates && nearestRealStates ? (
+      {!loadinNearRealStates && nearestRealStates && pathname === "/" ? (
         <div className=" absolute left-[50%] top-8 w-[250px] text-white bg-maincolorgreen p-3 flex items-center justify-center rounded-md z-30 translate-x-[-50%]">
           {nearestRealStates?.length} {t("locations beside you")}
         </div>
@@ -86,7 +86,10 @@ const MapView = () => {
           mapTypeId: isSatelliteView ? "satellite" : "roadmap",
         }}
       >
+        {markers && <Marker lat={markers.lat} lng={markers.lng} />}
         {!loadinNearRealStates &&
+          pathname === "/" &&
+          nearestRealStates &&
           nearestRealStates.map((item, index) => (
             <Marker
               key={index}
@@ -95,31 +98,37 @@ const MapView = () => {
               data={item}
               activeId={activeId}
               setActiveId={setActiveId}
+              pathname={pathname}
             />
           ))}
       </GoogleMap>
     </div>
   );
 };
-const Marker = ({ data, activeId, setActiveId }) => {
+const Marker = ({ data, activeId, setActiveId, pathname }) => {
   const { t } = useTranslation();
   return (
     <>
-      {data ? (
-        <div
-          onClick={() => setActiveId(data.id)}
-          className="p-3 rounded-md border border-maincolorgreen bg-white text-maincolorgreen flex items-center justify-center cursor-pointer gap-5 font-bold w-[180px] relative"
-        >
-          {data?.special === 1 && (
-            <FaStar size={18} className="text-yellow-400" />
+      {data && pathname === "/" ? (
+        <>
+          <div
+            onClick={() => setActiveId(data.id)}
+            className="p-3 rounded-md border border-maincolorgreen bg-white text-maincolorgreen flex items-center justify-center cursor-pointer gap-5 font-bold w-[180px] relative"
+          >
+            {data?.special === 1 && (
+              <FaStar size={18} className="text-yellow-400" />
+            )}
+            <p>
+              {data?.price} {t("currency")}
+            </p>
+            {data.year_of_construction <= 2 && (
+              <FaFireAlt size={22} className="text-red-300" />
+            )}
+          </div>
+          {activeId === data.id && (
+            <Popup data={data} activeId={activeId} setActiveId={setActiveId} />
           )}
-          <p>
-            {data?.price} {t("currency")}
-          </p>
-          {data.year_of_construction <= 2 && (
-            <FaFireAlt size={22} className="text-red-300" />
-          )}
-        </div>
+        </>
       ) : (
         <div>
           <div className="pin">
@@ -130,16 +139,12 @@ const Marker = ({ data, activeId, setActiveId }) => {
           <div className="pulse"></div>
         </div>
       )}
-      {activeId === data.id && (
-        <Popup data={data} activeId={activeId} setActiveId={setActiveId} />
-      )}
     </>
   );
 };
 const Popup = ({ data, activeId, setActiveId }) => {
   const { t, i18n } = useTranslation();
   const popupRef = useRef();
-  // Hide popup when clicking outside
 
   return (
     <div

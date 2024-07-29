@@ -7,9 +7,11 @@ import { changeLat, changeLng, changeLocation } from "../store/filterSlice";
 import ErrorHandling from "../components/common/ErrorHandling";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 const useMap = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const {
     lat,
     lng,
@@ -26,11 +28,12 @@ const useMap = () => {
     sortCreate,
   } = useSelector((state) => state.filterSlice);
   const [address, setAddress] = useState("");
-  const [markers, setMarkers] = useState({});
+  const [markers, setMarkers] = useState(null);
   const [coordinates, setCoordinates] = useState({
     lat: "",
     lng: "",
   });
+
   const [nearestRealStates, setNearestRealStates] = useState([]);
   const { isLoading: loadinNearRealStates, data } = useQuery(
     [
@@ -86,15 +89,18 @@ const useMap = () => {
   const handleSelect = async (value) => {
     try {
       const results = await geocodeByAddress(value);
+
       if (results.length > 0) {
         const latLng = await getLatLng(results[0]);
         setMarkers(latLng);
         setCoordinates(latLng);
-
         setAddress(value);
-        dispatch(changeLat(latLng.lat));
-        dispatch(changeLng(latLng.lng));
-        dispatch(changeLocation(value));
+        if (pathname === "/") {
+          dispatch(changeLat(latLng.lat));
+          dispatch(changeLng(latLng.lng));
+          dispatch(changeLocation(value));
+        }
+
         // Fetch ads based on the selected address
       } else {
         console.error("No results found for the selected address.");

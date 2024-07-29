@@ -170,3 +170,25 @@ export const followUs = {
     },
   ],
 };
+export const accountDetailsNavbar = [
+  {
+    title: "my account",
+    path: "/website/my-account",
+    role: ["owner", "tenant"],
+  },
+  {
+    title: "my houses",
+    path: "/website/my-realstates",
+    role: ["owner"],
+  },
+  {
+    title: "my reservations",
+    path: "/website/my-reservations",
+    role: ["owner", "tenant"],
+  },
+  {
+    title: "contracts",
+    path: "/website/my-contracts",
+    role: ["owner", "tenant"],
+  },
+];

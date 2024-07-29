@@ -20,6 +20,7 @@ import Login from "../pages/auth/Login";
 import Regester from "../pages/auth/Regester";
 import EmailVerfication from "../pages/auth/EmailVerfication";
 import AddRealstate from "../pages/website/AddRealstate";
+import MyAccount from "../pages/website/MyAccount";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "add-realstate",
         element: <AddRealstate />,
+      },
+      {
+        path: "my-account",
+        element: <MyAccount />,
       },
     ],
   },

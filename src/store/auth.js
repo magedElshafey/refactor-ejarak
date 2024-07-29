@@ -23,8 +23,6 @@ const authSlice = createSlice({
       state.token = null;
       state.userData = null;
       window.localStorage.setItem("auth", JSON.stringify(state.isLogin));
-      localStorage.setItem("token", JSON.stringify(state.token));
-      localStorage.setItem("user", JSON.stringify(state.userData));
       window.localStorage.removeItem("token");
       window.localStorage.removeItem("user");
     },

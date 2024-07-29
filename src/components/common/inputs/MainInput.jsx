@@ -13,6 +13,7 @@ const MainInput = ({
   border,
   bg,
   hintColor,
+  height,
   ...otherProps
 }) => {
   const { t } = useTranslation();
@@ -24,11 +25,13 @@ const MainInput = ({
         {t(label)}
       </label>
       <div
-        className={`w-full p-3 h-[40px] relative ${
+        className={`w-full p-3  relative ${
           border ? border : "border border-[#9399A3]"
         } ${
           bg ? `${bg} border-none` : "bg-white"
-        } rounded-xl my-3 flex items-center justify-between gap-2`}
+        } rounded-xl  flex items-center justify-between gap-2 ${
+          height ? height : ""
+        }`}
       >
         <input
           id={t(label)}

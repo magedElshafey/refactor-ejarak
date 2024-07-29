@@ -48,9 +48,9 @@ const MainSelect = ({
         onClick={toggleShowOptions}
       >
         <div
-          className={`w-full p-2 rounded-xl flex items-center justify-between  ${
+          className={`w-full p-3 rounded-xl flex items-center justify-between  ${
             border ? border : "border border-[#9399A3]"
-          } ${bg ? `${bg} border-none` : "bg-transparent"}`}
+          } ${bg ? `${bg} border-none` : "bg-white"}`}
         >
           <p>{selectedOption}</p>
           {!disabled ? (
@@ -58,7 +58,7 @@ const MainSelect = ({
           ) : null}
         </div>
         <div
-          className={`absolute bottom-[-70px] w-full duration-300 bg-white border border-slate-400 rounded-lg shadow-lg z-40 ${
+          className={`absolute top-[50px] w-full duration-300 bg-white border border-slate-400 rounded-lg shadow-lg z-40 text-start ${
             i18n.language === "ar" ? "right-0" : "left-0"
           } ${showOptions ? "block" : "hidden"} `}
         >
