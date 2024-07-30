@@ -21,6 +21,11 @@ import Regester from "../pages/auth/Regester";
 import EmailVerfication from "../pages/auth/EmailVerfication";
 import AddRealstate from "../pages/website/AddRealstate";
 import MyAccount from "../pages/website/MyAccount";
+import MyRealStates from "../pages/website/MyRealStates";
+import MyReservations from "../pages/website/MyReservations";
+import MyContracts from "../pages/website/MyContracts";
+import RealStateReservation from "../pages/website/RealStateReservation";
+import ReservationDetails from "../pages/website/ReservationDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -58,6 +63,26 @@ const router = createBrowserRouter([
       {
         path: "my-account",
         element: <MyAccount />,
+      },
+      {
+        path: "my-realstates",
+        element: <MyRealStates />,
+      },
+      {
+        path: "my-reservations",
+        element: <MyReservations />,
+      },
+      {
+        path: "my-contracts",
+        element: <MyContracts />,
+      },
+      {
+        path: "realstate/reservation-details/:id",
+        element: <RealStateReservation />,
+      },
+      {
+        path: "reservation-details/:id",
+        element: <ReservationDetails />,
       },
     ],
   },

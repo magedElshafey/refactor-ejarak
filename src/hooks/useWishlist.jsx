@@ -9,7 +9,7 @@ const useWishlist = (realStateId, queryKey) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { isLogin } = useSelector((state) => state.authSlice);
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
 
   const handleAddToWishlist = async (id) => {
     return await request({
@@ -33,7 +33,7 @@ const useWishlist = (realStateId, queryKey) => {
   });
 
   const handleClick = () => {
-    if (!isLogin) {
+    if (!ejarakLogin) {
       Swal.fire({
         text: t("login_first"),
         icon: "warning",

@@ -192,3 +192,56 @@ export const accountDetailsNavbar = [
     role: ["owner", "tenant"],
   },
 ];
+export const statusFilter = [
+  {
+    arTitle: "العقارات قيد المراجعة",
+    enTitle: "Under Review",
+    value: "pending",
+  },
+  {
+    arTitle: "العقارات المقبولة",
+    enTitle: "Acceptable",
+    value: "accepted",
+  },
+
+  {
+    arTitle: "العقارات المرفوضة",
+    enTitle: "Rejected",
+    value: "refused",
+  },
+];
+export const filterdReservations = [
+  {
+    arTitle: "الحجوزات قيد المراجعة",
+    enTitle: "Under Review",
+    value: "pending",
+  },
+  {
+    arTitle: "الحجوزات المقبولة",
+    enTitle: "Acceptable",
+    value: "accepted",
+  },
+
+  {
+    arTitle: "الحجوزات المرفوضة",
+    enTitle: "Rejected",
+    value: "refused",
+  },
+  {
+    arTitle: "الحجوزات المكتملة",
+    enTitle: "completed reservations",
+    value: "contract_created",
+  },
+];
+export const filterdContrancts = [
+  {
+    arTitle: "العقود اليدوية",
+    enTitle: "manual contract",
+    value: "manual",
+  },
+  {
+    arTitle: "العقود الإلكترونية",
+    enTitle: "electronic contracts",
+    value: "electronic_agent",
+  },
+];

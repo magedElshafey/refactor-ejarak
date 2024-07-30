@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Footer = ({ isHome }) => {
   const { t, i18n } = useTranslation();
-  const { isLogin } = useSelector((state) => state.authSlice);
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
   return (
     <>
       {isHome ? (
@@ -30,7 +30,7 @@ const Footer = ({ isHome }) => {
             </div>
             <div
               className={`grid grid-cols-1 ${
-                isLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
+                ejarakLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
               } gap-4 lg:gap-16`}
             >
               <div>
@@ -79,7 +79,7 @@ const Footer = ({ isHome }) => {
                   </NavLink>
                 ))}
               </div>
-              {isLogin ? (
+              {ejarakLogin ? (
                 <div>
                   <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                     {t("account")}
@@ -129,7 +129,7 @@ const Footer = ({ isHome }) => {
             </div>
             <div
               className={`grid grid-cols-1 ${
-                isLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
+                ejarakLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
               } gap-4 lg:gap-16`}
             >
               <div>
@@ -178,7 +178,7 @@ const Footer = ({ isHome }) => {
                   </NavLink>
                 ))}
               </div>
-              {isLogin ? (
+              {ejarakLogin ? (
                 <div>
                   <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                     {t("account")}

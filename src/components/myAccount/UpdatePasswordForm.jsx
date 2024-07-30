@@ -56,14 +56,14 @@ const UpdatePasswordForm = ({
       >
         <MainInput
           type="password"
-          label="password"
+          label="old password"
           value={password}
           error={passwordError}
           onChange={handlePasswordChange}
         />
         <MainInput
           type="password"
-          label="confirm"
+          label="new password"
           value={confirmPassword}
           onChange={handleConfrimPasswordChange}
           error={confirmPasswordError}

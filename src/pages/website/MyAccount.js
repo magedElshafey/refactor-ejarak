@@ -1,10 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import AccountDetailsNavbar from "../../components/common/accountDetails/AccountDetailsNavbar";
 import MyAccountForm from "../../components/myAccount/MyAccountForm";
 import { getMyAccountDetails } from "../../services/get/getMyAccountDetails";
 import { useQuery } from "react-query";
 import Spinner from "../../components/common/Spinner";
-import Swal from "sweetalert2";
+
 // custom hook
 import useNumberInput from "../../hooks/validation/useNumberInput";
 import useTextInputValidation from "../../hooks/validation/useTextInputValidation";

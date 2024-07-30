@@ -432,6 +432,7 @@
   "enterOTP": "Please enter the code",
   "noLocations": "there are no realstates nearest you",
   "acceptReq": "Do you want to accept the request?",
+  "refReq": "Do you want to refused the request?",
   "thank": "thank you",
   "payment done": "payment done successfully",
   "payment desc": "you will be redirect to the home page shortly or click here to return to home page",
@@ -453,5 +454,8 @@
   "contact us": "contact us",
   "Input must be text only. Numbers and special characters are not allowed.": "Input must be text only. Numbers and special characters are not allowed.",
   "Invalid email address": "Invalid email address",
-  "password does not match": "password does not match"
+  "password does not match": "password does not match",
+  "old password": "old password",
+  "new password": "new password",
+  "add realstate": "add realstate"
 }

@@ -8,7 +8,7 @@ import useClickOutside from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router-dom";
 const LoginBtn = ({ bg }) => {
   const { t, i18n } = useTranslation();
-  const { isLogin, userData } = useSelector((state) => state.authSlice);
+  const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
   const [showMenu, setShowMenu] = useState(false);
   const toggleShowMenu = () => setShowMenu(!showMenu);
   const ref = useRef(null);
@@ -16,7 +16,7 @@ const LoginBtn = ({ bg }) => {
   const navigate = useNavigate();
   return (
     <>
-      {!isLogin ? (
+      {!ejarakLogin ? (
         <Link
           to="/auth/login"
           className="flex items-center justify-center gap-2 bg-maincolorgreen text-white py-3 rounded-md w-[150px] "
@@ -52,8 +52,8 @@ const LoginBtn = ({ bg }) => {
               showMenu ? "block" : "hidden"
             }`}
           >
-            {userData.account.type === "owner" ||
-            userData.account.type === "tenant" ? (
+            {userData?.account?.type === "owner" ||
+            userData?.account?.type === "tenant" ? (
               <li
                 className=" cursor-pointer mb-2 text-black"
                 onClick={() => {

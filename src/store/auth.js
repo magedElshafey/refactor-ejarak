@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  isLogin: JSON.parse(window.localStorage.getItem("auth")) || false,
+  ejarakLogin: JSON.parse(window.localStorage.getItem("auth")) || false,
   userData: JSON.parse(localStorage.getItem("user")) || null,
   token: JSON.parse(localStorage.getItem("token")) || null,
 };
@@ -9,8 +9,8 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => {
-      state.isLogin = true;
-      window.localStorage.setItem("auth", JSON.stringify(state.isLogin));
+      state.ejarakLogin = true;
+      window.localStorage.setItem("auth", JSON.stringify(state.ejarakLogin));
       state.userData = action.payload;
       localStorage.setItem("user", JSON.stringify(state.userData));
     },
@@ -19,10 +19,10 @@ const authSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(state.userData));
     },
     logout: (state) => {
-      state.isLogin = false;
+      state.ejarakLogin = false;
       state.token = null;
       state.userData = null;
-      window.localStorage.setItem("auth", JSON.stringify(state.isLogin));
+      window.localStorage.setItem("auth", JSON.stringify(state.ejarakLogin));
       window.localStorage.removeItem("token");
       window.localStorage.removeItem("user");
     },

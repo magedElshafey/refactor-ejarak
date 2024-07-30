@@ -18,7 +18,7 @@ const Navbar = ({ bg }) => {
   const dispatch = useDispatch();
   const filterRef = useRef(null);
   const { i18n } = useTranslation();
-  const { isLogin } = useSelector((state) => state.authSlice);
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { openFilter } = useSelector((state) => state.filterSlice);
   useClickOutside(filterRef, () => dispatch(closeFilter()));
   const [showSidebar, setShowSidebar] = useState();
@@ -37,12 +37,12 @@ const Navbar = ({ bg }) => {
             <NavLinks navLinks={navLinks} logo={bg ? logo2 : logo} bg={bg} />
           </div>
           <LangMenu bg={bg} />
-          {isLogin ? (
+          {ejarakLogin ? (
             <>
               <ChatMenu bg={bg} />
             </>
           ) : null}
-          {isLogin ? (
+          {ejarakLogin ? (
             <>
               <ChatMenu bg={bg} />
             </>
@@ -61,12 +61,12 @@ const Navbar = ({ bg }) => {
               onClick={() => setShowSidebar(true)}
             />
             <LangMenu bg={bg} />
-            {isLogin ? (
+            {ejarakLogin ? (
               <>
                 <ChatMenu bg={bg} />
               </>
             ) : null}
-            {isLogin ? (
+            {ejarakLogin ? (
               <>
                 <ChatMenu bg={bg} />
               </>
@@ -143,12 +143,12 @@ export default Navbar;
         </div>
 
         <LangMenu bg={bg} />
-        {isLogin ? (
+        {ejarakLogin ? (
           <>
             <ChatMenu bg={bg} />
           </>
         ) : null}
-        {isLogin ? (
+        {ejarakLogin ? (
           <>
             <ChatMenu bg={bg} />
           </>

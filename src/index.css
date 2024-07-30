@@ -362,3 +362,24 @@ input[type="number"] {
 .main {
     min-height: calc(100vh - 548px);
 }
+
+.btn-msg {
+    background-color: #e0f1ff;
+    width: 100px;
+    color: rgba(17, 145, 207, 255);
+    border: 1px solid rgba(17, 145, 207, 255);
+}
+
+.btn-whats {
+    width: 100px;
+    color: var(--mainColor);
+    border: 1px solid var(--mainColor);
+    background-color: #e5f6ec;
+}
+
+.call-btn {
+    width: 100px;
+    color: var(--textColor);
+    border: 1px solid var(--textColor);
+    background-color: #f5f6f7;
+}

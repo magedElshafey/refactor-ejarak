@@ -450,6 +450,7 @@
   "enterOTP": "يرجى ادخال الكود المرسل",
   "noLocations": "لا يوجد عقارات قريبة منك",
   "acceptReq": "هل تريد قبول الطلب ؟",
+  "refReq": "هل تريد حذف الطلب ؟",
   "thank": "ِشكرا لك",
   "payment done": "تم الدفع بنجاح",
   "payment desc": "ستتم إعادة توجيهك إلى الصفحة الرئيسية قريبًا أو انقر هنا للعودة إلى الصفحة الرئيسية",
@@ -472,5 +473,8 @@
   "contact us": "تواصل معنا",
   "Input must be text only. Numbers and special characters are not allowed.": "يجب أن يكون الإدخال نصًا فقط. الأرقام والأحرف الخاصة غير مسموح بها.",
   "Invalid email address": "البريد الإلكتروني غير صالح",
-  "password does not match": "الباسورد غير متساوي"
+  "password does not match": "الباسورد غير متساوي",
+  "old password": "كلمة المرور القديمة",
+  "new password": "كلمة المرور الجديدة",
+  "add realstate": "إضافة عقار"
 }

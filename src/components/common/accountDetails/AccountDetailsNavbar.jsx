@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 const AccountDetailsNavbar = () => {
   const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
-  const role = userData.account.type;
+  const role = userData?.account?.type;
   return (
-    <div className="w-full bg-[#eceeeb] p-3 rounded-lg flex items-center gap-3 md:gap-4 lg:gap-6 overflow-x-auto ">
+    <div className="w-full   flex items-center gap-3 md:gap-4 lg:gap-6 overflow-x-auto overflow-y-hidden ">
       {accountDetailsNavbar
         ?.filter((item) => item.role.includes(role))
         .map((item, index) => (
