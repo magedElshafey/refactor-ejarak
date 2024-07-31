@@ -26,6 +26,9 @@ import MyReservations from "../pages/website/MyReservations";
 import MyContracts from "../pages/website/MyContracts";
 import RealStateReservation from "../pages/website/RealStateReservation";
 import ReservationDetails from "../pages/website/ReservationDetails";
+import CreateManualContract from "../pages/website/CreateManualContract";
+import ManualContractDetails from "../pages/website/ManualContractDetails";
+import CreateElectronicContract from "../pages/website/CreateElectronicContract";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -83,6 +86,18 @@ const router = createBrowserRouter([
       {
         path: "reservation-details/:id",
         element: <ReservationDetails />,
+      },
+      {
+        path: "create-contract/manual/:id",
+        element: <CreateManualContract />,
+      },
+      {
+        path: "manual-contract/details/:id",
+        element: <ManualContractDetails />,
+      },
+      {
+        path: "create-contract/electronic/:id",
+        element: <CreateElectronicContract />,
       },
     ],
   },

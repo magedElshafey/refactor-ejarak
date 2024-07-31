@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const ContractDetailsBtn = ({ id }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const handleClick = () => navigate(`/website/manual-contract-details/${id}`);
+  const handleClick = () => navigate(`/website/manual-contract/details/${id}`);
   return (
     <button
       onClick={handleClick}

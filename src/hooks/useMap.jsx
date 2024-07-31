@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useQuery } from "react-query";
 import { getNearRealStates } from "../services/get/getNearRealStates";
@@ -92,8 +92,11 @@ const useMap = () => {
 
       if (results.length > 0) {
         const latLng = await getLatLng(results[0]);
+
         setMarkers(latLng);
         setCoordinates(latLng);
+        console.log("markers from select", markers);
+
         setAddress(value);
         if (pathname === "/") {
           dispatch(changeLat(latLng.lat));
@@ -109,6 +112,7 @@ const useMap = () => {
       console.error("Error while getting coordinates:", error);
     }
   };
+
   return {
     handleSelect,
     address,

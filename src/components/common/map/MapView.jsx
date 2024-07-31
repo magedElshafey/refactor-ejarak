@@ -15,6 +15,7 @@ const MapView = () => {
   const { lat, lng } = useSelector((state) => state.filterSlice);
   const [isSatelliteView, setIsSatelliteView] = useState(false);
   const { nearestRealStates, loadinNearRealStates, markers } = useMap();
+
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const [activeId, setActiveId] = useState(null);
   // default props of map zoom and coordinates(lat , lng)

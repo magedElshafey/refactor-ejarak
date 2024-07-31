@@ -14,7 +14,7 @@ const RealStateCard = ({ data, dep }) => {
 
   const { handleClick } = useWishlist(data.id, dep);
   return (
-    <div className="w-full bg-white rounded-xl shadow-xl mb-3">
+    <div className="w-full bg-white rounded-xl shadow-xl mb-5 md:mb-6 lg:mb-8">
       <div className="flex items-center gap-3 justify-end mb-1">
         <div className="flex items-center gap-1">
           {data?.avg_rating ? (

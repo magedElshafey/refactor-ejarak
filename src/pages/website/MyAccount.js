@@ -81,33 +81,35 @@ const MyAccount = () => {
       ) : (
         <div className="container mx-auto px-8 mt-8">
           <AccountDetailsNavbar />
-          <MyAccountForm
-            name={name}
-            nameError={nameError}
-            handleNameChange={handleNameChange}
-            email={email}
-            setEmail={setEmail}
-            emailError={emailError}
-            nationalId={nationId}
-            type={type}
-            handlePhoneChange={handlePhoneChange}
-            phone={phone}
-            phoneError={phoneError}
-            handlePhotoChange={handlePhotoChange}
-            previewUrl={previewUrl}
-            profilePhoto={profilePhoto}
-            handleRemovePhoto={handleRemovePhoto}
-            countryCode={countryCode}
-            selectedPhoto={selectedPhoto}
-          />
-          <UpdatePasswordForm
-            password={password}
-            passwordError={passwordError}
-            handlePasswordChange={handlePasswordChange}
-            confirmPassword={confirmPassword}
-            confirmPasswordError={confirmPasswordError}
-            handleConfrimPasswordChange={handleConfrimPasswordChange}
-          />
+          <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
+            <MyAccountForm
+              name={name}
+              nameError={nameError}
+              handleNameChange={handleNameChange}
+              email={email}
+              setEmail={setEmail}
+              emailError={emailError}
+              nationalId={nationId}
+              type={type}
+              handlePhoneChange={handlePhoneChange}
+              phone={phone}
+              phoneError={phoneError}
+              handlePhotoChange={handlePhotoChange}
+              previewUrl={previewUrl}
+              profilePhoto={profilePhoto}
+              handleRemovePhoto={handleRemovePhoto}
+              countryCode={countryCode}
+              selectedPhoto={selectedPhoto}
+            />
+            <UpdatePasswordForm
+              password={password}
+              passwordError={passwordError}
+              handlePasswordChange={handlePasswordChange}
+              confirmPassword={confirmPassword}
+              confirmPasswordError={confirmPasswordError}
+              handleConfrimPasswordChange={handleConfrimPasswordChange}
+            />
+          </div>
         </div>
       )}
     </>

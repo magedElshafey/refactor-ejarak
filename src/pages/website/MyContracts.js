@@ -7,7 +7,6 @@ import { getMyContracts } from "../../services/get/getMyContracts";
 import Spinner from "../../components/common/Spinner";
 import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
-import ReservationCard from "../../components/common/reservations/ReservationCard";
 import NoDataTitle from "../../components/common/NoDataTitle";
 import ContractCard from "../../components/contracts/ContractCard";
 const MyContracts = () => {
@@ -31,6 +30,7 @@ const MyContracts = () => {
     }
   }, [orginalContracts, activeIndex, filterdContrancts]);
   console.log("filterd", filterdContracts);
+  console.log("data from all contracts", filterdContracts);
   return (
     <>
       {isLoading ? (
@@ -55,7 +55,7 @@ const MyContracts = () => {
                     role={role}
                     contractDate={item.created_at}
                     type={item.type}
-                    contractId={item.id}
+                    contractId={item.booking.id}
                   />
                 </div>
               ))

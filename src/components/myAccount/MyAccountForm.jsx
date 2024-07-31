@@ -80,8 +80,8 @@ const MyAccountForm = ({
           ref={inputRef}
           onChange={handlePhotoChange}
         />
-        <div className=" bg-[#DDE2DC] border border-dashed border-[#9399A3] rounded-[13px] h-[345px] w-full   flex items-center justify-center">
-          {!previewUrl ? (
+        {!previewUrl ? (
+          <div className=" bg-[#f6f5f5] border border-dashed border-[#9399A3] rounded-[13px] h-[345px] w-full   flex items-center justify-center">
             <div className="flex flex-col items-center gap-2">
               <img
                 alt="upload-icon"
@@ -91,31 +91,26 @@ const MyAccountForm = ({
               />
               <p className="text-[#4D5F65]">{t("upload photo")}</p>
             </div>
-          ) : (
-            <div className="  flex flex-col items-center gap-3">
-              <img
-                className="max-w-full max-h-[250px]  object-cover"
-                src={profilePhoto ? profilePhoto : previewUrl}
-                alt="Preview"
+          </div>
+        ) : (
+          <div className="  flex flex-col items-center gap-3">
+            <img
+              className="max-w-full max-h-[250px]  object-cover"
+              src={profilePhoto ? profilePhoto : previewUrl}
+              alt="Preview"
+            />
+            <div className="w-10 h-10 rounded-[50%] bg-maincolorgreen flex items-center justify-center ">
+              <CiEdit
+                size={30}
+                className=" cursor-pointer text-white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  inputRef.current.click();
+                }}
               />
-              <div className="flex items-center gap-3 flex-wrap">
-                <CiEdit
-                  size={50}
-                  className=" cursor-pointer text-maincolorgreen"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    inputRef.current.click();
-                  }}
-                />
-                <MdDelete
-                  size={50}
-                  className=" cursor-pointer text-red-700"
-                  onClick={handleRemovePhoto}
-                />
-              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 md:mb-3">

@@ -1,14 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { formatDateTime } from "../../utils/formateDateTime";
-const RealstateData = ({ data }) => {
+const RealstateData = ({ data, downloadContract }) => {
   const { t, i18n } = useTranslation();
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300">
-      <p className="text-lg mb-5">{t("advertiseData")}</p>
+      <p
+        className={`text-lg mb-5 ${
+          downloadContract
+            ? "bg-maincolorgreen text-white p-2 rounded-md"
+            : null
+        }`}
+      >
+        {downloadContract ? "1)" : null} {t("advertiseData")}
+      </p>
       <Link
-        to={`/website/realstate/${data.id}`}
+        to={`/website/realstate/${data?.id}`}
         className="block mb-3 text-lg md:text-xl lg:text-2xl font-bold text-maincolorgreen underline"
       >
         {data?.name}

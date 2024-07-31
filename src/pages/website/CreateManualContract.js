@@ -7,28 +7,31 @@ import OwnerData from "../../components/reservationDetails/OwnerData";
 import TenantData from "../../components/reservationDetails/TenantData";
 import ReservationData from "../../components/reservationDetails/ReservationData";
 import useReservationDetails from "../../hooks/useReservationDetails";
-const ReservationDetails = () => {
+import ManualContractBtn from "../../components/createmanualContract/ManualContractBtn";
+const CreateManualContract = () => {
   const params = useParams();
   const { t } = useTranslation();
   const { isLoading, data } = useReservationDetails(params.id);
-
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-8">
-          <p className="text-lg md:text-xl lg:text-2xl font-bold text-textColor mb-8">
-            {t("reservationDetails")}
+          <p className="font-bold text-textColor text-md md:text-lg lg:text-xl xl:text-2xl mb-4">
+            {t("Create a contract (manually)")}
           </p>
-          <RealstateData data={data?.data?.data?.realestate} />
-          <ReservationData data={data?.data?.data} />
-          <OwnerData data={data?.data?.data?.realestate?.user} />
-          <TenantData data={data?.data?.data?.tenant} />
+          <div className="bg-white p-3 shadow-xl rounded-xl">
+            <RealstateData data={data?.data?.data?.realestate} />
+            <ReservationData data={data?.data?.data} />
+            <OwnerData data={data?.data?.data?.realestate?.user} />
+            <TenantData data={data?.data?.data?.tenant} />
+            <ManualContractBtn id={params.id} />
+          </div>
         </div>
       )}
     </>
   );
 };
 
-export default ReservationDetails;
+export default CreateManualContract;

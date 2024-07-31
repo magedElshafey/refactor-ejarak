@@ -33,41 +33,43 @@ const MyRealStates = () => {
       ) : (
         <div className="container mx-auto px-8 mt-8">
           <AccountDetailsNavbar />
-          <div className="mt-4">
-            <StatusNavbar
-              statusFilter={statusFilter}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
-            />
-          </div>
-          <div className="my-4 w-full flex justify-end">
-            <div className="w-[200px]">
-              <MainBtn text="add realstate" action={handleAddRealState} />
-            </div>
-          </div>
-          {filteredData.length ? (
-            filteredData.map((item, index) => (
-              <div key={index}>
-                <RealstateCard data={item} />
-                <div className="my-4 flex gap-3 justify-end overflow-x-auto">
-                  {item.status === "accepted" ? (
-                    <UpdateBtn
-                      data={created_at}
-                      id={item.id}
-                      dep="my-realstates"
-                    />
-                  ) : null}
-                  {item.status === "accepted" ? (
-                    <ReservationBtn id={item.id} />
-                  ) : null}
-                  <EditBtn id={item.id} />
-                  <DeleteBtn id={item.id} dep="my-realstates" />
-                </div>
+          <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
+            <div className="w-full flex items-center justify-between gap-8 mb-8 flex-wrap">
+              <div className="flex-1">
+                <StatusNavbar
+                  statusFilter={statusFilter}
+                  activeIndex={activeIndex}
+                  setActiveIndex={setActiveIndex}
+                />
               </div>
-            ))
-          ) : (
-            <NoDataTitle />
-          )}
+              <div className="w-[200px]">
+                <MainBtn text="add realstate" action={handleAddRealState} />
+              </div>
+            </div>
+            {filteredData.length ? (
+              filteredData.map((item, index) => (
+                <div key={index}>
+                  <RealstateCard data={item} />
+                  <div className="my-4 flex gap-3 justify-end overflow-x-auto">
+                    {item.status === "accepted" ? (
+                      <UpdateBtn
+                        data={created_at}
+                        id={item.id}
+                        dep="my-realstates"
+                      />
+                    ) : null}
+                    {item.status === "accepted" ? (
+                      <ReservationBtn id={item.id} />
+                    ) : null}
+                    <EditBtn id={item.id} />
+                    <DeleteBtn id={item.id} dep="my-realstates" />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <NoDataTitle />
+            )}
+          </div>
         </div>
       )}
     </>

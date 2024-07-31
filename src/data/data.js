@@ -245,3 +245,23 @@ export const filterdContrancts = [
     value: "electronic_agent",
   },
 ];
+export const elevatorsAr = [
+  {
+    id: 1,
+    name: "يوجد",
+  },
+  {
+    id: 0,
+    name: "لا يوجد",
+  },
+];
+export const elevatorsEn = [
+  {
+    id: 1,
+    name: "founded",
+  },
+  {
+    id: 0,
+    name: "not founded",
+  },
+];

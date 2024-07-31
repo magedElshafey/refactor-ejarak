@@ -26,10 +26,16 @@ const CreateContractBtn = ({ id }) => {
           showModal ? "block" : "hidden"
         } `}
       >
-        <Link className="block mb-2" to={`/website/contract/manual/${id}`}>
+        <Link
+          className="block p-1 duration-300 hover:bg-slate-200 rounded-md"
+          to={`/website/create-contract/manual/${id}`}
+        >
           {t("manualCreate")}
         </Link>
-        <Link className="block " to={`/website/contract/electronic/${id}`}>
+        <Link
+          className="block p-1 duration-300 hover:bg-slate-200 rounded-md"
+          to={`/website/create-contract/electronic/${id}`}
+        >
           {t("viaSpons")}
         </Link>
       </div>
