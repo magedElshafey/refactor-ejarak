@@ -477,5 +477,8 @@
   "area field is required": "area field is required",
   "turn field is required": "turn field is required",
   "payment type field is required": "payment type field is required",
-  "service field is required": "service room field is required"
+  "service field is required": "service room field is required",
+  "At least 4 photos must be uploaded": "At least 4 photos must be uploaded",
+  "images field is required": "images field is required",
+  "instrument file field is required": "instrument file field is required"
 }

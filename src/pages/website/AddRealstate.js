@@ -26,7 +26,6 @@ const AddRealstate = () => {
     turn: "",
     paymentType: "",
     service: "",
-    instrument_file: null,
   });
   const { t } = useTranslation();
   const [coordinates, setCoordinates] = useState(null);
@@ -48,6 +47,12 @@ const AddRealstate = () => {
   const selectedCategory = data.categories.find(
     (item) => item.id === formState.category
   );
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const [selectedSuck, setSelectedSuck] = useState(null);
+  const [previewSuck, setPreviewSuck] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videoPreview, setVideoPrview] = useState(null);
   return (
     <div className="container mx-auto px-8 mt-8">
       <h2
@@ -101,7 +106,24 @@ const AddRealstate = () => {
           service={formState.service}
         />
       ) : null}
-      {step === 3 ? <FormThree /> : null}
+      {step === 3 ? (
+        <FormThree
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+          previewImages={previewImages}
+          setPreviewImages={setPreviewImages}
+          selectedSuck={selectedSuck}
+          setSelectedSuck={setSelectedSuck}
+          previewSuck={previewSuck}
+          setPreviewSuck={setPreviewSuck}
+          selectedVideo={selectedVideo}
+          setSelectedVideo={setSelectedVideo}
+          videoPreview={videoPreview}
+          setVideoPrview={setVideoPrview}
+          step={step}
+          setStep={setStep}
+        />
+      ) : null}
     </div>
   );
 };
