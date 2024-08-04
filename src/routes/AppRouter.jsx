@@ -29,6 +29,7 @@ import ReservationDetails from "../pages/website/ReservationDetails";
 import CreateManualContract from "../pages/website/CreateManualContract";
 import ManualContractDetails from "../pages/website/ManualContractDetails";
 import CreateElectronicContract from "../pages/website/CreateElectronicContract";
+import DashboardLayout from "../templates/dashboard/DashboardLayout";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -123,6 +124,11 @@ const router = createBrowserRouter([
   {
     path: "/no-connection",
     element: <div>No Internet Connection</div>,
+  },
+  {
+    path: "/dashboard",
+    errorElement: <ErrorPage />,
+    element: <DashboardLayout />,
   },
 ]);
 

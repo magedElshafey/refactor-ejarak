@@ -1,5 +1,9 @@
 // navbar assets
-import { BsFillHouseLockFill, BsBuildingFill } from "react-icons/bs";
+import {
+  BsFillHouseLockFill,
+  BsBuildingFill,
+  BsFillHousesFill,
+} from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { t } from "i18next";
@@ -13,6 +17,13 @@ import {
   FaSnapchatGhost,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { MdOutlineDashboard } from "react-icons/md";
+import { FaUsers } from "react-icons/fa6";
+import { TbBrandBooking, TbInfoTriangle } from "react-icons/tb";
+import { GoPackage } from "react-icons/go";
+import { LiaFileContractSolid } from "react-icons/lia";
+import { HiOutlineNewspaper } from "react-icons/hi2";
+import { IoSettings } from "react-icons/io5";
 
 export const navLinks = [
   {
@@ -263,5 +274,100 @@ export const elevatorsEn = [
   {
     id: 0,
     name: "not founded",
+  },
+];
+export const dashboardLinks = [
+  {
+    icon: <MdOutlineDashboard size={20} />,
+    title: "dashboard",
+    path: "/dashboard",
+    list: [],
+  },
+  {
+    icon: <BsFillHousesFill size={20} />,
+    path: "realstates",
+    title: "realstates",
+    list: [],
+  },
+  {
+    icon: <FaUsers size={20} />,
+    path: "users",
+    title: "users",
+    list: [],
+  },
+  {
+    icon: <TbBrandBooking size={20} />,
+    path: "reservations",
+    title: "reservations",
+    list: [],
+  },
+  {
+    icon: <TbInfoTriangle size={20} />,
+    path: "reports",
+    title: "reports",
+    list: [],
+  },
+  {
+    icon: <GoPackage size={20} />,
+    path: "packages",
+    title: "packages",
+    list: [],
+  },
+  {
+    icon: <LiaFileContractSolid size={20} />,
+    path: "contracts",
+    title: "contracts",
+    list: [
+      {
+        title: "manual contracts",
+        path: "manual-contracts",
+      },
+      {
+        title: "electronic contracts",
+        path: "electronic-contracts",
+      },
+    ],
+  },
+  {
+    icon: <HiOutlineNewspaper size={20} />,
+    path: "website-content",
+    title: "website content",
+    list: [
+      {
+        path: "about-ejarak",
+        title: "about ejarak",
+      },
+      {
+        path: "terms-conditions",
+        title: "terms and conditions",
+      },
+      {
+        path: "faqs",
+        title: "faqs",
+      },
+      {
+        path: "privacy-policy",
+        title: "privacy and policy",
+      },
+    ],
+  },
+  {
+    icon: <IoSettings size={20} />,
+    title: "settings",
+    path: "settings",
+    list: [
+      {
+        path: "realstate-types",
+        title: "realstates types",
+      },
+      {
+        path: "realstate-places",
+        title: "realstates-places",
+      },
+      {
+        path: "payment-period",
+        title: "payment period",
+      },
+    ],
   },
 ];
