@@ -503,4 +503,12 @@
   "uploading": "جاري رفع البيانات",
   "not refresh": "لا تقم بعمل إعادة تحميل ولا الخروج من الصفحة حتي يتم الانتهاء من رفع البيانات",
   "realstate details": "بيانات العقار"
+  "notfications": "الإشعارات",
+  "all notfications": "جميع الإشعارات",
+  "no internet connection": "تعذر الاتصال بالانترنت",
+  "ejarak": "إيجارك",
+  "infooooo": "موقع إيجارك هو موقع لحجز و تأجير العقارات علي مستوي المملكة العربية السعودية",
+  "realstate images": "صور العقار",
+  "realstate location": "موقع العقار",
+  "realstate details": "تفاصيل العقار"
 }

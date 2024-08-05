@@ -17,8 +17,8 @@ import store from "./store/store";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5000, // Adjust this based on your requirements
-      cacheTime: 1000, // Adjust this based on your requirements
+      staleTime: 0, // Adjust this based on your requirements
+      cacheTime: 0, // Adjust this based on your requirements
 
       refetchOnMount: true,
     },

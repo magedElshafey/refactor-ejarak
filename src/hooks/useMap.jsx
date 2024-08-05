@@ -35,6 +35,7 @@ const useMap = () => {
   });
 
   const [nearestRealStates, setNearestRealStates] = useState([]);
+  console.log("nearestRealStates", nearestRealStates);
   const { isLoading: loadinNearRealStates, data } = useQuery(
     [
       "near realstates",
@@ -95,7 +96,6 @@ const useMap = () => {
 
         setMarkers(latLng);
         setCoordinates(latLng);
-        console.log("markers from select", markers);
 
         setAddress(value);
         if (pathname === "/") {

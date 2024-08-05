@@ -60,12 +60,16 @@ const RealstateData = ({ data, downloadContract }) => {
           </p>
         </div>
         <div>
-          <p className="text-[#4D5F65] mb-1">{t("region")}</p>
+          <p className="text-[#4D5F65] mb-1">{t("city")}</p>
           <p className="text-black">{data?.city?.name}</p>
         </div>
         <div>
-          <p className="text-[#4D5F65] mb-1">{t("district")}</p>
+          <p className="text-[#4D5F65] mb-1">{t("region")}</p>
           <p className="text-black">{data.region}</p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("district")}</p>
+          <p className="text-black">{data.address}</p>
         </div>
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8 p-3  rounded-md">

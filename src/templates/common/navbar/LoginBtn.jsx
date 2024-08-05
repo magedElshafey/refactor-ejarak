@@ -2,18 +2,42 @@ import React, { useState, useRef } from "react";
 import { CiUser } from "react-icons/ci";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { IoMdArrowDropdown } from "react-icons/io";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { useNavigate } from "react-router-dom";
+import { handleLogout } from "../../../services/get/handleLogout";
+import { useMutation } from "react-query";
+import { logout } from "../../../store/auth";
+import Swal from "sweetalert2";
 const LoginBtn = ({ bg }) => {
   const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
   const [showMenu, setShowMenu] = useState(false);
   const toggleShowMenu = () => setShowMenu(!showMenu);
   const ref = useRef(null);
   useClickOutside(ref, () => setShowMenu(false));
   const navigate = useNavigate();
+  const { isLoading, mutate } = useMutation(handleLogout, {
+    onSuccess: (data) => {
+      if (data?.data?.status) {
+        Swal.fire({
+          icon: "success",
+          title: data?.data?.message,
+        });
+        dispatch(logout());
+        navigate("/");
+        window.location.reload();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: data?.response?.data?.message,
+        });
+      }
+    },
+  });
+  const handleClick = () => mutate();
   return (
     <>
       {!ejarakLogin ? (
@@ -75,13 +99,16 @@ const LoginBtn = ({ bg }) => {
               </li>
             )}
 
-            <li
-              className=" cursor-pointer text-black "
-              onClick={() => {
-                setShowMenu(false);
-              }}
-            >
-              {t("logout")}
+            <li className=" cursor-pointer text-black ">
+              <button
+                onClick={() => {
+                  handleClick();
+                  setShowMenu(false);
+                }}
+                disabled={isLoading}
+              >
+                {t("logout")}
+              </button>
             </li>
           </ul>
         </div>
