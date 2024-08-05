@@ -499,5 +499,8 @@
   "service field is required": "حقل غرفة الخدمة مطلوب",
   "At least 4 photos must be uploaded": "يجب رفع 4 صور علي الاقل",
   "images field is required": "حقل صور العقار مطلوب",
-  "instrument file field is required": "حقل ملف الصك مطلوب"
+  "instrument file field is required": "حقل ملف الصك مطلوب",
+  "uploading": "جاري رفع البيانات",
+  "not refresh": "لا تقم بعمل إعادة تحميل ولا الخروج من الصفحة حتي يتم الانتهاء من رفع البيانات",
+  "realstate details": "بيانات العقار"
 }

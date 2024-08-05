@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../common/navbar/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../common/footer/Footer";
+import ProgressBar from "../../components/common/ProgressBar";
 const WebsiteLayout = () => {
   return (
     <div>

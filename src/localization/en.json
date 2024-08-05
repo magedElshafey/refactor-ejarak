@@ -480,5 +480,8 @@
   "service field is required": "service room field is required",
   "At least 4 photos must be uploaded": "At least 4 photos must be uploaded",
   "images field is required": "images field is required",
-  "instrument file field is required": "instrument file field is required"
+  "instrument file field is required": "instrument file field is required",
+  "uploading": "uploading ....",
+  "not refresh": "Do not reload or exit the page until the data has been uploaded",
+  "realstate details": "realstate details"
 }

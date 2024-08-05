@@ -29,6 +29,7 @@ import ReservationDetails from "../pages/website/ReservationDetails";
 import CreateManualContract from "../pages/website/CreateManualContract";
 import ManualContractDetails from "../pages/website/ManualContractDetails";
 import CreateElectronicContract from "../pages/website/CreateElectronicContract";
+import EditRealstate from "../pages/website/EditRealstate";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "add-realstate",
         element: <AddRealstate />,
+      },
+      {
+        path: "edit-realstate/:id",
+        element: <EditRealstate />,
       },
       {
         path: "my-account",

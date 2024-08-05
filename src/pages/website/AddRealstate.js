@@ -11,8 +11,6 @@ const AddRealstate = () => {
     category: "",
     region: "",
     district: "",
-    lat: "",
-    lng: "",
     address: "",
     notes: "",
     instrument_number: "",
@@ -122,6 +120,24 @@ const AddRealstate = () => {
           setVideoPrview={setVideoPrview}
           step={step}
           setStep={setStep}
+          title={formState.title}
+          category={formState.category}
+          region={formState.region}
+          district={formState.district}
+          address={formState.address}
+          notes={formState.notes}
+          instrument_number={formState.instrument_number}
+          subCategoryId={formState.subCategoryId}
+          price={formState.price}
+          age={formState.age}
+          rooms={formState.rooms}
+          bathRooms={formState.bathRooms}
+          elevators={formState.elevators}
+          area={formState.area}
+          turn={formState.turn}
+          paymentType={formState.paymentType}
+          service={formState.service}
+          coordinates={coordinates}
         />
       ) : null}
     </div>
