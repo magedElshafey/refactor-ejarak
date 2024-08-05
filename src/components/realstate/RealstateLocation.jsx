@@ -65,8 +65,8 @@ const RealstateLocation = ({ data }) => {
           bootstrapURLKeys={{
             key: apiKey,
           }}
-          center={houseCoordinates}
-          zoom={defaultProps.zoom}
+          defaultCenter={houseCoordinates}
+          defaultZoom={defaultProps.zoom}
           options={{
             ...mapOptions,
             mapTypeId: isSatelliteView ? "satellite" : "roadmap",
