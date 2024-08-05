@@ -2,8 +2,14 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Logo from "../../../components/common/Logo";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const NavLinks = ({ navLinks, logo, bg }) => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.authSlice);
+  const isLogin = auth.ejarakLogin;
+  const type = auth?.userData?.account?.type;
   return (
     <div
       className={`w-full flex items-center gap-3 justify-evenly ${
@@ -13,6 +19,9 @@ const NavLinks = ({ navLinks, logo, bg }) => {
       <Logo img={logo} />
       {navLinks.map((item, index) => (
         <NavLink
+          onClick={(e) =>
+            item.onClick && item.onClick(e, isLogin, navigate, type)
+          }
           to={item.path}
           key={index}
           className={`flex items-center gap-1 ${

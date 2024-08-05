@@ -499,5 +499,13 @@
   "service field is required": "حقل غرفة الخدمة مطلوب",
   "At least 4 photos must be uploaded": "يجب رفع 4 صور علي الاقل",
   "images field is required": "حقل صور العقار مطلوب",
-  "instrument file field is required": "حقل ملف الصك مطلوب"
+  "instrument file field is required": "حقل ملف الصك مطلوب",
+  "notfications": "الإشعارات",
+  "all notfications": "جميع الإشعارات",
+  "no internet connection": "تعذر الاتصال بالانترنت",
+  "ejarak": "إيجارك",
+  "infooooo": "موقع إيجارك هو موقع لحجز و تأجير العقارات علي مستوي المملكة العربية السعودية",
+  "realstate images": "صور العقار",
+  "realstate location": "موقع العقار",
+  "realstate details": "تفاصيل العقار"
 }

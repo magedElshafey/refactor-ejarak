@@ -1,0 +1,69 @@
+import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import useClickOutside from "../../../hooks/useClickOutside";
+import { FaBell } from "react-icons/fa";
+import { getAllNotfications } from "../../../services/get/getAllNotfications";
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import ShowNotfications from "../../../components/common/notfications/ShowNotfications";
+const NotficationMenu = ({ bg }) => {
+  const { i18n, t } = useTranslation();
+  const [showMenu, setShowMenu] = useState(false);
+  const menu = useRef(null);
+  const closeMenu = () => setShowMenu(false);
+  useClickOutside(menu, closeMenu);
+  const { isLoading, data } = useQuery("all-notfications", getAllNotfications, {
+    staleTime: "Infinity",
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
+  console.log("data from notfication ", data?.data);
+  return (
+    <div
+      onClick={() => setShowMenu(!showMenu)}
+      ref={menu}
+      className="cursor-pointer relative"
+    >
+      <div
+        className={`w-12 h-12 p-2 flex items-center rounded-md justify-center border  ${
+          bg ? `${bg} text-slate-500` : "border-white text-white bg-transparent"
+        }`}
+      >
+        <FaBell size={20} />
+      </div>
+      {data ? (
+        <div className=" absolute bottom-0 left-0 w-5 h-5 flex items-center justify-center bg-maincolorgreen text-white rounded-[50%]">
+          <p> {data?.data?.un_seen}</p>
+        </div>
+      ) : null}
+
+      <ul
+        className={`absolute duration-300 min-w-[280px] border ${
+          i18n.language === "ar" ? "right-[-100px]" : "left-[-100px]"
+        } ${
+          isLoading || !data ? "bottom-[-50px]" : "bottom-[-450px]"
+        }  bg-white shadow-lg z-50 p-3 rounded-md ${
+          showMenu ? "block" : "hidden"
+        }`}
+      >
+        {isLoading || !data ? (
+          <div className="spinner3 text-center mx-auto"></div>
+        ) : (
+          <div>
+            <div className="flex items-center justify-between text-textColor mb-5">
+              <p>{t("notfications")}</p>
+              <Link to="/website/all-notfications">
+                {t("all notfications")}
+              </Link>
+            </div>
+            {data?.data?.data?.slice(0, 5).map((item, index) => (
+              <ShowNotfications isMenu={true} key={index} data={item} />
+            ))}
+          </div>
+        )}
+      </ul>
+    </div>
+  );
+};
+
+export default NotficationMenu;

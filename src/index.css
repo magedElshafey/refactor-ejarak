@@ -332,7 +332,7 @@ a.active.footer {
     grid-area: 1/1;
     border: 9px solid;
     border-radius: 50%;
-    border-color: #474bff #474bff #0000 #0000;
+    border-color: var(--mainColor) var(--mainColor) #0000 #0000;
     mix-blend-mode: darken;
     animation: spinner-plncf99 1s infinite linear;
 }
@@ -389,4 +389,14 @@ a.active.dashboard {
     border-radius: 15px;
     box-shadow: #dbdcef;
     color: var(--secondaryColor);
+}
+
+.spinner3 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, var(--mainColor) 94%, #0000) top/9px 9px no-repeat,
+        conic-gradient(#0000 30%, var(--mainColor));
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+    animation: spinner-c7wet2 1s infinite linear;
 }

@@ -480,5 +480,13 @@
   "service field is required": "service room field is required",
   "At least 4 photos must be uploaded": "At least 4 photos must be uploaded",
   "images field is required": "images field is required",
-  "instrument file field is required": "instrument file field is required"
+  "instrument file field is required": "instrument file field is required",
+  "notfications": "notfications",
+  "all notfications": "all notfications",
+  "no internet connection": "no internet connection",
+  "ejarak": "ejarak",
+  "infooooo": "Ejarak website is a website for booking and renting real estate throughout the Kingdom of Saudi Arabia",
+  "realstate images": "realstate images",
+  "realstate location": "realstate location",
+  "realstate details": "realstate details"
 }

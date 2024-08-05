@@ -14,6 +14,8 @@ import LoginBtn from "./LoginBtn";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import NotficationMenu from "./NotficationMenu";
+import { useNavigate } from "react-router-dom";
 const Navbar = ({ bg }) => {
   const dispatch = useDispatch();
   const filterRef = useRef(null);
@@ -23,7 +25,10 @@ const Navbar = ({ bg }) => {
   useClickOutside(filterRef, () => dispatch(closeFilter()));
   const [showSidebar, setShowSidebar] = useState();
   const sidebarRef = useRef(null);
-
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.authSlice);
+  const isLogin = auth.ejarakLogin;
+  const type = auth?.userData?.account?.type;
   const { pathname } = useLocation();
   return (
     <div className="container mx-auto px-8  pt-5">
@@ -44,7 +49,7 @@ const Navbar = ({ bg }) => {
           ) : null}
           {ejarakLogin ? (
             <>
-              <ChatMenu bg={bg} />
+              <NotficationMenu bg={bg} />
             </>
           ) : null}
           <LoginBtn bg={bg} />
@@ -63,7 +68,7 @@ const Navbar = ({ bg }) => {
             <LangMenu bg={bg} />
             {ejarakLogin ? (
               <>
-                <ChatMenu bg={bg} />
+                <NotficationMenu bg={bg} />
               </>
             ) : null}
             {ejarakLogin ? (
@@ -115,7 +120,10 @@ const Navbar = ({ bg }) => {
             />
             {navLinks.map((item, index) => (
               <NavLink
-                onClick={() => setShowSidebar(false)}
+                onClick={(e) => {
+                  item.onClick && item.onClick(e, isLogin, navigate, type);
+                  setShowSidebar(false);
+                }}
                 to={item.path}
                 key={index}
                 className={`w-fit flex items-center gap-2 mb-4 home`}

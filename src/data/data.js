@@ -31,10 +31,10 @@ export const navLinks = [
     enTitle: "Advertise",
     path: "/website/add-realstate",
     icon: <BsFillHouseLockFill size={20} />,
-    onClick: (e, isLoggedIn, navigate, setActiveLink, type) => {
+    onClick: (e, isLoggedIn, navigate, type) => {
       if (!isLoggedIn) {
         e.preventDefault();
-        setActiveLink(null);
+
         Swal.fire({
           text: t("login_first"),
           icon: "warning",
@@ -45,14 +45,14 @@ export const navLinks = [
           cancelButtonText: t("cancel"),
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate("/login");
+            navigate("/auth/login");
           } else {
             return;
           }
         });
       } else if (type === "tenant") {
         e.preventDefault();
-        setActiveLink(null);
+
         Swal.fire({
           icon: "error",
           position: "center",
@@ -69,7 +69,7 @@ export const navLinks = [
     onClick: (e, isLoggedIn, navigate, setActiveLink) => {
       if (!isLoggedIn) {
         e.preventDefault();
-        setActiveLink(null);
+
         Swal.fire({
           text: t("login_first"),
           icon: "warning",
@@ -80,7 +80,7 @@ export const navLinks = [
           cancelButtonText: t("cancel"),
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate("/login");
+            navigate("/auth/login");
           } else {
             return;
           }
@@ -140,6 +140,10 @@ export const aboutUs = [
   {
     title: "termsAndConditions",
     path: "/website/terms-conditions",
+  },
+  {
+    title: "about us",
+    path: "/website/about-us",
   },
 ];
 export const myAccount = [

@@ -30,6 +30,11 @@ import CreateManualContract from "../pages/website/CreateManualContract";
 import ManualContractDetails from "../pages/website/ManualContractDetails";
 import CreateElectronicContract from "../pages/website/CreateElectronicContract";
 import DashboardLayout from "../templates/dashboard/DashboardLayout";
+import AllNotfications from "../pages/website/AllNotfications";
+import Privacy from "../pages/website/Privacy";
+import Terms from "../pages/website/Terms";
+import About from "../pages/website/About";
+import RealstateDetails from "../pages/website/RealstateDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -99,6 +104,26 @@ const router = createBrowserRouter([
       {
         path: "create-contract/electronic/:id",
         element: <CreateElectronicContract />,
+      },
+      {
+        path: "all-notfications",
+        element: <AllNotfications />,
+      },
+      {
+        path: "privacy",
+        element: <Privacy />,
+      },
+      {
+        path: "terms-conditions",
+        element: <Terms />,
+      },
+      {
+        path: "about-us",
+        element: <About />,
+      },
+      {
+        path: "realstate/:id",
+        element: <RealstateDetails />,
       },
     ],
   },
