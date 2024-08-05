@@ -5,7 +5,7 @@ import UserContactCard from "../common/user/UserContactCard";
 const RealstateOwnerCard = ({ name, img, phone, whatsapp, id }) => {
   const { t } = useTranslation();
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg border border-dashed border-textColor">
+    <div className="bg-white p-6 rounded-2xl shadow-lg border border-dashed border-textColor">
       <div className="flex flex-col items-center md:flex-row gap-4 justify-between">
         <div>
           <p className=" font-extrabold text-lg md:text-xl lg:text-2xl mb-3">

@@ -36,6 +36,7 @@ import Privacy from "../pages/website/Privacy";
 import Terms from "../pages/website/Terms";
 import About from "../pages/website/About";
 import RealstateDetails from "../pages/website/RealstateDetails";
+import RealstateOwnerDetails from "../pages/website/RealstateOwnerDetails";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -129,6 +130,10 @@ const router = createBrowserRouter([
       {
         path: "realstate/:id",
         element: <RealstateDetails />,
+      },
+      {
+        path: "realstate-owner/:id",
+        element: <RealstateOwnerDetails />,
       },
     ],
   },

@@ -43,7 +43,7 @@ const RealstateLocation = ({ data }) => {
           {data?.city?.name} - {data?.region} - {data?.address}
         </p>
       </div>
-      <div className="mt-3 h-[250px] w-full rounded-xl overflow relative">
+      <div className="mt-3 h-[250px] w-full rounded-xl  relative">
         <div className="absolute top-4 left-4 z-10">
           <button
             type="button"
