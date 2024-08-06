@@ -15,7 +15,7 @@ const RealStateCard = ({ data, dep }) => {
   const { handleClick } = useWishlist(data.id, dep);
   return (
     <div className="w-full bg-white rounded-xl shadow-xl mb-5 md:mb-6 lg:mb-8">
-      <div className="flex items-center gap-3 justify-end mb-1">
+      <div className="flex items-center gap-3 justify-end mb-5 lg:mb-2">
         <div className="flex items-center gap-1">
           {data?.avg_rating ? (
             <p className="  text-secondcolorgreen font-medium">
@@ -88,7 +88,7 @@ const RealStateCard = ({ data, dep }) => {
                 {data.notes.substr(0, 250)}
                 {data.notes.length > 250 ? "..." : null}
               </p>
-              <div className="flex items-center gap-1 text-slate-600">
+              <div className="flex  gap-1 text-slate-600 flex-col md:flex-row">
                 <IoLocationSharp />
                 <p>
                   {data?.city?.name} - {data?.region} -{data?.address}
@@ -104,31 +104,31 @@ const RealStateCard = ({ data, dep }) => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-[#f5f3f3] rounded-xl p-3 px-6 flex items-center justify-around gap-8 flex-wrap">
-        <div className="flex-1 flex items-center justify-between flex-wrap">
+      <div className="w-full bg-[#f5f3f3] rounded-xl p-3 px-6 flex lg:items-center justify-around gap-4 flex-col lg:flex-row">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6  ">
           <div className="flex items-center gap-1">
             <BsBuildings size={18} />
-            <p>{t("realstate type")} : </p>
+            <p className="lg:text-sm">{t("realstate type")} : </p>
             <p className="font-bold">{data?.category?.name}</p>
           </div>
           <div className="flex items-center gap-1">
             <BsBuildings size={18} />
-            <p>{t("subCategory type")} : </p>
+            <p className="lg:text-sm">{t("subCategory type")} : </p>
             <p className="font-bold">{data?.sub_category?.name}</p>
           </div>
           <div className="flex items-center gap-1">
             <BiArea size={18} />
-            <p>{t("area")} : </p>
+            <p className="lg:text-sm">{t("area")} : </p>
             <p className="font-bold"> {parseFloat(data.area).toFixed(0)}</p>
           </div>
           <div className="flex items-center gap-1">
             <IoBedOutline size={18} />
-            <p>{t("rooms")} : </p>
+            <p className="lg:text-sm">{t("rooms")} : </p>
             <p className="font-bold"> {data.rooms_count}</p>
           </div>
           <div className="flex items-center gap-1">
             <IoBedOutline size={18} />
-            <p>{t("bathRooms")} : </p>
+            <p className="lg:text-sm">{t("bathRooms")} : </p>
             <p className="font-bold"> {data.bathrooms_count}</p>
           </div>
         </div>

@@ -9,7 +9,7 @@ const Area = ({ min, max }) => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
-  const maxValRef = useRef(max);
+
   const range = useRef(null);
   useEffect(() => {
     setareaVal(area || min);
