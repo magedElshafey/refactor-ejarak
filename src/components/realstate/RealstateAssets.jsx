@@ -4,8 +4,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import { useTranslation } from "react-i18next";
-const RealstateAssets = ({ images, video }) => {
-  const { t } = useTranslation();
+import { FaStar } from "react-icons/fa";
+import newIcon from "../../assets/fire.svg";
+const RealstateAssets = ({ images, data }) => {
+  const { t, i18n } = useTranslation();
   const settings = {
     dots: false,
     infinite: false,
@@ -16,8 +18,7 @@ const RealstateAssets = ({ images, video }) => {
     slidesToScroll: 1,
     initialSlide: 0,
     cssEase: "linear",
-    speed: 2000,
-    autoplaySpeed: 2000,
+
     verticalSwiping: false,
     responsive: [
       {
@@ -76,12 +77,30 @@ const RealstateAssets = ({ images, video }) => {
       <div className="rounded-md p-3 bg-[#f1efef] w-full">
         <Slider dir="rtl" ref={sliderRef} {...settings}>
           {images?.map((item, index) => (
-            <div key={index} className="px-3">
+            <div key={index} className="px-3 relative">
               <img
                 alt={item}
                 src={item}
                 className="w-full h-[250px] object-cover rounded-lg "
               />
+              {data?.special || data?.year_of_construction <= 2 ? (
+                <div
+                  className={`rounded-md absolute top-[5px] p-2 min-w-10 h-10 flex items-center justify-center gap-2   bg-white  ${
+                    i18n.language === "ar" ? "right-[15px]" : "left-[15px]"
+                  }`}
+                >
+                  {data?.special ? (
+                    <FaStar style={{ color: "gold", width: "20px" }} />
+                  ) : null}
+                  {data?.year_of_construction <= 2 ? (
+                    <img
+                      alt="special"
+                      src={newIcon}
+                      style={{ width: "15px" }}
+                    />
+                  ) : null}
+                </div>
+              ) : null}
             </div>
           ))}
         </Slider>

@@ -4,24 +4,18 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import GoogleMap from "google-map-react";
 import { useTranslation } from "react-i18next";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
+import { useSelector } from "react-redux";
 const RealstateLocation = ({ data }) => {
+  const { lat, lng } = useSelector((state) => state.filterSlice);
+  console.log("data from location", data);
+  const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const { t } = useTranslation();
-  const houseCoordinates = {
-    lat: data.lat,
-    lng: data.lng,
-  };
-  const [isSatelliteView, setIsSatelliteView] = useState(false);
-  const handleToggleMapView = () => {
-    setIsSatelliteView((prevIsSatelliteView) => !prevIsSatelliteView);
-  };
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
-  console.log("api key", apiKey);
-
   const defaultProps = {
-    center: houseCoordinates,
-    zoom: 10,
+    zoom: 5,
+    center: { lat, lng },
   };
+  // Define the map options with the desired map style
   const mapOptions = {
     restriction: {
       latLngBounds: {
@@ -33,9 +27,13 @@ const RealstateLocation = ({ data }) => {
       strictBounds: true,
     },
   };
+  const [isSatelliteView, setIsSatelliteView] = useState(false);
+  const handleToggleMapView = () => {
+    setIsSatelliteView((prevIsSatelliteView) => !prevIsSatelliteView);
+  };
 
   return (
-    <div className="bg-white p-7 rounded-lg shadow-lg border  border-dashed border-maincolorgreen">
+    <div className="bg-white p-7 rounded-lg shadow-lg border  border-dashed border-maincolorgreen overflow-hidden">
       <p className="mb-3 text-textColor">{t("realstate location")}</p>
       <div className="flex items-center gap-2">
         <FaMapMarkerAlt size={20} className="text-maincolorgreen" />
@@ -43,7 +41,7 @@ const RealstateLocation = ({ data }) => {
           {data?.city?.name} - {data?.region} - {data?.address}
         </p>
       </div>
-      <div className="mt-3 h-[250px] w-full rounded-xl  relative">
+      <div className="mt-3 h-[80%] w-full rounded-xl  relative ">
         <div className="absolute top-4 left-4 z-10">
           <button
             type="button"
@@ -61,18 +59,17 @@ const RealstateLocation = ({ data }) => {
         {/* google map  */}
 
         <GoogleMap
-          key={houseCoordinates.lat + houseCoordinates.lng}
+          key={mapKey}
           bootstrapURLKeys={{
             key: apiKey,
           }}
-          defaultCenter={houseCoordinates}
+          defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           options={{
             ...mapOptions,
-            mapTypeId: isSatelliteView ? "satellite" : "roadmap",
           }}
         >
-          <Marker lat={houseCoordinates.lat} lng={houseCoordinates.lng} />
+          <Marker lat={data?.lat} lng={data?.lng} />
         </GoogleMap>
       </div>
     </div>

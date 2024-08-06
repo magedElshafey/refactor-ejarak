@@ -20,9 +20,14 @@ import BookingForm from "../../components/realstate/booking/BookingForm.jsx";
 import ContactWithCustomerServiceBtn from "../../components/realstate/ContactWithCustomerServiceBtn.jsx";
 import ReportRealstateBtn from "../../components/realstate/report/ReportRealstateBtn.jsx";
 import ReportForm from "../../components/realstate/report/ReportForm.jsx";
+import RealstateVideoAndSuck from "../../components/realstate/RealstateVideoAndSuck.jsx";
+import SuckModal from "../../components/realstate/SuckModal.jsx";
+import PendingRealstate from "../../components/realstate/PendingRealstate.jsx";
+
 const RealstateDetails = () => {
   const params = useParams();
   const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
+
   const userId = userData?.id;
   const { t } = useTranslation();
   const { isLoading, data } = useQuery(["realstate-details", params.id], () =>
@@ -36,6 +41,7 @@ const RealstateDetails = () => {
   const toggleShowBookingForm = () => setShowBookingForm(!showBookingForm);
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
+  const [showSuckModal, setShowSuckModal] = useState(false);
   return (
     <>
       {isLoading || loadingSimilars ? (
@@ -44,10 +50,24 @@ const RealstateDetails = () => {
         <div>
           <div className="container mx-auto px-8 mt-8">
             <Meta title={data?.data?.data?.name} />
-            <RealstateInfo name={data?.data?.data?.name} />
+            <RealstateInfo
+              name={data?.data?.data?.name}
+              realStateOwnerId={data?.data?.data?.user?.id}
+              userId={userId}
+              status={data?.data?.data?.status}
+              id={params.id}
+            />
+            {data?.data?.data?.status === "pending" ? (
+              <PendingRealstate num={data?.data?.data?.number_ad} />
+            ) : null}
             <RealstateAssets
               images={data?.data?.data?.images}
+              data={data?.data?.data}
+            />
+            <RealstateVideoAndSuck
               video={data?.data?.data?.video}
+              suck={data?.data?.data?.instrument_file}
+              setShowSuckModal={setShowSuckModal}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 my-8">
               <RealstateData data={data?.data?.data} />
@@ -120,6 +140,11 @@ const RealstateDetails = () => {
             showReportForm={showReportForm}
             setShowReportForm={setShowReportForm}
             id={params.id}
+          />
+          <SuckModal
+            showSuckModal={showSuckModal}
+            setShowSuckModal={setShowSuckModal}
+            suck={data?.data?.data?.instrument_file}
           />
         </div>
       )}

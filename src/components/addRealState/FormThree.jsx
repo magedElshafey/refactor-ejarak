@@ -6,10 +6,11 @@ import { useTranslation } from "react-i18next";
 import MainBtn from "../common/buttons/MainBtn";
 import Swal from "sweetalert2";
 import { useMutation } from "react-query";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import LoadingBtn from "../common/buttons/LoadingBtn";
 import { setProgress, setLoading } from "../../store/uploadSlice";
+import { useNavigate } from "react-router-dom";
 const FormThree = ({
   selectedImages,
   setSelectedImages,
@@ -46,6 +47,8 @@ const FormThree = ({
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [uploadProgress, setUploadProgress] = useState(0);
   const handleBack = () => {
     setStep((prev) => prev - 1);
   };
@@ -84,11 +87,13 @@ const FormThree = ({
             icon: "success",
             title: data.message,
           });
+          navigate(`/website/realstate/${data?.data?.id}`);
         } else {
           Swal.fire({
             icon: "error",
             title: data.message,
           });
+          setUploadProgress(0);
         }
       },
       onError: (error) => {
@@ -100,8 +105,6 @@ const FormThree = ({
     }
   );
 
-  const [uploadProgress, setUploadProgress] = useState(0);
-  console.log("suck file", selectedSuck);
   const handleSubmit = () => {
     const totalImagesSize = selectedImages.reduce(
       (acc, image) => acc + image.size,
@@ -198,15 +201,17 @@ const FormThree = ({
         </div>
         {isLoading && (
           <div className=" fixed top-0 left-0 bg-black bg-opacity-25 w-full h-full flex items-center">
-            <div className="w-full bg-white shadow-2xl h-1/2 flex items-center p-4">
-              <div className="w-full">
-                <p className="text-red-600 mb-2">{t("not refresh")}</p>
-                <p className="text-maincolorgreen mb-2">{t("uploading")}</p>
-                <div className="bg-slate-200 w-full h-[8px] rounded-md">
-                  <div
-                    className="progress bg-maincolorgreen h-[8px] rounded-md"
-                    style={{ width: `${uploadProgress}%` }}
-                  ></div>
+            <div className="container mx-auto px-8">
+              <div className="w-full bg-white shadow-2xl h-1/2 flex items-center p-4 md:w-[400px] lg:w-[550px] mx-auto rounded-lg">
+                <div className="w-full">
+                  <p className="text-red-600 mb-2">{t("not refresh")}</p>
+                  <p className="text-maincolorgreen mb-2">{t("uploading")}</p>
+                  <div className="bg-slate-200 w-full h-[8px] rounded-md">
+                    <div
+                      className="progress bg-maincolorgreen h-[8px] rounded-md"
+                      style={{ width: `${uploadProgress}%` }}
+                    ></div>
+                  </div>
                 </div>
               </div>
             </div>

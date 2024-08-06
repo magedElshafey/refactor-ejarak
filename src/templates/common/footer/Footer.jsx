@@ -22,11 +22,11 @@ const Footer = ({ isHome }) => {
           <div className="container mx-auto px-8">
             <div className="w-full flex justify-center flex-col items-center gap-3 mb-8">
               <Logo img={logo} />
-              <p className="text-white">
+              {/* <p className="text-white">
                 هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
                 هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
                 العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
-              </p>
+              </p> */}
             </div>
             <div
               className={`grid grid-cols-1 ${
@@ -119,13 +119,13 @@ const Footer = ({ isHome }) => {
       ) : (
         <div className="w-screen p-3 flex items-center footerr mt-8">
           <div className="container mx-auto px-8">
-            <div className="w-full flex justify-center flex-col items-center gap-3 my-8">
+            <div className="w-full flex justify-center flex-col items-center gap-3 mb-8  mt-24 md:mt-20 lg:mt-8">
               <Logo img={logo} />
-              <p className="text-white mt-5">
+              {/* <p className="text-white mt-5">
                 هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
                 هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
                 العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
-              </p>
+              </p> */}
             </div>
             <div
               className={`grid grid-cols-1 ${
