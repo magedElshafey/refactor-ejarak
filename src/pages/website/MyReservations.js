@@ -33,11 +33,13 @@ const MyReservations = () => {
         <div className="container mx-auto px-8 mt-8">
           <AccountDetailsNavbar />
           <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
-            <StatusNavbar
-              statusFilter={filterdReservations}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
-            />
+            <div className="mb-5">
+              <StatusNavbar
+                statusFilter={filterdReservations}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            </div>
             {filteredData?.length ? (
               filteredData?.map((item, index) => (
                 <div key={index}>

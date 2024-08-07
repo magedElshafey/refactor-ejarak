@@ -8,6 +8,7 @@ import OtpInput from "react-otp-input";
 import { handleEmailVerfication } from "../../services/post/handleEmailVerfication";
 import { handleResendEmailVerficationCode } from "../../services/post/handleResendEmailVerficationCode";
 import Swal from "sweetalert2";
+import Treaty from "../../components/treaty/Treaty";
 const EmailVerfication = () => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
@@ -106,6 +107,7 @@ const EmailVerfication = () => {
           {t("resendCode")}
         </p>
       ) : null}
+      <Treaty showTreaty={showTreaty} setShowTreaty={setShowTreaty} />
     </div>
   );
 };

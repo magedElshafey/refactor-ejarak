@@ -5,7 +5,7 @@ const RealstateInfo = ({ name, realStateOwnerId, userId, status, id }) => {
   const { i18n } = useTranslation();
   return (
     <div className="mb-8">
-      <div className="flex items-center gap-4 justify-between">
+      <div className="flex items-center gap-4 justify-between flex-wrap">
         <p className=" font-extrabold text-textColor text-lg md:text-xl lg:text-2xl ">
           {name}
         </p>

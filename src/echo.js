@@ -1,4 +1,5 @@
 import Echo from "laravel-echo";
+import Pusher from "pusher-js";
 const token = localStorage.getItem("token")
   ? JSON.parse(localStorage.getItem("token"))
   : "";
@@ -15,3 +16,4 @@ const echo = new Echo({
     },
   },
 });
+export default echo;

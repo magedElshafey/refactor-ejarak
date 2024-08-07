@@ -4,7 +4,7 @@ const StatusNavbar = ({ statusFilter, activeIndex, setActiveIndex }) => {
   const { i18n } = useTranslation();
 
   return (
-    <div className=" w-full bg-[#f6f5f5] p-3 rounded-lg flex items-center gap-3 md:gap-4 lg:gap-6 overflow-x-auto ">
+    <div className=" bg-[#f6f5f5] p-3 rounded-lg flex items-center gap-3 md:gap-4 lg:gap-8 overflow-x-auto text-nowrap">
       {statusFilter?.map((item, index) => (
         <p
           onClick={() => setActiveIndex(index)}

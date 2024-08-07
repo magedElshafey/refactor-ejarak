@@ -492,5 +492,6 @@
   "realstate location": "realstate location",
   "realstate details": "realstate details",
   "suck image": "instrument image",
-  "not valid unit": "not valid unit"
+  "not valid unit": "not valid unit",
+  "review hint": "You need to log in to be able to evaluate the property"
 }

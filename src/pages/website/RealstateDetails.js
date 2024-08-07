@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../components/common/Spinner";
 import { getRealStateDetails } from "../../services/get/getRealStateDetails";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RealstateAssets from "../../components/realstate/RealstateAssets";
 import RealstateInfo from "../../components/realstate/RealstateInfo";
@@ -114,6 +114,13 @@ const RealstateDetails = () => {
             <div className="container mx-auto p-8">
               {ejarakLogin && data?.data?.data?.user?.id !== userId ? (
                 <SubmitReview data={data?.data?.data} />
+              ) : !ejarakLogin && data?.data?.data?.user?.id !== userId ? (
+                <Link
+                  to="/auth/login"
+                  className="text-xs md:text-sm lg:text-base font-light text-red-600 underline"
+                >
+                  * {t("review hint")}
+                </Link>
               ) : null}
               <div className="mt-8">
                 <ViewReviews id={params.id} />

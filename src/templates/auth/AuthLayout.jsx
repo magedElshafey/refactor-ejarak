@@ -7,12 +7,10 @@ const AuthLayout = () => {
   return (
     <div>
       <Hero hasoverlay={true} img={img}>
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="container mx-auto px-8">
-            <AuthCard>
-              <Outlet />
-            </AuthCard>
-          </div>
+        <div className="w-full container mx-auto px-8">
+          <AuthCard>
+            <Outlet />
+          </AuthCard>
         </div>
       </Hero>
     </div>

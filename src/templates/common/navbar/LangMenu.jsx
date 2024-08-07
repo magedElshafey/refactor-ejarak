@@ -20,8 +20,10 @@ const LangMenu = ({ bg }) => {
       className="cursor-pointer relative"
     >
       <div
-        className={`w-12 h-12 p-2 flex items-center rounded-md justify-center border  ${
-          bg ? `${bg} text-slate-500` : "border-white text-white bg-transparent"
+        className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border mx-1 md:mx-0  ${
+          bg
+            ? `${bg} text-slate-500`
+            : "md:border-white text-white bg-transparent"
         }`}
       >
         <FaGlobe size={20} />

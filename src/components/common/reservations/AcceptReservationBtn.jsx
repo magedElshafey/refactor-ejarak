@@ -51,7 +51,7 @@ const AcceptReservationBtn = ({ id, data, dep }) => {
     <button
       onClick={handleClick}
       disabled={isLoading}
-      className="flex items-center p-3 rounded-xl justify-center bg-white text-maincolorgreen border border-maincolorgreen duration-300 min-w-[150px] hover:bg-maincolorgreen hover:text-white hover:border-white"
+      className="flex items-center p-2 md:p-3 rounded-xl justify-center bg-white text-maincolorgreen border border-maincolorgreen duration-300 w-auto md:w-[150px] hover:bg-maincolorgreen hover:text-white hover:border-white"
     >
       {t("accept")}
     </button>

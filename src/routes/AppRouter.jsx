@@ -37,6 +37,11 @@ import Terms from "../pages/website/Terms";
 import About from "../pages/website/About";
 import RealstateDetails from "../pages/website/RealstateDetails";
 import RealstateOwnerDetails from "../pages/website/RealstateOwnerDetails";
+import ForgetPassword from "../pages/auth/ForgetPassword";
+import ForgetPasswordCode from "../pages/auth/ForgetPasswordCode";
+import NewPassword from "../pages/auth/NewPassword";
+import Dashboard from "../pages/dashboard/Dashboard";
+import Chat from "../pages/website/Chat";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -135,6 +140,14 @@ const router = createBrowserRouter([
         path: "realstate-owner/:id",
         element: <RealstateOwnerDetails />,
       },
+      {
+        path: "chat/",
+        element: <Chat />,
+      },
+      {
+        path: "chat/:id",
+        element: <Chat />,
+      },
     ],
   },
   {
@@ -154,16 +167,31 @@ const router = createBrowserRouter([
         path: "email-verfication",
         element: <EmailVerfication />,
       },
+      {
+        path: "forget-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "forget-password-code",
+        element: <ForgetPasswordCode />,
+      },
+      {
+        path: "new-password",
+        element: <NewPassword />,
+      },
     ],
   },
-  {
-    path: "/no-connection",
-    element: <div>No Internet Connection</div>,
-  },
+
   {
     path: "/dashboard",
     errorElement: <ErrorPage />,
     element: <DashboardLayout />,
+    children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
+    ],
   },
 ]);
 

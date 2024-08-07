@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { navLinks } from "../../../data/data";
 import logo from "../../../assets/logo footer.png";
 import logo2 from "../../../assets/logobglight.png";
@@ -30,9 +30,20 @@ const Navbar = ({ bg }) => {
   const isLogin = auth.ejarakLogin;
   const type = auth?.userData?.account?.type;
   const { pathname } = useLocation();
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setShowSidebar(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div className="container mx-auto px-8  pt-5">
-      <div className=" hidden lg:block">
+      <div className="hidden lg:block">
         <div className="flex items-center justify-between gap-4">
           <div
             className={`rounded-lg p-4 flex-1 ${
@@ -56,10 +67,10 @@ const Navbar = ({ bg }) => {
         </div>
       </div>
       <div className="lg:hidden">
-        <div className="flex items-center justify-between gap-8">
-          <div className="flex items-center gap-1 ">
+        <div className="flex items-center justify-between ">
+          <div className="flex items-center ">
             <IoMdMenu
-              size={40}
+              size={30}
               className={`cursor-pointer ${
                 bg ? `text-slate-500` : "text-white"
               }`}
@@ -77,14 +88,13 @@ const Navbar = ({ bg }) => {
               </>
             ) : null}
           </div>
-          <div className="flex items-center gap-1">
-            <LoginBtn bg={bg} />
+          <div className="flex items-center gap-2">
             {pathname === "/" ||
             pathname === "/website/near-realstates" ||
             pathname === "/website/all-realstates" ? (
               <div ref={filterRef}>
                 <PiListMagnifyingGlassFill
-                  size={40}
+                  size={30}
                   className={`cursor-pointer ${
                     bg ? `text-slate-500` : "text-white"
                   }`}
@@ -104,6 +114,7 @@ const Navbar = ({ bg }) => {
                 </div>
               </div>
             ) : null}
+            <LoginBtn bg={bg} />
           </div>
         </div>
         <div

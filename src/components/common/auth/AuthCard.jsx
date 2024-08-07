@@ -3,7 +3,7 @@ import logo from "../../../assets/logobglight.png";
 import Logo from "../../common/Logo";
 const AuthCard = ({ children }) => {
   return (
-    <div className="bg-white w-full md:w-[450px] lg:w-[600px] py-4 px-6 rounded-lg shadow-xl">
+    <div className="bg-white w-full md:w-[450px] lg:w-[600px] py-4 px-6 rounded-lg shadow-xl h-auto max-h-[650px] overflow-y-auto ">
       <div className="w-full flex justify-center mb-3">
         <Logo img={logo} />
       </div>

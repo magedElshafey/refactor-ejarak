@@ -41,13 +41,21 @@ const LoginBtn = ({ bg }) => {
   return (
     <>
       {!ejarakLogin ? (
-        <Link
-          to="/auth/login"
-          className="flex items-center justify-center gap-2 bg-maincolorgreen text-white py-3 rounded-md w-[150px] "
-        >
-          <CiUser size={20} />
-          <p>{t("login")}</p>
-        </Link>
+        <>
+          <Link
+            to="/auth/login"
+            className=" items-center hidden md:flex justify-center gap-1 bg-maincolorgreen text-white py-3 rounded-md w-[150px] "
+          >
+            <CiUser size={20} />
+            <p>{t("login")}</p>
+          </Link>
+          <Link
+            to="/auth/login"
+            className={`md:hidden ${bg ? "" : "text-white"}`}
+          >
+            <CiUser size={20} />
+          </Link>
+        </>
       ) : (
         <div
           ref={ref}
@@ -58,20 +66,20 @@ const LoginBtn = ({ bg }) => {
         >
           <div
             className={`w-full flex items-center gap-1 p-2 rounded-lg ${
-              bg ? "" : " border border-white "
+              bg ? "" : "border border-white "
             }`}
           >
             <IoMdArrowDropdown size={20} />
             <img
               alt="avtar-img"
               src={userData.avatar?.original}
-              className="w-8 h-8 lg:w-10 lg:h-10 rounded-[50%] object-cover"
+              className="w-6 h-6 lg:w-10 lg:h-10 rounded-[50%] object-cover"
             />
-            <p className={`font-bold`}>{userData?.name}</p>
+            <p className={` font-normal md:font-bold`}>{userData?.name}</p>
           </div>
           <ul
             className={`absolute bottom-[-70px] ${
-              i18n.language === "ar" ? "right-0" : "left-0"
+              i18n.language === "ar" ? "left-[30px]" : "right-[30px]"
             } text-start bg-white shadow-lg rounded-md p-3 z-40 duration-300 min-w-[180px] ${
               showMenu ? "block" : "hidden"
             }`}

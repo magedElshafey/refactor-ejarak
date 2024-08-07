@@ -5,7 +5,7 @@ import Filter from "../../components/common/filter/Filter";
 
 const Home = () => {
   return (
-    <div className="h container mx-auto px-8 mt-8  flex items-center">
+    <div className="h mt-8  flex items-center">
       <div className="md:backdrop-blur-md md:backdrop-brightness-150 md:border-2 md:border-white rounded-xl p-4 w-full flex  gap-4">
         <div className=" hidden lg:block w-[350px] ">
           <Filter

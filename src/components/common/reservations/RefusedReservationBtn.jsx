@@ -26,7 +26,7 @@ const RefusedReservationBtn = ({ id, dep, data }) => {
     <>
       <button
         onClick={handleShowModal}
-        className="flex items-center p-3 rounded-xl justify-center bg-red-500 text-white border border-white duration-300 min-w-[150px] hover:bg-white hover:text-red-500 hover:border-red-500"
+        className="flex items-center p-2 md:p-3 rounded-xl justify-center bg-red-500 text-white border border-white duration-300 w-auto md:w-[150px] hover:bg-white hover:text-red-500 hover:border-red-500"
       >
         {t("refusedd")}
       </button>

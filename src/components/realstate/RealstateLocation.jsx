@@ -33,7 +33,7 @@ const RealstateLocation = ({ data }) => {
   };
 
   return (
-    <div className="bg-white p-7 rounded-lg shadow-lg border  border-dashed border-maincolorgreen overflow-hidden">
+    <div className="bg-white p-7 rounded-lg shadow-lg border  border-dashed border-maincolorgreen lg:overflow-hidden h-[450px] lg:h-auto">
       <p className="mb-3 text-textColor">{t("realstate location")}</p>
       <div className="flex items-center gap-2">
         <FaMapMarkerAlt size={20} className="text-maincolorgreen" />

@@ -24,14 +24,16 @@ const NotficationMenu = ({ bg }) => {
       className="cursor-pointer relative"
     >
       <div
-        className={`w-12 h-12 p-2 flex items-center rounded-md justify-center border  ${
-          bg ? `${bg} text-slate-500` : "border-white text-white bg-transparent"
+        className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border  ${
+          bg
+            ? `${bg} text-slate-500`
+            : "md:border-white text-white bg-transparent"
         }`}
       >
         <FaBell size={20} />
       </div>
       {data ? (
-        <div className=" absolute bottom-0 left-0 w-5 h-5 flex items-center justify-center bg-maincolorgreen text-white rounded-[50%]">
+        <div className=" absolute bottom-0 left-0 w-3 h-3 md:w-5 md:h-5 flex items-center justify-center bg-maincolorgreen text-white rounded-[50%] text-xs md:text-base">
           <p> {data?.data?.un_seen}</p>
         </div>
       ) : null}

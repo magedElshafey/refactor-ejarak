@@ -1,7 +1,7 @@
 import React from "react";
-import img from "../../../assets/Path 1.png";
 import logo from "../../../assets/logo footer.png";
 import Logo from "../../../components/common/Logo";
+import { useNavigate } from "react-router-dom";
 import {
   appDetails,
   navLinks,
@@ -13,8 +13,13 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Footer = ({ isHome }) => {
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { ejarakLogin } = useSelector((state) => state.authSlice);
+  const auth = useSelector((state) => state.authSlice);
+  const isLogin = ejarakLogin;
+  console.log("ejarak login", isLogin);
+  const type = auth?.userData?.account?.type;
   return (
     <>
       {isHome ? (
@@ -121,11 +126,6 @@ const Footer = ({ isHome }) => {
           <div className="container mx-auto px-8">
             <div className="w-full flex justify-center flex-col items-center gap-3 mb-8  mt-24 md:mt-20 lg:mt-8">
               <Logo img={logo} />
-              {/* <p className="text-white mt-5">
-                هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
-                هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
-                العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
-              </p> */}
             </div>
             <div
               className={`grid grid-cols-1 ${
@@ -154,6 +154,9 @@ const Footer = ({ isHome }) => {
                 </p>
                 {navLinks.map((item, index) => (
                   <NavLink
+                    onClick={(e) =>
+                      item.onClick && item.onClick(e, isLogin, navigate, type)
+                    }
                     to={item.path}
                     key={index}
                     className={`w-fit flex items-center gap-2 mb-4 footer text-white`}

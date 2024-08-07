@@ -96,7 +96,7 @@ const Login = () => {
           value={password}
           onChange={handlePasswordChange}
         />
-        <div className="w-full flex items-center justify-between mb-4">
+        <div className="w-full flex items-center justify-between my-4">
           <div className="flex items-center gap-1">
             <div
               onClick={toggleRemeberMe}

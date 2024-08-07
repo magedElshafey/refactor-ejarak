@@ -107,7 +107,7 @@ const FormTwo = ({
         <MainInput
           label="suckNum"
           bg="bg-[#BDC7BC4D]"
-          type="number"
+          type="text"
           value={instrument_number}
           onChange={handleChange("instrument_number")}
         />

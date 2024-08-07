@@ -146,7 +146,7 @@ const Regester = () => {
         {t("createAccount")}
       </p>
       <p className="text-main  text-sm mb-3">{t("regQuery")}</p>
-      <form onSubmit={handleSubmit} className="w-full">
+      <form onSubmit={handleSubmit} className="w-full ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <MainInput
             type="text"
@@ -164,7 +164,7 @@ const Regester = () => {
             error={emailError}
           />
         </div>
-
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"></div>
         <div>
           <MobileInput
             value={phone}

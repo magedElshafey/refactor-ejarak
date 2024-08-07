@@ -8,7 +8,7 @@ const AccountDetailsNavbar = () => {
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
   return (
-    <div className="w-full   flex items-center gap-3 md:gap-4 lg:gap-6 overflow-x-auto overflow-y-hidden ">
+    <div className="w-full text-nowrap   flex items-center gap-3 md:gap-4 lg:gap-6 overflow-x-auto overflow-y-hidden ">
       {accountDetailsNavbar
         ?.filter((item) => item.role.includes(role))
         .map((item, index) => (
