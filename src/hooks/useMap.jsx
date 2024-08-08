@@ -36,7 +36,11 @@ const useMap = () => {
 
   const [nearestRealStates, setNearestRealStates] = useState([]);
   console.log("nearestRealStates", nearestRealStates);
-  const { isLoading: loadinNearRealStates, data } = useQuery(
+  const {
+    isLoading: loadinNearRealStates,
+    data,
+    isError,
+  } = useQuery(
     [
       "near realstates",
       lat,
@@ -83,7 +87,6 @@ const useMap = () => {
       },
       onError: () => {
         setNearestRealStates([]);
-        <ErrorHandling />;
       },
     }
   );
@@ -121,6 +124,7 @@ const useMap = () => {
     markers,
     nearestRealStates,
     loadinNearRealStates,
+    isError,
   };
 };
 

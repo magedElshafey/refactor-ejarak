@@ -62,6 +62,9 @@ const Footer = ({ isHome }) => {
                   <NavLink
                     to={item.path}
                     key={index}
+                    onClick={(e) =>
+                      item.onClick && item.onClick(e, isLogin, navigate, type)
+                    }
                     className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
                   >
                     <p>
@@ -78,6 +81,9 @@ const Footer = ({ isHome }) => {
                   <NavLink
                     to={item.path}
                     key={index}
+                    onClick={(e) =>
+                      item.onClick && item.onClick(e, isLogin, navigate, type)
+                    }
                     className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
                   >
                     <p>{t(item.title)}</p>
@@ -175,6 +181,9 @@ const Footer = ({ isHome }) => {
                   <NavLink
                     to={item.path}
                     key={index}
+                    onClick={(e) =>
+                      item.onClick && item.onClick(e, isLogin, navigate, type)
+                    }
                     className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
                   >
                     <p>{t(item.title)}</p>

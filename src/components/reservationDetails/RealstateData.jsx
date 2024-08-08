@@ -5,13 +5,7 @@ const RealstateData = ({ data, downloadContract }) => {
   const { t, i18n } = useTranslation();
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300">
-      <p
-        className={`text-lg mb-5 ${
-          downloadContract
-            ? "bg-maincolorgreen text-white p-2 rounded-md"
-            : null
-        }`}
-      >
+      <p className={`text-lg mb-5 bg-slate-200 p-2 rounded-md`}>
         {downloadContract ? "1)" : null} {t("advertiseData")}
       </p>
       <Link
@@ -40,7 +34,7 @@ const RealstateData = ({ data, downloadContract }) => {
           </p>
         </div>
       </div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8 p-3 bg-slate-200 rounded-md">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8 p-3 rounded-md">
         <div>
           <p className="text-[#4D5F65] mb-1">{t("space")}</p>
           <p className="text-black">

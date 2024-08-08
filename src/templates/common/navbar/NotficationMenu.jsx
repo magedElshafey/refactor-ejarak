@@ -32,7 +32,7 @@ const NotficationMenu = ({ bg }) => {
       >
         <FaBell size={20} />
       </div>
-      {data ? (
+      {data && data?.data?.un_seen ? (
         <div className=" absolute bottom-0 left-0 w-3 h-3 md:w-5 md:h-5 flex items-center justify-center bg-maincolorgreen text-white rounded-[50%] text-xs md:text-base">
           <p> {data?.data?.un_seen}</p>
         </div>

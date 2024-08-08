@@ -26,11 +26,11 @@ const RealstateData = ({ data }) => {
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("region")}</p>
-          <p className="text-black font-bold">{data.region}</p>
+          <p className="text-black font-bold">{data?.region}</p>
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("district")}</p>
-          <p className="text-black font-bold">{data.address}</p>
+          <p className="text-black font-bold">{data?.address}</p>
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("space")}</p>

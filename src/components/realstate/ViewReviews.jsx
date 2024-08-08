@@ -41,7 +41,7 @@ const ViewReviews = ({ id }) => {
                     )}
                   </div>
                   <div className="text-textColor text-xs">
-                    {formatDateTime(item?.created_at)}
+                    {formatDateTime(item?.updated_at)}
                   </div>
                 </div>
               ))}

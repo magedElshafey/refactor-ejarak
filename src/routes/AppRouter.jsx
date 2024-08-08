@@ -42,6 +42,7 @@ import ForgetPasswordCode from "../pages/auth/ForgetPasswordCode";
 import NewPassword from "../pages/auth/NewPassword";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Chat from "../pages/website/Chat";
+import Realstates from "../pages/dashboard/Realstates";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -188,8 +189,12 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "",
+        path: "main",
         element: <Dashboard />,
+      },
+      {
+        path: "realstates",
+        element: <Realstates />,
       },
     ],
   },

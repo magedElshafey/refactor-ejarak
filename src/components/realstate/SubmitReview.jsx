@@ -6,7 +6,7 @@ import LoadingBtn from "../../components/common/buttons/LoadingBtn";
 import { useMutation, useQueryClient } from "react-query";
 import { submitReview } from "../../services/post/submitReview";
 import Swal from "sweetalert2";
-const SubmitReview = ({ data }) => {
+const SubmitReview = ({ data, id }) => {
   const { t } = useTranslation();
   const [comment, setComment] = useState("");
   const handleCommentChange = (e) => setComment(e.target.value);
@@ -23,7 +23,8 @@ const SubmitReview = ({ data }) => {
         });
         setRating(0);
         setComment("");
-        queryClient.invalidateQueries(["revs"]);
+        queryClient.invalidateQueries(["revs", id]);
+        queryClient.invalidateQueries(["realstate-details", id]);
       } else {
         Swal.fire({
           icon: "error",

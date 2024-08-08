@@ -159,6 +159,7 @@ const EditRealstate = () => {
     },
     {
       onSuccess: (data) => {
+        console.log("data from edit", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",

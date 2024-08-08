@@ -4,13 +4,7 @@ const TenantData = ({ data, downloadContract }) => {
   const { t } = useTranslation();
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300 my-5">
-      <p
-        className={`text-lg mb-5 ${
-          downloadContract
-            ? "bg-maincolorgreen text-white p-2 rounded-md"
-            : null
-        }`}
-      >
+      <p className={`text-lg mb-5 bg-slate-200 p-2 rounded-md`}>
         {downloadContract ? "4)" : null} {t("tenant data")}
       </p>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 lg:gap-8 p-3 rounded-md">

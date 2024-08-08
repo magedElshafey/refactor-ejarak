@@ -15,7 +15,7 @@ const RealStateCategories = () => {
   const { categoryId, subCategoryId } = useSelector(
     (state) => state.filterSlice
   );
-  const selectedCategory = data.categories.find(
+  const selectedCategory = data?.categories.find(
     (item) => item.id === categoryId
   );
 

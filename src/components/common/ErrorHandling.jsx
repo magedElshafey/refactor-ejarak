@@ -1,20 +1,22 @@
 import React from "react";
-import Swal from "sweetalert2";
+import Lottie from "react-lottie";
+import * as animationData from "../../assets/no.json";
+import MainBtn from "../../components/common/buttons/MainBtn";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 const ErrorHandling = () => {
   const { t } = useTranslation();
-  const fireAlert = () => {
-    Swal.fire({
-      icon: "error",
-      title: t("error50"),
-      confirmButtonText: t("s"),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        window.location.reload();
-      }
-    });
+  const navigate = useNavigate();
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
   };
-  return fireAlert();
+  const handleNavigate = () => navigate("/");
+  return <div>ErrorHandling</div>;
 };
 
 export default ErrorHandling;

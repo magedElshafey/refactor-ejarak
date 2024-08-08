@@ -9,25 +9,27 @@ export const useGlobalContext = () => {
 };
 
 const GlobalContext = ({ children }) => {
-  const { isLoading, data } = useQuery("featuers", getFeatuers, {
+  const { isLoading, data, isError } = useQuery("featuers", getFeatuers, {
     onSuccess: (data) => {
       if (!data) {
-        return [];
+        return {};
       }
     },
     onError: () => {
       <ErrorHandling />;
-      return [];
+      return {};
     },
   });
 
   const value = {
-    data: data?.data?.data,
+    data: data?.data?.data || {},
   };
   return (
     <>
       {isLoading ? (
         <Spinner />
+      ) : isError ? (
+        <ErrorHandling />
       ) : (
         <GlobalProvider.Provider value={value}>
           {children}

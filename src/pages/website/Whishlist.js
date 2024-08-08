@@ -6,8 +6,9 @@ import RealstateCard from "../../components/common/RealstateCard";
 import LoadingTitle from "../../components/common/LoadingTitle";
 import NoDataTitle from "../../components/common/NoDataTitle";
 import Pagination from "../../components/common/Pagination";
+import ErrorHandling from "../../components/common/ErrorHandling";
 const Whishlist = () => {
-  const { isLoading, data } = useQuery("favorites", getWhishlist);
+  const { isLoading, data, isError } = useQuery("favorites", getWhishlist);
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(0);
   useEffect(() => {
@@ -27,6 +28,8 @@ const Whishlist = () => {
     <div>
       {isLoading ? (
         <Spinner />
+      ) : isError ? (
+        <ErrorHandling />
       ) : (
         <div className="container mx-auto px-8 mt-8">
           <div>

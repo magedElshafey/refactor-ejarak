@@ -12,6 +12,7 @@ import LoadingBtn from "../../components/common/buttons/LoadingBtn";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { login, addToken } from "../../store/auth";
+import usePasswordValidation from "../../hooks/validation/usePasswordValidation";
 const dashboardRoles = ["super_admin", "admin"];
 const Login = () => {
   const { t } = useTranslation();
@@ -24,10 +25,12 @@ const Login = () => {
     handleChange: handlePhoneChange,
     setValue: setPhone,
   } = useNumberInput("");
-  const [rememberMe, setRememberMe] = useState(false);
-  const toggleRemeberMe = () => setRememberMe(!rememberMe);
-  const [password, setPassword] = useState("");
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const {
+    password,
+    error: passwordError,
+    handleChange: handlePasswordChange,
+    setPassword,
+  } = usePasswordValidation();
   const { isLoading, mutate } = useMutation(handleLogin, {
     onSuccess: (data) => {
       if (data?.data?.status) {
@@ -95,9 +98,10 @@ const Login = () => {
           placeholder="password"
           value={password}
           onChange={handlePasswordChange}
+          error={passwordError}
         />
         <div className="w-full flex items-center justify-between my-4">
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <div
               onClick={toggleRemeberMe}
               className={`w-4 h-4 border cursor-pointer  ${
@@ -105,7 +109,7 @@ const Login = () => {
               }`}
             ></div>
             <p> {t("rem")}</p>
-          </div>
+          </div> */}
           <Link
             to="/auth/forget-password"
             className=" text-red-500 underline font-medium text-sm"

@@ -7,6 +7,7 @@ import { FaMapMarkedAlt, FaStar, FaFireAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IoLocationSharp, IoClose } from "react-icons/io5";
 import { useLocation } from "react-router-dom";
+import ErrorHandling from "../ErrorHandling";
 
 const MapView = () => {
   // hooks
@@ -14,7 +15,8 @@ const MapView = () => {
   const { pathname } = useLocation();
   const { lat, lng } = useSelector((state) => state.filterSlice);
   const [isSatelliteView, setIsSatelliteView] = useState(false);
-  const { nearestRealStates, loadinNearRealStates, markers } = useMap();
+  const { nearestRealStates, loadinNearRealStates, markers, isError } =
+    useMap();
 
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const [activeId, setActiveId] = useState(null);
@@ -46,64 +48,70 @@ const MapView = () => {
     setMapKey((prevKey) => prevKey + 1);
   }, [nearestRealStates]);
   return (
-    <div
-      className={`relative w-full  ${
-        pathname === "/" ? "h-[450px] md:h-[600px]" : "h-[450px]"
-      } `}
-    >
-      <button
-        type="button"
-        onClick={toggleMapView}
-        className={`absolute top-4 ${
-          i18n.language === "ar" ? "right-6" : "left-6"
-        } z-10 w-10 h-10 text-white bg-maincolorgreen  rounded-full flex justify-center items-center`}
-      >
-        {isSatelliteView ? (
-          <FaMapMarkedAlt size={25} className="text-white" />
-        ) : (
-          <MdOutlineSatelliteAlt size={25} className="text-white" />
-        )}
-      </button>
+    <>
+      {isError ? (
+        <ErrorHandling />
+      ) : (
+        <div
+          className={`relative w-full  ${
+            pathname === "/" ? "h-[450px] md:h-[600px]" : "h-[450px]"
+          } `}
+        >
+          <button
+            type="button"
+            onClick={toggleMapView}
+            className={`absolute top-4 ${
+              i18n.language === "ar" ? "left-6" : "right-6"
+            } z-10 w-10 h-10 text-white bg-maincolorgreen  rounded-full flex justify-center items-center`}
+          >
+            {isSatelliteView ? (
+              <FaMapMarkedAlt size={25} className="text-white" />
+            ) : (
+              <MdOutlineSatelliteAlt size={25} className="text-white" />
+            )}
+          </button>
 
-      {loadinNearRealStates ? (
-        <div className="bg-maincolorgreen p-3 rounded-md text-white flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[220px] z-30">
-          {t("loading")}
+          {loadinNearRealStates ? (
+            <div className="bg-maincolorgreen p-3 rounded-md text-white flex items-center justify-center absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[220px] z-30">
+              {t("loading")}
+            </div>
+          ) : null}
+          {!loadinNearRealStates && nearestRealStates && pathname === "/" ? (
+            <div className=" absolute left-[50%] top-8 w-[250px] text-white bg-maincolorgreen p-3 flex items-center justify-center rounded-md z-30 translate-x-[-50%]">
+              {nearestRealStates?.length} {t("locations beside you")}
+            </div>
+          ) : null}
+          <GoogleMap
+            key={mapKey}
+            bootstrapURLKeys={{
+              key: apiKey,
+            }}
+            defaultCenter={defaultProps.center}
+            defaultZoom={defaultProps.zoom}
+            options={{
+              ...mapOptions,
+              mapTypeId: isSatelliteView ? "satellite" : "roadmap",
+            }}
+          >
+            {markers && <Marker lat={markers.lat} lng={markers.lng} />}
+            {!loadinNearRealStates &&
+              pathname === "/" &&
+              nearestRealStates &&
+              nearestRealStates.map((item, index) => (
+                <Marker
+                  key={index}
+                  lat={item.lat}
+                  lng={item.lng}
+                  data={item}
+                  activeId={activeId}
+                  setActiveId={setActiveId}
+                  pathname={pathname}
+                />
+              ))}
+          </GoogleMap>
         </div>
-      ) : null}
-      {!loadinNearRealStates && nearestRealStates && pathname === "/" ? (
-        <div className=" absolute left-[50%] top-8 w-[250px] text-white bg-maincolorgreen p-3 flex items-center justify-center rounded-md z-30 translate-x-[-50%]">
-          {nearestRealStates?.length} {t("locations beside you")}
-        </div>
-      ) : null}
-      <GoogleMap
-        key={mapKey}
-        bootstrapURLKeys={{
-          key: apiKey,
-        }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}
-        options={{
-          ...mapOptions,
-          mapTypeId: isSatelliteView ? "satellite" : "roadmap",
-        }}
-      >
-        {markers && <Marker lat={markers.lat} lng={markers.lng} />}
-        {!loadinNearRealStates &&
-          pathname === "/" &&
-          nearestRealStates &&
-          nearestRealStates.map((item, index) => (
-            <Marker
-              key={index}
-              lat={item.lat}
-              lng={item.lng}
-              data={item}
-              activeId={activeId}
-              setActiveId={setActiveId}
-              pathname={pathname}
-            />
-          ))}
-      </GoogleMap>
-    </div>
+      )}
+    </>
   );
 };
 const Marker = ({ data, activeId, setActiveId, pathname }) => {
@@ -114,7 +122,7 @@ const Marker = ({ data, activeId, setActiveId, pathname }) => {
         <>
           <div
             onClick={() => setActiveId(data.id)}
-            className="p-3 rounded-md border border-maincolorgreen bg-white text-maincolorgreen flex items-center justify-center cursor-pointer gap-5 font-bold w-[180px] relative"
+            className="p-3 rounded-md border border-maincolorgreen bg-white text-maincolorgreen flex items-center justify-center cursor-pointer gap-5 font-bold w-[180px] "
           >
             {data?.special === 1 && (
               <FaStar size={18} className="text-yellow-400" />

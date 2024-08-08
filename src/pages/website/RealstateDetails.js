@@ -113,7 +113,7 @@ const RealstateDetails = () => {
           <div className="w-full bg-white">
             <div className="container mx-auto p-8">
               {ejarakLogin && data?.data?.data?.user?.id !== userId ? (
-                <SubmitReview data={data?.data?.data} />
+                <SubmitReview data={data?.data?.data} id={params.id} />
               ) : !ejarakLogin && data?.data?.data?.user?.id !== userId ? (
                 <Link
                   to="/auth/login"

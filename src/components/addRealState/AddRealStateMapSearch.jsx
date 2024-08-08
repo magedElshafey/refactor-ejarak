@@ -9,8 +9,7 @@ const AddRealStateMapSearch = ({
   setSearchAddress,
 }) => {
   const { t } = useTranslation();
-  const formStyle =
-    "rounded-xl w-full outline-none px-3 h-[40px] bg-[#BDC7BC4D] cursor-pointer";
+
   // force auto complete packages to search on saudi arabia only
   const saudiArabiaBounds = new window.google.maps.LatLngBounds(
     new window.google.maps.LatLng(16, 34),
@@ -61,7 +60,7 @@ const AddRealStateMapSearch = ({
 
             <div className="autocomplete-dropdown-container z-[1001] absolute top-15 left-0 w-full rounded-lg overflow-hidden">
               {suggestions &&
-                suggestions.map((suggestion, index) => (
+                suggestions?.map((suggestion, index) => (
                   <div
                     key={index}
                     {...getSuggestionItemProps(suggestion)}

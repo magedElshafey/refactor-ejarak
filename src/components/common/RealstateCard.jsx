@@ -119,7 +119,10 @@ const RealStateCard = ({ data, dep }) => {
           <div className="flex items-center gap-1">
             <BiArea size={18} />
             <p className="lg:text-sm">{t("area")} : </p>
-            <p className="font-bold"> {parseFloat(data.area).toFixed(0)}</p>
+            <p className="font-bold">
+              {" "}
+              {parseFloat(data.area).toFixed(0)} {t("m")}
+            </p>
           </div>
           <div className="flex items-center gap-1">
             <IoBedOutline size={18} />

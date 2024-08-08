@@ -132,6 +132,35 @@ export const aboutUs = [
   {
     title: "contact us",
     path: "/website/chat",
+    onClick: (e, isLoggedIn, navigate, type) => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+
+        Swal.fire({
+          text: t("login_first"),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: t("login"),
+          cancelButtonText: t("cancel"),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/auth/login");
+          } else {
+            return;
+          }
+        });
+      } else if (type === "tenant") {
+        e.preventDefault();
+
+        Swal.fire({
+          icon: "error",
+          position: "center",
+          title: "يرجي تسجيل حساب مالك أولا",
+        });
+      }
+    },
   },
   {
     title: "privacy Policy",
@@ -284,7 +313,7 @@ export const dashboardLinks = [
   {
     icon: <MdOutlineDashboard size={20} />,
     title: "dashboard",
-    path: "/dashboard",
+    path: "main",
     list: [],
   },
   {

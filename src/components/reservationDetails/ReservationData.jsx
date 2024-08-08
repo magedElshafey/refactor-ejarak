@@ -8,13 +8,7 @@ const ReservationData = ({ data, downloadContract }) => {
   endDate.setMonth(contractBeginning.getMonth() + data?.contract_period);
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300 my-5">
-      <p
-        className={`text-lg mb-5 ${
-          downloadContract
-            ? "bg-maincolorgreen text-white p-2 rounded-md"
-            : null
-        }`}
-      >
+      <p className={`text-lg mb-5 bg-slate-200 p-2 rounded-md `}>
         {downloadContract ? "2)" : null} {t("reservationDetails")}
       </p>
       <div
