@@ -2,17 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatDateTime } from "../../../utils/formateDateTime";
+import getNotificationLink from "../../../utils/getNotificationLink";
 const ShowNotfications = ({ data }) => {
-  console.log("data", data);
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
   const navigate = useNavigate();
   const handleNavigate = (id) => {
-    if (role === "tenant") {
-      navigate("/website/my-reservations");
-    } else {
-      navigate(`/website/realstate/reservation-details/${id}`);
-    }
+    const url = getNotificationLink(data.type, role, data?.realty_id);
+    navigate(url);
   };
   return (
     <div

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { userToken } from "../store/auth";
 
 const lang = localStorage.getItem("lang")
   ? JSON.parse(localStorage.getItem("lang"))

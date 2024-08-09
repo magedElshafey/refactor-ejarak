@@ -16,31 +16,107 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import NotficationMenu from "./NotficationMenu";
 import { useNavigate } from "react-router-dom";
+import echo from "../../../echo";
+import notificationSound from "../../../assets/sounds/notification.wav";
+import { useQueryClient } from "react-query";
+
+const notificationAudio = new Audio(notificationSound);
+
 const Navbar = ({ bg }) => {
-  const dispatch = useDispatch();
-  const filterRef = useRef(null);
+  // ================== global states =============================
   const { i18n } = useTranslation();
+  const dispatch = useDispatch();
   const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { openFilter } = useSelector((state) => state.filterSlice);
-  useClickOutside(filterRef, () => dispatch(closeFilter()));
+  const loggedUser = useSelector((state) => state?.authSlice?.userData);
+  const auth = useSelector((state) => state.authSlice);
+  const { pathname } = useLocation();
+  const queryClient = useQueryClient();
+
+  // ================== local states =============================
   const [showSidebar, setShowSidebar] = useState();
   const sidebarRef = useRef(null);
-  const navigate = useNavigate();
-  const auth = useSelector((state) => state.authSlice);
+  const filterRef = useRef(null);
+  
+  
+  useClickOutside(filterRef, () => dispatch(closeFilter()));
   const isLogin = auth.ejarakLogin;
+  const navigate = useNavigate();
   const type = auth?.userData?.account?.type;
-  const { pathname } = useLocation();
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       setShowSidebar(false);
     }
   };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const addNotification = (newNotification) => {
+    const newNotifications = [
+      {
+        ...newNotification,
+        description: newNotification.notification,
+        seen: Boolean(newNotification.seen),
+        date: new Date(Date.parse(newNotification.time)),
+        created_at: new Date(Date.parse(newNotification.time)),
+        path: newNotification.realty_id
+          ? `/user-ad-details/${newNotification.realty_id}`
+          : "",
+        id: newNotification.notification_id,
+      },
+    ];
+    return setNotifications(newNotifications, +1, true);
+  };
+
+  // Subscribing to the Event Manager.
+  useEffect(() => {
+    if (loggedUser) {
+      echo
+        .private(`privateNotification.${loggedUser?.id}`)
+        .listen(".private-notification", (e) => {
+          //play the sound of the notification.
+          notificationAudio.play().catch(e => {
+          if (e.name === "NotAllowedError") {
+            // handle autoplay errors, for reference https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
+            return 
+          }
+          throw new Error("unexpected behaviour from the audio player.");
+        })
+          addNotification(e);
+        });
+    }
+
+    return () => {
+      echo
+        .private(`privateNotification.${loggedUser?.id}`)
+        .stopListening(".private-notification");
+    };
+  }, [loggedUser]);
+
+  const setNotifications = (notifications, unseen = 0, isNew = false) => {
+    queryClient.setQueryData("all-notfications", (response) => {
+      const results = response?.data?.data || [];
+      const newNotifications = isNew
+        ? [...notifications, ...results]
+        : notifications;
+      const oldUnseen = response?.data?.un_seen || 0;
+      const newData = {
+        ...response,
+        data: {
+          ...response.data,
+          data: newNotifications,
+          un_seen: oldUnseen + unseen
+        }
+      };
+      return newData;
+    });
+  };
+
   return (
     <div className="container mx-auto px-8  pt-5">
       <div className="hidden lg:block">
