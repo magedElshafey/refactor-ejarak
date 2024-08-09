@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatDateTime } from "../../../utils/formateDateTime";
 const ShowNotfications = ({ data }) => {
-  console.log("data", data);
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
   const navigate = useNavigate();

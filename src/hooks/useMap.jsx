@@ -35,7 +35,6 @@ const useMap = () => {
   });
 
   const [nearestRealStates, setNearestRealStates] = useState([]);
-  console.log("nearestRealStates", nearestRealStates);
   const {
     isLoading: loadinNearRealStates,
     data,
