@@ -17,7 +17,6 @@ const NotficationMenu = ({ bg }) => {
     refetchOnMount: true,
     refetchOnWindowFocus: false,
   });
-
   return (
     <div
       onClick={() => setShowMenu(!showMenu)}
