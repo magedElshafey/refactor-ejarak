@@ -91,14 +91,7 @@ const RealStateTable = ({ data, isLoading, onStatusChange }) => {
       title: "view",
       icon: <FaEye />,
       onClick: () => {
-        navigate(`/dashboard/static-pages/view-faq/${row.id}`);
-      }
-    },
-    {
-      title: "edit",
-      icon: <FaPencilAlt />,
-      onClick: () => {
-        navigate(`/dashboard/static-pages/edit-faq/${row.id}`);
+        navigate(``);
       }
     },
     {
