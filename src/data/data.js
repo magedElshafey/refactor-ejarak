@@ -404,3 +404,26 @@ export const dashboardLinks = [
     ],
   },
 ];
+
+
+
+//  * table filter
+
+export const tableStatus = [
+  {
+    arTitle: " قيد المراجعة",
+    enTitle: "Under Review",
+    value: "pending",
+  },
+  {
+    arTitle: "مقبول",
+    enTitle: "Acceptable",
+    value: "accepted",
+  },
+
+  {
+    arTitle: "مرفوض",
+    enTitle: "Rejected",
+    value: "refused",
+  },
+];

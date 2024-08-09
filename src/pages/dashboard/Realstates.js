@@ -1,21 +1,36 @@
 import React, { useEffect, useState } from "react";
 import Table from "../../components/dashboard/common/table/Table";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getDashboardRealstates } from "../../services/get/dashboard/getDashboardRealstates";
 import { formatDateTime } from "../../utils/formateDateTime";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import TableProperties from "../../components/dashboard/common/table/TableProperties";
-import Pagination from "../../components/common/Pagination"
+import Pagination from "../../components/common/Pagination";
 import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import getStatusBackgroundColor from "../../utils/dashboard/getStatusBackgroundColor";
-import { useTranslation } from "react-i18next";
+import TableStatus from "../../components/dashboard/common/table/TableStatus";
+import updateRealStateStatus from "../../services/post/dashboard/updateRealStateStatus";
+import RejectedPopup from "../../components/dashboard/common/RejectedPopup";
 
 const itemsPerPage = 10;
 
 const Realstates = () => {
   const [currentPage, setCurrentPage] = useState(0);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [selectedRowId, setSelectedRowId] = useState(null);
+  const [rejectionReason, setRejectionReason] = useState("");
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
+
+  const mutation = useMutation(
+    ({ status, id, rejectionReason }) => updateRealStateStatus(status, id, rejectionReason),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("realstates");
+      }
+    }
+  );
 
   useEffect(() => {
     setCurrentPage(0);
@@ -33,9 +48,28 @@ const Realstates = () => {
   const offset = currentPage * itemsPerPage;
   const realStateData = data?.data?.data?.slice(offset, offset + itemsPerPage) || [];
 
+  const handleStatusChange = (id, newStatus) => {
+    if (newStatus === "refused") {
+      setSelectedRowId(id);
+      setPopupOpen(true);
+    } else {
+      mutation.mutate({ status: newStatus, id });
+    }
+  };
+
+  const handlePopupSubmit = (message) => {
+    mutation.mutate({ status: "refused", id: selectedRowId, reason_refused: message });
+    setRejectionReason("");
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+    setSelectedRowId(null);
+  };
+
   return (
     <>
-      <RealStateTable data={realStateData} isLoading={isLoading} />
+      <RealStateTable data={realStateData} isLoading={isLoading} onStatusChange={handleStatusChange} />
       {data?.data?.data?.length > itemsPerPage ? (
         <Pagination
           itemsPerPage={itemsPerPage}
@@ -44,122 +78,84 @@ const Realstates = () => {
           currentPage={currentPage}
         />
       ) : null}
+      <RejectedPopup isOpen={popupOpen} closePopup={closePopup} onSubmit={handlePopupSubmit} />
     </>
   );
 };
 
-const RealStateTable = ({ data, isLoading }) => {
+const RealStateTable = ({ data, isLoading, onStatusChange }) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
-  //  * table properties ( delete , view )
-  const properties = (row) => {
-    return [
-      {
-        title: "view",
-        icon: <FaEye />,
-        onClick: () => {
-          navigate(`/dashboard/static-pages/view-faq/${row.id}`)
-        }
-      },
+  const properties = (row) => [
+    {
+      title: "view",
+      icon: <FaEye />,
+      onClick: () => {
+        navigate(`/dashboard/static-pages/view-faq/${row.id}`);
+      }
+    },
+    {
+      title: "edit",
+      icon: <FaPencilAlt />,
+      onClick: () => {
+        navigate(`/dashboard/static-pages/edit-faq/${row.id}`);
+      }
+    },
+    {
+      title: "delete",
+      icon: <FaTrash />,
+      onClick: () => {
+        // Handle delete action
+      }
+    }
+  ];
 
-      {
-        title: "edit",
-        icon: <FaPencilAlt />,
-        onClick: () => {
-          navigate(`/dashboard/static-pages/edit-faq/${row.id}`);
-        }
-      },
-      {
-        title: "delete",
-        icon: <FaTrash />,
-        onClick: () => {
-
-        }
-      },
-    ]
-  }
-
-  // * table data ( header titles , body data ) 
   const columns = [
-    {
-      title: "house title",
-      dataIndex: "name",
-    },
-    {
-      title: "houseOwner",
-      dataIndex: "user.name",
-    },
-    {
-      title: "house address",
-      dataIndex: "city.name",
-    },
-    {
-      title: "created date",
-      dataIndex: "created_at",
-      render: (date) => {
-        return formatDateTime(date);
-      },
-    },
+    { title: "house title", dataIndex: "name" },
+    { title: "houseOwner", dataIndex: "user.name" },
+    { title: "house address", dataIndex: "city.name" },
+    { title: "created date", dataIndex: "created_at", render: (date) => formatDateTime(date) },
     {
       title: "house status",
       dataIndex: "status",
-      render: (row) => {
-        console.log(row);
-
-        return (
-          <p
-            className={`p-1 text-sm rounded-full text-black ${getStatusBackgroundColor(
-              row
-            )}`}
-          >
-            {t(row)}
-          </p>
-        )
-      }
+      render: (status, row) => (
+        <TableStatus status={status} onChange={(newStatus) => onStatusChange(row.id, newStatus)} />
+      )
     },
     {
       title: "special realStates",
       dataIndex: "special",
-      render: (row) => {
-        return (
-          <label className="inline-flex items-center me-5 cursor-pointer">
-            <input
-              type="checkbox"
-              value=""
-              checked={row === 1}
-              className="sr-only peer"
-            // onClick={toggleSpecialStatus}
-            />
-            <div
-              className={`relative w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-[${row === 1 ? "-100%" : "0"
-                }] rtl:peer-checked:after:-translate-x-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600`}
-            ></div>
-          </label>
-        );
-      }
+      render: (special) => (
+        <label className="inline-flex items-center me-5 cursor-pointer">
+          <input
+            type="checkbox"
+            value=""
+            checked={special === 1}
+            className="sr-only peer"
+          />
+          <div
+            className={`relative w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-[${special === 1 ? "-100%" : "0"
+              }] rtl:peer-checked:after:-translate-x-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600`}
+          ></div>
+        </label>
+      )
     },
-    {
-      title: "properties",
-      render: (row) => {
-        return (
-          <TableProperties items={properties} row={row} />
-        )
-      },
-    },
+    { title: "properties", render: (row) => <TableProperties items={properties} row={row} /> }
   ];
+
   return (
     <>
-      {isLoading ?
+      {isLoading ? (
         <div className="pt-20 flex items-center justify-center">
           <AiOutlineLoading3Quarters size={60} className="animate-spin text-maincolorgreen" />
         </div>
-        :
-        <div className=" max-w-screen overflow-x-auto">
+      ) : (
+        <div className="max-w-screen overflow-x-auto">
           <Table columns={columns} bodyData={data || []} />
         </div>
-      }
+      )}
     </>
-  )
-}
+  );
+};
+
 export default Realstates;
