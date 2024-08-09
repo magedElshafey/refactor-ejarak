@@ -503,5 +503,6 @@
   "reservations": "reservations",
   "packages": "packages",
   "website content": "website content",
-  "settings": "settings"
+  "settings": "settings",
+  "index": "id"
 }

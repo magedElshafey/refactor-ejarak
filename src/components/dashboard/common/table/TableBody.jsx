@@ -6,12 +6,13 @@ const getNestedValue = (obj, path) => {
   return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
-const TableBody = ({ bodyData, columns }) => {
+const TableBody = ({ bodyData, columns, numbersBeginning }) => {
   const { t } = useTranslation();
   return (
-    <tbody>
+    <tbody className="pt-10">
       {bodyData?.map((data, i) => (
         <tr key={i}>
+          <td className="p-2"> {i + 1 + numbersBeginning} </td>
           {columns?.map((column, j) => {
             const value = column.dataIndex
               ? getNestedValue(data, column.dataIndex)
@@ -24,7 +25,7 @@ const TableBody = ({ bodyData, columns }) => {
               );
             }
             return (
-              <td className="py-1 px-2 font-medium" key={i + j}>
+              <td className="p-3 font-medium truncate max-w-[350px]"  key={i + j}>
                 {t(value)}
               </td>
             );
