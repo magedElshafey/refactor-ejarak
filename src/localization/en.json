@@ -521,5 +521,16 @@
   "answer in english": "answer in english",
   "answer in arabic": "answer in arabic",
   "edit question": "edit question",
-  "faq details": "question details"
+  "faq details": "question details",
+  "addd": "add",
+  "you need to choose the city you want to remove": "you need to choose the city you want to remove",
+  "do you sure you want to remove the city": "do you sure you want to remove the city ?",
+  "city name in arabic": "city name in arabic",
+  "city name in english": "city name in english",
+  "city name in arabic field is required": "city name in arabic field is required",
+  "city name in english field is required": "city name in english field is required",
+  "you need to choose the city you want to edit": "you need to choose the city you want to edit",
+  "do you sure you want to edit the city": "do you sure you want to edit the city ?",
+  "old city name in arabic": "current city name in arabic",
+  "old city name in english": "current city name in english"
 }

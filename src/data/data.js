@@ -4,7 +4,6 @@ import {
   BsBuildingFill,
   BsFillHousesFill,
 } from "react-icons/bs";
-import { FaHeart } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { t } from "i18next";
 import google from "../assets/google.png";
@@ -15,15 +14,15 @@ import {
   FaInstagramSquare,
   FaTiktok,
   FaSnapchatGhost,
+  FaRocketchat,
+  FaHeart,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
 import { MdOutlineDashboard } from "react-icons/md";
-import { FaUsers } from "react-icons/fa6";
+import { FaUsers, FaXTwitter, FaCity } from "react-icons/fa6";
 import { TbBrandBooking, TbInfoTriangle } from "react-icons/tb";
 import { GoPackage } from "react-icons/go";
 import { LiaFileContractSolid } from "react-icons/lia";
 import { HiOutlineNewspaper } from "react-icons/hi2";
-import { IoSettings } from "react-icons/io5";
 
 export const navLinks = [
   {
@@ -315,36 +314,42 @@ export const dashboardLinks = [
     title: "dashboard",
     path: "main",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <BsFillHousesFill size={20} />,
     path: "realstates",
     title: "realstates",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <FaUsers size={20} />,
     path: "users",
     title: "users",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <TbBrandBooking size={20} />,
     path: "reservations",
     title: "reservations",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <TbInfoTriangle size={20} />,
     path: "reports",
     title: "reports",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <GoPackage size={20} />,
     path: "packages",
     title: "packages",
     list: [],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <LiaFileContractSolid size={20} />,
@@ -360,6 +365,7 @@ export const dashboardLinks = [
         path: "electronic-contracts",
       },
     ],
+    role: ["admin", "super_admin"],
   },
   {
     icon: <HiOutlineNewspaper size={20} />,
@@ -383,24 +389,20 @@ export const dashboardLinks = [
         title: "privacy and policy",
       },
     ],
+    role: ["admin", "super_admin"],
   },
   {
-    icon: <IoSettings size={20} />,
-    title: "settings",
-    path: "settings",
-    list: [
-      {
-        path: "realstate-types",
-        title: "realstates types",
-      },
-      {
-        path: "realstate-places",
-        title: "realstates-places",
-      },
-      {
-        path: "payment-period",
-        title: "payment period",
-      },
-    ],
+    icon: <FaCity size={20} />,
+    title: "cities",
+    path: "cities",
+    list: [],
+    role: ["admin", "super_admin"],
+  },
+  {
+    icon: <FaRocketchat size={20} />,
+    title: "chat",
+    path: "chat",
+    list: [],
+    role: ["admin", "super_admin", "customer_service"],
   },
 ];

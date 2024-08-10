@@ -50,6 +50,7 @@ import Faqs from "../pages/dashboard/Faqs";
 import AddFaq from "../pages/dashboard/AddFaq";
 import EditFaq from "../pages/dashboard/EditFaq";
 import FAQ from "../pages/dashboard/FAQ";
+import Cities from "../pages/dashboard/Cities";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -230,6 +231,10 @@ const router = createBrowserRouter([
       {
         path: "view-faq/:id",
         title: <FAQ />,
+      },
+      {
+        path: "cities",
+        element: <Cities />,
       },
     ],
   },

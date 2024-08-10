@@ -540,5 +540,16 @@
   "answer in english": "الإجابة بالإنجليزية",
   "answer in arabic": "الإجابة بالعربية",
   "edit question": "تعديل السؤال",
-  "faq details": "تفاصيل السؤال"
+  "faq details": "تفاصيل السؤال",
+  "addd": "إضافة",
+  "you need to choose the city you want to remove": "يجب اختيار المدينة التي تريد حذفها",
+  "do you sure you want to remove the city": "هل أنت متأكد من حذف المدينة ؟ ",
+  "city name in arabic": "إسم المدينة بالعربي",
+  "city name in english": "إسم المدينة بالإنجليزية",
+  "city name in arabic field is required": "إسم المدينة بالعربية مطلوب",
+  "city name in english field is required": "إسم المدينة بالإنجليزية مطلوب",
+  "you need to choose the city you want to edit": "يجب عليك اختيار المدينة التي تريد تعديلها اولا ",
+  "do you sure you want to edit the city": "هل أنت متأكد من تعديل الميدنة ؟",
+  "old city name in arabic": "إسم المدينة الحالي بالعربية",
+  "old city name in english": "إسم المدينة الحالي بالإنجليزية"
 }
