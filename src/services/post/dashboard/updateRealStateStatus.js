@@ -2,10 +2,10 @@ import { request } from "../../axios";
 
 const updateRealStateStatus = async (status, id, rejectionReason) => {
   return await request({
-    url: `/${status === "rejected" ? "rejected" : "accept"}-real-estate/${id} `,
-    method: `${status === "rejected" ? "POST" : "GET"}`,
-    data: status === "rejected" ? { rejectionReason } : null
+    url: `/Dashboard/admin/${status === "refused" ? "reject" : "accept"}-real-estate/${id} `,
+    method: `${status === "refused" ? "POST" : "GET"}`,
+    data: status === "refused" ? { rejectionReason } : null
   })
 }
 
-export default updateRealStateStatus
+export default updateRealStateStatus;
