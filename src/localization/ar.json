@@ -523,5 +523,22 @@
   "reservations": "الحجوزات",
   "packages": "الباقات",
   "website content": "محتوي الموقع",
-  "settings": "الإعدادات"
+  "settings": "الإعدادات",
+  "terms and conditions in arabic": "الشروط و الأحكام بالعربية",
+  "terms and conditions in english": "الشروط و الأحكام بالإنجليزية",
+  "about ejarak in arabic": " عن إيجارك بالعربية",
+  "about ejarak in english": "عن ايجارك بالإنجليزية",
+  "about ejarak": "عن إيجارك",
+  "privacy and policy": "سياسة الخصوصية",
+  "privacy and policy in english": "سياسة الخصوصية بالإنجليزية",
+  "privacy and policy in arabic": "سياسة الخصوصية بالعربية",
+  "faqs": "الأسئلة الشائعة",
+  "add question": "إضافة سؤال",
+  "question": "السؤال",
+  "question in english": "السؤال بالإنجليزية",
+  "question in arabic": "السؤال بالعربية",
+  "answer in english": "الإجابة بالإنجليزية",
+  "answer in arabic": "الإجابة بالعربية",
+  "edit question": "تعديل السؤال",
+  "faq details": "تفاصيل السؤال"
 }

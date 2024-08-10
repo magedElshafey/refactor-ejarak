@@ -1,14 +1,10 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getPrivacy } from "../../services/get/getPrivacy";
 import Spinner from "../../components/common/Spinner";
 import { useTranslation } from "react-i18next";
+import useFilteredContent from "../../hooks/api/useFilterdSettings";
 const Privacy = () => {
-  const { isLoading, data } = useQuery(["privacy"], getPrivacy);
   const { t } = useTranslation();
-
-  const content = data?.data?.data?.find((item) => item.key === "policy");
-  console.log("content is", content);
+  const { isLoading, data } = useFilteredContent("policy");
   return (
     <>
       {isLoading ? (
@@ -20,7 +16,7 @@ const Privacy = () => {
           </p>
           <p
             className="mb-8 leading-7 text-[#4D5F65]"
-            dangerouslySetInnerHTML={{ __html: content?.value }}
+            dangerouslySetInnerHTML={{ __html: data?.value }}
           ></p>
         </div>
       )}

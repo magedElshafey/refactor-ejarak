@@ -1,18 +1,18 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getPrivacy } from "../../services/get/getPrivacy";
 import Spinner from "../../components/common/Spinner";
 import { useTranslation } from "react-i18next";
+import useFilteredContent from "../../hooks/api/useFilterdSettings";
+
 const Terms = () => {
-  const { isLoading, data } = useQuery(["terms"], getPrivacy);
   const { t } = useTranslation();
-  const content = data?.data?.data?.find(
-    (item) => item.key === "terms_and_conditions"
+
+  const { isLoading, data: content2 } = useFilteredContent("policy");
+  const { isLoading: loadingTerms, data: content } = useFilteredContent(
+    "terms_and_conditions"
   );
-  const content2 = data?.data?.data?.find((item) => item.key === "policy");
   return (
     <>
-      {isLoading ? (
+      {isLoading || loadingTerms ? (
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-5">

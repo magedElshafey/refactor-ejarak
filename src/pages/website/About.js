@@ -1,13 +1,12 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getPrivacy } from "../../services/get/getPrivacy";
+
 import Spinner from "../../components/common/Spinner";
 import { useTranslation } from "react-i18next";
+import useFilteredContent from "../../hooks/api/useFilterdSettings";
 const About = () => {
-  const { isLoading, data } = useQuery(["privacy"], getPrivacy);
   const { t } = useTranslation();
 
-  const content = data?.data?.data?.find((item) => item.key === "about_ejark");
+  const { isLoading, data: content } = useFilteredContent("about_ejark");
   return (
     <>
       {isLoading ? (
