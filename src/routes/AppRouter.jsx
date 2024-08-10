@@ -43,6 +43,13 @@ import NewPassword from "../pages/auth/NewPassword";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Chat from "../pages/website/Chat";
 import Realstates from "../pages/dashboard/Realstates";
+import AboutEjarak from "../pages/dashboard/AboutEjarak";
+import TermsAndConditions from "../pages/dashboard/TermsAndConditions";
+import PrivacyAndPolicy from "../pages/dashboard/PrivacyAndPolicy";
+import Faqs from "../pages/dashboard/Faqs";
+import AddFaq from "../pages/dashboard/AddFaq";
+import EditFaq from "../pages/dashboard/EditFaq";
+import FAQ from "../pages/dashboard/FAQ";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -195,6 +202,34 @@ const router = createBrowserRouter([
       {
         path: "realstates",
         element: <Realstates />,
+      },
+      {
+        path: "about-ejarak",
+        element: <AboutEjarak />,
+      },
+      {
+        path: "terms-conditions",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "privacy-policy",
+        element: <PrivacyAndPolicy />,
+      },
+      {
+        path: "faqs",
+        element: <Faqs />,
+      },
+      {
+        path: "faqs/add",
+        element: <AddFaq />,
+      },
+      {
+        path: "faqs/edit/:id",
+        element: <EditFaq />,
+      },
+      {
+        path: "view-faq/:id",
+        title: <FAQ />,
       },
     ],
   },

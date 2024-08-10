@@ -15,7 +15,7 @@ const NotficationMenu = ({ bg }) => {
   const { isLoading, data } = useQuery("all-notfications", getAllNotfications, {
     staleTime: "Infinity",
     refetchOnMount: true,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
   });
   return (
     <div

@@ -504,5 +504,22 @@
   "packages": "packages",
   "website content": "website content",
   "settings": "settings",
-  "index": "id"
+  "index": "id",
+  "terms and conditions in arabic": "terms and conditions in arabic",
+  "terms and conditions in english": "terms and conditions in english",
+  "about ejarak in arabic": "about ejarak in arabic",
+  "about ejarak in english": "about ejarak in english",
+  "about ejarak": "about ejarak",
+  "privacy and policy": "privacy and policy",
+  "privacy and policy in arabic": "privacy and policy in arabic",
+  "privacy and policy in english": "privacy and policy in english",
+  "faqs": "faqs",
+  "add question": "add question",
+  "question": "question",
+  "question in english": "question in english",
+  "question in arabic": "question in arabic",
+  "answer in english": "answer in english",
+  "answer in arabic": "answer in arabic",
+  "edit question": "edit question",
+  "faq details": "question details"
 }
