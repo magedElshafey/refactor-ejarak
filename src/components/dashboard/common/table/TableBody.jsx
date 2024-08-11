@@ -19,13 +19,16 @@ const TableBody = ({ bodyData, columns, numbersBeginning }) => {
               : null;
             if (column.render) {
               return (
-                <td className="py-1 px-2 font-medium" key={i + j}>
+                <td className="py-1 px-2 font-medium" key={`${i}-${j}`}>
                   {column.render(value, data)}
                 </td>
               );
             }
             return (
-              <td className="p-3 font-medium truncate max-w-[350px]"  key={i + j}>
+              <td
+                className="p-3 font-medium truncate max-w-[350px]"
+                key={`${i}-${j}`}
+              >
                 {t(value)}
               </td>
             );

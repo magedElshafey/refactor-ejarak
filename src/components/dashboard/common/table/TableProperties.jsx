@@ -1,4 +1,39 @@
-import { useRef, useState } from "react";
+import React from "react";
+import { FaEye, FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+const TableProperties = ({
+  hasEdit,
+  hasDelete,
+  hasView,
+  editAction,
+  deleteAction,
+  viewAction,
+  disabled,
+}) => {
+  return (
+    <div className="flex items-center justify-center gap-2 flex-wrap">
+      {hasView ? (
+        <FaEye size={20} className=" cursor-pointer" onClick={viewAction} />
+      ) : null}
+      {hasEdit ? (
+        <FaEdit size={20} className=" cursor-pointer" onClick={editAction} />
+      ) : null}
+      {hasDelete ? (
+        <MdDelete
+          size={20}
+          className={`${
+            disabled ? " opacity-20" : "cursor-pointer opacity-100"
+          }`}
+          onClick={deleteAction}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default TableProperties;
+/**
+ * import { useRef, useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import useClickOutside from "../../../../hooks/useClickOutside";
 import { useTranslation } from "react-i18next";
@@ -47,3 +82,5 @@ const TableProperties = ({ items, row }) => {
 };
 
 export default TableProperties;
+
+ */

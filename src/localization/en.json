@@ -532,5 +532,17 @@
   "you need to choose the city you want to edit": "you need to choose the city you want to edit",
   "do you sure you want to edit the city": "do you sure you want to edit the city ?",
   "old city name in arabic": "current city name in arabic",
-  "old city name in english": "current city name in english"
+  "old city name in english": "current city name in english",
+  "do you sure you want to remove the package": "do you sure you want to remove the package",
+  "package name in english": "package name in english",
+  "package name in arabic": "package name in arabic",
+  "notes in arabic": "notes in arabic",
+  "notes in english": "notes in english",
+  "package name in english field is required": "package name in english field is required",
+  "package name in arabic field is required": "package name in arabic field is required",
+  "price package field is required": "price package field is required",
+  "contracts number field is required": "contracts number field is required",
+  "notes in arabic field is required": "notes in arabic field is required",
+  "notes in english field is required": "notes in english field is required",
+  "package details": "package details"
 }

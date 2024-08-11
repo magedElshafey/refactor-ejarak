@@ -551,5 +551,17 @@
   "you need to choose the city you want to edit": "يجب عليك اختيار المدينة التي تريد تعديلها اولا ",
   "do you sure you want to edit the city": "هل أنت متأكد من تعديل الميدنة ؟",
   "old city name in arabic": "إسم المدينة الحالي بالعربية",
-  "old city name in english": "إسم المدينة الحالي بالإنجليزية"
+  "old city name in english": "إسم المدينة الحالي بالإنجليزية",
+  "do you sure you want to remove the package": "هل أنت متاكد من حذف الباقة ؟",
+  "package name in arabic": "إسم الباقة بالعربية",
+  "package name in english": "إسم الباقة بالإنجليزية",
+  "notes in english": "الملاحظات بالإنجليزية",
+  "notes in arabic": "الملاحظات بالعربية",
+  "package name in arabic field is required": "يرجي إدخال اسم الباقة بالعربية",
+  "package name in english field is required": "يرجي إدخال اسم الباقة بالإنجليزية",
+  "price package field is required": "يرجي إدخال سعر الباقة",
+  "contracts number field is required": "يرجي إدخال عدد العقود",
+  "notes in arabic field is required": "يرجي إدخال الملاحظات بالعربية",
+  "notes in english field is required": "يرجي إدخال الملاحظات بالإنجليزية",
+  "package details": "تفاصيل الباقة"
 }

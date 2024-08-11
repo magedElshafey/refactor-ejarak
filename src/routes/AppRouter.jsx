@@ -51,6 +51,10 @@ import AddFaq from "../pages/dashboard/AddFaq";
 import EditFaq from "../pages/dashboard/EditFaq";
 import FAQ from "../pages/dashboard/FAQ";
 import Cities from "../pages/dashboard/Cities";
+import Packages from "../pages/dashboard/packages/Packages";
+import AddPackage from "../pages/dashboard/packages/AddPackage";
+import PackageDetails from "../pages/dashboard/packages/PackageDetails";
+import EditPackage from "../pages/dashboard/packages/EditPackage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -190,7 +194,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-
   {
     path: "/dashboard",
     errorElement: <ErrorPage />,
@@ -235,6 +238,22 @@ const router = createBrowserRouter([
       {
         path: "cities",
         element: <Cities />,
+      },
+      {
+        path: "packages",
+        element: <Packages />,
+      },
+      {
+        path: "add-package",
+        element: <AddPackage />,
+      },
+      {
+        path: "package-details/:id",
+        element: <PackageDetails />,
+      },
+      {
+        path: "edit-package/:id",
+        element: <EditPackage />,
       },
     ],
   },
