@@ -55,6 +55,10 @@ import Packages from "../pages/dashboard/packages/Packages";
 import AddPackage from "../pages/dashboard/packages/AddPackage";
 import PackageDetails from "../pages/dashboard/packages/PackageDetails";
 import EditPackage from "../pages/dashboard/packages/EditPackage";
+import Reports from "../pages/dashboard/reports/Reports";
+import ReportDetails from "../pages/dashboard/reports/ReportDetails";
+import ManualContracts from "../pages/dashboard/contracts/manual/ManualContracts";
+import ElectronicContracts from "../pages/dashboard/contracts/electronic/ElectronicContracts";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -232,8 +236,8 @@ const router = createBrowserRouter([
         element: <EditFaq />,
       },
       {
-        path: "view-faq/:id",
-        title: <FAQ />,
+        path: "faq-details/:id",
+        element: <FAQ />,
       },
       {
         path: "cities",
@@ -254,6 +258,30 @@ const router = createBrowserRouter([
       {
         path: "edit-package/:id",
         element: <EditPackage />,
+      },
+      {
+        path: "reports",
+        element: <Reports />,
+      },
+      {
+        path: "report-details/:id",
+        element: <ReportDetails />,
+      },
+      {
+        path: "manual-contracts",
+        element: <ManualContracts />,
+      },
+      {
+        path: "manual-contracts-details/:id",
+        element: <ManualContractDetails />,
+      },
+      {
+        path: "electronic-contracts",
+        element: <ElectronicContracts />,
+      },
+      {
+        path: "electronic-contracts-details/:id",
+        element: <ReservationDetails />,
       },
     ],
   },

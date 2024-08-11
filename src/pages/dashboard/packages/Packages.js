@@ -33,7 +33,9 @@ const Packages = () => {
     if (data) {
       if (search) {
         setFitlerdData(
-          data?.data?.data?.filter((item) => item.name.includes(search))
+          data?.data?.data?.filter((item) =>
+            item?.name?.toLowerCase().includes(search.toLowerCase())
+          )
         );
       } else {
         setFitlerdData(data?.data?.data);

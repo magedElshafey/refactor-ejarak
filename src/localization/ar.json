@@ -241,7 +241,7 @@
   "users": "المستخدمين",
   "booking": "الحجوزات",
   "Complaints and suggestions": "الشكاوي والاقتراحات",
-  "reports": "التقارير",
+  "reports": "البلاغات",
   "owners": "الملاك",
   "tenants": "المستأجرين",
   "houses number": "عدد العقارات",
@@ -563,5 +563,6 @@
   "contracts number field is required": "يرجي إدخال عدد العقود",
   "notes in arabic field is required": "يرجي إدخال الملاحظات بالعربية",
   "notes in english field is required": "يرجي إدخال الملاحظات بالإنجليزية",
-  "package details": "تفاصيل الباقة"
+  "package details": "تفاصيل الباقة",
+  "do you sure you want to remove the faq": "هل أنت متأكد من حذف السؤال ؟"
 }

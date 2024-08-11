@@ -544,5 +544,6 @@
   "contracts number field is required": "contracts number field is required",
   "notes in arabic field is required": "notes in arabic field is required",
   "notes in english field is required": "notes in english field is required",
-  "package details": "package details"
+  "package details": "package details",
+  "do you sure you want to remove the faq": "do you sure you want to remove the faq"
 }

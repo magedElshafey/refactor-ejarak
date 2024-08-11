@@ -1,66 +1,26 @@
 import React, { useState, useEffect } from "react";
 import MainBtn from "../../components/common/buttons/MainBtn";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import Table from "../../components/dashboard/common/table/Table";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { getFaq } from "../../services/get/dashboard/getFaqs";
 import Spinner from "../../components/common/Spinner";
-import { FaEye, FaPencilAlt, FaTrash } from "react-icons/fa";
 import Pagination from "../../components/common/Pagination";
 import TableProperties from "../../components/dashboard/common/table/TableProperties";
-import { render } from "@testing-library/react";
+import { deleteFaq } from "../../services/delete/dashboard/deleteFaq";
+import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 const itemsPerPage = 10;
-const columns = [
-  {
-    title: "question",
-    dataIndex: "question",
-    render: (value) => {
-      return <p dangerouslySetInnerHTML={{ __html: value }}></p>;
-    },
-  },
-  {
-    title: "answer",
-    dataIndex: "answer",
-    render: (value) => {
-      return <p dangerouslySetInnerHTML={{ __html: value }}></p>;
-    },
-  },
-  {
-    title: "properties",
-    dataIndex: "",
-  },
-];
-const Faqs = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const properties = (row) => {
-    return [
-      {
-        title: "view",
-        icon: <FaEye />,
-        onClick: () => {
-          navigate(`/dashboard/static-pages/view-faq/${row.id}`);
-        },
-      },
 
-      {
-        title: "edit",
-        icon: <FaPencilAlt />,
-        onClick: () => {
-          navigate(`/dashboard/static-pages/edit-faq/${row.id}`);
-        },
-      },
-      {
-        title: "delete",
-        icon: <FaTrash />,
-        onClick: () => {},
-      },
-    ];
-  };
-  const navigate = useNavigate();
+const Faqs = () => {
   const { t } = useTranslation();
+  const [currentPage, setCurrentPage] = useState(0);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
   const handleNavigate = () => navigate("/dashboard/faqs/add");
   const { isLoading, data } = useQuery("faqs", getFaq);
+
   useEffect(() => {
     setCurrentPage(0);
   }, [data?.data?.data]);
@@ -75,7 +35,77 @@ const Faqs = () => {
   };
 
   const offset = currentPage * itemsPerPage;
-
+  const { isLoading: loadingDelete, mutate } = useMutation(
+    (i, v) => deleteFaq(i, v),
+    {
+      onSuccess: (data) => {
+        console.log("data from delete package", data);
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+          queryClient.invalidateQueries("faqs");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
+      },
+    }
+  );
+  const handleDelete = (i) => {
+    Swal.fire({
+      text: t("do you sure you want to remove the faq"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: t("del"),
+      cancelButtonText: t("cancel"),
+    }).then((res) => {
+      if (res.isConfirmed) {
+        const data = {};
+        mutate(i, data);
+      } else {
+        return;
+      }
+    });
+  };
+  const columns = [
+    {
+      title: "question",
+      dataIndex: "question",
+      render: (value) => {
+        return <p dangerouslySetInnerHTML={{ __html: value }}></p>;
+      },
+    },
+    {
+      title: "answer",
+      dataIndex: "answer",
+      render: (value) => {
+        return <p dangerouslySetInnerHTML={{ __html: value }}></p>;
+      },
+    },
+    {
+      title: "properties",
+      dataIndex: "",
+      render: (value, row) => {
+        return (
+          <TableProperties
+            hasDelete={true}
+            hasEdit={true}
+            hasView={true}
+            viewAction={() => navigate(`/dashboard/faq-details/${row.id}`)}
+            editAction={() => navigate(`/dashboard/faqs/edit/${row.id}`)}
+            deleteAction={() => handleDelete(row.id)}
+            disabled={loadingDelete}
+          />
+        );
+      },
+    },
+  ];
   return (
     <>
       {isLoading ? (
