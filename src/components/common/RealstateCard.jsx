@@ -9,9 +9,10 @@ import { BiArea } from "react-icons/bi";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import useWishlist from "../../hooks/useWishlist";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const RealStateCard = ({ data, dep }) => {
   const { t, i18n } = useTranslation();
-
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { handleClick } = useWishlist(data.id, dep);
   return (
     <div className="w-full bg-white rounded-xl shadow-xl mb-5 md:mb-6 lg:mb-8">
@@ -104,7 +105,7 @@ const RealStateCard = ({ data, dep }) => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-[#f5f3f3] rounded-xl p-3 px-6 flex lg:items-center justify-around gap-4 flex-col lg:flex-row">
+      <div className="w-full bg-[#f5f3f3] rounded-xl p-3 px-6 flex lg:items-center justify-around gap-4 flex-col lg:flex-row text-nowrap">
         <div className="flex-1 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6  ">
           <div className="flex items-center gap-1">
             <BsBuildings size={18} />
@@ -120,7 +121,6 @@ const RealStateCard = ({ data, dep }) => {
             <BiArea size={18} />
             <p className="lg:text-sm">{t("area")} : </p>
             <p className="font-bold">
-              {" "}
               {parseFloat(data.area).toFixed(0)} {t("m")}
             </p>
           </div>
@@ -136,7 +136,25 @@ const RealStateCard = ({ data, dep }) => {
           </div>
         </div>
         <div>
-          {data?.is_fav ? (
+          {ejarakLogin ? (
+            data?.is_fav ? (
+              <MdFavorite
+                onClick={handleClick}
+                className="text-3xl text-maincolorgreen cursor-pointer "
+              />
+            ) : (
+              <MdFavoriteBorder
+                onClick={handleClick}
+                className="text-3xl hover:text-[#00AA4B] cursor-pointer "
+              />
+            )
+          ) : (
+            <MdFavoriteBorder
+              onClick={handleClick}
+              className="text-3xl hover:text-[#00AA4B] cursor-pointer "
+            />
+          )}
+          {/* {data?.is_fav ? (
             <MdFavorite
               onClick={handleClick}
               className="text-3xl text-maincolorgreen cursor-pointer "
@@ -146,7 +164,7 @@ const RealStateCard = ({ data, dep }) => {
               onClick={handleClick}
               className="text-3xl hover:text-[#00AA4B] cursor-pointer "
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

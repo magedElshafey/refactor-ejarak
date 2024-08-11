@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaDownload } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 
 const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
   const { t } = useTranslation();
@@ -12,17 +13,35 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
     link.click();
     document.body.removeChild(link);
   };
+  const [isPlaying, setIsPlaying] = useState(false);
+  const handlePlay = () => {
+    const videoElement = document.getElementById("video");
+    if (isPlaying) {
+      videoElement.pause();
+    } else {
+      videoElement.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-12 xl:gap-16 my-8 ">
-      <div className="w-full  bg-white rounded-lg p-3 shadow-xl flex items-center">
+      <div className="w-full  bg-white rounded-lg p-3 shadow-xl flex items-center relative">
         <video
           className="w-full h-[350px] object-cover "
           src={video}
-          controls
-          muted
-          autoPlay
           loop
+          muted
+          autoPlay={false}
+          id="video"
         ></video>
+        {!isPlaying && (
+          <div
+            onClick={handlePlay}
+            className="absolute inset-0 flex justify-center items-center cursor-pointer bg-black bg-opacity-50"
+          >
+            <FaPlay className="text-white text-5xl" />
+          </div>
+        )}
       </div>
       {suck.length ? (
         <div className=" bg-white rounded-lg p-3 shadow-xl flex flex-col items-center justify-center gap-3">

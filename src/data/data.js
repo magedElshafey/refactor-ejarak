@@ -55,7 +55,7 @@ export const navLinks = [
         Swal.fire({
           icon: "error",
           position: "center",
-          title: "يرجي تسجيل حساب مالك أولا",
+          title: t("you need to login as a realstate owner"),
         });
       }
     },
@@ -312,7 +312,7 @@ export const dashboardLinks = [
   {
     icon: <MdOutlineDashboard size={20} />,
     title: "dashboard",
-    path: "main",
+    path: "dashboard",
     list: [],
     role: ["admin", "super_admin"],
   },
@@ -406,8 +406,6 @@ export const dashboardLinks = [
     role: ["admin", "super_admin", "customer_service"],
   },
 ];
-
-
 
 //  * table filter
 

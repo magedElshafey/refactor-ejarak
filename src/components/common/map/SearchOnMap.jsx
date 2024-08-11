@@ -43,7 +43,7 @@ const SearchOnMap = () => {
 
               <div className="autocomplete-dropdown-container z-[1001] absolute top-15 left-0 w-full rounded-lg overflow-hidden">
                 {suggestions &&
-                  suggestions.map((suggestion, index) => (
+                  suggestions?.map((suggestion, index) => (
                     <div
                       key={index}
                       {...getSuggestionItemProps(suggestion)}

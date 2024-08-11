@@ -42,6 +42,7 @@ const RealstateDetails = () => {
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
   const [showSuckModal, setShowSuckModal] = useState(false);
+  console.log("data from realstate details", data?.data?.data);
   return (
     <>
       {isLoading || loadingSimilars ? (

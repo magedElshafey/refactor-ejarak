@@ -59,6 +59,10 @@ import Reports from "../pages/dashboard/reports/Reports";
 import ReportDetails from "../pages/dashboard/reports/ReportDetails";
 import ManualContracts from "../pages/dashboard/contracts/manual/ManualContracts";
 import ElectronicContracts from "../pages/dashboard/contracts/electronic/ElectronicContracts";
+import Users from "../pages/dashboard/users/Users";
+import AddUser from "../pages/dashboard/users/AddUser";
+import UserDetails from "../pages/dashboard/users/UserDetails";
+import EditUser from "../pages/dashboard/users/EditUser";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -189,7 +193,7 @@ const router = createBrowserRouter([
         element: <ForgetPassword />,
       },
       {
-        path: "forget-password-code",
+        path: "forgeqwqwwe  et-password-code",
         element: <ForgetPasswordCode />,
       },
       {
@@ -204,8 +208,9 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: "main",
+        path: "dashboard",
         element: <Dashboard />,
+        index: true,
       },
       {
         path: "realstates",
@@ -282,6 +287,22 @@ const router = createBrowserRouter([
       {
         path: "electronic-contracts-details/:id",
         element: <ReservationDetails />,
+      },
+      {
+        path: "users",
+        element: <Users />,
+      },
+      {
+        path: "add-user",
+        element: <AddUser />,
+      },
+      {
+        path: "user-details/:id",
+        element: <UserDetails />,
+      },
+      {
+        path: "edit-user/:id",
+        element: <EditUser />,
       },
     ],
   },

@@ -50,6 +50,7 @@ const MyAccount = () => {
   };
   const { isLoading } = useQuery("account-details", getMyAccountDetails, {
     onSuccess: (data) => {
+      console.log("data from my account", data);
       if (data?.data?.status) {
         setName(data?.data?.data?.user?.name);
         setPhone(data?.data?.data?.user?.phone.number);

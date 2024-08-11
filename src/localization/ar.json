@@ -564,5 +564,7 @@
   "notes in arabic field is required": "يرجي إدخال الملاحظات بالعربية",
   "notes in english field is required": "يرجي إدخال الملاحظات بالإنجليزية",
   "package details": "تفاصيل الباقة",
-  "do you sure you want to remove the faq": "هل أنت متأكد من حذف السؤال ؟"
+  "do you sure you want to remove the faq": "هل أنت متأكد من حذف السؤال ؟",
+
+  "you need to login as a realstate owner": "تحتاج التسجيل ك مالك عقار"
 }

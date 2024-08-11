@@ -1,11 +1,15 @@
 import axios from "axios";
+import { userToken } from "../store/auth";
+import store from "../store/store";
+const token = userToken(store.getState());
 
 const lang = localStorage.getItem("lang")
   ? JSON.parse(localStorage.getItem("lang"))
   : "ar";
 const authToken = localStorage.getItem("token")
   ? JSON.parse(localStorage.getItem("token"))
-  : "238|R95WJDNOBCvX9cgKCFpgpAKQwhLTzYRJtfYzE6Ypba82bea2";
+  : null;
+
 const client = axios.create({
   baseURL: "https://api.ejark.sa/api/v1",
   headers: {
@@ -14,8 +18,18 @@ const client = axios.create({
     "Accept-Language": lang,
     "Access-Control-Allow-Credentials": true,
     "x-api-key": "0FcBOe75FIFkBkNkA",
-    Authorization: authToken ? `Bearer ${authToken}` : null,
+    Authorization: token ? `Bearer ${token}` : null,
   },
+});
+client.interceptors.request.use((config) => {
+  const token =
+    userToken(store.getState()) || JSON.parse(localStorage.getItem("token"));
+
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  return config;
 });
 export const request = ({ ...options }) => {
   const onSuccess = (response) => {

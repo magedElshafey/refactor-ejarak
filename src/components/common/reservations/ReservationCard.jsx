@@ -10,6 +10,7 @@ import PayBtn from "./PayBtn";
 import CreateContractBtn from "./CreateContractBtn";
 const ReservationCard = ({ data, index, role, created_at, dep }) => {
   const { t } = useTranslation();
+  console.log("data from reservation card", data);
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">
@@ -23,7 +24,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
         </div>
         <div className="px-6">
           <Link
-            to={`/website/realstate/${data.id}`}
+            to={`/website/realstate/${data.realty_id}`}
             className="block font-bold lg:text-lg mb-4 md:w-[80%] text-maincolorgreen underline"
           >
             {data?.reality}
@@ -33,9 +34,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               <p className="text-textColor mb-1">
                 {role === "owner" ? t("tentName") : t("ownerName")}
               </p>
-              <p className="font-bold">
-                {role === "owner" ? data?.tenant?.name : data?.owner?.name}
-              </p>
+              <p className="font-bold">{data?.tenant?.name}</p>
             </div>
             <div className="flex flex-col items-start md:items-center">
               <p className="text-textColor mb-1">{t("admin")}</p>
@@ -63,21 +62,9 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
           <div className="flex items-center justify-between flex-col md:flex-row gap-3 md:gap-0 mb-3">
             <UserContactCard
               role={role}
-              phone={
-                role === "owner"
-                  ? `tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`
-                  : `tel:${data?.owner?.phone?.country_code}${data.owner?.phone?.number}`
-              }
-              whatsapp={
-                role === "owner"
-                  ? `https://wa.me/${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`
-                  : `https://wa.me/${data?.owner?.phone?.country_code}${data.owner?.phone?.number}`
-              }
-              chat={
-                role === "owner"
-                  ? `/website/chat/${data.tenant.id}`
-                  : `/website/chat/${data?.owner?.id}`
-              }
+              phone={`tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`}
+              whatsapp={`tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`}
+              chat={`/website/chat/${data.tenant.id}`}
             />
             <div className="flex items-center gap-3 flex-wrap">
               {data?.status === "pending" && role === "owner" ? (

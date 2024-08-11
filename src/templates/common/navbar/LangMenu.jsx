@@ -2,14 +2,26 @@ import React, { useRef, useState } from "react";
 import { FaGlobe } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import useClickOutside from "../../../hooks/useClickOutside";
+import { useMutation } from "react-query";
+import { changeLanguage } from "../../../services/post/changeLangauge";
 const LangMenu = ({ bg }) => {
   const { i18n, t } = useTranslation();
   const [showLang, setShowLang] = useState(false);
   const menu = useRef(null);
+  const { mutate } = useMutation((v) => changeLanguage(v), {
+    onSuccess: (data) => {
+      if (data?.data?.status) {
+        window.location.reload();
+      }
+    },
+  });
   const handleChangeLang = (v) => {
     localStorage.setItem("lang", JSON.stringify(v));
+    const data = {
+      language: v,
+    };
+    mutate(data);
     i18n.changeLanguage(v);
-    window.location.reload();
   };
   const closeMenu = () => setShowLang(false);
   useClickOutside(menu, closeMenu);

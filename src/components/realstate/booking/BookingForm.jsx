@@ -166,7 +166,7 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
               <div className="my-2 text-red-500">{periodError}</div>
             ) : null}
           </div>
-          {data?.category?.id === 1 ? (
+          {data?.category?.id === 2 ? (
             <div className="mb-3 md:mb-4 lg:mb-5">
               <label
                 htmlFor="familyNum"

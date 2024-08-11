@@ -154,11 +154,21 @@ const Marker = ({ data, activeId, setActiveId, pathname }) => {
 const Popup = ({ data, activeId, setActiveId }) => {
   const { t, i18n } = useTranslation();
   const popupRef = useRef();
-
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setActiveId(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
     <div
       ref={popupRef}
-      className={` duration-300 rounded-lg absolute  bottom-0 ${
+      className={` duration-300 rounded-lg  absolute bottom-0 ${
         i18n.language === "ar" ? "right-0" : "left-0"
       } z-40 `}
     >

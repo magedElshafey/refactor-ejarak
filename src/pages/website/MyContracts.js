@@ -39,11 +39,13 @@ const MyContracts = () => {
         <div className="container mx-auto px-8 mt-8">
           <AccountDetailsNavbar />
           <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
-            <StatusNavbar
-              statusFilter={filterdContrancts}
-              activeIndex={activeIndex}
-              setActiveIndex={setActiveIndex}
-            />
+            <div className="mb-8">
+              <StatusNavbar
+                statusFilter={filterdContrancts}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            </div>
             {filterdContracts?.length ? (
               filterdContracts?.map((item, index) => (
                 <div key={index}>
