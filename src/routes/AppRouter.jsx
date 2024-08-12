@@ -194,7 +194,7 @@ const router = createBrowserRouter([
         element: <ForgetPassword />,
       },
       {
-        path: "forgeqwqwwe  et-password-code",
+        path: "forget-password-code",
         element: <ForgetPasswordCode />,
       },
       {

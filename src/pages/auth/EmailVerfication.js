@@ -45,7 +45,17 @@ const EmailVerfication = () => {
     handleResendEmailVerficationCode,
     {
       onSuccess: (data) => {
-        console.log("data");
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
       },
     }
   );
@@ -68,7 +78,15 @@ const EmailVerfication = () => {
       mutate(userData);
     }
   };
-  const resendClick = () => {};
+  const handleResend = () => {
+    const data = {
+      identifier_type: "phone",
+      identifier: localStorage.getItem("phone")
+        ? JSON.parse(localStorage.getItem("phone"))
+        : null,
+    };
+    mutateResend(data);
+  };
   return (
     <div>
       <p className="font-bold text-textColor my-5 text-xl">{t("enterOTP")}</p>
@@ -99,14 +117,14 @@ const EmailVerfication = () => {
           <MainBtn action={handleSubmit} type="submit" text={t("verify")} />
         </div>
       )}
-      {!loadingResend ? (
-        <p
-          onClick={resendClick}
-          className="text-sm py-4 text-main cursor-pointer font-bold underline hover:text-[#00aa4b] hover:text-md"
-        >
-          {t("resendCode")}
-        </p>
-      ) : null}
+      <button
+        disabled={loadingResend}
+        onClick={handleResend}
+        type="button"
+        className="font-semibold text-textColor text-base lg:text-md underline"
+      >
+        {t("resend")}
+      </button>
       <Treaty showTreaty={showTreaty} setShowTreaty={setShowTreaty} />
     </div>
   );

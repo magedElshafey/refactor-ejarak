@@ -8,10 +8,14 @@ import { useMutation } from "react-query";
 import LoadingBtn from "../../components/common/buttons/LoadingBtn";
 import { passwordRecovery } from "../../services/post/passwordRecovery";
 import Swal from "sweetalert2";
+import { handleResendEmailVerficationCode } from "../../services/post/handleResendEmailVerficationCode";
 const ForgetPasswordCode = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
+  const forgetPhone = localStorage.getItem("forgetPhone")
+    ? JSON.parse(localStorage.getItem("forgetPhone"))
+    : "";
   const { isLoading, mutate } = useMutation((v) => passwordRecovery(v), {
     onSuccess: (data) => {
       if (data?.data?.status) {
@@ -48,6 +52,31 @@ const ForgetPasswordCode = () => {
       mutate(data);
     }
   };
+  const { isLoading: loadingResend, mutate: mutateResend } = useMutation(
+    handleResendEmailVerficationCode,
+    {
+      onSuccess: (data) => {
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
+      },
+    }
+  );
+  const handleResend = () => {
+    const data = {
+      identifier_type: "phone",
+      identifier: forgetPhone,
+    };
+    mutateResend(data);
+  };
   return (
     <div>
       <p className="text-[#4D5F65] font-bold text-lg mb-3">{t("forgett")}</p>
@@ -74,6 +103,14 @@ const ForgetPasswordCode = () => {
           </div>
         </div>
       </form>
+      <button
+        disabled={loadingResend}
+        onClick={handleResend}
+        type="button"
+        className="font-semibold text-textColor text-base lg:text-md underline"
+      >
+        {t("resend")}
+      </button>
     </div>
   );
 };

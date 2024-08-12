@@ -570,5 +570,6 @@
   "do you sure you want to remove the user": "هل تريد حذف المستدخم بالفعل ؟ ",
   "do you sure you want to remove the reservation": "هل تريد حذف الحجز بالفعل ؟؟ ",
   "electronic contracts": "العقود الإلكترونية",
-  "manual contracts": "العقود اليدوية"
+  "manual contracts": "العقود اليدوية",
+  "resend": "إعادة إرسال رمز التحقق"
 }
