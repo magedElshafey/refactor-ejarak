@@ -218,6 +218,10 @@ const router = createBrowserRouter([
         element: <Realstates />,
       },
       {
+        path: "realstate/:id",
+        element: <RealstateDetails />,
+      },
+      {
         path: "about-ejarak",
         element: <AboutEjarak />,
       },
