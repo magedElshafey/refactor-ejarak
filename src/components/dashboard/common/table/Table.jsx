@@ -9,13 +9,13 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
 
   return (
     <>
-      <table className="min-w-full text-center px-2">
+      <table className="w-full text-center px-2 overflow-x-auto">
         <TableHeader columns={columns} />
 
         {bodyData.length > 0 && (
-          <TableBody 
-            bodyData={bodyData} 
-            columns={columns} 
+          <TableBody
+            bodyData={bodyData}
+            columns={columns}
             numbersBeginning={numbersBeginning}
           />
         )}
@@ -31,7 +31,6 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
           <p className="text-maincolorgreen">{t("no data available")}</p>
         </div>
       )}
-
     </>
   );
 };

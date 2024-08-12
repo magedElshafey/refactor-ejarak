@@ -21,7 +21,7 @@ const TenantData = ({ data, downloadContract }) => {
           <p className="text-black">{data?.phone?.number}</p>
         </div>
         <div>
-          <p className="text-[#4D5F65] mb-1">{t("mobilePhone")}</p>
+          <p className="text-[#4D5F65] mb-1">{t("email")}</p>
           <p className="text-black lowercase">{data?.email?.address}</p>
         </div>
       </div>

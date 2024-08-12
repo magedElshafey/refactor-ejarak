@@ -4,7 +4,9 @@ import { useTranslation } from "react-i18next";
 import useClickOutside from "../../../hooks/useClickOutside";
 import { useMutation } from "react-query";
 import { changeLanguage } from "../../../services/post/changeLangauge";
+import { useSelector } from "react-redux";
 const LangMenu = ({ bg }) => {
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { i18n, t } = useTranslation();
   const [showLang, setShowLang] = useState(false);
   const menu = useRef(null);
@@ -22,6 +24,11 @@ const LangMenu = ({ bg }) => {
     };
     mutate(data);
     i18n.changeLanguage(v);
+    if (!ejarakLogin) {
+      window.location.reload();
+    } else {
+      return;
+    }
   };
   const closeMenu = () => setShowLang(false);
   useClickOutside(menu, closeMenu);

@@ -64,7 +64,7 @@ const EditUser = () => {
 
       setUserType(data?.data?.data?.account?.text);
     }
-  }, []);
+  }, [data]);
   const { isLoading: loadingSubmit, mutate } = useMutation(
     (v) => editUser(params.id, v),
     {

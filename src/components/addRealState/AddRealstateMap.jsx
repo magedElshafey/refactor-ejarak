@@ -14,7 +14,12 @@ const AddRealstateMap = ({ coordinates }) => {
   const toggleMapView = () => setIsSatelliteView(!isSatelliteView);
   const defaultProps = {
     zoom: 5,
-    center: { lat, lng },
+    center: coordinates
+      ? {
+          lat: coordinates?.lat,
+          lng: coordinates?.lng,
+        }
+      : { lat, lng },
   };
   // Define the map options with the desired map style
   const mapOptions = {

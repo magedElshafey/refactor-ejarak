@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import MainBtn from "../../../components/common/buttons/MainBtn";
 import MainInput from "../../../components/common/inputs/MainInput";
-import { useMutation, useQueryClient, useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import LoadingBtn from "../../../components/common/buttons/LoadingBtn";
 import useTextInputValidation from "../../../hooks/validation/useTextInputValidation";
 import useNumberInput from "../../../hooks/validation/useNumberInput";
@@ -15,6 +15,7 @@ import usePasswordValidation from "../../../hooks/validation/usePasswordValidati
 import { addUser } from "../../../services/post/dashboard/addUser";
 import Swal from "sweetalert2";
 import useAccountType from "../../../hooks/api/useAccountType";
+import { useNavigate } from "react-router-dom";
 const AddUser = () => {
   const { t } = useTranslation();
   const { data } = useGlobalContext();
@@ -65,6 +66,7 @@ const AddUser = () => {
     },
   });
   const { loadingAccountType, accountType, error } = useAccountType();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -112,15 +114,7 @@ const AddUser = () => {
       formData.append("phone_country_code", data.countries[0].prefix_code);
       formData.append("account_type", userType);
       formData.append(" nationalId,", nationId);
-      // const userData = {
-      //   name,
-      //   email,
-      //   phone,
-      //   phone_country_code: data.countries[0].prefix_code,
-      //   password,
-      //   account_type: userType,
-      //   nationalId: nationId,
-      // };
+
       mutate(formData);
     }
   };
@@ -181,7 +175,11 @@ const AddUser = () => {
               <MainBtn type="submit" text="add user" />
             )}
           </div>
-          <button className="font-semibold" type="button">
+          <button
+            onClick={() => navigate(-1)}
+            className="font-semibold"
+            type="button"
+          >
             {t("cancel")}
           </button>
         </div>
