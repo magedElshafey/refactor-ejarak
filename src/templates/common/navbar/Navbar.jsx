@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import echo from "../../../echo";
 import notificationSound from "../../../assets/sounds/notification.wav";
 import { useQueryClient } from "react-query";
+import useListenToMessages from "../../../hooks/useListenToMessages";
 
 const notificationAudio = new Audio(notificationSound);
 
@@ -37,7 +38,6 @@ const Navbar = ({ bg }) => {
   const [showSidebar, setShowSidebar] = useState();
   const sidebarRef = useRef(null);
   const filterRef = useRef(null);
-  
   
   useClickOutside(filterRef, () => dispatch(closeFilter()));
   const isLogin = auth.ejarakLogin;
@@ -72,6 +72,8 @@ const Navbar = ({ bg }) => {
     ];
     return setNotifications(newNotifications, +1, true);
   };
+
+  useListenToMessages();
 
   // Subscribing to the Event Manager.
   useEffect(() => {

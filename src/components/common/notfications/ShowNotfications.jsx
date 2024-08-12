@@ -11,6 +11,7 @@ const ShowNotfications = ({ data }) => {
     const url = getNotificationLink(data.type, role, data?.realty_id);
     navigate(url);
   };
+
   return (
     <div
       onClick={() => handleNavigate(data?.realty_id)}

@@ -63,7 +63,7 @@ const NotificationItem = ({ messages, userId, onOpenLink }) => {
 
   return (
     <Link
-      to={`/chat/${userId || ""}`}
+      to={`/website/chat/${userId || ""}`}
       onClick={() => {
         onOpenLink();
       }}
@@ -229,18 +229,12 @@ const ChatMenu = ({ bg }) => {
       staleTime: 1000 * 60 * 5,
     }
   );
+
   //derived values ====================
   const messagesCount = Object.values(notifications || {}).reduce(
     (previous, current) => previous + current.length,
     0
   );
-  const { i18n, t } = useTranslation();
-
-  const handleChangeLang = (v) => {
-    localStorage.setItem("lang", JSON.stringify(v));
-    i18n.changeLanguage(v);
-    window.location.reload();
-  };
   const closeMenu = () => setMenuActive(false);
   const [menuActive, setMenuActive] = useState(false);
   const menuRef = useRef(null);

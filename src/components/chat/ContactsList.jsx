@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from "uuid";
 import fetchPublicUserInfo from "../../services/get/fetchPublicUserInfo";
 import { useTranslation } from "react-i18next";
 const Contact = ({ message, time, type, otherParty, unseen, id, onChoose }) => {
-  console.log("this is the time", time);
   const { id: receiverId } = useParams();
   const queryClient = useQueryClient();
   const {
@@ -45,9 +44,7 @@ const Contact = ({ message, time, type, otherParty, unseen, id, onChoose }) => {
     }
   }, [otherParty]);
   const { i18n } = useTranslation();
-  function formatDateTime(dateTimeString) {
-    const dateTime = new Date(dateTimeString);
-
+  function formatDateTime(dateTime) {
     // Get the current language
     const language = i18n.language;
 
@@ -229,7 +226,7 @@ const ContactsList = ({ search, onChoose }) => {
               ...contact,
               unseen: contact.unseen + 1,
               message: e.message,
-              time: new Date(Date.parse(e.time)),
+              time: new Date(Date.parse(e.time + "Z")),
             };
           });
         }
@@ -250,31 +247,33 @@ const ContactsList = ({ search, onChoose }) => {
       });
     }
   };
-  <div className="h-full w-full overflow-y-auto flex flex-col gap-2 overflow-x-hidden">
-    {!isLoading &&
-      contacts
-        ?.filter(
-          (contact) =>
-            contact?.otherParty?.id &&
-            (search
-              ? contact?.otherParty?.name
-                  ?.toLowerCase()
-                  ?.includes(search?.toLowerCase())
-              : true)
-        )
-        ?.map((contact) => (
-          <Contact
-            key={contact?.id}
-            time={contact?.time}
-            message={contact?.message}
-            type={contact?.type}
-            otherParty={contact?.otherParty}
-            unseen={contact?.unseen}
-            id={contact?.id}
-            onChoose={onChoose}
-          />
-        ))}
-  </div>;
+  return (
+    <div className="h-full w-full overflow-y-auto flex flex-col gap-2 overflow-x-hidden">
+      {!isLoading &&
+        contacts
+          ?.filter(
+            (contact) =>
+              contact?.otherParty?.id &&
+              (search
+                ? contact?.otherParty?.name
+                    ?.toLowerCase()
+                    ?.includes(search?.toLowerCase())
+                : true)
+          )
+          ?.map((contact) => (
+            <Contact
+              key={contact?.id}
+              time={contact?.time}
+              message={contact?.message}
+              type={contact?.type}
+              otherParty={contact?.otherParty}
+              unseen={contact?.unseen}
+              id={contact?.id}
+              onChoose={onChoose}
+            />
+          ))}
+    </div>
+  );
 };
 
 export default ContactsList;

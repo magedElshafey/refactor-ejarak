@@ -42,7 +42,7 @@ const NotficationMenu = ({ bg }) => {
         className={`absolute duration-300 min-w-[280px] border ${
           i18n.language === "ar" ? "right-[-100px]" : "left-[-100px]"
         } ${
-          isLoading || !data ? "bottom-[-50px]" : "bottom-[-450px]"
+          isLoading || !data ? "bottom-[-50px]" : "top-[105%]"
         }  bg-white shadow-lg z-50 p-3 rounded-md ${
           showMenu ? "block" : "hidden"
         }`}

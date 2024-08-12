@@ -11,7 +11,7 @@ const ProfileHeader = () => {
     <div className="flex items-center h-14 gap-2  px-2">
       <div className="w-14 h-14 rounded-full overflow-hidden p-1">
         <img
-          src={loggedUser?.pp || ""}
+          src={loggedUser?.avatar?.original || ""}
           alt="user"
           className="h-[110%] w-[110%] object-center object-cover"
         />
@@ -19,7 +19,7 @@ const ProfileHeader = () => {
       <div className="w-[70%] overflow-hidden text-xs h-full py-2 flex flex-col gap-2 whitespace-nowrap [&>*]:text-ellipsis [&>*]:overflow-hidden [&>*]:w-full">
         <p>{loggedUser?.name || ""}</p>
         <p className="text-[#7f8b9c] text-[0.65rem] lowercase">
-          {loggedUser?.email || ""}
+          {loggedUser?.email?.address || ""}
         </p>
       </div>
     </div>

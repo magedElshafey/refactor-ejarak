@@ -296,7 +296,7 @@ const ChatContainer = () => {
     chatBoxRef.current.scroll(0, chatBoxRef.current.scrollHeight);
   };
   return (
-    <div className="flex-1 bg-[#f5f7f5] rounded-lg border flex flex-col">
+    <div className="flex-1 bg-[#f5f7f5] max-h-[700px] rounded-lg border flex flex-col">
       <div className="w-full bg-[#f4f5f8] py-2 px-4 text-xl border-b min-h-10">
         {receiverLoading ? t("loading") : receiverId ? receiver?.name : ""}
       </div>

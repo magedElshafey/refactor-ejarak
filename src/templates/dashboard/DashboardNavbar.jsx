@@ -7,6 +7,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 import LoginBtn from "../common/navbar/LoginBtn";
 import { FaBell } from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
+import useListenToMessages from "../../hooks/useListenToMessages";
 
 const DashboardNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -22,6 +23,7 @@ const DashboardNavbar = () => {
   const toggleShowChatMenu = () => setShowChatMenu(!showChatMenu);
   const chatMenuRef = useRef(null);
   useClickOutside(chatMenuRef, () => setShowChatMenu(false));
+  useListenToMessages();
   return (
     <>
       <div className="w-full  border h-[80px] flex items-center">
