@@ -23,6 +23,7 @@ const initialState = {
   name: "",
   sortCreate: "",
   sort: "",
+  cityId: "",
 };
 
 const filterSlice = createSlice({
@@ -108,6 +109,9 @@ const filterSlice = createSlice({
       state.sortCreate = "asc";
       state.sort = "";
     },
+    changeCityId: (state, action) => {
+      state.cityId = action.payload;
+    },
     resetFilter: (state) => {
       state.categoryId = "";
       state.subCategoryId = [];
@@ -122,6 +126,7 @@ const filterSlice = createSlice({
       state.name = "";
       state.sort = "";
       state.sortCreate = "";
+      state.cityId = "";
     },
   },
 });
@@ -146,5 +151,6 @@ export const {
   changeSortLow,
   changeSortCreateHigh,
   changeSortCreateLow,
+  changeCityId,
 } = filterSlice.actions;
 export default filterSlice.reducer;
