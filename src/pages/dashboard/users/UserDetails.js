@@ -4,11 +4,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../../components/common/Spinner";
 import MainInput from "../../../components/common/inputs/MainInput";
 import useUserDetails from "../../../hooks/api/useUserDetails";
+import { FaRegCircleDot } from "react-icons/fa6";
 const UserDetails = () => {
   const { t } = useTranslation();
   const params = useParams();
   const navigate = useNavigate();
   const { isLoading, data } = useUserDetails(params.id);
+  console.log(
+    "data from user details page",
+    data?.data?.data?.email?.is_verified
+  );
   return (
     <>
       {isLoading ? (
@@ -46,11 +51,24 @@ const UserDetails = () => {
                   />
                 </div>
               </div>
-              <MainInput
-                disabled
-                value={data?.data?.data?.account?.text}
-                label="access"
-              />
+              <div className="my-6">
+                <MainInput
+                  disabled
+                  value={data?.data?.data?.account?.text}
+                  label="access"
+                />
+              </div>
+              {data?.data?.data?.email?.is_verified ? (
+                <div className="text-[#00AA4B]  mx-auto w-24 rounded-full py-1 px-2  flex items-center gap-x-1">
+                  <FaRegCircleDot className="text-[#00AA4B]" />
+                  {t("active")}
+                </div>
+              ) : (
+                <div className="text-[#FF697C]  mx-auto w-24 rounded-full py-1 px-2 flex items-center gap-x-1 ">
+                  <FaRegCircleDot className="text-[#FF697C]" />
+                  {t("not active")}
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-8 flex items-center justify-end">

@@ -1,35 +1,25 @@
 import React, { useState, useEffect } from "react";
-import SearchInput from "../../../components/dashboard/common/SearchInput";
-import MainBtn from "../../../components/common/buttons/MainBtn";
-import Paginate from "../../../components/common/Pagination";
 import Table from "../../../components/dashboard/common/table/Table";
-import TableProperties from "../../../components/dashboard/common/table/TableProperties";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import Spinner from "../../../components/common/Spinner";
-import { getUsers } from "../../../services/get/dashboard/getUsers";
+import TableProperties from "../../../components/dashboard/common/table/TableProperties";
+import Pagination from "../../../components/common/Pagination";
+import SearchInput from "../../../components/dashboard/common/SearchInput";
 import Swal from "sweetalert2";
-import { FaRegCircleDot } from "react-icons/fa6";
-import { deleteUser } from "../../../services/delete/dashboard/deleteUser";
+import { useTranslation } from "react-i18next";
+import { getReservations } from "../../../services/get/dashboard/getReservations";
+import { useNavigate } from "react-router-dom";
+import TableStatus from "../../../components/dashboard/common/table/TableStatus";
+import { deleteReservation } from "../../../services/delete/dashboard/deleteReservation";
 const itemsPerPage = 10;
-
-const Users = () => {
+const Reservations = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const { isLoading, data } = useQuery("users", getUsers, {
-    onSuccess: (data) => {
-      if (data?.data?.status) {
-        setFitlerdData(data?.data?.data);
-      } else {
-        setFitlerdData([]);
-      }
-    },
-  });
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  const queryClient = useQueryClient();
+  const { isLoading, data } = useQuery("reservations", getReservations);
   useEffect(() => {
     if (data) {
       if (search) {
@@ -55,10 +45,8 @@ const Users = () => {
       behavior: "smooth",
     });
   };
-
-  const offset = currentPage * itemsPerPage;
   const { isLoading: loadingDelete, mutate } = useMutation(
-    (i, v) => deleteUser(i, v),
+    (i, v) => deleteReservation(i, v),
     {
       onSuccess: (data) => {
         if (data?.data?.status) {
@@ -66,7 +54,7 @@ const Users = () => {
             icon: "success",
             title: data?.data?.message,
           });
-          queryClient.invalidateQueries("users");
+          queryClient.invalidateQueries("reservations");
         } else {
           Swal.fire({
             icon: "error",
@@ -78,7 +66,7 @@ const Users = () => {
   );
   const handleDelete = (i) => {
     Swal.fire({
-      text: t("do you sure you want to remove the user"),
+      text: t("do you sure you want to remove the reservation"),
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -94,85 +82,69 @@ const Users = () => {
       }
     });
   };
+  const offset = currentPage * itemsPerPage;
   const columns = [
     {
-      title: "image",
-      dataIndex: "avatar.original",
-      render: (url) => {
-        return <img src={url} alt="test" className="w-12 h-12 rounded-full " />;
-      },
+      title: "house title",
+      dataIndex: "realestate.name",
     },
     {
-      title: "name",
-      dataIndex: "name",
+      title: "houseType",
+      dataIndex: "realestate.category.name",
     },
     {
-      title: "email",
-      dataIndex: "email.address",
+      title: "houseOwner",
+      dataIndex: "realestate.user.name",
     },
     {
-      title: "mobilePhone",
-      dataIndex: "phone.number",
-    },
-
-    {
-      title: "validity",
-      dataIndex: "account.text",
+      title: "tentName",
+      dataIndex: "tenant.name",
     },
     {
-      title: "status",
-      dataIndex: "email.is_verified",
+      title: "reservationPeriod",
+      dataIndex: "contract_period",
       render: (value) => {
         return (
-          <>
-            {value ? (
-              <span className="text-[#00AA4B]  mx-auto w-24 rounded-full py-1 px-2  flex items-center gap-x-1">
-                <FaRegCircleDot className="text-[#00AA4B]" />
-                {t("active")}
-              </span>
-            ) : (
-              <span className="text-[#FF697C]  mx-auto w-24 rounded-full py-1 px-2 flex items-center gap-x-1 ">
-                <FaRegCircleDot className="text-[#FF697C]" />
-                {t("not active")}
-              </span>
-            )}
-          </>
+          <p>
+            {value} {t("months")}
+          </p>
         );
       },
     },
     {
+      title: "reservationStatus",
+      dataIndex: "status",
+      render: (value) => {
+        return <TableStatus status={value} />;
+      },
+    },
+    {
       title: "properties",
-      dataIndex: "account.type",
+      dataIndex: "",
       render: (value, row) => {
         return (
           <TableProperties
-            hasEdit={true}
+            hasEdit={false}
             hasView={true}
-            hasDelete={value === "super_admin" ? false : true}
-            viewAction={() => navigate(`/dashboard/user-details/${row.id}`)}
-            editAction={() => navigate(`/dashboard/edit-user/${row.id}`)}
+            hasDelete={true}
             deleteAction={() => handleDelete(row.id)}
-            disabled={loadingDelete}
+            viewAction={() =>
+              navigate(`/dashboard/reservation-details/${row.id}`)
+            }
           />
         );
       },
     },
   ];
-  const handleAddUser = () => navigate("/dashboard/add-user");
-  console.log("data from users", data?.data?.data);
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="container mx-auto px-8 mt-6">
+        <div className="container mx-auto px-8 mt-5">
           <div className="w-full mb-8 flex items-center justify-between gap-5">
-            <div className="w-1/2 flex-1">
+            <div className="md:w-1/2">
               <SearchInput onSearchChange={setSearch} />
-            </div>
-
-            <div className="w-full md:w-[180px]">
-              <MainBtn text="add user" action={handleAddUser} />
             </div>
           </div>
           <Table
@@ -181,7 +153,7 @@ const Users = () => {
           />
           {filterdData?.length > itemsPerPage ? (
             <div className="mt-12">
-              <Paginate
+              <Pagination
                 itemsPerPage={itemsPerPage}
                 totalItems={filterdData.length}
                 onPageChange={handlePageChange}
@@ -195,4 +167,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Reservations;

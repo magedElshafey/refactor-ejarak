@@ -13,8 +13,8 @@ import { useGlobalContext } from "../../../hooks/GlobalContext";
 import useNationalIdValidation from "../../../hooks/validation/useNationalIdValidation";
 import usePasswordValidation from "../../../hooks/validation/usePasswordValidation";
 import { addUser } from "../../../services/post/dashboard/addUser";
-import { getAccountType } from "../../../services/get/dashboard/getAccountType";
 import Swal from "sweetalert2";
+import useAccountType from "../../../hooks/api/useAccountType";
 const AddUser = () => {
   const { t } = useTranslation();
   const { data } = useGlobalContext();
@@ -64,10 +64,7 @@ const AddUser = () => {
       }
     },
   });
-  const { isLoading: loadingAccountType, data: accountType } = useQuery(
-    "account-type",
-    getAccountType
-  );
+  const { loadingAccountType, accountType, error } = useAccountType();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (

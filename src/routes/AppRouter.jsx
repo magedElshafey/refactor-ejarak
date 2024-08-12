@@ -63,6 +63,7 @@ import Users from "../pages/dashboard/users/Users";
 import AddUser from "../pages/dashboard/users/AddUser";
 import UserDetails from "../pages/dashboard/users/UserDetails";
 import EditUser from "../pages/dashboard/users/EditUser";
+import Reservations from "../pages/dashboard/reservations/Reservations";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -303,6 +304,14 @@ const router = createBrowserRouter([
       {
         path: "edit-user/:id",
         element: <EditUser />,
+      },
+      {
+        path: "reservations",
+        element: <Reservations />,
+      },
+      {
+        path: "reservation-details/:id",
+        element: <ReservationDetails />,
       },
     ],
   },

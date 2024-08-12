@@ -37,7 +37,7 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
     link.role.includes(role)
   );
   return (
-    <div className="w-[90%] lg:w-[250px] h-screen bg-[#f6f5f5] border ">
+    <div className="w-[90%] lg:w-[250px] h-screen bg-[#f6f5f5] border overflow-y-auto ">
       {isMobileView ? (
         <IoMdClose
           size={20}
@@ -45,7 +45,7 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
           onClick={() => setShowSidebar(false)}
         />
       ) : null}
-      <div className="w-full flex justify-center mt-8 mb-5">
+      <div className="w-full flex justify-center my-5">
         <Logo img={logo} />
       </div>
       <ul ref={menuRef}>
@@ -63,7 +63,7 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
                   ? link.list[0].path
                   : link.path
               }
-              className="dashboard p-3 flex items-center justify-between duration-300 hover:text-maincolorgreen mb-2 "
+              className="dashboard p-3 flex items-center justify-between duration-300 hover:text-maincolorgreen "
             >
               <div className="flex items-center gap-2">
                 <p>{link.icon}</p>
@@ -79,7 +79,7 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
                   <NavLink
                     to={l.path}
                     key={i}
-                    className="block mb-3 font-semibold dashboard duration-300 w-fit"
+                    className="block mb-2 font-semibold dashboard duration-300 w-fit"
                   >
                     {t(l.title)}
                   </NavLink>

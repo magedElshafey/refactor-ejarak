@@ -43,7 +43,7 @@ const Login = () => {
         setPassword("");
         setPhone("");
         if (dashboardRoles.includes(data?.data?.data?.user?.account?.type)) {
-          navigate("/dashboard");
+          navigate("/dashboard/dashboard");
         } else {
           navigate("/");
         }

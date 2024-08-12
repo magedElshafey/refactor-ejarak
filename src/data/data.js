@@ -14,15 +14,23 @@ import {
   FaInstagramSquare,
   FaTiktok,
   FaSnapchatGhost,
-  FaRocketchat,
   FaHeart,
+  FaNewspaper,
+  FaQuestion,
 } from "react-icons/fa";
-import { MdOutlineDashboard } from "react-icons/md";
+import {
+  MdOutlineDashboard,
+  MdOutlineRoundaboutLeft,
+  MdPrivacyTip,
+} from "react-icons/md";
 import { FaUsers, FaXTwitter, FaCity } from "react-icons/fa6";
-import { TbBrandBooking, TbInfoTriangle } from "react-icons/tb";
+import {
+  TbBrandBooking,
+  TbInfoTriangle,
+  TbAirConditioning,
+} from "react-icons/tb";
 import { GoPackage } from "react-icons/go";
 import { LiaFileContractSolid } from "react-icons/lia";
-import { HiOutlineNewspaper } from "react-icons/hi2";
 
 export const navLinks = [
   {
@@ -352,44 +360,47 @@ export const dashboardLinks = [
     role: ["admin", "super_admin"],
   },
   {
-    icon: <LiaFileContractSolid size={20} />,
-    path: "contracts",
-    title: "contracts",
-    list: [
-      {
-        title: "manual contracts",
-        path: "manual-contracts",
-      },
-      {
-        title: "electronic contracts",
-        path: "electronic-contracts",
-      },
-    ],
+    title: "manual contracts",
+    path: "manual-contracts",
+    icon: <FaNewspaper size={20} />,
     role: ["admin", "super_admin"],
+    list: [],
   },
   {
-    icon: <HiOutlineNewspaper size={20} />,
-    path: "website-content",
-    title: "website content",
-    list: [
-      {
-        path: "about-ejarak",
-        title: "about ejarak",
-      },
-      {
-        path: "terms-conditions",
-        title: "terms and conditions",
-      },
-      {
-        path: "faqs",
-        title: "faqs",
-      },
-      {
-        path: "privacy-policy",
-        title: "privacy and policy",
-      },
-    ],
+    title: "electronic contracts",
+    path: "electronic-contracts",
+    icon: <LiaFileContractSolid size={20} />,
     role: ["admin", "super_admin"],
+    list: [],
+  },
+
+  {
+    path: "about-ejarak",
+    title: "about ejarak",
+    role: ["admin", "super_admin"],
+    list: [],
+    icon: <MdOutlineRoundaboutLeft size={20} />,
+  },
+  {
+    path: "faqs",
+    title: "faqs",
+    role: ["admin", "super_admin"],
+    list: [],
+    icon: <FaQuestion size={20} />,
+  },
+  {
+    path: "privacy-policy",
+    title: "privacy and policy",
+    role: ["admin", "super_admin"],
+    list: [],
+    icon: <MdPrivacyTip size={20} />,
+  },
+  {
+    path: "terms-conditions",
+    title: "terms and conditions",
+    role: ["admin", "super_admin"],
+    list: [],
+    icon: <TbAirConditioning size={20} />,
   },
   {
     icon: <FaCity size={20} />,
@@ -398,13 +409,13 @@ export const dashboardLinks = [
     list: [],
     role: ["admin", "super_admin"],
   },
-  {
-    icon: <FaRocketchat size={20} />,
-    title: "chat",
-    path: "chat",
-    list: [],
-    role: ["admin", "super_admin", "customer_service"],
-  },
+  // {
+  //   icon: <FaRocketchat size={20} />,
+  //   title: "chat",
+  //   path: "chat",
+  //   list: [],
+  //   role: ["admin", "super_admin", "customer_service"],
+  // },
 ];
 
 //  * table filter

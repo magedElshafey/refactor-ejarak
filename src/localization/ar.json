@@ -566,5 +566,9 @@
   "package details": "تفاصيل الباقة",
   "do you sure you want to remove the faq": "هل أنت متأكد من حذف السؤال ؟",
 
-  "you need to login as a realstate owner": "تحتاج التسجيل ك مالك عقار"
+  "you need to login as a realstate owner": "تحتاج التسجيل ك مالك عقار",
+  "do you sure you want to remove the user": "هل تريد حذف المستدخم بالفعل ؟ ",
+  "do you sure you want to remove the reservation": "هل تريد حذف الحجز بالفعل ؟؟ ",
+  "electronic contracts": "العقود الإلكترونية",
+  "manual contracts": "العقود اليدوية"
 }

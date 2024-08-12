@@ -15,13 +15,23 @@ import MobileInput from "../../../components/common/inputs/MobileInput";
 import useEmailValidation from "../../../hooks/validation/useEmailValidation";
 import useNationalIdValidation from "../../../hooks/validation/useNationalIdValidation";
 import usePasswordValidation from "../../../hooks/validation/usePasswordValidation";
+import useAccountType from "../../../hooks/api/useAccountType";
+import { editUser } from "../../../services/post/dashboard/editUser";
+import { useGlobalContext } from "../../../hooks/GlobalContext";
 const EditUser = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { data: global } = useGlobalContext();
   const params = useParams();
   const queryClient = useQueryClient();
   const handleNavigate = () => navigate(-1);
+  const { loadingAccountType, accountType, error } = useAccountType();
   const { isLoading, data } = useUserDetails(params.id);
+  console.log("data returned from user details", data?.data?.data);
+  console.log(
+    "data returned from account type request",
+    accountType?.data?.data?.account_type
+  );
   const {
     value: phone,
     error: phoneError,
@@ -51,17 +61,95 @@ const EditUser = () => {
       setName(data?.data?.data?.name);
       setEmail(data?.data?.data?.email?.address);
       setNationId(data?.data?.data?.nationalId);
-      //   setUserType(data?.data?.data?.)
+
+      setUserType(data?.data?.data?.account?.text);
     }
   }, []);
+  const { isLoading: loadingSubmit, mutate } = useMutation(
+    (v) => editUser(params.id, v),
+    {
+      onSuccess: (data) => {
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+          queryClient.invalidateQueries("users");
+          queryClient.invalidateQueries(["user-details", params.id]);
+          setPhone("");
+          setName("");
+          setEmail("");
+          setUserType("");
+          setNationId("");
+          setPassword("");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
+      },
+    }
+  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      !phone.trim() ||
+      !name.trim() ||
+      !email.trim() ||
+      !nationId.trim() ||
+      !password.trim()
+    ) {
+      Swal.fire({
+        icon: "error",
+        title: t("please fill all fields"),
+      });
+      return;
+    } else if (nameError) {
+      Swal.fire({
+        icon: "error",
+        title: t(nameError),
+      });
+      return;
+    } else if (phoneError) {
+      Swal.fire({
+        icon: "error",
+        title: t(phoneError),
+      });
+      return;
+    } else if (emailError) {
+      Swal.fire({
+        icon: "error",
+        title: t(emailError),
+      });
+      return;
+    } else if (nationError) {
+      Swal.fire({
+        icon: "error",
+        title: t(nationError),
+      });
+      return;
+    } else {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("password", password);
+      formData.append("phone_country_code", global?.countries[0]?.prefix_code);
+      formData.append("account_type", userType);
+      formData.append(" nationalId,", nationId);
+
+      mutate(formData);
+    }
+  };
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-8">
-          <form>
-            <div className="my-6">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 md:mb-6">
               <MainInput
                 type="text"
                 label="name"
@@ -69,8 +157,6 @@ const EditUser = () => {
                 onChange={handleNameChange}
                 error={nameError}
               />
-            </div>
-            <div className="my-6">
               <MainInput
                 type="email"
                 label="email"
@@ -80,20 +166,25 @@ const EditUser = () => {
                 error={emailError}
               />
             </div>
-            <div className="my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 md:mb-6">
               <MobileInput
                 value={phone}
                 error={phoneError}
                 onChange={handlePhoneChange}
               />
+              <MainSelect
+                label="userType"
+                options={accountType?.data?.data?.account_type}
+                onSelect={handleUserTypeChange}
+                loading={loadingAccountType}
+                value={
+                  accountType?.data?.data?.account_type?.find(
+                    (item) => item.name === userType
+                  )?.name
+                }
+              />
             </div>
-            {/* <MainSelect
-              label="userType"
-              options={accountType?.data?.data?.account_type}
-              onSelect={handleUserTypeChange}
-              loading={loadingAccountType}
-            /> */}
-            <div className="my-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 md:mb-6">
               <MainInput
                 label="password"
                 type="password"
@@ -101,15 +192,28 @@ const EditUser = () => {
                 error={passwordError}
                 onChange={handlePasswordChange}
               />
-            </div>
-            <div className="my-6">
               <MainInput
                 placeholder="1/2xxxxxxxxx"
                 label={t("nationalId")}
                 value={nationId}
-                onChange={handleNationIdChange}
-                error={nationError}
+                disabled
               />
+            </div>
+            <div className="flex items-center justify-center gap-3 md:gap-7">
+              <div className="w-[150px]">
+                {loadingSubmit ? (
+                  <LoadingBtn />
+                ) : (
+                  <MainBtn text="edit" type="submit" />
+                )}
+              </div>
+              <button
+                onClick={handleNavigate}
+                type="button"
+                className="font-semibold"
+              >
+                {t("cancel")}
+              </button>
             </div>
           </form>
         </div>
