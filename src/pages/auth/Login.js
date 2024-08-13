@@ -134,7 +134,7 @@ const Login = () => {
         <div className="flex items-center flex-col md:flex-row gap-1 justify-center">
           <p className="text-xs text-textColor">{t("pres")}</p>
           <Link
-            to="/website/terms"
+            to="/website/terms-conditions"
             className=" underline text-[#2B2B2B] text-xs"
           >
             {t("terms")}

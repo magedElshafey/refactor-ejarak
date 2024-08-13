@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const ReservationData = ({ data, downloadContract }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const contractBeginning = new Date(Date.parse(data?.contract_start_date));
   const endDate = new Date(contractBeginning);
   endDate.setMonth(contractBeginning.getMonth() + data?.contract_period);
@@ -38,11 +38,19 @@ const ReservationData = ({ data, downloadContract }) => {
         ) : null}
         <div>
           <p className="text-[#4D5F65] mb-1">{t("admin")}</p>
-          <p className="text-black">{data?.contract_fee_payer}</p>
+          <p className="text-black">
+            {data.contract_fee_payer === "owner" && i18n.language === "ar"
+              ? "المالك"
+              : data.contract_fee_payer === "owner" && i18n.language === "en"
+              ? "owner"
+              : data.contract_fee_payer === "tenant" && i18n.language === "ar"
+              ? "المستأجر"
+              : "tenant"}
+          </p>
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("status")}</p>
-          <p className="text-black">{data?.status}</p>
+          <p className="text-black">{t(data?.status)}</p>
         </div>
       </div>
     </div>

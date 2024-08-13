@@ -17,7 +17,7 @@ const ContractCard = ({
   type,
   contractId,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">
@@ -47,7 +47,18 @@ const ContractCard = ({
             </div>
             <div className="flex flex-col items-center">
               <p className="text-textColor mb-1">{t("admin")}</p>
-              <p className="font-bold">{data.contract_fee_payer}</p>
+              <p className="font-bold">
+                {" "}
+                {data.contract_fee_payer === "owner" && i18n.language === "ar"
+                  ? "المالك"
+                  : data.contract_fee_payer === "owner" &&
+                    i18n.language === "en"
+                  ? "owner"
+                  : data.contract_fee_payer === "tenant" &&
+                    i18n.language === "ar"
+                  ? "المستأجر"
+                  : "tenant"}
+              </p>
             </div>
             {data?.family_number ? (
               <div className="flex flex-col items-center">

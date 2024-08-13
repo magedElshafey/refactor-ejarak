@@ -11,11 +11,11 @@ const SubmitReview = ({ data, id }) => {
   const [comment, setComment] = useState("");
   const handleCommentChange = (e) => setComment(e.target.value);
   const [rating, setRating] = useState(0);
+  console.log("rating from submit", rating);
   const ratingChanged = (newRating) => setRating(newRating);
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation((v) => submitReview(data.id, v), {
     onSuccess: (data) => {
-      console.log("data from submit", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",
