@@ -9,7 +9,7 @@ import ReservationDetailsBtn from "./ReservationDetailsBtn";
 import PayBtn from "./PayBtn";
 import CreateContractBtn from "./CreateContractBtn";
 const ReservationCard = ({ data, index, role, created_at, dep }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   console.log("data from reservation card", data);
   return (
     <div className="w-full flex gap-3 mb-5">
@@ -38,7 +38,17 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
             </div>
             <div className="flex flex-col items-start md:items-center">
               <p className="text-textColor mb-1">{t("admin")}</p>
-              <p className="font-bold">{data.contract_fee_payer}</p>
+              <p className="font-bold">
+                {data.contract_fee_payer === "owner" && i18n.language === "ar"
+                  ? "المالك"
+                  : data.contract_fee_payer === "owner" &&
+                    i18n.language === "en"
+                  ? "owner"
+                  : data.contract_fee_payer === "tenant" &&
+                    i18n.language === "ar"
+                  ? "المستأجر"
+                  : "tenant"}
+              </p>
             </div>
             {data?.family_number ? (
               <div className="flex flex-col items-start md:items-center">

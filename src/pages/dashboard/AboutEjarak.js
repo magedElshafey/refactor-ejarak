@@ -74,7 +74,7 @@ const AboutEjarak = () => {
             label="about ejarak in arabic"
           />
 
-          <div className="mt-16 mb-8">
+          <div className="mt-24 md:mt-16 mb-8">
             <Editor
               value={terms?.en}
               field="en"
@@ -83,7 +83,7 @@ const AboutEjarak = () => {
               label="about ejarak in english"
             />
           </div>
-          <div className="flex items-center justify-center md:justify-end gap-5 mt-16">
+          <div className="flex items-center justify-center md:justify-end gap-5 mt-24 md:mt-16">
             <div className="w-[180px]">
               {loadingSubmit ? (
                 <LoadingBtn />
@@ -91,13 +91,13 @@ const AboutEjarak = () => {
                 <MainBtn text="save" type="submit" />
               )}
             </div>
-            <button
+            {/* <button
               type="button"
               onClick={handleNavigate}
               className="flex items-center justify-center rounded-md bg-[#f6f5f5]"
             >
               {t("back")}
-            </button>
+            </button> */}
           </div>
         </form>
       )}

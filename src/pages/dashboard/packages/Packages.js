@@ -135,7 +135,7 @@ const Packages = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-5">
-          <div className="w-full mb-8 flex items-center justify-between gap-5">
+          <div className="w-full mb-8 flex items-center justify-between gap-5 flex-wrap">
             <div className="w-1/2 flex-1">
               <SearchInput onSearchChange={setSearch} />
             </div>

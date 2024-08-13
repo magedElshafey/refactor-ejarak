@@ -571,5 +571,6 @@
   "do you sure you want to remove the reservation": "هل تريد حذف الحجز بالفعل ؟؟ ",
   "electronic contracts": "العقود الإلكترونية",
   "manual contracts": "العقود اليدوية",
-  "resend": "إعادة إرسال رمز التحقق"
+  "resend": "إعادة إرسال رمز التحقق",
+  "Enter Rejection Reason": "ادخل سبب الرفض"
 }

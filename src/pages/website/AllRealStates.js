@@ -18,8 +18,7 @@ import CityBtn from "../../components/common/filter/CityBtn";
 const AllRealStates = () => {
   const dispatch = useDispatch();
   const { data: global } = useGlobalContext();
-  const [cityId, setCityId] = useState();
-  const handleCityIdChange = (opt) => setCityId(opt.id);
+
   // reset all redux value when the page loaded
   useEffect(() => {
     dispatch(resetFilter());
@@ -36,6 +35,7 @@ const AllRealStates = () => {
     name,
     sortCreate,
     sort,
+    cityId,
   } = useSelector((state) => state.filterSlice);
 
   const { isLoading, data } = useQuery(
@@ -52,6 +52,7 @@ const AllRealStates = () => {
       priceCreate,
       sort,
       sortCreate,
+      cityId,
     ],
     () =>
       getAllRealstates(
@@ -65,7 +66,8 @@ const AllRealStates = () => {
         subCategoryId,
         sort,
         priceCreate,
-        sortCreate
+        sortCreate,
+        cityId
       )
   );
 

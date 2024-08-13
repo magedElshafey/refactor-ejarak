@@ -1,12 +1,8 @@
-import React from 'react'
-import SearchInput from '../common/SearchInput';
+import React from "react";
+import SearchInput from "../common/SearchInput";
 
 const RealStatesHeader = ({ onSearchChange }) => {
-    return (
-        <div className='py-7'>
-            <SearchInput onSearchChange={onSearchChange} />
-        </div>
-    )
-}
+  return <SearchInput onSearchChange={onSearchChange} />;
+};
 
 export default RealStatesHeader;

@@ -64,6 +64,8 @@ import AddUser from "../pages/dashboard/users/AddUser";
 import UserDetails from "../pages/dashboard/users/UserDetails";
 import EditUser from "../pages/dashboard/users/EditUser";
 import Reservations from "../pages/dashboard/reservations/Reservations";
+import Success from "../pages/website/Success";
+import PaymentError from "../pages/website/PaymentError";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -169,6 +171,14 @@ const router = createBrowserRouter([
       {
         path: "chat/:id",
         element: <Chat />,
+      },
+      {
+        path: "payment/success",
+        element: <Success />,
+      },
+      {
+        path: "payment/error",
+        element: <PaymentError />,
       },
     ],
   },

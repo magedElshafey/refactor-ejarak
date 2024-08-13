@@ -6,9 +6,6 @@ const token = userToken(store.getState());
 const lang = localStorage.getItem("lang")
   ? JSON.parse(localStorage.getItem("lang"))
   : "ar";
-const authToken = localStorage.getItem("token")
-  ? JSON.parse(localStorage.getItem("token"))
-  : null;
 
 const client = axios.create({
   baseURL: "https://api.ejark.sa/api/v1",

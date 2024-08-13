@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import Spinner from "../../components/common/Spinner";
@@ -11,7 +11,8 @@ const FAQ = () => {
   const { isLoading, data } = useQuery(["faq-details", params.id], () =>
     getFaqDetails(params.id)
   );
-  console.log("Data from faq details", data?.data?.data);
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate(-1);
   return (
     <>
       {isLoading ? (
@@ -70,6 +71,15 @@ const FAQ = () => {
                 ></p>
               </div>
             </div>
+          </div>
+          <div className="w-full flex justify-end  mt-8">
+            <button
+              type="button"
+              onClick={handleNavigate}
+              className="font-semibold"
+            >
+              {t("back")}
+            </button>
           </div>
         </div>
       )}

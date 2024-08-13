@@ -23,7 +23,7 @@ const Cities = () => {
       ) : (
         <div className="container mx-auto px-8 mt-8">
           <div className="flex items-center gap-4 md:gap-8 lg:gap-12 flex-col md:flex-row">
-            <div className="md:w-1/2">
+            <div className="w-full md:w-1/2">
               <MainSelect
                 onSelect={handleCitiyChange}
                 label="region"

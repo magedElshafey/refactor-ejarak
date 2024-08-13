@@ -43,7 +43,7 @@ export const navLinks = [
         e.preventDefault();
 
         Swal.fire({
-          text: t("login_first"),
+          title: t("you need to login as a realstate owner"),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -157,14 +157,6 @@ export const aboutUs = [
           } else {
             return;
           }
-        });
-      } else if (type === "tenant") {
-        e.preventDefault();
-
-        Swal.fire({
-          icon: "error",
-          position: "center",
-          title: "يرجي تسجيل حساب مالك أولا",
         });
       }
     },

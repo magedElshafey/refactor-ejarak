@@ -7,11 +7,11 @@ import { useTranslation } from "react-i18next";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
-const Sidebar = ({ isMobileView, setShowSidebar }) => {
+const Sidebar = ({ isMobileView, setShowDashboardSidebar }) => {
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
-  const navigate = useNavigate();
-  const { t } = useTranslation();
+
+  const { t, i18n } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
@@ -37,12 +37,16 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
     link.role.includes(role)
   );
   return (
-    <div className="w-[90%] lg:w-[250px] h-screen bg-[#f6f5f5] border overflow-y-auto ">
+    <div
+      className={`w-[90%] lg:w-[280px] h-screen  bg-[#f6f5f5] border overflow-y-auto fixed top-0 ${
+        i18n.language === "ar" ? "rught-0" : "left-0"
+      }`}
+    >
       {isMobileView ? (
         <IoMdClose
           size={20}
           className=" cursor-pointer mb-3 "
-          onClick={() => setShowSidebar(false)}
+          onClick={() => setShowDashboardSidebar(false)}
         />
       ) : null}
       <div className="w-full flex justify-center my-5">
@@ -51,7 +55,14 @@ const Sidebar = ({ isMobileView, setShowSidebar }) => {
       <ul ref={menuRef}>
         {filteredLinks?.map((link, index) => (
           <li
-            onClick={() => handleLinkClick(index)}
+            onClick={() => {
+              handleLinkClick(index);
+              if (isMobileView) {
+                setShowDashboardSidebar(false);
+              } else {
+                return;
+              }
+            }}
             key={index}
             className="relative cursor-pointer"
           >

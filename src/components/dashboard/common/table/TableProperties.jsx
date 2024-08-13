@@ -11,7 +11,7 @@ const TableProperties = ({
   disabled,
 }) => {
   return (
-    <div className="flex items-center justify-center gap-2 flex-wrap">
+    <div className="flex items-center justify-center gap-2 ">
       {hasView ? (
         <FaEye size={20} className=" cursor-pointer" onClick={viewAction} />
       ) : null}

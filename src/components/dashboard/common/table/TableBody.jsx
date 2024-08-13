@@ -25,10 +25,7 @@ const TableBody = ({ bodyData, columns, numbersBeginning }) => {
               );
             }
             return (
-              <td
-                className="p-3 font-medium truncate max-w-[350px]"
-                key={`${i}-${j}`}
-              >
+              <td className="p-3 font-medium truncate " key={`${i}-${j}`}>
                 {t(value)}
               </td>
             );

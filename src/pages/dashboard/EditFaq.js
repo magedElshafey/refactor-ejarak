@@ -101,7 +101,7 @@ const EditFaq = () => {
               label="question in arabic"
             />
 
-            <div className="my-16 ">
+            <div className="my-24 md:my-16 ">
               <Editor
                 value={question?.en}
                 field="en"
@@ -119,7 +119,7 @@ const EditFaq = () => {
               onEditorChange={(content) => handleAnswerChange(content, "ar")}
               label="answer in arabic"
             />
-            <div className="my-16 ">
+            <div className="my-24 md:my-16 ">
               <Editor
                 value={answer?.en}
                 field="en"

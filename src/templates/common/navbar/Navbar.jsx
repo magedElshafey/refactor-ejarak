@@ -20,10 +20,11 @@ import echo from "../../../echo";
 import notificationSound from "../../../assets/sounds/notification.wav";
 import { useQueryClient } from "react-query";
 import useListenToMessages from "../../../hooks/useListenToMessages";
+import Sidebar from "../../dashboard/Sidebar";
 
 const notificationAudio = new Audio(notificationSound);
 
-const Navbar = ({ bg }) => {
+const Navbar = ({ bg, dashboard }) => {
   // ================== global states =============================
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -38,7 +39,15 @@ const Navbar = ({ bg }) => {
   const [showSidebar, setShowSidebar] = useState();
   const sidebarRef = useRef(null);
   const filterRef = useRef(null);
-  
+  // dashboard side bar
+  const [showDashboardSidBar, setShowDashboardSidebar] = useState(false);
+  const handleBurgerMenuClick = () => {
+    if (dashboard) {
+      setShowDashboardSidebar(true);
+    } else {
+      setShowSidebar(true);
+    }
+  };
   useClickOutside(filterRef, () => dispatch(closeFilter()));
   const isLogin = auth.ejarakLogin;
   const navigate = useNavigate();
@@ -82,13 +91,13 @@ const Navbar = ({ bg }) => {
         .private(`privateNotification.${loggedUser?.id}`)
         .listen(".private-notification", (e) => {
           //play the sound of the notification.
-          notificationAudio.play().catch(e => {
-          if (e.name === "NotAllowedError") {
-            // handle autoplay errors, for reference https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
-            return 
-          }
-          throw new Error("unexpected behaviour from the audio player.");
-        })
+          notificationAudio.play().catch((e) => {
+            if (e.name === "NotAllowedError") {
+              // handle autoplay errors, for reference https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
+              return;
+            }
+            throw new Error("unexpected behaviour from the audio player.");
+          });
           addNotification(e);
         });
     }
@@ -112,8 +121,8 @@ const Navbar = ({ bg }) => {
         data: {
           ...response.data,
           data: newNotifications,
-          un_seen: oldUnseen + unseen
-        }
+          un_seen: oldUnseen + unseen,
+        },
       };
       return newData;
     });
@@ -128,7 +137,9 @@ const Navbar = ({ bg }) => {
               bg ? "" : "border border-white"
             }`}
           >
-            <NavLinks navLinks={navLinks} logo={bg ? logo2 : logo} bg={bg} />
+            {dashboard ? null : (
+              <NavLinks navLinks={navLinks} logo={bg ? logo2 : logo} bg={bg} />
+            )}
           </div>
           <LangMenu bg={bg} />
           {ejarakLogin ? (
@@ -152,8 +163,9 @@ const Navbar = ({ bg }) => {
               className={`cursor-pointer ${
                 bg ? `text-slate-500` : "text-white"
               }`}
-              onClick={() => setShowSidebar(true)}
+              onClick={handleBurgerMenuClick}
             />
+
             <LangMenu bg={bg} />
             {ejarakLogin ? (
               <>
@@ -170,27 +182,29 @@ const Navbar = ({ bg }) => {
             {pathname === "/" ||
             pathname === "/website/near-realstates" ||
             pathname === "/website/all-realstates" ? (
-              <div ref={filterRef}>
-                <PiListMagnifyingGlassFill
-                  size={30}
-                  className={`cursor-pointer ${
-                    bg ? `text-slate-500` : "text-white"
-                  }`}
-                  onClick={() => dispatch(handleOpenFilter())}
-                />
-                <div
-                  className={`fixed top-0 duration-300 w-[90%] h-screen overflow-y-scroll z-50 ${
-                    openFilter ? "left-0" : "left-[-350%]"
-                  }`}
-                >
-                  <Filter
-                    bg="bg-white"
-                    rounded="rounded-none"
-                    showRealStateBtn={true}
-                    mobileVieow={true}
+              dashboard ? null : (
+                <div ref={filterRef}>
+                  <PiListMagnifyingGlassFill
+                    size={30}
+                    className={`cursor-pointer ${
+                      bg ? `text-slate-500` : "text-white"
+                    }`}
+                    onClick={() => dispatch(handleOpenFilter())}
                   />
+                  <div
+                    className={`fixed top-0 duration-300 w-[90%] h-screen overflow-y-scroll z-50 ${
+                      openFilter ? "left-0" : "left-[-350%]"
+                    }`}
+                  >
+                    <Filter
+                      bg="bg-white"
+                      rounded="rounded-none"
+                      showRealStateBtn={true}
+                      mobileVieow={true}
+                    />
+                  </div>
                 </div>
-              </div>
+              )
             ) : null}
             <LoginBtn bg={bg} />
           </div>
@@ -222,6 +236,16 @@ const Navbar = ({ bg }) => {
               </NavLink>
             ))}
           </div>
+        </div>
+        <div
+          className={`fixed top-0 duration-300 z-50 w-[95%] h-screen ${
+            showDashboardSidBar ? "left-0" : "left-[-300%]"
+          }`}
+        >
+          <Sidebar
+            setShowDashboardSidebar={setShowDashboardSidebar}
+            isMobileView={true}
+          />
         </div>
       </div>
     </div>

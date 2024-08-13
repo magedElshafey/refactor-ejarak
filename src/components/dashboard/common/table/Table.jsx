@@ -8,8 +8,8 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <table className="w-full text-center px-2 overflow-x-auto">
+    <div className="w-full overflow-x-auto text-nowrap">
+      <table className="min-w-full  px-2">
         <TableHeader columns={columns} />
 
         {bodyData.length > 0 && (
@@ -31,7 +31,7 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
           <p className="text-maincolorgreen">{t("no data available")}</p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

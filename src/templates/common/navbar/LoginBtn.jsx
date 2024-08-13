@@ -99,7 +99,7 @@ const LoginBtn = ({ bg }) => {
               <li
                 className=" cursor-pointer mb-2 text-black"
                 onClick={() => {
-                  navigate("/dashboard");
+                  navigate("/dashboard/dashboard");
                   setShowMenu(false);
                 }}
               >

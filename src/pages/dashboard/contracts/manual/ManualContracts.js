@@ -85,7 +85,7 @@ const ManualContracts = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="w-1/2 mb-8">
+          <div className="md:w-1/2 mb-8">
             <SearchInput onSearchChange={setSearch} />
           </div>
           <Table

@@ -38,9 +38,7 @@ const AddRealstateMap = ({ coordinates }) => {
       <button
         type="button"
         onClick={toggleMapView}
-        className={`absolute top-4 ${
-          i18n.language === "ar" ? "left-6" : "right-6"
-        } z-10 w-10 h-10 text-white bg-maincolorgreen  rounded-full flex justify-center items-center`}
+        className={`absolute top-4 left-6  z-10 w-10 h-10 text-white bg-maincolorgreen  rounded-full flex justify-center items-center`}
       >
         {isSatelliteView ? (
           <FaMapMarkedAlt size={25} className="text-white" />

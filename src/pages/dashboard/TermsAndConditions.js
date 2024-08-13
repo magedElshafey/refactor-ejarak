@@ -73,7 +73,7 @@ const TermsAndConditions = () => {
             label="terms and conditions in arabic"
           />
 
-          <div className="mt-16 mb-8">
+          <div className="mt-24 md:mt-16 mb-8">
             <Editor
               value={terms?.en}
               field="en"
@@ -82,7 +82,7 @@ const TermsAndConditions = () => {
               label="terms and conditions in english"
             />
           </div>
-          <div className="flex items-center justify-center md:justify-end gap-5 mt-16">
+          <div className="flex items-center justify-center md:justify-end gap-5 mt-24 md:mt-16">
             <div className="w-[180px]">
               {loadingSubmit ? (
                 <LoadingBtn />

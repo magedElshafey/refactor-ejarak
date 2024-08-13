@@ -9,7 +9,7 @@ const StatisticsChart = ({ totalCities, data }) => {
       <div className="flex ">
         <div className="grid grid-cols-2 lg lg:grid-cols-4 gap-5 ">
           {totalCities
-            .slice(0, Math.ceil(totalCities.length / 2))
+            ?.slice(0, Math.ceil(totalCities?.length / 2))
             .map((item, index) => (
               <div key={index}>
                 <div className="">

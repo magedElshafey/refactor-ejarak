@@ -27,7 +27,7 @@ import PendingRealstate from "../../components/realstate/PendingRealstate.jsx";
 const RealstateDetails = () => {
   const params = useParams();
   const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
-
+  const role = userData?.account?.type;
   const userId = userData?.id;
   const { t } = useTranslation();
   const { isLoading, data } = useQuery(["realstate-details", params.id], () =>
@@ -42,7 +42,6 @@ const RealstateDetails = () => {
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
   const [showSuckModal, setShowSuckModal] = useState(false);
-  console.log("data from realstate details", data?.data?.data);
   return (
     <>
       {isLoading || loadingSimilars ? (
@@ -101,7 +100,10 @@ const RealstateDetails = () => {
             ) : null}
             {ejarakLogin && data?.data?.data?.user?.id !== userId ? (
               <div className="flex items-center justify-center md:justify-between gap-1 flex-wrap my-8">
-                <BookingBtn toggleShowBookingForm={toggleShowBookingForm} />
+                {role !== "owner" ? (
+                  <BookingBtn toggleShowBookingForm={toggleShowBookingForm} />
+                ) : null}
+
                 <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
                   <ContactWithCustomerServiceBtn />
                   <ReportRealstateBtn
