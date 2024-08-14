@@ -186,13 +186,6 @@ const EditUser = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 md:mb-6">
               <MainInput
-                label="password"
-                type="password"
-                value={password}
-                error={passwordError}
-                onChange={handlePasswordChange}
-              />
-              <MainInput
                 placeholder="1/2xxxxxxxxx"
                 label={t("nationalId")}
                 value={nationId}

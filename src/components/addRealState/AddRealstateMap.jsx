@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import GoogleMap from "google-map-react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,8 @@ const AddRealstateMap = ({ coordinates }) => {
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
   const [isSatelliteView, setIsSatelliteView] = useState(false);
   const toggleMapView = () => setIsSatelliteView(!isSatelliteView);
+  const mapRef = useRef(); // Reference to the map instance
+
   const defaultProps = {
     zoom: 5,
     center: coordinates
@@ -33,6 +35,25 @@ const AddRealstateMap = ({ coordinates }) => {
       strictBounds: true,
     },
   };
+  // useEffect(() => {
+  //   if (coordinates && mapRef.current) {
+  //     const bounds = new window.google.maps.LatLngBounds();
+  //     bounds.extend({
+  //       lat: coordinates.lat,
+  //       lng: coordinates.lng,
+  //     });
+  //     mapRef.current.fitBounds(bounds);
+  //   }
+  // }, [coordinates]);
+  useEffect(() => {
+    if (coordinates && mapRef.current) {
+      // Move the map to the new marker's position without changing the zoom level
+      mapRef.current.panTo({
+        lat: coordinates.lat,
+        lng: coordinates.lng,
+      });
+    }
+  }, [coordinates]);
   return (
     <div className="h-[450px] relative">
       <button
@@ -48,14 +69,16 @@ const AddRealstateMap = ({ coordinates }) => {
       </button>
       <GoogleMap
         key={mapKey}
-        bootstrapURLKeys={{
-          key: apiKey,
-        }}
+        bootstrapURLKeys={{ key: apiKey }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={{
           ...mapOptions,
           mapTypeId: isSatelliteView ? "satellite" : "roadmap",
+        }}
+        yesIWantToUseGoogleMapApiInternals
+        onGoogleApiLoaded={({ map }) => {
+          mapRef.current = map;
         }}
       >
         {coordinates ? (

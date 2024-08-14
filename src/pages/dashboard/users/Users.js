@@ -109,6 +109,7 @@ const Users = () => {
     {
       title: "email",
       dataIndex: "email.address",
+      render: (value) => <p className=" lowercase">{value}</p>,
     },
     {
       title: "mobilePhone",
@@ -146,7 +147,7 @@ const Users = () => {
       render: (value, row) => {
         return (
           <TableProperties
-            hasEdit={true}
+            hasEdit={value === "super_admin" ? false : true}
             hasView={true}
             hasDelete={value === "super_admin" ? false : true}
             viewAction={() => navigate(`/dashboard/user-details/${row.id}`)}
@@ -159,7 +160,7 @@ const Users = () => {
     },
   ];
   const handleAddUser = () => navigate("/dashboard/add-user");
-  console.log("data from users", data?.data?.data);
+
   return (
     <>
       {isLoading ? (

@@ -6,7 +6,6 @@ import TableStatus from "../../../components/dashboard/common/table/TableStatus"
 import RejectedPopup from "../../../components/dashboard/common/RejectedPopup";
 import Table from "../../../components/dashboard/common/table/Table";
 import Pagination from "../../../components/common/Pagination";
-
 import { useNavigate } from "react-router-dom";
 
 import updateRealStateStatus from "../../../services/post/dashboard/updateRealStateStatus";
@@ -22,6 +21,7 @@ import { getSpecialRealState } from "../../../services/get/dashboard/getSpecialR
 const itemsPerPage = 10;
 
 const RealStatesBody = ({ tableSearch }) => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(0);
   const [popupOpen, setPopupOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
@@ -30,7 +30,7 @@ const RealStatesBody = ({ tableSearch }) => {
 
   const queryClient = useQueryClient();
   const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
-
+  console.log("data from all realstate", data?.data?.data);
   const mutation = useMutation(
     ({ status, id, rejectionReason }) =>
       updateRealStateStatus(status, id, rejectionReason),
@@ -86,11 +86,17 @@ const RealStatesBody = ({ tableSearch }) => {
     }
   };
 
-  const handlePopupSubmit = (message) => {
+  const handlePopupSubmit = (rejectionReason) => {
+    if (!rejectionReason.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: t("refused reason field is required"),
+      });
+    }
     mutation.mutate({
       status: "refused",
       id: selectedRowId,
-      reason_refused: message,
+      reason_refused: rejectionReason,
     });
     setRejectionReason("");
   };
@@ -107,7 +113,7 @@ const RealStatesBody = ({ tableSearch }) => {
         isLoading={isLoading}
         onStatusChange={handleStatusChange}
       />
-      {data?.data?.data?.length > itemsPerPage ? (
+      {filteredRealStates?.length > itemsPerPage ? (
         <Pagination
           itemsPerPage={itemsPerPage}
           totalItems={data?.data?.data.length}

@@ -158,7 +158,7 @@ const router = createBrowserRouter([
       },
       {
         path: "realstate/:id",
-        element: <RealstateDetails />,
+        element: <RealstateDetails isDashboard={false} />,
       },
       {
         path: "realstate-owner/:id",
@@ -229,7 +229,7 @@ const router = createBrowserRouter([
       },
       {
         path: "realstate/:id",
-        element: <RealstateDetails />,
+        element: <RealstateDetails isDashboard={true} />,
       },
       {
         path: "about-ejarak",

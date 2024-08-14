@@ -15,7 +15,7 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
   };
   const [isPlaying, setIsPlaying] = useState(false);
   const handlePlay = () => {
-    const videoElement = document.getElementById("video");
+    const videoElement = document.getElementById("video") || null;
     if (isPlaying) {
       videoElement.pause();
     } else {
@@ -25,24 +25,27 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
   };
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-12 xl:gap-16 my-8 ">
-      <div className="w-full  bg-white rounded-lg p-3 shadow-xl flex items-center relative">
-        <video
-          className="w-full h-[350px] object-cover "
-          src={video}
-          loop
-          muted
-          autoPlay={false}
-          id="video"
-        ></video>
-        {!isPlaying && (
-          <div
-            onClick={handlePlay}
-            className="absolute inset-0 flex justify-center items-center cursor-pointer bg-black bg-opacity-50"
-          >
-            <FaPlay className="text-white text-5xl" />
-          </div>
-        )}
-      </div>
+      {video ? (
+        <div className="w-full  bg-white rounded-lg p-3 shadow-xl flex items-center relative">
+          <video
+            className="w-full h-[350px] object-cover "
+            src={video}
+            loop
+            muted
+            autoPlay={false}
+            id="video"
+          ></video>
+          {!isPlaying && (
+            <div
+              onClick={handlePlay}
+              className="absolute inset-0 flex justify-center items-center cursor-pointer bg-black bg-opacity-50"
+            >
+              <FaPlay className="text-white text-5xl" />
+            </div>
+          )}
+        </div>
+      ) : null}
+
       {suck.length ? (
         <div className=" bg-white rounded-lg p-3 shadow-xl flex flex-col items-center justify-center gap-3">
           {suck[0].endsWith(".pdf") ? (

@@ -23,8 +23,12 @@ import ReportForm from "../../components/realstate/report/ReportForm.jsx";
 import RealstateVideoAndSuck from "../../components/realstate/RealstateVideoAndSuck.jsx";
 import SuckModal from "../../components/realstate/SuckModal.jsx";
 import PendingRealstate from "../../components/realstate/PendingRealstate.jsx";
+import MainInput from "../../components/common/inputs/MainInput.jsx";
+import RefusedReason from "../../components/common/RefusedReason.jsx";
+import { FaComment, FaEye } from "react-icons/fa";
+import { MdStarRate } from "react-icons/md";
 
-const RealstateDetails = () => {
+const RealstateDetails = ({ isDashboard }) => {
   const params = useParams();
   const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
@@ -42,6 +46,7 @@ const RealstateDetails = () => {
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
   const [showSuckModal, setShowSuckModal] = useState(false);
+  console.log("data returned from realstate page", data?.data?.data);
   return (
     <>
       {isLoading || loadingSimilars ? (
@@ -56,7 +61,9 @@ const RealstateDetails = () => {
               userId={userId}
               status={data?.data?.data?.status}
               id={params.id}
+              isDashboard={isDashboard}
             />
+
             {data?.data?.data?.status === "pending" ? (
               <PendingRealstate num={data?.data?.data?.number_ad} />
             ) : null}
@@ -87,7 +94,7 @@ const RealstateDetails = () => {
                 </p>
               </div>
             </div>
-            {data?.data?.data?.user?.id !== userId ? (
+            {isDashboard ? null : data?.data?.data?.user?.id !== userId ? (
               <div className="my-8">
                 <RealstateOwnerCard
                   name={data?.data?.data?.user?.name}
@@ -98,7 +105,8 @@ const RealstateDetails = () => {
                 />
               </div>
             ) : null}
-            {ejarakLogin && data?.data?.data?.user?.id !== userId ? (
+            {isDashboard ? null : ejarakLogin &&
+              data?.data?.data?.user?.id !== userId ? (
               <div className="flex items-center justify-center md:justify-between gap-1 flex-wrap my-8">
                 {role !== "owner" ? (
                   <BookingBtn toggleShowBookingForm={toggleShowBookingForm} />
@@ -113,9 +121,11 @@ const RealstateDetails = () => {
               </div>
             ) : null}
           </div>
+
           <div className="w-full bg-white">
             <div className="container mx-auto p-8">
-              {ejarakLogin && data?.data?.data?.user?.id !== userId ? (
+              {isDashboard ? null : ejarakLogin &&
+                data?.data?.data?.user?.id !== userId ? (
                 <SubmitReview data={data?.data?.data} id={params.id} />
               ) : !ejarakLogin && data?.data?.data?.user?.id !== userId ? (
                 <Link
@@ -125,10 +135,11 @@ const RealstateDetails = () => {
                   * {t("review hint")}
                 </Link>
               ) : null}
+
               <div className="mt-8">
                 <ViewReviews id={params.id} />
               </div>
-              {similars?.data?.data?.length ? (
+              {isDashboard ? null : similars?.data?.data?.length ? (
                 <>
                   <div className="my-8 w-full h-[1px] bg-textColor"></div>
                   <p className=" mb-5 font-bold text-lg md:text-xl lg:text-2xl">
@@ -139,7 +150,89 @@ const RealstateDetails = () => {
                   ))}
                 </>
               ) : null}
+              {isDashboard ? (
+                <div className="my-8 w-full md:w-1/2">
+                  <MainInput
+                    disabled
+                    value={t(data?.data?.data?.status)}
+                    label={t("realstate status")}
+                  />
+                  {data?.data?.data?.status === "refused" ? (
+                    <RefusedReason reason={data?.data?.data?.reason_refuse} />
+                  ) : null}
+                </div>
+              ) : null}
+              {isDashboard ? (
+                <div className="my-8">
+                  <p className="mb-3 font-bold text-md md:text-lg lg:text-xl xl:text-2xl text-textColor">
+                    {t("realstate owner data")}
+                  </p>
+                  <div className="flex flex-col items-center justify-between md:flex-row gap-4 md:gap-6 lg:gap-24">
+                    <div className="w-full md:w-1/2">
+                      <div className="my-4">
+                        <MainInput
+                          disabled
+                          label={t("name")}
+                          value={data?.data?.data?.user?.name}
+                        />
+                      </div>
+                      <div className="my-4">
+                        <MainInput
+                          disabled
+                          label={t("email")}
+                          value={data?.data?.data?.user?.email?.address}
+                        />
+                      </div>
+                      <div className="my-4">
+                        <MainInput
+                          disabled
+                          label={t("emailOrPhone")}
+                          value={data?.data?.data?.user?.phone?.number}
+                        />
+                      </div>
+                      <MainInput
+                        disabled
+                        vale={data?.data?.data?.user?.nationalId}
+                        label={t("id")}
+                      />
+                    </div>
+                    <div className="w-full md:w-1/2">
+                      <img
+                        alt={data?.data?.data?.user?.name}
+                        className=" max-h-[250px] object-contain"
+                        src={data?.data?.data?.user?.avatar?.original}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
+          </div>
+          <div className="container mx-auto px-8">
+            {isDashboard ? (
+              <div className="my-8">
+                <p className="mb-3 text-textColor font-bold text-base md:text-md lg:text-lg xl:text-xl">
+                  {t("statistics")}
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+                  <div className=" shadow-xl p-3 rounded-md flex flex-col items-center gap-3">
+                    <FaComment size={40} className="text-maincolorgreen" />
+                    <p className="font-semibold">{t("comments number")}</p>
+                    <p>{data?.data?.data?.comments_no}</p>
+                  </div>
+                  <div className=" shadow-xl p-3 rounded-md flex flex-col items-center gap-3">
+                    <FaEye size={40} className="text-red-500" />
+                    <p className="font-semibold">{t("watching number")}</p>
+                    <p>{data?.data?.data?.views_count}</p>
+                  </div>
+                  <div className=" shadow-xl p-3 rounded-md flex flex-col items-center gap-3">
+                    <MdStarRate size={40} className="text-textColor" />
+                    <p className="font-semibold">{t("rating average")}</p>
+                    <p>{data?.data?.data?.avg_rating}</p>
+                  </div>
+                </div>
+              </div>
+            ) : null}
           </div>
           <BookingForm
             showBookingForm={showBookingForm}

@@ -12,8 +12,8 @@ const RealstateLocation = ({ data }) => {
   const { t } = useTranslation();
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
   const defaultProps = {
-    zoom: 5,
-    center: { lat, lng },
+    zoom: 15,
+    center: { lat: data.lat, lng: data.lng },
   };
   // Define the map options with the desired map style
   const mapOptions = {

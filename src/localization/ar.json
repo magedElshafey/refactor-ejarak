@@ -163,7 +163,6 @@
   "issue": "الإبلاغ عن مشكلة",
   "book": "حجز العقار",
   "related": "العقارات المشابهة",
-  "owner": "عقارات المالك",
   "reservation": "الحجوزات",
   "update": "تحديث",
   "add": "إضافة عقار",
@@ -194,7 +193,7 @@
   "rejected houses": "العقارات الرفوضه",
   "add submit": "إضافة",
   "accepted": "مقبول",
-  "contract_created": "أنتهي",
+  "contract_created": "إكتمل",
   "pending l": "قيد الإنتظار",
   "refused": "مرفوض",
   "house users": "بيانات المستخدمين",
@@ -572,5 +571,10 @@
   "electronic contracts": "العقود الإلكترونية",
   "manual contracts": "العقود اليدوية",
   "resend": "إعادة إرسال رمز التحقق",
-  "Enter Rejection Reason": "ادخل سبب الرفض"
+  "Enter Rejection Reason": "ادخل سبب الرفض",
+  "no data available": "لا يوجد بيانات الان",
+  "realstate status": "حالة العقار",
+  "realstate owner data": "بيانات مالك العقار",
+  "statistics": "الإحصائيات",
+  "refused reason field is required": "سبب الرفض مطلوب"
 }

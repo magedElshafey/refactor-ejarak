@@ -29,6 +29,7 @@ const Message = ({
   insertDate,
 }) => {
   const { i18n, t } = useTranslation();
+  console.log(sender);
   function formatDateTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
 
@@ -342,7 +343,10 @@ const ChatContainer = () => {
               key={getHash(message.message + message.date.getTime().toString())}
               sender={
                 message.type === "sent"
-                  ? loggedUser
+                  ? {
+                      ...loggedUser,
+                      pp: loggedUser?.avatar?.original,
+                    }
                   : {
                       name: receiver?.name,
                       pp: receiver?.photo_url,
