@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 const useTextInputValidation = () => {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
   const { t } = useTranslation();
+
   const validateInput = (inputValue) => {
-    const regex = /^[a-zA-Z\s]*$/; // Regex to allow only letters and spaces
+    const regex = /^[a-zA-Z\u0600-\u06FF\s]*$/; // Regex to allow Arabic, English letters, and spaces
     if (!regex.test(inputValue)) {
       setError(
         t(

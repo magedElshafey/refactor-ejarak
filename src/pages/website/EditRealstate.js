@@ -274,7 +274,9 @@ const EditRealstate = () => {
       });
       return;
     } else {
-      selectedPhotos.forEach((file) => formData.append("image[]", file));
+      if (selectedPhotos.length) {
+        selectedPhotos.forEach((file) => formData.append("image[]", file));
+      }
       formData.append("category_id", categoryId);
       formData.append("sub_category_id", subCategoryId);
       formData.append("name", name);
@@ -294,7 +296,9 @@ const EditRealstate = () => {
       formData.append("price", price);
       formData.append("instrument_number", suckNum);
       formData.append("payment_type_id", paymentId);
-      formData.append("instrument_file", selectedSuck);
+      if (selectedSuck) {
+        formData.append("instrument_file", selectedSuck);
+      }
       if (selectedVideo) {
         formData.append("video", selectedVideo);
       }

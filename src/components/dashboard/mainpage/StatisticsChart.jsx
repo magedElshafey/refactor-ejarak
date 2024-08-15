@@ -15,11 +15,9 @@ const StatisticsChart = ({ totalCities, data }) => {
                 <div className="">
                   <div className="flex items-center align-center  text-nowrap flex-1 gap-1">
                     <FaRegCircle size={12} className="text-[#7A8499] " />
-                    <p>{item}</p>
+                    <p>{data?.cities?.number_of_realestate_in_city[item]}</p>
                   </div>
-                  <div className="">
-                    {data?.cities?.number_of_realestate_in_city[item]}
-                  </div>
+                  <div className="">{item}</div>
                 </div>
               </div>
             ))}
@@ -30,11 +28,9 @@ const StatisticsChart = ({ totalCities, data }) => {
                 <div className="">
                   <div className="flex items-center align-center  text-nowrap flex-1 gap-1">
                     <FaRegCircle size={12} className="text-[#7A8499] " />
-                    <p>{item}</p>
+                    <p>{data?.cities?.number_of_realestate_in_city[item]}</p>
                   </div>
-                  <div className="">
-                    {data?.cities?.number_of_realestate_in_city[item]}
-                  </div>
+                  <div className="">{item}</div>
                 </div>
               </div>
             ))}

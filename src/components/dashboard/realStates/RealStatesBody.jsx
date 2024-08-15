@@ -92,13 +92,15 @@ const RealStatesBody = ({ tableSearch }) => {
         icon: "error",
         title: t("refused reason field is required"),
       });
+      return;
+    } else {
+      mutation.mutate({
+        status: "refused",
+        id: selectedRowId,
+        reason_refused: rejectionReason,
+      });
+      setRejectionReason("");
     }
-    mutation.mutate({
-      status: "refused",
-      id: selectedRowId,
-      reason_refused: rejectionReason,
-    });
-    setRejectionReason("");
   };
 
   const closePopup = () => {

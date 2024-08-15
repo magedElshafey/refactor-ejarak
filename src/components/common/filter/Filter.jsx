@@ -11,9 +11,11 @@ import { useDispatch } from "react-redux";
 import { closeFilter } from "../../../store/filterSlice";
 import { IoClose } from "react-icons/io5";
 import SearchBtn from "./SearchBtn";
+import { useLocation } from "react-router-dom";
 const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
   return (
     <div
       className={`${bg} w-full ${rounded} p-4 px-6 min-h-full ${
@@ -33,6 +35,14 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
           className="w-full mb-5 bg-maincolorgreen text-white p-3 rounded-md font-bold flex items-center justify-center"
         >
           {t("display list of real states")}
+        </Link>
+      ) : null}
+      {pathname === "/website/near-realstates" ? (
+        <Link
+          to="/"
+          className=" underline text-blue-500 block w-fit text-center mb-2 mx-auto"
+        >
+          {t("change location")}
         </Link>
       ) : null}
       <RealStateCategories />

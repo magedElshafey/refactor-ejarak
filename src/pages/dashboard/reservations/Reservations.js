@@ -11,6 +11,9 @@ import { getReservations } from "../../../services/get/dashboard/getReservations
 import { useNavigate } from "react-router-dom";
 import TableStatus from "../../../components/dashboard/common/table/TableStatus";
 import { deleteReservation } from "../../../services/delete/dashboard/deleteReservation";
+import { updateReservationStatus } from "../../../services/get/dashboard/updateReservationStatus";
+import RejectedPopup from "../../../components/dashboard/common/RejectedPopup";
+import { getCurrentDate } from "../../../utils/getCurrentDate";
 const itemsPerPage = 10;
 const Reservations = () => {
   const { t } = useTranslation();
@@ -83,6 +86,99 @@ const Reservations = () => {
     });
   };
   const offset = currentPage * itemsPerPage;
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState("");
+  const [selectedRowId, setSelectedRowId] = useState(null);
+  const closePopup = () => {
+    setPopupOpen(false);
+    setSelectedRowId(null);
+  };
+
+  const {
+    isLoading: loadingReservationStatus,
+    mutate: mutateReservationStatus,
+  } = useMutation(({ i, v }) => updateReservationStatus(i, v), {
+    onSuccess: (data) => {
+      if (data?.data?.status) {
+        Swal.fire({
+          icon: "success",
+          title: data?.data?.message,
+        });
+        queryClient.invalidateQueries("reservations");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: data?.response?.data?.message,
+        });
+      }
+    },
+  });
+
+  const handleStatusChange = (id, newStatus) => {
+    console.log("new status", newStatus);
+    if (newStatus === "refused") {
+      setSelectedRowId(id);
+      setPopupOpen(true);
+    } else {
+      const data = new FormData();
+      data.append("status", "accepted");
+      data.append("accepted_at", getCurrentDate());
+      mutateReservationStatus({ i: id, v: data });
+      console.log("data", data);
+    }
+  };
+
+  const handlePopupSubmit = (rejectionReason) => {
+    if (!rejectionReason.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: t("refused reason field is required"),
+      });
+      return;
+    } else {
+      const data = {
+        status: "refused",
+        id: selectedRowId,
+        reason_refused: rejectionReason,
+      };
+      mutateReservationStatus({ i: selectedRowId, v: data });
+      // mutation.mutate({
+      //   status: "refused",
+      //   id: selectedRowId,
+      //   reason_refused: rejectionReason,
+      // });
+      setRejectionReason("");
+    }
+  };
+
+  // const mutation = useMutation(
+  //   ({ status, id, rejectionReason }) =>
+  //     updateReservationStatus(status, id, rejectionReason),
+  //   {
+  //     onSuccess: () => {
+  //       if (data?.data?.status) {
+  //         Swal.fire({
+  //           icon: "success",
+  //           title: data?.data?.message,
+  //         });
+  //         queryClient.invalidateQueries("reservations");
+  //       } else {
+  //         Swal.fire({
+  //           icon: "error",
+  //           title: data?.response?.data?.message,
+  //         });
+  //       }
+  //     },
+  //   }
+  // );
+  // const handleStatusChange = (id, newStatus) => {
+  //   if (newStatus === "refused") {
+  //     setSelectedRowId(id);
+  //     setPopupOpen(true);
+  //   } else {
+  //     mutation.mutate({ status: newStatus, id });
+  //   }
+  // };
   const columns = [
     {
       title: "house title",
@@ -114,8 +210,15 @@ const Reservations = () => {
     {
       title: "reservationStatus",
       dataIndex: "status",
-      render: (value) => {
-        return <TableStatus status={value} />;
+      render: (status, row) => {
+        console.log("row is", row);
+        console.log("id is", row.id);
+        return (
+          <TableStatus
+            status={status}
+            onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
+          />
+        );
       },
     },
     {
@@ -161,6 +264,11 @@ const Reservations = () => {
               />
             </div>
           ) : null}
+          <RejectedPopup
+            isOpen={popupOpen}
+            closePopup={closePopup}
+            onSubmit={handlePopupSubmit}
+          />
         </div>
       )}
     </>

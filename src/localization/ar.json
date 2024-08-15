@@ -576,5 +576,7 @@
   "realstate status": "حالة العقار",
   "realstate owner data": "بيانات مالك العقار",
   "statistics": "الإحصائيات",
-  "refused reason field is required": "سبب الرفض مطلوب"
+  "refused reason field is required": "سبب الرفض مطلوب",
+  "change location": "تغيير الموقع",
+  "completed": "مكتمل"
 }

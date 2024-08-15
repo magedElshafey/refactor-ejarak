@@ -161,7 +161,7 @@
   "issue": "Report a problem",
   "book": "Reserve the property",
   "related": "related real states",
-  "owner": "owner real state",
+  "owner": "owner",
   "reservation": "reservation",
   "update": "update",
   "add": "add real state",
@@ -557,5 +557,7 @@
   "realstate status": "realstate status",
   "realstate owner data": "realstate owner data",
   "statistics": "statistics",
-  "refused reason field is required": "refused reason field is required"
+  "refused reason field is required": "refused reason field is required",
+  "change location": "change location",
+  "completed": "completed"
 }

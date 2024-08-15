@@ -93,19 +93,7 @@ const EditUser = () => {
   );
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !phone.trim() ||
-      !name.trim() ||
-      !email.trim() ||
-      !nationId.trim() ||
-      !password.trim()
-    ) {
-      Swal.fire({
-        icon: "error",
-        title: t("please fill all fields"),
-      });
-      return;
-    } else if (nameError) {
+    if (nameError) {
       Swal.fire({
         icon: "error",
         title: t(nameError),
@@ -134,7 +122,7 @@ const EditUser = () => {
       formData.append("name", name);
       formData.append("email", email);
       formData.append("phone", phone);
-      formData.append("password", password);
+      // formData.append("password", password);
       formData.append("phone_country_code", global?.countries[0]?.prefix_code);
       formData.append("account_type", userType);
       formData.append(" nationalId,", nationId);
@@ -186,9 +174,8 @@ const EditUser = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 md:mb-6">
               <MainInput
-                placeholder="1/2xxxxxxxxx"
                 label={t("nationalId")}
-                value={nationId}
+                value={data?.data?.data?.nationalId}
                 disabled
               />
             </div>

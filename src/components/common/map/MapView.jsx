@@ -6,7 +6,7 @@ import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt, FaStar, FaFireAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IoLocationSharp, IoClose } from "react-icons/io5";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ErrorHandling from "../ErrorHandling";
 
 const MapView = () => {
@@ -152,6 +152,8 @@ const Marker = ({ data, activeId, setActiveId, pathname }) => {
 const Popup = ({ data, activeId, setActiveId }) => {
   const { t, i18n } = useTranslation();
   const popupRef = useRef();
+  const navigate = useNavigate();
+  const handleNavigate = () => navigate(`/website/realstate/${data.id}`);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -165,8 +167,9 @@ const Popup = ({ data, activeId, setActiveId }) => {
   }, []);
   return (
     <div
+      onClick={handleNavigate}
       ref={popupRef}
-      className={` duration-300 rounded-lg  absolute bottom-0 ${
+      className={` duration-300 rounded-lg cursor-pointer  absolute bottom-0 ${
         i18n.language === "ar" ? "right-0" : "left-0"
       } z-40 `}
     >

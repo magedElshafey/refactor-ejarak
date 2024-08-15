@@ -29,7 +29,7 @@ const RefusedModal = ({ id, dep, setShowModal, data }) => {
             icon: "success",
             title: data?.data?.message,
           });
-          queryClient.invalidateQueries(dep);
+          queryClient.invalidateQueries([dep]);
           setShowModal(false);
         } else {
           Swal.fire({

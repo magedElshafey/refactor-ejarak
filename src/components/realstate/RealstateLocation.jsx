@@ -13,7 +13,10 @@ const RealstateLocation = ({ data }) => {
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
   const defaultProps = {
     zoom: 15,
-    center: { lat: data.lat, lng: data.lng },
+    center: {
+      lat: Number.parseFloat(data?.lat),
+      lng: Number.parseFloat(data?.lng),
+    },
   };
   // Define the map options with the desired map style
   const mapOptions = {
@@ -28,10 +31,8 @@ const RealstateLocation = ({ data }) => {
     },
   };
   const [isSatelliteView, setIsSatelliteView] = useState(false);
-  const handleToggleMapView = () => {
-    setIsSatelliteView((prevIsSatelliteView) => !prevIsSatelliteView);
-  };
 
+  const toggleMapView = () => setIsSatelliteView(!isSatelliteView);
   return (
     <div className="bg-white p-7 rounded-lg shadow-lg border  border-dashed border-maincolorgreen lg:overflow-hidden h-[450px] lg:h-auto">
       <p className="mb-3 text-textColor">{t("realstate location")}</p>
@@ -45,13 +46,13 @@ const RealstateLocation = ({ data }) => {
         <div className="absolute top-4 left-4 z-10">
           <button
             type="button"
-            onClick={handleToggleMapView}
-            className="w-12 h-12 text-white bg-maincolorgreen px-3 py-1 rounded-full flex justify-center items-center"
+            onClick={toggleMapView}
+            className={`absolute top-4 left-6  z-10 w-10 h-10 text-white bg-maincolorgreen  rounded-full flex justify-center items-center`}
           >
             {isSatelliteView ? (
-              <FaMapMarkedAlt size={22} className="text-white" />
+              <FaMapMarkedAlt size={25} className="text-white" />
             ) : (
-              <MdOutlineSatelliteAlt size={22} className="text-white" />
+              <MdOutlineSatelliteAlt size={25} className="text-white" />
             )}
           </button>
         </div>
@@ -67,9 +68,13 @@ const RealstateLocation = ({ data }) => {
           defaultZoom={defaultProps.zoom}
           options={{
             ...mapOptions,
+            mapTypeId: isSatelliteView ? "satellite" : "roadmap",
           }}
         >
-          <Marker lat={data?.lat} lng={data?.lng} />
+          <Marker
+            lat={Number.parseFloat(data?.lat)}
+            lng={Number.parseFloat(data?.lng)}
+          />
         </GoogleMap>
       </div>
     </div>
