@@ -9,7 +9,6 @@ const DeleteBtn = ({ id, dep }) => {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(() => deleteRealstate(id), {
     onSuccess: (data) => {
-      console.log("data from delete", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",

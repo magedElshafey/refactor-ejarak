@@ -18,7 +18,6 @@ const Footer = ({ isHome }) => {
   const { ejarakLogin } = useSelector((state) => state.authSlice);
   const auth = useSelector((state) => state.authSlice);
   const isLogin = ejarakLogin;
-  console.log("ejarak login", isLogin);
   const type = auth?.userData?.account?.type;
   return (
     <>

@@ -29,7 +29,6 @@ const Message = ({
   insertDate,
 }) => {
   const { i18n, t } = useTranslation();
-  console.log(sender);
   function formatDateTime(dateTimeString) {
     const dateTime = new Date(dateTimeString);
 

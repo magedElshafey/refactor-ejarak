@@ -12,6 +12,7 @@ const GlobalContext = ({ children }) => {
   const { isLoading, data, isError } = useQuery("featuers", getFeatuers, {
     onSuccess: (data) => {
       if (!data) {
+        <ErrorHandling />;
         return {};
       }
     },

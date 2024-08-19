@@ -10,10 +10,7 @@ const UserDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
   const { isLoading, data } = useUserDetails(params.id);
-  console.log(
-    "data from user details page",
-    data?.data?.data?.email?.is_verified
-  );
+
   return (
     <>
       {isLoading ? (

@@ -37,7 +37,6 @@ const PrivacyAndPolicy = () => {
   const { isLoading: loadingSubmit, mutate } = useMutation(changeTerms, {
     onSuccess: (data) => {
       if (data?.data?.status) {
-        console.log("data", data);
         Swal.fire({
           icon: "success",
           title: data?.data?.message,

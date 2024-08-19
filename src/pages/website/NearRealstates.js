@@ -13,6 +13,7 @@ const NearRealstates = () => {
   const { nearestRealStates, loadinNearRealStates } = useMap();
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(0);
+
   useEffect(() => {
     setCurrentPage(0); // Reset to first page when data changes
   }, [nearestRealStates]);

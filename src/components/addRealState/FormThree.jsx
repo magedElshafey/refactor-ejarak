@@ -55,7 +55,6 @@ const FormThree = ({
   const authToken = localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : null;
-  console.log("token", authToken);
   const { isLoading, mutate } = useMutation(
     async (formData) => {
       const response = await axios.post(

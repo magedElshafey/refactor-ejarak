@@ -9,7 +9,6 @@ const UpdateBtn = ({ data, id, dep }) => {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(() => updateRealState(id, data), {
     onSuccess: (data) => {
-      console.log("data from update", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",

@@ -17,14 +17,13 @@ const Dashboard = () => {
     onSuccess: (data) => {
       if (data?.data?.status) {
         setTotalCities(
-          Object.keys(data?.data?.data.cities?.number_of_realestate_in_city)
+          Object.keys(data?.data?.data?.cities?.number_of_realestate_in_city)
         );
       } else {
         setTotalCities({});
       }
     },
   });
-  console.log("data from dashboard : ", data?.data?.data);
   // names of cities
   useEffect(() => {
     if (data?.data?.data && data?.data?.data?.chartCities) {

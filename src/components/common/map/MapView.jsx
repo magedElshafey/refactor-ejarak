@@ -179,14 +179,14 @@ const Popup = ({ data, activeId, setActiveId }) => {
           alt={data.title}
           className="w-[240px] h-[200px] object-cover rounded-t-lg"
         />
-        <div
+        {/* <div
           onClick={() => setActiveId(null)}
           className={`absolute top-0 ${
             i18n.language === "ar" ? "right-0" : "left-0"
           } w-8 h-8 p-2 flex items-center justify-center rounded-sm bg-red-600 text-white cursor-pointer`}
         >
           <IoClose size={15} />
-        </div>
+        </div> */}
       </div>
       <div className="bg-white p-2 rounded-b-lg w-[240px] h-auto">
         <p className="font-bold text-sm">{data?.name}</p>

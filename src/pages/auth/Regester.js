@@ -55,7 +55,6 @@ const Regester = () => {
   } = usePasswordValidation();
   const { isLoading, mutate } = useMutation(handleRegester, {
     onSuccess: (data) => {
-      console.log("data", data);
       if (data.status === 201 || data.statusText === "Created") {
         Swal.fire({
           icon: "success",

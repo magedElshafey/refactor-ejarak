@@ -4,14 +4,12 @@ import { handleAcceptReservation } from "../../../services/post/handleAcceptRese
 import { useMutation, useQueryClient } from "react-query";
 import Swal from "sweetalert2";
 const AcceptReservationBtn = ({ id, data, dep }) => {
-  console.log("dep", dep);
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(
     () => handleAcceptReservation(id, { ...data, status: "accepted" }),
     {
       onSuccess: (data) => {
-        console.log("data from accept", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",

@@ -16,7 +16,6 @@ const EmailVerfication = () => {
   const { t } = useTranslation();
   const { isLoading, mutate } = useMutation(handleEmailVerfication, {
     onSuccess: (data) => {
-      console.log("data from activation code", data);
       const hasResponseKey = Object.keys(data).includes("response");
       if (!hasResponseKey) {
         if (data.status === 200) {

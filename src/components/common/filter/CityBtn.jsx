@@ -20,7 +20,7 @@ const CityBtn = () => {
       onClick={() => setShow(!show)}
       className="relative cursor-pointer"
     >
-      <button className=" flex items-center justify-center gap-2 rounded-xl p-3 w-[150px] bg-white border border-slate-300">
+      <button className=" flex items-center justify-center gap-2 rounded-xl p-3 w-[180px] bg-white border border-slate-300">
         {cityId
           ? data?.cities?.find((item) => item.id === cityId).name
           : t("city")}

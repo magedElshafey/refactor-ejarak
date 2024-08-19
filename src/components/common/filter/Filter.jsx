@@ -12,10 +12,13 @@ import { closeFilter } from "../../../store/filterSlice";
 import { IoClose } from "react-icons/io5";
 import SearchBtn from "./SearchBtn";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const { location } = useSelector((state) => state.filterSlice);
   return (
     <div
       className={`${bg} w-full ${rounded} p-4 px-6 min-h-full ${
@@ -38,12 +41,18 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
         </Link>
       ) : null}
       {pathname === "/website/near-realstates" ? (
-        <Link
-          to="/"
-          className=" underline text-blue-500 block w-fit text-center mb-2 mx-auto"
-        >
-          {t("change location")}
-        </Link>
+        <div className="flex  gap-1 flex-col items-center">
+          <div className="flex  gap-1">
+            <p> {t("location")} : </p>
+            <p className="font-bold">{location}</p>
+          </div>
+          <Link
+            to="/"
+            className=" underline text-blue-500 block w-fit text-center "
+          >
+            {t("change location")}
+          </Link>
+        </div>
       ) : null}
       <RealStateCategories />
       <Price min={1000} max={50000} />

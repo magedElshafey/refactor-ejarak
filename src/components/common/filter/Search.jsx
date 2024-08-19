@@ -5,7 +5,6 @@ import { changeName } from "../../../store/filterSlice";
 const Search = () => {
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.filterSlice);
-  console.log("name", name);
   return (
     <div className="w-full border bg-[#f6f5f5] border-slate-300 rounded-xl p-3 flex items-center gap-3 text-slate-300">
       <FaSearch size={20} /> |

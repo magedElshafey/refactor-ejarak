@@ -115,7 +115,6 @@ const Reservations = () => {
   });
 
   const handleStatusChange = (id, newStatus) => {
-    console.log("new status", newStatus);
     if (newStatus === "refused") {
       setSelectedRowId(id);
       setPopupOpen(true);
@@ -124,7 +123,6 @@ const Reservations = () => {
       data.append("status", "accepted");
       data.append("accepted_at", getCurrentDate());
       mutateReservationStatus({ i: id, v: data });
-      console.log("data", data);
     }
   };
 
@@ -211,8 +209,6 @@ const Reservations = () => {
       title: "reservationStatus",
       dataIndex: "status",
       render: (status, row) => {
-        console.log("row is", row);
-        console.log("id is", row.id);
         return (
           <TableStatus
             status={status}

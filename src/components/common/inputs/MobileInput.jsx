@@ -28,7 +28,7 @@ const MobileInput = ({ value, error, onChange, bg }) => {
             <img
               alt="flag"
               className="w-[20px] h-[20px] object-contain"
-              src={data.countries[0].flag}
+              src={data?.countries[0]?.flag}
             />
           </div>
           <div dir="ltr" className="flex-1 flex items-center gap-2">

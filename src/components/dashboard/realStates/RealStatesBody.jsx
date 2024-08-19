@@ -30,7 +30,6 @@ const RealStatesBody = ({ tableSearch }) => {
 
   const queryClient = useQueryClient();
   const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
-  console.log("data from all realstate", data?.data?.data);
   const mutation = useMutation(
     ({ status, id, rejectionReason }) =>
       updateRealStateStatus(status, id, rejectionReason),

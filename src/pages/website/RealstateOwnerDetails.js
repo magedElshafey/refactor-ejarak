@@ -12,7 +12,6 @@ const RealstateOwnerDetails = () => {
   const { isLoading, data } = useQuery(["realstate-owner", params.id], () =>
     getRealstateOwner(params.id)
   );
-  console.log("data from realstate owner", data?.data);
   return (
     <>
       {isLoading ? (

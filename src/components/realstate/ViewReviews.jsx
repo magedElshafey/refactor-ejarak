@@ -24,7 +24,6 @@ const ViewReviews = ({ id }) => {
             <div>
               {data?.data?.data?.map((item, index) => (
                 <div key={index} className="my-6 flex  gap-x-3">
-                  {console.log("rating", item.rating)}
                   <img
                     src={item?.user?.avatar?.thumb}
                     alt={item.user?.name}

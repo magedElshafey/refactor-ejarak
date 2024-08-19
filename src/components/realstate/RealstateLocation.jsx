@@ -4,10 +4,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import GoogleMap from "google-map-react";
 import { useTranslation } from "react-i18next";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import { useSelector } from "react-redux";
 const RealstateLocation = ({ data }) => {
-  const { lat, lng } = useSelector((state) => state.filterSlice);
-  console.log("data from location", data);
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const { t } = useTranslation();
   const apiKey = process.env.GOOGLE_MAP_API_KEY;

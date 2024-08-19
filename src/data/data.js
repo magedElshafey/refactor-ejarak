@@ -41,7 +41,6 @@ export const navLinks = [
     onClick: (e, isLoggedIn, navigate, type) => {
       if (!isLoggedIn) {
         e.preventDefault();
-
         Swal.fire({
           title: t("you need to login as a realstate owner"),
           icon: "warning",
@@ -57,9 +56,8 @@ export const navLinks = [
             return;
           }
         });
-      } else if (type === "tenant") {
+      } else if (type !== "owner") {
         e.preventDefault();
-
         Swal.fire({
           icon: "error",
           position: "center",
@@ -76,7 +74,6 @@ export const navLinks = [
     onClick: (e, isLoggedIn, navigate, setActiveLink) => {
       if (!isLoggedIn) {
         e.preventDefault();
-
         Swal.fire({
           text: t("login_first"),
           icon: "warning",

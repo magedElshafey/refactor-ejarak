@@ -12,7 +12,6 @@ const ReportDetails = () => {
   const { isLoading, data } = useQuery(["report-details", params.id], () =>
     getReportDetails(params.id)
   );
-  console.log("data from report details", data?.data?.data);
   return (
     <>
       {isLoading ? (

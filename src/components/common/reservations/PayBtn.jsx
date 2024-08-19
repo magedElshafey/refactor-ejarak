@@ -8,7 +8,6 @@ const PayBtn = ({ id, dep }) => {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(() => handlePayment(id), {
     onSuccess: (data) => {
-      console.log("data from payment", data);
       if (data?.data?.status) {
         window.open(data?.data?.data, "_blank");
         queryClient.invalidateQueries(dep);

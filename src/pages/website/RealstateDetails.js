@@ -46,7 +46,6 @@ const RealstateDetails = ({ isDashboard }) => {
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
   const [showSuckModal, setShowSuckModal] = useState(false);
-  console.log("data returned from realstate page", data?.data?.data);
   return (
     <>
       {isLoading || loadingSimilars ? (
@@ -192,7 +191,7 @@ const RealstateDetails = ({ isDashboard }) => {
                       </div>
                       <MainInput
                         disabled
-                        vale={data?.data?.data?.user?.nationalId}
+                        value={data?.data?.data?.user?.nationalId}
                         label={t("id")}
                       />
                     </div>

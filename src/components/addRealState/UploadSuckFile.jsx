@@ -26,7 +26,6 @@ const UploadSuckFile = ({
     setSelectedSuck(null);
     setPreviewSuck(null);
   };
-  console.log("preview suck", previewSuck);
   return (
     <div className="mb-5">
       <p className="text-textColor font-medium mb-3">{t("sukFile")}</p>

@@ -29,8 +29,7 @@ const MyContracts = () => {
       setFilterdContracts(newData);
     }
   }, [orginalContracts, activeIndex, filterdContrancts]);
-  console.log("filterd", filterdContracts);
-  console.log("data from all contracts", filterdContracts);
+
   return (
     <>
       {isLoading ? (

@@ -27,11 +27,7 @@ const EditUser = () => {
   const handleNavigate = () => navigate(-1);
   const { loadingAccountType, accountType, error } = useAccountType();
   const { isLoading, data } = useUserDetails(params.id);
-  console.log("data returned from user details", data?.data?.data);
-  console.log(
-    "data returned from account type request",
-    accountType?.data?.data?.account_type
-  );
+
   const {
     value: phone,
     error: phoneError,
@@ -49,20 +45,13 @@ const EditUser = () => {
   const handleUserTypeChange = (e) => setUserType(e.id);
   const { nationId, nationError, setNationId, handleNationIdChange } =
     useNationalIdValidation();
-  const {
-    password,
-    error: passwordError,
-    setPassword,
-    handleChange: handlePasswordChange,
-  } = usePasswordValidation();
+
   useEffect(() => {
     if (data?.data?.data) {
       setPhone(data?.data?.data?.phone?.number);
       setName(data?.data?.data?.name);
       setEmail(data?.data?.data?.email?.address);
       setNationId(data?.data?.data?.nationalId);
-
-      setUserType(data?.data?.data?.account?.text);
     }
   }, [data]);
   const { isLoading: loadingSubmit, mutate } = useMutation(
@@ -81,7 +70,6 @@ const EditUser = () => {
           setEmail("");
           setUserType("");
           setNationId("");
-          setPassword("");
         } else {
           Swal.fire({
             icon: "error",
@@ -122,11 +110,11 @@ const EditUser = () => {
       formData.append("name", name);
       formData.append("email", email);
       formData.append("phone", phone);
-      // formData.append("password", password);
       formData.append("phone_country_code", global?.countries[0]?.prefix_code);
-      formData.append("account_type", userType);
+      if (userType) {
+        formData.append("account_type", userType);
+      }
       formData.append(" nationalId,", nationId);
-
       mutate(formData);
     }
   };
@@ -166,9 +154,11 @@ const EditUser = () => {
                 onSelect={handleUserTypeChange}
                 loading={loadingAccountType}
                 value={
-                  accountType?.data?.data?.account_type?.find(
-                    (item) => item.name === userType
-                  )?.name
+                  userType
+                    ? accountType?.data?.data?.account_type?.find(
+                        (item) => item.name === userType
+                      )?.name
+                    : data?.data?.data?.account?.text
                 }
               />
             </div>

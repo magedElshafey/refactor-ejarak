@@ -39,7 +39,6 @@ const Faqs = () => {
     (i, v) => deleteFaq(i, v),
     {
       onSuccess: (data) => {
-        console.log("data from delete package", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",

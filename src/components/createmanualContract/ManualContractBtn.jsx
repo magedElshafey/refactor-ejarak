@@ -13,7 +13,6 @@ const ManualContractBtn = ({ id }) => {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(createManualContract, {
     onSuccess: (data) => {
-      console.log("data from create contract", data);
       if (data?.data?.status) {
         queryClient.invalidateQueries("my-reservations");
         queryClient.invalidateQueries("my-contracts");

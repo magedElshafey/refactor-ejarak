@@ -70,10 +70,10 @@ const RealstateData = ({ data }) => {
           <p className="text-[#4D5F65] mb-1">{t("payment method")}</p>
           <p className="text-black font-bold">{data.payment_type_id?.name}</p>
         </div>
-        <div>
+        {/* <div>
           <p className="text-[#4D5F65] mb-1">{t("advertiser type")}</p>
           <p className="text-black font-bold">{data?.user?.account?.text}</p>
-        </div>
+        </div> */}
         <div>
           <p className="text-[#4D5F65] mb-1">{t("suckNum")}</p>
           <p className="text-black font-bold">{data?.instrument_number}</p>

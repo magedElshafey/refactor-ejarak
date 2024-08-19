@@ -16,7 +16,6 @@ const Area = ({ min, max }) => {
   useEffect(() => {
     setAreaVal(max - (area - min));
   }, [area, max, min]);
-  console.log("area value", areaVal);
   const getPercent = useCallback(
     (value) => Math.round(((value - min) / (max - min)) * 100),
     [min, max]

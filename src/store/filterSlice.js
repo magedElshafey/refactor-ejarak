@@ -19,7 +19,9 @@ const initialState = {
   priceCreate: "",
   review: "",
   latest: "",
-  location: getParse("location"),
+  location: localStorage.getItem("location")
+    ? JSON.parse(localStorage.getItem("location"))
+    : null,
   name: "",
   sortCreate: "",
   sort: "",

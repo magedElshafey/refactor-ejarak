@@ -19,10 +19,7 @@ const RealStateReservation = () => {
   const params = useParams();
   const { isLoading: loadingDetails, data } = useQuery(
     ["realstate-details", params.id],
-    () => getRealStateDetails(params.id),
-    {
-      onSuccess: (data) => console.log("real state data", data?.data?.data),
-    }
+    () => getRealStateDetails(params.id)
   );
   const { isLoading: loadingBookings, data: bookings } = useQuery(
     ["realstate-booking", params.id],
