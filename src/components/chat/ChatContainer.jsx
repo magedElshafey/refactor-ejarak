@@ -116,18 +116,6 @@ const Message = ({
               }`}
             >
               {formatDateTime(date)}
-              {/* <p>
-                  {date.toLocaleDateString(language, {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  })}
-                </p>
-                <p>
-                  {`${formatHours(date?.getHours())} : ${formatNumbersBaseTwo(
-                    date?.getMinutes()
-                  )} ${t(getAmOrPm(date?.getHours()))}`}
-                </p> */}
             </div>
           )}
         </div>

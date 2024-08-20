@@ -155,9 +155,9 @@ const Contact = ({ message, time, type, otherParty, unseen, id, onChoose }) => {
             </div>
           )}
         </div>
-        <div className="text-[0.65rem] flex-col [&>*]:flex-1 gap-1">
+        <div className=" flex-col flex-1 gap-1">
           <div className="flex flex-col items-center justify-center">
-            <p>{formatDateTime(time)}</p>
+            <p className="text-[0.65rem]">{formatDateTime(time)}</p>
           </div>
         </div>
       </div>

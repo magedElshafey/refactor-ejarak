@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { login, addToken } from "../../store/auth";
 import usePasswordValidation from "../../hooks/validation/usePasswordValidation";
+import { IoMdCheckmark } from "react-icons/io";
 
 const dashboardRoles = ["super_admin", "admin"];
 
@@ -135,13 +136,25 @@ const Login = () => {
           error={passwordError}
         />
         <div className="w-full flex items-center justify-between my-4">
-          <div className="flex items-center gap-1">
-            <input
+          <div
+            onClick={handleRememberMeChange}
+            className="flex items-center gap-1 cursor-pointer"
+          >
+            {!rememberMe ? (
+              <div className="border w-4 h-4 bg-transparent"></div>
+            ) : (
+              <div className="border w-4 h-4 flex items-center justify-center bg-maincolorgreen text-white font-bold">
+                <IoMdCheckmark size={10} />
+              </div>
+            )}
+            {/* <input
               type="checkbox"
               checked={rememberMe}
+
+              
               onChange={handleRememberMeChange}
               className="w-4 h-4 border cursor-pointer"
-            />
+            /> */}
             <p>{t("rem")}</p>
           </div>
           <Link
