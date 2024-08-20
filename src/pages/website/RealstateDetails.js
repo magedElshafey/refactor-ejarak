@@ -101,6 +101,7 @@ const RealstateDetails = ({ isDashboard }) => {
                   phone={`tel:${data?.data?.data?.user?.phone?.country_code}${data?.data?.data?.user?.phone?.number}`}
                   whatsapp={`https://wa.me/${data?.data?.data?.user?.phone?.country_code}${data?.data?.data?.user?.phone?.number}`}
                   id={data?.data?.data?.user?.id}
+                  ejarakLogin={ejarakLogin}
                 />
               </div>
             ) : null}

@@ -66,6 +66,7 @@ const AddUser = () => {
     },
   });
   const { loadingAccountType, accountType, error } = useAccountType();
+  console.log("data returned frm account type", accountType);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

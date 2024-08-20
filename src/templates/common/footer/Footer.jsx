@@ -6,8 +6,7 @@ import {
   appDetails,
   navLinks,
   aboutUs,
-  myAccount,
-  followUs,
+  accountDetailsNavbar,
 } from "../../../data/data";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
@@ -19,6 +18,8 @@ const Footer = ({ isHome }) => {
   const auth = useSelector((state) => state.authSlice);
   const isLogin = ejarakLogin;
   const type = auth?.userData?.account?.type;
+  const { userData } = useSelector((state) => state.authSlice);
+  const role = userData?.account?.type;
   return (
     <>
       {isHome ? (
@@ -33,8 +34,8 @@ const Footer = ({ isHome }) => {
               </p> */}
             </div>
             <div
-              className={`grid grid-cols-1 ${
-                ejarakLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
+              className={`grid grid-cols-1 w-full justify-center ${
+                ejarakLogin ? "lg:grid-cols-4" : "lg:grid-cols-3"
               } gap-4 lg:gap-16`}
             >
               <div>
@@ -94,18 +95,20 @@ const Footer = ({ isHome }) => {
                   <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                     {t("account")}
                   </p>
-                  {myAccount.map((item, index) => (
-                    <NavLink
-                      to={item.path}
-                      key={index}
-                      className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
-                    >
-                      <p>{t(item.title)}</p>
-                    </NavLink>
-                  ))}
+                  {accountDetailsNavbar
+                    ?.filter((item) => item.role.includes(role))
+                    .map((item, index) => (
+                      <NavLink
+                        to={item.path}
+                        key={index}
+                        className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
+                      >
+                        <p>{t(item.title)}</p>
+                      </NavLink>
+                    ))}
                 </div>
               ) : null}
-              <div>
+              {/* <div>
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                   {t(followUs.title)}
                 </p>
@@ -122,7 +125,7 @@ const Footer = ({ isHome }) => {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -134,7 +137,7 @@ const Footer = ({ isHome }) => {
             </div>
             <div
               className={`grid grid-cols-1 ${
-                ejarakLogin ? "lg:grid-cols-5" : "lg:grid-cols-4"
+                ejarakLogin ? "lg:grid-cols-4" : "lg:grid-cols-3"
               } gap-4 lg:gap-16`}
             >
               <div>
@@ -194,18 +197,20 @@ const Footer = ({ isHome }) => {
                   <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                     {t("account")}
                   </p>
-                  {myAccount.map((item, index) => (
-                    <NavLink
-                      to={item.path}
-                      key={index}
-                      className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
-                    >
-                      <p>{t(item.title)}</p>
-                    </NavLink>
-                  ))}
+                  {accountDetailsNavbar
+                    ?.filter((item) => item.role.includes(role))
+                    .map((item, index) => (
+                      <NavLink
+                        to={item.path}
+                        key={index}
+                        className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
+                      >
+                        <p>{t(item.title)}</p>
+                      </NavLink>
+                    ))}
                 </div>
               ) : null}
-              <div>
+              {/* <div>
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                   {t(followUs.title)}
                 </p>
@@ -222,7 +227,7 @@ const Footer = ({ isHome }) => {
                     </a>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 const RejectedPopup = ({ isOpen, closePopup, onSubmit }) => {
   const [message, setMessage] = useState("");
   const { t } = useTranslation();
+  // const handleSubmit = () => {
+  //   onSubmit(message);
+  //   closePopup();
+  //   setMessage("");
+  // };
   const handleSubmit = () => {
-    onSubmit(message);
-    closePopup();
-    setMessage("");
+    if (!message.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: t("refused reason field is required"),
+      });
+    } else {
+      onSubmit(message);
+      setMessage("");
+    }
   };
-
   return (
     isOpen && (
       <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">

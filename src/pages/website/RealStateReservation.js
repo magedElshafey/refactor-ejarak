@@ -58,7 +58,7 @@ const RealStateReservation = () => {
                     data={item}
                     index={index}
                     role={role}
-                    dep="my-reservations"
+                    dep="realstate-booking"
                     isContract={false}
                   />
                   {item.status === "refused" ? (

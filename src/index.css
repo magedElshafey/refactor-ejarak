@@ -287,7 +287,7 @@ a.active.home {
 
 @media screen and (max-width : 600px) {
     .h {
-        height: calc(100vh - 360px);
+        min-height: calc(100vh - 360px);
     }
 }
 
@@ -425,4 +425,64 @@ a.active.dashboard {
 ::-webkit-scrollbar-thumb {
     background: #01937c;
     border-radius: 12px;
+}
+
+/* إزالة الـ default style من عناصر radio و checkbox */
+input[type='radio'],
+input[type='checkbox'] {
+    -webkit-appearance: none;
+    /* إزالة الأسلوب الافتراضي في WebKit browsers */
+    -moz-appearance: none;
+    /* إزالة الأسلوب الافتراضي في Firefox */
+    appearance: none;
+    /* إزالة الأسلوب الافتراضي في معظم المتصفحات */
+    margin: 0;
+    padding: 0;
+    outline: none;
+    width: 15px;
+    /* ضبط العرض */
+    height: 15px;
+    /* ضبط الارتفاع */
+    border: 1px solid var(--mainColor);
+    /* ضبط الإطار */
+    cursor: pointer;
+    position: relative;
+}
+
+/* أسلوب مخصص عند تحديد radio */
+input[type='radio']:checked:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--mainColor);
+    border-radius: 50%;
+}
+
+/* أسلوب مخصص عند تحديد checkbox */
+input[type='checkbox']:checked:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--mainColor);
+    border-radius: 3px;
+}
+
+/* أسلوب مخصص لـ radio */
+input[type='radio'] {
+    border-radius: 50%;
+    /* دائرة لـ radio */
+}
+
+/* أسلوب مخصص لـ checkbox */
+input[type='checkbox'] {
+    border-radius: 1px;
+    /* مربع لـ checkbox */
 }

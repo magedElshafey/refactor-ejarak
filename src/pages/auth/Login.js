@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import MobileInput from "../../components/common/inputs/MobileInput";
 import useNumberInput from "../../hooks/validation/useNumberInput";
@@ -13,11 +14,15 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { login, addToken } from "../../store/auth";
 import usePasswordValidation from "../../hooks/validation/usePasswordValidation";
+
 const dashboardRoles = ["super_admin", "admin"];
+
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [rememberMe, setRememberMe] = useState(false);
 
   const {
     value: phone,
@@ -25,12 +30,25 @@ const Login = () => {
     handleChange: handlePhoneChange,
     setValue: setPhone,
   } = useNumberInput("");
+
   const {
     password,
     error: passwordError,
     handleChange: handlePasswordChange,
     setPassword,
   } = usePasswordValidation();
+
+  useEffect(() => {
+    const savedPhone = localStorage.getItem("phone");
+    const savedPassword = localStorage.getItem("password");
+
+    if (savedPhone && savedPassword) {
+      setPhone(savedPhone);
+      setPassword(savedPassword);
+      setRememberMe(true);
+    }
+  }, [setPhone, setPassword]);
+
   const { isLoading, mutate } = useMutation(handleLogin, {
     onSuccess: (data) => {
       if (data?.data?.status) {
@@ -40,8 +58,18 @@ const Login = () => {
         });
         dispatch(login(data?.data?.data?.user));
         dispatch(addToken(data?.data?.data?.token));
+
+        if (rememberMe) {
+          localStorage.setItem("phone", phone);
+          localStorage.setItem("password", password);
+        } else {
+          localStorage.removeItem("phone");
+          localStorage.removeItem("password");
+        }
+
         setPassword("");
         setPhone("");
+
         if (dashboardRoles.includes(data?.data?.data?.user?.account?.type)) {
           navigate("/dashboard/dashboard");
         } else {
@@ -60,6 +88,11 @@ const Login = () => {
       }
     },
   });
+
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!password.trim() || !phone.trim()) {
@@ -82,10 +115,11 @@ const Login = () => {
       mutate(userData);
     }
   };
+
   return (
     <div>
       <p className="text-[#4D5F65] font-bold text-lg mb-3">{t("login")}</p>
-      <p className="text-main  text-sm mb-5">{t("loginQuery")}</p>
+      <p className="text-main text-sm mb-5">{t("loginQuery")}</p>
       <form onSubmit={handleSubmit} className="w-full">
         <MobileInput
           value={phone}
@@ -101,24 +135,23 @@ const Login = () => {
           error={passwordError}
         />
         <div className="w-full flex items-center justify-between my-4">
-          {/* <div className="flex items-center gap-1">
-            <div
-              onClick={toggleRemeberMe}
-              className={`w-4 h-4 border cursor-pointer  ${
-                rememberMe ? "bg-maincolorgreen" : "bg-transparent"
-              }`}
-            ></div>
-            <p> {t("rem")}</p>
-          </div> */}
+          <div className="flex items-center gap-1">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+              className="w-4 h-4 border cursor-pointer"
+            />
+            <p>{t("rem")}</p>
+          </div>
           <Link
             to="/auth/forget-password"
-            className=" text-red-500 underline font-medium text-sm"
+            className="text-red-500 underline font-medium text-sm"
           >
             {t("forget")}
           </Link>
         </div>
         {isLoading ? <LoadingBtn /> : <MainBtn text="login" type="submit" />}
-
         <div className="my-4">
           <NafazBtn />
         </div>
@@ -126,7 +159,7 @@ const Login = () => {
           <p className="text-xs text-textColor">{t("haveAccount")}</p>
           <Link
             to="/auth/regester"
-            className=" underline text-maincolorgreen text-xs"
+            className="underline text-maincolorgreen text-xs"
           >
             {t("createAccount")}
           </Link>
@@ -135,7 +168,7 @@ const Login = () => {
           <p className="text-xs text-textColor">{t("pres")}</p>
           <Link
             to="/website/terms-conditions"
-            className=" underline text-[#2B2B2B] text-xs"
+            className="underline text-[#2B2B2B] text-xs"
           >
             {t("terms")}
           </Link>

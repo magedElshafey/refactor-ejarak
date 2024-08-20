@@ -2,7 +2,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import UserContactCard from "../common/user/UserContactCard";
-const RealstateOwnerCard = ({ name, img, phone, whatsapp, id }) => {
+const RealstateOwnerCard = ({
+  name,
+  img,
+  phone,
+  whatsapp,
+  id,
+  ejarakLogin,
+}) => {
   const { t } = useTranslation();
   return (
     <div className="bg-white p-6 rounded-2xl shadow-lg border border-dashed border-textColor">
@@ -25,10 +32,12 @@ const RealstateOwnerCard = ({ name, img, phone, whatsapp, id }) => {
             </Link>
           </div>
         </div>
+
         <UserContactCard
           phone={phone}
           whatsapp={whatsapp}
           chat={`/website/chat/${id}`}
+          ejarakLogin={ejarakLogin}
         />
       </div>
     </div>

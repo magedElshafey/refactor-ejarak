@@ -30,23 +30,58 @@ const RealStatesBody = ({ tableSearch }) => {
 
   const queryClient = useQueryClient();
   const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
-  const mutation = useMutation(
+  // const { isLoading: loadingStatus, mutate } = useMutation(
+  //   ({ status, id, rejectionReason }) =>
+  //     updateRealStateStatus(status, id, rejectionReason),
+  //   {
+  //     onSuccess: (data) => {
+  //       console.log("data from change realstate states", data);
+  //       if (data?.data?.status) {
+  //         Swal.fire({
+  //           icon: "success",
+  //           title: data?.data?.message,
+  //         });
+  //         queryClient.invalidateQueries("realstates");
+  //         setRejectionReason("");
+  //         setSelectedRowId("");
+  //       } else {
+  //         Swal.fire({
+  //           icon: "error",
+  //           title: data?.response?.data?.message,
+  //         });
+  //       }
+  //     },
+  //   }
+  // );
+
+  const { isLoading: loadingStatus, mutate } = useMutation(
     ({ status, id, rejectionReason }) =>
       updateRealStateStatus(status, id, rejectionReason),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log("data from change realstate status", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",
             title: data?.data?.message,
           });
           queryClient.invalidateQueries("realstates");
+          setRejectionReason("");
+          setSelectedRowId("");
+          setPopupOpen(false); // أغلق الـ popup بعد النجاح
         } else {
           Swal.fire({
             icon: "error",
             title: data?.response?.data?.message,
           });
         }
+      },
+      onError: (error) => {
+        Swal.fire({
+          icon: "error",
+          title: "An error occurred",
+          text: error?.response?.data?.message || "Unknown error",
+        });
       },
     }
   );
@@ -76,37 +111,66 @@ const RealStatesBody = ({ tableSearch }) => {
   const realStateData =
     filteredRealStates?.slice(offset, offset + itemsPerPage) || [];
 
+  // const handleStatusChange = (id, newStatus) => {
+  //   console.log("id from status change", id);
+  //   console.log("newStatus from status change", newStatus);
+  //   if (newStatus === "refused") {
+  //     setSelectedRowId(id);
+  //     setPopupOpen(true);
+  //   } else {
+  //     mutate({ status: newStatus, id });
+  //   }
+  // };
+
   const handleStatusChange = (id, newStatus) => {
+    console.log("id from status change", id);
+    console.log("newStatus from status change", newStatus);
     if (newStatus === "refused") {
       setSelectedRowId(id);
       setPopupOpen(true);
     } else {
-      mutation.mutate({ status: newStatus, id });
+      mutate({ status: newStatus, id });
     }
   };
 
-  const handlePopupSubmit = (rejectionReason) => {
-    if (!rejectionReason.trim()) {
-      Swal.fire({
-        icon: "error",
-        title: t("refused reason field is required"),
-      });
-      return;
-    } else {
-      mutation.mutate({
-        status: "refused",
-        id: selectedRowId,
-        reason_refused: rejectionReason,
-      });
-      setRejectionReason("");
-    }
+  // const handlePopupSubmit = (rejectionReason) => {
+  //   console.log("selectedRowId", selectedRowId);
+  //   console.log("rejected reason", rejectionReason);
+  //   if (!rejectionReason.trim()) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: t("refused reason field is required"),
+  //     });
+  //     return;
+  //   } else {
+  //     const data = {
+  //       status: "refused",
+  //       id: selectedRowId,
+  //       reason_refused: rejectionReason,
+  //     };
+  //     mutate(data);
+  //   }
+  // };
+
+  const handlePopupSubmit = (v) => {
+    console.log("selectedRowId", selectedRowId);
+    console.log("rejected reason", v);
+    const data = {
+      status: "refused",
+      id: selectedRowId,
+      rejectionReason: v, // استخدم المفتاح الصحيح هنا
+    };
+    mutate(data);
   };
 
+  // const closePopup = () => {
+  //   setPopupOpen(false);
+  //   setSelectedRowId(null);
+  // };
   const closePopup = () => {
     setPopupOpen(false);
     setSelectedRowId(null);
   };
-
   return (
     <>
       <RealStateTable

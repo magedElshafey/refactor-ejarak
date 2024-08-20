@@ -107,10 +107,10 @@ const ChatInput = ({ sendMessage }) => {
           </div>
         )}
       </div>
-      <TiAttachment
+      {/* <TiAttachment
         size={22}
         className="cursor-pointer text-[#b8c3cc] hover:text-gray-500"
-      />
+      /> */}
       <LuSendHorizonal
         size={32}
         className={`bg-maincolorgreen p-1 rounded-full text-white cursor-pointer ${

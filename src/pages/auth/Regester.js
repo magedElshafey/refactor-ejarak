@@ -58,7 +58,7 @@ const Regester = () => {
       if (data.status === 201 || data.statusText === "Created") {
         Swal.fire({
           icon: "success",
-          title: data?.data?.data?.message,
+          title: data?.data?.message,
         });
         dispatch(addToken(data?.data?.data?.token));
         localStorage.setItem(

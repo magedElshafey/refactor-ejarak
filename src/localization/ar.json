@@ -578,5 +578,6 @@
   "statistics": "الإحصائيات",
   "refused reason field is required": "سبب الرفض مطلوب",
   "change location": "تغيير الموقع",
-  "completed": "مكتمل"
+  "completed": "مكتمل",
+  "login need": "تحتاج الي تسجيل الدخول لكي تتمكن من التواصل مع مالك العقار"
 }

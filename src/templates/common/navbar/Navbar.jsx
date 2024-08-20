@@ -28,7 +28,7 @@ const Navbar = ({ bg, dashboard }) => {
   // ================== global states =============================
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
-  const { ejarakLogin } = useSelector((state) => state.authSlice);
+  const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
   const { openFilter } = useSelector((state) => state.filterSlice);
   const loggedUser = useSelector((state) => state?.authSlice?.userData);
   const auth = useSelector((state) => state.authSlice);
@@ -142,7 +142,10 @@ const Navbar = ({ bg, dashboard }) => {
             )}
           </div>
           <LangMenu bg={bg} />
-          {ejarakLogin ? (
+          {ejarakLogin &&
+          (userData.account.type === "owner" ||
+            userData.account.type === "tenant" ||
+            userData.account.type === "customer_service") ? (
             <>
               <ChatMenu bg={bg} />
             </>

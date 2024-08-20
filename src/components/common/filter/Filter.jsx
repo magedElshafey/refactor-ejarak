@@ -43,15 +43,18 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
       {pathname === "/website/near-realstates" ? (
         <div className="flex  gap-1 flex-col items-center">
           <div className="flex  gap-1">
-            <p> {t("location")} : </p>
+            {location ? <p> {t("location")} : </p> : null}
+
             <p className="font-bold">{location}</p>
           </div>
-          <Link
-            to="/"
-            className=" underline text-blue-500 block w-fit text-center "
-          >
-            {t("change location")}
-          </Link>
+          {location ? (
+            <Link
+              to="/"
+              className=" underline text-blue-500 block w-fit text-center "
+            >
+              {t("change location")}
+            </Link>
+          ) : null}
         </div>
       ) : null}
       <RealStateCategories />
