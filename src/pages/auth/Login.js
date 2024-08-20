@@ -147,14 +147,7 @@ const Login = () => {
                 <IoMdCheckmark size={10} />
               </div>
             )}
-            {/* <input
-              type="checkbox"
-              checked={rememberMe}
 
-              
-              onChange={handleRememberMeChange}
-              className="w-4 h-4 border cursor-pointer"
-            /> */}
             <p>{t("rem")}</p>
           </div>
           <Link
