@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import GoogleMap from "google-map-react";
-import { useSelector } from "react-redux";
 import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
 const EditRealstateMap = ({ coordinates }) => {
-  const { lat, lng } = useSelector((state) => state.filterSlice);
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   // api key for map
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
@@ -12,7 +10,10 @@ const EditRealstateMap = ({ coordinates }) => {
   const toggleMapView = () => setIsSatelliteView(!isSatelliteView);
   const defaultProps = {
     zoom: 5,
-    center: { lat, lng },
+    center: {
+      lat: coordinates?.lat,
+      lng: coordinates?.lng,
+    },
   };
   // Define the map options with the desired map style
   const mapOptions = {
@@ -31,8 +32,8 @@ const EditRealstateMap = ({ coordinates }) => {
     if (coordinates && mapRef.current) {
       // Move the map to the new marker's position without changing the zoom level
       mapRef.current.panTo({
-        lat: coordinates.lat,
-        lng: coordinates.lng,
+        lat: coordinates?.lat,
+        lng: coordinates?.lng,
       });
     }
   }, [coordinates]);
@@ -64,7 +65,7 @@ const EditRealstateMap = ({ coordinates }) => {
         }}
       >
         {coordinates ? (
-          <Markers lat={coordinates.lat} lng={coordinates.lng} />
+          <Markers lat={coordinates?.lat} lng={coordinates?.lng} />
         ) : null}
       </GoogleMap>
     </div>

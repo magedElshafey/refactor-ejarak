@@ -155,11 +155,7 @@ const Contact = ({ message, time, type, otherParty, unseen, id, onChoose }) => {
             </div>
           )}
         </div>
-        <div className=" flex-col flex-1 gap-1">
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-[0.65rem]">{formatDateTime(time)}</p>
-          </div>
-        </div>
+        <p className="text-[0.65rem]">{formatDateTime(time)}</p>
       </div>
     </Link>
   );

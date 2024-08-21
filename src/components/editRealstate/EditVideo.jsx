@@ -19,6 +19,7 @@ const EditVideo = ({
   const removeVideo = () => {
     setSelectedVideo(null);
     setVideoPreview("");
+    videoInputRef.current.value = null;
   };
   const handleVideoClick = () => videoInputRef.current.click();
   return (

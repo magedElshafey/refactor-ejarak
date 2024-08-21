@@ -63,15 +63,23 @@ const RealstateAssets = ({ images, data }) => {
       <div className="flex items-center justify-start mb-2 gap-2">
         <button
           className=" cursor-pointer flex items-center justify-center text-white  bg-maincolorgreen h-8 w-8 rounded-[50%]"
-          onClick={slickNext}
+          onClick={slickPrev}
         >
-          {i18n.language === "ar" ? <FaChevronRight /> : <FaChevronLeft />}
+          {i18n.language === "ar" ? (
+            <FaChevronRight onClick={slickPrev} />
+          ) : (
+            <FaChevronLeft onClick={slickPrev} />
+          )}
         </button>
         <button
           className=" cursor-pointer flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%]"
-          onClick={slickPrev}
+          onClick={slickNext}
         >
-          {i18n.language === "ar" ? <FaChevronLeft /> : <FaChevronRight />}
+          {i18n.language === "ar" ? (
+            <FaChevronLeft onClick={slickNext} />
+          ) : (
+            <FaChevronRight onClick={slickNext} />
+          )}
         </button>
       </div>
       <div className="rounded-md p-3 bg-[#f1efef] w-full">

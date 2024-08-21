@@ -7,7 +7,11 @@ import { useTranslation } from "react-i18next";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
-const Sidebar = ({ isMobileView, setShowDashboardSidebar }) => {
+const Sidebar = ({
+  isMobileView,
+  setShowDashboardSidebar,
+  showDashboardSidBar,
+}) => {
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
 
@@ -38,14 +42,24 @@ const Sidebar = ({ isMobileView, setShowDashboardSidebar }) => {
   );
   return (
     <div
-      className={`w-[90%] lg:w-[280px] h-screen  bg-[#f6f5f5] border overflow-y-auto fixed top-0 ${
-        i18n.language === "ar" ? "rught-0" : "left-0"
+      className={`w-[90%] lg:w-[280px] h-screen z-[2500]  bg-[#f6f5f5] border overflow-y-auto fixed top-0  ${
+        isMobileView && i18n.language === "ar" && showDashboardSidBar
+          ? "right-0"
+          : isMobileView && i18n.language === "en" && showDashboardSidBar
+          ? "left-0"
+          : isMobileView && !showDashboardSidBar
+          ? "left-[-300%]"
+          : !isMobileView && i18n.language === "ar"
+          ? "right-0"
+          : !isMobileView && i18n.language === "en"
+          ? "left-0"
+          : ""
       }`}
     >
       {isMobileView ? (
         <IoMdClose
           size={20}
-          className=" cursor-pointer mb-3 "
+          className=" cursor-pointer"
           onClick={() => setShowDashboardSidebar(false)}
         />
       ) : null}

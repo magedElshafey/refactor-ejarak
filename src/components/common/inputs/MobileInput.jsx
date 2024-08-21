@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../../hooks/GlobalContext";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 const MobileInput = ({ value, error, onChange, bg }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { data } = useGlobalContext();
 
   const ref = useRef(null);
@@ -20,24 +20,20 @@ const MobileInput = ({ value, error, onChange, bg }) => {
         }`}
       >
         <div className="w-full flex justify-between items-center gap-3">
-          <div
-            className="flex items-center gap-1 relative cursor-pointer"
-            onClick={() => setShow(!show)}
-          >
-            <IoMdArrowDropdown size={20} />
-            <img
-              alt="flag"
-              className="w-[20px] h-[20px] object-contain"
-              src={data?.countries[0]?.flag}
-            />
-          </div>
+          {/* <IoMdArrowDropdown size={20} /> */}
+          <img
+            alt="flag"
+            className="w-[20px] h-[20px] object-contain"
+            src={data?.countries[0]?.flag}
+          />
+
           <div dir="ltr" className="flex-1 flex items-center gap-2">
             <p>{data?.countries[0]?.phone_prefix_code}</p>
             <input
               placeholder="5xxxxxxxx"
               dir="ltr"
               required
-              className="border-none focus:outline-none flex-1 bg-transparent"
+              className="border-none focus:outline-none bg-transparent"
               value={value}
               onChange={onChange}
             />

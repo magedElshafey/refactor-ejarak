@@ -175,7 +175,10 @@ const Navbar = ({ bg, dashboard }) => {
                 <NotficationMenu bg={bg} />
               </>
             ) : null}
-            {ejarakLogin ? (
+            {ejarakLogin &&
+            (userData.account.type === "owner" ||
+              userData.account.type === "tenant" ||
+              userData.account.type === "customer_service") ? (
               <>
                 <ChatMenu bg={bg} />
               </>
@@ -240,16 +243,12 @@ const Navbar = ({ bg, dashboard }) => {
             ))}
           </div>
         </div>
-        <div
-          className={`fixed top-0 duration-300 z-50 w-[95%] h-screen ${
-            showDashboardSidBar ? "left-0" : "left-[-300%]"
-          }`}
-        >
-          <Sidebar
-            setShowDashboardSidebar={setShowDashboardSidebar}
-            isMobileView={true}
-          />
-        </div>
+
+        <Sidebar
+          setShowDashboardSidebar={setShowDashboardSidebar}
+          isMobileView={true}
+          showDashboardSidBar={showDashboardSidBar}
+        />
       </div>
     </div>
   );

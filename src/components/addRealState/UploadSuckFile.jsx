@@ -25,6 +25,7 @@ const UploadSuckFile = ({
   const handleRemoveSuck = () => {
     setSelectedSuck(null);
     setPreviewSuck(null);
+    sukRef.current.value = null;
   };
   return (
     <div className="mb-5">
@@ -61,7 +62,7 @@ const UploadSuckFile = ({
                 alt="preveiw/img"
                 className="w-full h-full object-cover"
               />
-              <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-600 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
+              <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
                 <IoMdClose
                   size={20}
                   className="text-white"

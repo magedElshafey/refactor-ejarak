@@ -24,6 +24,7 @@ const UploadVideo = ({
   const removeVideo = () => {
     setSelectedVideo(null);
     setVideoPrview(null);
+    videoRef.current.value = null;
   };
 
   return (
@@ -43,7 +44,7 @@ const UploadVideo = ({
               <source src={videoPreview} type={selectedVideo.type} />
               Your browser does not support the video tag.
             </video>
-            <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-600 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
+            <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
               <IoMdClose
                 size={20}
                 className="text-white"

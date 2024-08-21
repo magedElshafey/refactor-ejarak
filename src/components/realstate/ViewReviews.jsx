@@ -5,11 +5,13 @@ import Spinner from "../common/Spinner";
 import { useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
-const ViewReviews = ({ id }) => {
+const ViewReviews = ({ id, rating }) => {
   const { t } = useTranslation();
-  const { isLoading, data } = useQuery(["revs", id], () =>
+  const { isLoading, data, isFetching } = useQuery(["revs", id], () =>
     getRealstateReviews(id)
   );
+  console.log("is fetchung", isFetching);
+  console.log("is data", data);
 
   return (
     <>
@@ -35,10 +37,11 @@ const ViewReviews = ({ id }) => {
                     {!item.rating ? null : (
                       <ReactStars
                         count={5}
-                        value={item.rating}
+                        value={+item?.rating}
                         edit={false}
                         activeColor="#ffd700"
                         isHalf={true}
+                        key={`${isFetching} ${item.id}`}
                       />
                     )}
                   </div>

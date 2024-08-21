@@ -25,6 +25,7 @@ const EditSuck = ({
   const handleDeleteSuck = () => {
     setSelectedSuck(null);
     setSuckPreview("");
+    sukRef.current.value = null;
   };
   return (
     <div>

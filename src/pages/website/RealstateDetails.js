@@ -34,9 +34,17 @@ const RealstateDetails = ({ isDashboard }) => {
   const role = userData?.account?.type;
   const userId = userData?.id;
   const { t } = useTranslation();
-  const { isLoading, data } = useQuery(["realstate-details", params.id], () =>
-    getRealStateDetails(params.id)
+  const [rating, setRating] = useState("");
+  const { isLoading, data } = useQuery(
+    ["realstate-details", params.id],
+    () => getRealStateDetails(params.id),
+    {
+      onSuccess: (data) => {
+        setRating(data?.data?.data?.avg_rating);
+      },
+    }
   );
+  console.log("data retunred from realstate details", data?.data?.data);
   const { isLoading: loadingSimilars, data: similars } = useQuery(
     ["similars-realstate", params.id],
     () => getSimilarRealstates(params.id)
@@ -137,7 +145,7 @@ const RealstateDetails = ({ isDashboard }) => {
               ) : null}
 
               <div className="mt-8">
-                <ViewReviews id={params.id} />
+                <ViewReviews id={params.id} rating={rating} />
               </div>
               {isDashboard ? null : similars?.data?.data?.length ? (
                 <>

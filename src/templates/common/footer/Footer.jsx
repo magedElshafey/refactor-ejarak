@@ -92,9 +92,12 @@ const Footer = ({ isHome }) => {
               </div>
               {ejarakLogin ? (
                 <div>
-                  <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                    {t("account")}
-                  </p>
+                  {role === "owner" || role === "tenant" ? (
+                    <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
+                      {t("account")}
+                    </p>
+                  ) : null}
+
                   {accountDetailsNavbar
                     ?.filter((item) => item.role.includes(role))
                     .map((item, index) => (
@@ -194,9 +197,11 @@ const Footer = ({ isHome }) => {
               </div>
               {ejarakLogin ? (
                 <div>
-                  <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                    {t("account")}
-                  </p>
+                  {role === "owner" || role === "tenant" ? (
+                    <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
+                      {t("account")}
+                    </p>
+                  ) : null}
                   {accountDetailsNavbar
                     ?.filter((item) => item.role.includes(role))
                     .map((item, index) => (

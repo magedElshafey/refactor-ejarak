@@ -4,7 +4,11 @@ import { IoMdClose } from "react-icons/io";
 import { deleteRealstateImages } from "../../services/delete/deleteRealstateImages";
 import { useMutation, useQueryClient } from "react-query";
 import Swal from "sweetalert2";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import img from "../../assets/image-.png";
 const RealstateImages = ({
   previewsPhotos,
   setPreveiwsPhotos,
@@ -12,19 +16,21 @@ const RealstateImages = ({
   setSelectedPhotos,
   realstateId,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
   const [deletingIndex, setDeletingIndex] = useState(null);
   const { isLoading, mutate } = useMutation(
     (v) => deleteRealstateImages(realstateId, v),
     {
       onSuccess: (data) => {
+        console.log("data from realstate images", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",
             title: data?.data?.message,
           });
           queryClient.invalidateQueries(["realstate-details", realstateId]);
+          queryClient.invalidateQueries("my-realstates");
         } else {
           Swal.fire({
             icon: "error",
@@ -34,6 +40,46 @@ const RealstateImages = ({
       },
     }
   );
+  const sliderRef = useRef(null);
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    arrows: false,
+    autoplay: false,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1224,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 540,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
+
+  const slickNext = () => {
+    sliderRef.current.slickNext();
+  };
+
+  const slickPrev = () => {
+    sliderRef.current.slickPrev();
+  };
   const handleClick = (data) => {
     setDeletingIndex(data);
     const userData = {
@@ -60,7 +106,82 @@ const RealstateImages = ({
         onChange={handleImageChange}
         accept="image/*"
       />
-      <label className="w-full h-[200px] bg-[#ebeeeb] mb-3 rounded-md p-3 px-6 border border-dashed border-textColor flex items-center gap-5 overflow-x-auto">
+      <div className="relative">
+        <div className="flex items-center justify-start mb-2 gap-2">
+          <button
+            type="button"
+            className="cursor-pointer flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%]"
+            onClick={slickNext}
+          >
+            {i18n.language === "ar" ? (
+              <FaChevronRight onClick={slickNext} />
+            ) : (
+              <FaChevronLeft onClick={slickNext} />
+            )}
+          </button>
+          <button
+            type="button"
+            className="cursor-pointer flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%]"
+            onClick={slickPrev}
+          >
+            {i18n.language === "ar" ? (
+              <FaChevronLeft onClick={slickPrev} />
+            ) : (
+              <FaChevronRight onClick={slickPrev} />
+            )}
+          </button>
+        </div>
+      </div>
+      <Slider
+        dir={i18n.language === "ar" ? "rtl" : "ltr"}
+        ref={sliderRef}
+        {...settings}
+        className="bg-[#BDC7BC4D] rounded-[13px] border border-dashed border-[#4D5F65] h-[250px] p-1 mb-5 "
+      >
+        {previewsPhotos.length > 0 && (
+          <div
+            className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] bg-[#BDC7BC4D] border border-dashed cursor-pointer mt-4 px-4"
+            onClick={handleButtonClick}
+          >
+            <FaPlus
+              size={30}
+              className="text-maincolorgreen  absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+            />
+          </div>
+        )}
+        {previewsPhotos.length ? (
+          previewsPhotos.map((item, index) => (
+            <div
+              key={index}
+              className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] px-3 mt-4"
+            >
+              <img
+                src={item}
+                alt="preveiw/img"
+                className="w-full h-full object-cover"
+              />
+              {!isLoading || deletingIndex !== index ? (
+                <div
+                  onClick={() => handleClick(index)}
+                  className="absolute left-0 top-0 w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer"
+                >
+                  <IoMdClose size={20} className="text-white" />
+                </div>
+              ) : null}
+            </div>
+          ))
+        ) : (
+          <div className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px]  cursor-pointer mt-5 flex items-center justify-center ">
+            <img
+              src={img}
+              alt="img"
+              className="cursor-pointer w-[37px] h-[37px] object-contai absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+              onClick={handleButtonClick}
+            />
+          </div>
+        )}
+      </Slider>
+      {/* <label className="w-full h-[200px] bg-[#ebeeeb] mb-3 rounded-md p-3 px-6 border border-dashed border-textColor flex items-center gap-5 overflow-x-auto">
         <FaPlus
           size={30}
           className="mx-8 cursor-pointer"
@@ -83,7 +204,7 @@ const RealstateImages = ({
             ) : null}
           </div>
         ))}
-      </label>
+      </label> */}
     </div>
   );
 };

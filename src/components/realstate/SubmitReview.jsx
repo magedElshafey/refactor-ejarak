@@ -7,23 +7,26 @@ import { useMutation, useQueryClient } from "react-query";
 import { submitReview } from "../../services/post/submitReview";
 import Swal from "sweetalert2";
 const SubmitReview = ({ data, id }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [comment, setComment] = useState("");
   const handleCommentChange = (e) => setComment(e.target.value);
   const [rating, setRating] = useState(0);
   const ratingChanged = (newRating) => setRating(newRating);
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation((v) => submitReview(data.id, v), {
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       if (data?.data?.status) {
+        console.log("data from review", data);
+
         Swal.fire({
           icon: "success",
           title: data?.data?.message,
         });
         setRating(0);
         setComment("");
-        queryClient.invalidateQueries(["revs", id]);
-        queryClient.invalidateQueries(["realstate-details", id]);
+        await queryClient.invalidateQueries(["revs"]);
+        await queryClient.invalidateQueries(["realstate-details", id]);
+        return;
       } else {
         Swal.fire({
           icon: "error",
@@ -61,18 +64,20 @@ const SubmitReview = ({ data, id }) => {
           <p className="mb-2 text-textColor">{t("post a comment")}</p>
           <div className="flex items-center gap-2 mb-3">
             <p className=" text-secondcolorgreen font-bold">( {rating} )</p>
-            <ReactStars
-              key={rating}
-              value={rating}
-              count={5}
-              onChange={ratingChanged}
-              size={24}
-              isHalf={true}
-              emptyIcon={<i className="far fa-star"></i>}
-              halfIcon={<i className="fa fa-star-half-alt"></i>}
-              fullIcon={<i className="fa fa-star"></i>}
-              activeColor="#007D56"
-            />
+            <div style={{ direction: "ltr" }}>
+              <ReactStars
+                key={rating}
+                value={rating}
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                isHalf={true}
+                emptyIcon={<i className="far fa-star"></i>}
+                halfIcon={<i className="fa fa-star-half-alt"></i>}
+                fullIcon={<i className="fa fa-star"></i>}
+                activeColor="#007D56"
+              />
+            </div>
           </div>
           <div className="w-full flex justify-start">
             {isLoading ? (

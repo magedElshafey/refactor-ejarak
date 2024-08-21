@@ -34,6 +34,7 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
             muted
             autoPlay={false}
             id="video"
+            controls={isPlaying}
           ></video>
           {!isPlaying && (
             <div

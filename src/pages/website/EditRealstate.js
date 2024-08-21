@@ -91,7 +91,7 @@ const EditRealstate = () => {
     : null;
   const [uploadProgress, setUploadProgress] = useState(0);
   const params = useParams();
-  const query = useQueryClient();
+  const queryClient = useQueryClient();
   const { t, i18n } = useTranslation();
 
   const { isLoading, data } = useQuery(
@@ -109,8 +109,8 @@ const EditRealstate = () => {
           setAddress(data?.data?.data?.address);
           setNotes(data?.data?.data?.notes);
           setCoordinates({
-            lat: data?.data?.data?.lat,
-            lng: data?.data?.data?.lng,
+            lat: Number.parseFloat(data?.data?.data?.lat),
+            lng: Number.parseFloat(data?.data?.data?.lng),
           });
           setAge(data?.data?.data?.year_of_construction);
           setArea(data?.data?.data?.area);
@@ -127,8 +127,8 @@ const EditRealstate = () => {
         }
       },
       staleTime: Infinity,
-      cacheTime: Infinity,
-      refetchOnMount: false,
+      // cacheTime: Infinity,
+      refetchOnMount: true,
       refetchOnWindowFocus: false,
     }
   );
@@ -163,7 +163,8 @@ const EditRealstate = () => {
             icon: "success",
             title: data?.data?.message,
           });
-          query.invalidateQueries(["realstate-details", params.id]);
+          queryClient.invalidateQueries(["realstate-details", params.id]);
+          queryClient.invalidateQueries("my-realstates");
           setSelectedPhotos([]);
           navigate(`/website/realstate/${data?.data?.data?.id}`);
         } else {
@@ -328,7 +329,7 @@ const EditRealstate = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-6">
               <MainInput
-                value={name}
+                value={name || ""}
                 type="text"
                 onChange={handleNameChnage}
                 label="adArabicTitle"
@@ -359,23 +360,23 @@ const EditRealstate = () => {
                 options={global?.cities || []}
                 value={
                   city !== ""
-                    ? global.cities?.find((item) => item?.id === city)?.name
+                    ? global?.cities?.find((item) => item?.id === city)?.name
                     : ""
                 }
                 onSelect={handleCityChange}
               />
               <MainInput
-                value={district}
+                value={district || ""}
                 onChange={handleDistrictChange}
                 label="district"
               />
               <MainInput
-                value={address}
+                value={address || ""}
                 onChange={handleAddressChange}
                 label="allDetails"
               />
               <MainInput
-                value={notes}
+                value={notes || ""}
                 onChange={handleNotesChange}
                 label="notes"
               />
@@ -392,42 +393,42 @@ const EditRealstate = () => {
               <MainInput
                 type="number"
                 label="age"
-                value={age}
+                value={age || ""}
                 onChange={handleAgeChange}
                 error={ageError}
               />
               <MainInput
                 type="number"
                 label="area"
-                value={area}
+                value={area || ""}
                 onChange={handleAreaChange}
                 error={areaError}
               />
               <MainInput
                 type="number"
                 label="turn"
-                value={turn}
+                value={turn || ""}
                 onChange={handleTurnChange}
                 error={turnError}
               />
               <MainInput
                 type="number"
                 label="roomNum"
-                value={rooms}
+                value={rooms || ""}
                 onChange={handleRoomsChange}
                 error={roomsError}
               />
               <MainInput
                 type="number"
                 label="bathRooms"
-                value={bathRooms}
+                value={bathRooms || ""}
                 onChange={handleBathRoomsChange}
                 error={bathRoomsError}
               />
               <MainInput
                 type="number"
                 label="service"
-                value={service}
+                value={service || ""}
                 onChange={handleServiceChange}
                 error={serviceError}
               />
@@ -444,14 +445,14 @@ const EditRealstate = () => {
               <MainInput
                 type="number"
                 label="price"
-                value={price}
+                value={price || ""}
                 onChange={handlePriceChange}
                 error={priceError}
               />
               <MainInput
                 type="text"
                 label="suckNum"
-                value={suckNum}
+                value={suckNum || ""}
                 onChange={handleSuckNumChange}
               />
               <MainSelect
@@ -459,8 +460,8 @@ const EditRealstate = () => {
                 options={global?.paymentTypes || []}
                 onSelect={handlePaymentChange}
                 value={
-                  global.paymentTypes.find((item) => item.id === paymentId)
-                    .name || ""
+                  global?.paymentTypes?.find((item) => item.id === paymentId)
+                    ?.name || ""
                 }
               />
             </div>
