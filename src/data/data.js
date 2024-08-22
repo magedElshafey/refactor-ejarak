@@ -8,21 +8,13 @@ import Swal from "sweetalert2";
 import { t } from "i18next";
 import google from "../assets/google.png";
 import app from "../assets/app.png";
-import {
-  FaFacebook,
-  FaInstagramSquare,
-  FaTiktok,
-  FaSnapchatGhost,
-  FaHeart,
-  FaNewspaper,
-  FaQuestion,
-} from "react-icons/fa";
+import { FaHeart, FaNewspaper, FaQuestion } from "react-icons/fa";
 import {
   MdOutlineDashboard,
   MdOutlineRoundaboutLeft,
   MdPrivacyTip,
 } from "react-icons/md";
-import { FaUsers, FaXTwitter, FaCity } from "react-icons/fa6";
+import { FaUsers, FaCity } from "react-icons/fa6";
 import {
   TbBrandBooking,
   TbInfoTriangle,
@@ -118,7 +110,7 @@ export const appDetails = {
   details: [
     {
       img: google,
-      path: "https://www.google.com",
+      path: "https://play.google.com/store/apps/details?id=com.ejarksa.leasing",
     },
 
     {
@@ -181,31 +173,7 @@ export const myAccount = [
     path: "/website/my-reservations",
   },
 ];
-// export const followUs = {
-//   title: "follow us",
-//   details: [
-//     {
-//       path: "https://www.facebook.com",
-//       icon: <FaFacebook size={20} />,
-//     },
-//     {
-//       path: "https://www.instagram.com",
-//       icon: <FaInstagramSquare size={20} />,
-//     },
-//     {
-//       path: "https://www.tiktok.com",
-//       icon: <FaTiktok size={20} />,
-//     },
-//     {
-//       path: "https://www.snapchat.com",
-//       icon: <FaSnapchatGhost size={20} />,
-//     },
-//     {
-//       path: "https://www.x.com",
-//       icon: <FaXTwitter size={20} />,
-//     },
-//   ],
-// };
+
 export const accountDetailsNavbar = [
   {
     title: "my account",
@@ -402,9 +370,6 @@ export const dashboardLinks = [
   //   role: ["admin", "super_admin", "customer_service"],
   // },
 ];
-
-//  * table filter
-
 export const tableStatus = [
   {
     arTitle: " قيد المراجعة",

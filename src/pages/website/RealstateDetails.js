@@ -44,7 +44,6 @@ const RealstateDetails = ({ isDashboard }) => {
       },
     }
   );
-  console.log("data retunred from realstate details", data?.data?.data);
   const { isLoading: loadingSimilars, data: similars } = useQuery(
     ["similars-realstate", params.id],
     () => getSimilarRealstates(params.id)

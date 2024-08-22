@@ -9,7 +9,7 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
 
   return (
     <div className="w-full overflow-x-auto text-nowrap">
-      <table className="min-w-full  px-2">
+      <table className="min-w-full  px-2 text-center">
         <TableHeader columns={columns} />
 
         {bodyData.length > 0 && (

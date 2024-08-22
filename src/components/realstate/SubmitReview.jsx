@@ -16,8 +16,6 @@ const SubmitReview = ({ data, id }) => {
   const { isLoading, mutate } = useMutation((v) => submitReview(data.id, v), {
     onSuccess: async (data) => {
       if (data?.data?.status) {
-        console.log("data from review", data);
-
         Swal.fire({
           icon: "success",
           title: data?.data?.message,

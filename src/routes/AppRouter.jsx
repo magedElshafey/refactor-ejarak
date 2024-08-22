@@ -1,8 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// layouts
-
-// common components
-import ScrollToTopAfterChangePage from "../components/App/ScrollToTopAfterChangePage";
 // hooks
 import useNetworkStatus from "../hooks/useNetworkStatus";
 // pages
@@ -66,6 +62,7 @@ import EditUser from "../pages/dashboard/users/EditUser";
 import Reservations from "../pages/dashboard/reservations/Reservations";
 import Success from "../pages/website/Success";
 import PaymentError from "../pages/website/PaymentError";
+import ScrollToTopAfterChangePage from "../components/App/ScrollToTopAfterChangePage";
 const router = createBrowserRouter([
   {
     path: "/",

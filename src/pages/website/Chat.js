@@ -6,7 +6,6 @@ import ContactListContainer from "../../components/chat/ContactListContainer";
 const Chat = () => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  console.log("location from chat", pathname);
   return (
     <div className="px-4 md:px-16 py-4 flex flex-col gap-4 justify-stretch h-[85vh]">
       <p className="text-2xl font-bold">

@@ -140,43 +140,11 @@ const Reservations = () => {
         reason_refused: rejectionReason,
       };
       mutateReservationStatus({ i: selectedRowId, v: data });
-      // mutation.mutate({
-      //   status: "refused",
-      //   id: selectedRowId,
-      //   reason_refused: rejectionReason,
-      // });
+
       setRejectionReason("");
     }
   };
 
-  // const mutation = useMutation(
-  //   ({ status, id, rejectionReason }) =>
-  //     updateReservationStatus(status, id, rejectionReason),
-  //   {
-  //     onSuccess: () => {
-  //       if (data?.data?.status) {
-  //         Swal.fire({
-  //           icon: "success",
-  //           title: data?.data?.message,
-  //         });
-  //         queryClient.invalidateQueries("reservations");
-  //       } else {
-  //         Swal.fire({
-  //           icon: "error",
-  //           title: data?.response?.data?.message,
-  //         });
-  //       }
-  //     },
-  //   }
-  // );
-  // const handleStatusChange = (id, newStatus) => {
-  //   if (newStatus === "refused") {
-  //     setSelectedRowId(id);
-  //     setPopupOpen(true);
-  //   } else {
-  //     mutation.mutate({ status: newStatus, id });
-  //   }
-  // };
   const columns = [
     {
       title: "house title",

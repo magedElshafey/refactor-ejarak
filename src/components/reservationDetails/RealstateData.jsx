@@ -38,7 +38,7 @@ const RealstateData = ({ data, downloadContract }) => {
         <div>
           <p className="text-[#4D5F65] mb-1">{t("space")}</p>
           <p className="text-black">
-            {data?.area} ${t("meterSquare")}
+            {data?.area} {t("meterSquare")}
           </p>
         </div>
         <div>

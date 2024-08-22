@@ -23,7 +23,6 @@ const RealstateImages = ({
     (v) => deleteRealstateImages(realstateId, v),
     {
       onSuccess: (data) => {
-        console.log("data from realstate images", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",

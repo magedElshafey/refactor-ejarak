@@ -10,8 +10,6 @@ const ViewReviews = ({ id, rating }) => {
   const { isLoading, data, isFetching } = useQuery(["revs", id], () =>
     getRealstateReviews(id)
   );
-  console.log("is fetchung", isFetching);
-  console.log("is data", data);
 
   return (
     <>

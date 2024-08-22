@@ -17,49 +17,23 @@ import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import { deleteRealState } from "../../../services/delete/dashboard/deleteRealState";
 import { getSpecialRealState } from "../../../services/get/dashboard/getSpecialRealState";
-
+import Spinner from "../../common/Spinner";
 const itemsPerPage = 10;
 
 const RealStatesBody = ({ tableSearch }) => {
-  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(0);
   const [popupOpen, setPopupOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
   const [selectedRowId, setSelectedRowId] = useState(null);
-  const navigate = useNavigate();
 
   const queryClient = useQueryClient();
   const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
-  // const { isLoading: loadingStatus, mutate } = useMutation(
-  //   ({ status, id, rejectionReason }) =>
-  //     updateRealStateStatus(status, id, rejectionReason),
-  //   {
-  //     onSuccess: (data) => {
-  //       console.log("data from change realstate states", data);
-  //       if (data?.data?.status) {
-  //         Swal.fire({
-  //           icon: "success",
-  //           title: data?.data?.message,
-  //         });
-  //         queryClient.invalidateQueries("realstates");
-  //         setRejectionReason("");
-  //         setSelectedRowId("");
-  //       } else {
-  //         Swal.fire({
-  //           icon: "error",
-  //           title: data?.response?.data?.message,
-  //         });
-  //       }
-  //     },
-  //   }
-  // );
 
   const { isLoading: loadingStatus, mutate } = useMutation(
     ({ status, id, rejectionReason }) =>
       updateRealStateStatus(status, id, rejectionReason),
     {
       onSuccess: (data) => {
-        console.log("data from change realstate status", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",
@@ -111,20 +85,7 @@ const RealStatesBody = ({ tableSearch }) => {
   const realStateData =
     filteredRealStates?.slice(offset, offset + itemsPerPage) || [];
 
-  // const handleStatusChange = (id, newStatus) => {
-  //   console.log("id from status change", id);
-  //   console.log("newStatus from status change", newStatus);
-  //   if (newStatus === "refused") {
-  //     setSelectedRowId(id);
-  //     setPopupOpen(true);
-  //   } else {
-  //     mutate({ status: newStatus, id });
-  //   }
-  // };
-
   const handleStatusChange = (id, newStatus) => {
-    console.log("id from status change", id);
-    console.log("newStatus from status change", newStatus);
     if (newStatus === "refused") {
       setSelectedRowId(id);
       setPopupOpen(true);
@@ -133,69 +94,48 @@ const RealStatesBody = ({ tableSearch }) => {
     }
   };
 
-  // const handlePopupSubmit = (rejectionReason) => {
-  //   console.log("selectedRowId", selectedRowId);
-  //   console.log("rejected reason", rejectionReason);
-  //   if (!rejectionReason.trim()) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: t("refused reason field is required"),
-  //     });
-  //     return;
-  //   } else {
-  //     const data = {
-  //       status: "refused",
-  //       id: selectedRowId,
-  //       reason_refused: rejectionReason,
-  //     };
-  //     mutate(data);
-  //   }
-  // };
-
   const handlePopupSubmit = (v) => {
-    console.log("selectedRowId", selectedRowId);
-    console.log("rejected reason", v);
     const data = {
       status: "refused",
       id: selectedRowId,
-      rejectionReason: v, // استخدم المفتاح الصحيح هنا
+      rejectionReason: v,
     };
     mutate(data);
   };
-
-  // const closePopup = () => {
-  //   setPopupOpen(false);
-  //   setSelectedRowId(null);
-  // };
   const closePopup = () => {
     setPopupOpen(false);
     setSelectedRowId(null);
   };
   return (
     <>
-      <RealStateTable
-        data={realStateData}
-        isLoading={isLoading}
-        onStatusChange={handleStatusChange}
-      />
-      {filteredRealStates?.length > itemsPerPage ? (
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          totalItems={data?.data?.data.length}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
-      ) : null}
-      <RejectedPopup
-        isOpen={popupOpen}
-        closePopup={closePopup}
-        onSubmit={handlePopupSubmit}
-      />
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <RealStateTable
+            data={realStateData}
+            onStatusChange={handleStatusChange}
+          />
+          {filteredRealStates?.length > itemsPerPage ? (
+            <Pagination
+              itemsPerPage={itemsPerPage}
+              totalItems={data?.data?.data.length}
+              onPageChange={handlePageChange}
+              currentPage={currentPage}
+            />
+          ) : null}
+          <RejectedPopup
+            isOpen={popupOpen}
+            closePopup={closePopup}
+            onSubmit={handlePopupSubmit}
+          />
+        </>
+      )}
     </>
   );
 };
 
-const RealStateTable = ({ data, isLoading, onStatusChange }) => {
+const RealStateTable = ({ data, onStatusChange }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -279,18 +219,9 @@ const RealStateTable = ({ data, isLoading, onStatusChange }) => {
 
   return (
     <>
-      {isLoading ? (
-        <div className="pt-20 flex items-center justify-center">
-          <AiOutlineLoading3Quarters
-            size={60}
-            className="animate-spin text-maincolorgreen"
-          />
-        </div>
-      ) : (
-        <div className="max-w-screen overflow-x-auto">
-          <Table columns={columns} bodyData={data || []} />
-        </div>
-      )}
+      <div className="max-w-screen overflow-x-auto">
+        <Table columns={columns} bodyData={data || []} />
+      </div>
     </>
   );
 };
@@ -326,27 +257,20 @@ const RowStatus = ({ row }) => {
 
   return (
     <label className="inline-flex items-center me-5 cursor-pointer">
-      {specialLoading ? (
-        <AiOutlineLoading3Quarters
-          size={14}
-          className="animate-spin text-maincolorgreen"
+      <>
+        <input
+          type="checkbox"
+          value=""
+          checked={row.special === 1}
+          className="sr-only peer"
+          onChange={() => handleSpecialRealState(row.id)}
         />
-      ) : (
-        <>
-          <input
-            type="checkbox"
-            value=""
-            checked={row.special === 1}
-            className="sr-only peer"
-            onChange={() => handleSpecialRealState(row.id)}
-          />
-          <div
-            className={`relative w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-[${
-              row.special === 1 ? "-100%" : "0"
-            }] rtl:peer-checked:after:-translate-x-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600`}
-          ></div>
-        </>
-      )}
+        <div
+          className={`relative w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-[${
+            row.special === 1 ? "-100%" : "0"
+          }] rtl:peer-checked:after:-translate-x-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600`}
+        ></div>
+      </>
     </label>
   );
 };

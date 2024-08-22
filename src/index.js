@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import HandleLanguages from "./components/App/HandleLanguages";
 // style
 import "./index.css";
 // routes
@@ -14,12 +13,12 @@ import { Provider } from "react-redux";
 // global context
 import GlobalContext from "./hooks/GlobalContext";
 import store from "./store/store";
+import HandleLanguages from "./components/App/HandleLanguages";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0, // Adjust this based on your requirements
-      cacheTime: 0, // Adjust this based on your requirements
-
+      staleTime: 0,
+      cacheTime: 0,
       refetchOnMount: true,
     },
   },
