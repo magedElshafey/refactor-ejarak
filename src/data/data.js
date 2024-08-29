@@ -115,7 +115,7 @@ export const appDetails = {
 
     {
       img: app,
-      path: "https://www.facebook.com",
+      path: "https://apps.apple.com/eg/app/ejark-%D8%A5%D9%8A%D8%AC%D8%A7%D8%B1%D9%83/id6654921635",
     },
   ],
 };
