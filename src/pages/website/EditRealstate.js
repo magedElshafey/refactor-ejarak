@@ -36,6 +36,11 @@ const EditRealstate = () => {
   const [elevator, setElevator] = useState("");
   const [suckNum, setSuckNum] = useState("");
   const [paymentId, setPaymentId] = useState("");
+  const [kitchen, setKitchen] = useState("");
+  const [airConditions, setAirConditions] = useState("");
+  const [parkingNumbers, setParkingNumbers] = useState("");
+  const [parkingType, setParkingType] = useState("");
+  const [estaplished, setEstaplished] = useState("");
   const {
     value: age,
     error: ageError,
@@ -124,6 +129,11 @@ const EditRealstate = () => {
           setPaymentId(data?.data?.data?.payment_type_id?.id);
           setSuckPreview(data?.data?.data?.instrument_file[0]);
           setVideoPreview(data?.data?.data?.video);
+          setKitchen(data?.data?.data?.kitchen);
+          setAirConditions(data?.data?.data?.air_conditioner);
+          setParkingNumbers(data?.data?.data?.barking_space);
+          setParkingType(data?.data?.data?.barking);
+          setEstaplished(data?.data?.data?.furniture);
         }
       },
       staleTime: Infinity,
@@ -132,7 +142,7 @@ const EditRealstate = () => {
       refetchOnWindowFocus: false,
     }
   );
-
+  console.log("data returned from realstate edit", data?.data?.data);
   const { isLoading: loadingEdit, mutate } = useMutation(
     async (formData) => {
       const response = await axios.post(
