@@ -4,10 +4,16 @@ import MainSelect from "../common/inputs/MainSelect";
 
 import MainBtn from "../common/buttons/MainBtn";
 import Swal from "sweetalert2";
-import { elevatorsAr, elevatorsEn } from "../../data/data";
+import {
+  elevatorsAr,
+  elevatorsEn,
+  furnishedOptionsAr,
+  furnishedOptionsEn,
+  parkingTypeAr,
+  parkingTypeEn,
+} from "../../data/data";
 import { useTranslation } from "react-i18next";
 const FormTwo = ({
-  step,
   setStep,
   handleSelect,
   handleChange,
@@ -24,6 +30,11 @@ const FormTwo = ({
   paymentTypesOpt,
   paymentType,
   service,
+  furnished,
+  kitchen,
+  parkingNumbers,
+  parkingType,
+  airConditions,
 }) => {
   const { i18n, t } = useTranslation();
   const handleBack = () => {
@@ -73,10 +84,40 @@ const FormTwo = ({
         title: t("elevators field is required"),
       });
       return;
+    } else if (furnished === "") {
+      Swal.fire({
+        icon: "error",
+        title: t("furnished field is required"),
+      });
+      return;
+    } else if (kitchen === "") {
+      Swal.fire({
+        icon: "error",
+        title: t("kitchen field is required"),
+      });
+      return;
+    } else if (parkingNumbers === "") {
+      Swal.fire({
+        icon: "error",
+        title: t("parkingNumbers field is required"),
+      });
+      return;
+    } else if (parkingNumbers > 0 && parkingType === "") {
+      Swal.fire({
+        icon: "error",
+        title: t("parkingType field is required"),
+      });
+      return;
     } else if (!area.trim()) {
       Swal.fire({
         icon: "error",
         title: t("area field is required"),
+      });
+      return;
+    } else if (airConditions === "") {
+      Swal.fire({
+        icon: "error",
+        title: t("airConditions field is required"),
       });
       return;
     } else if (!turn.trim()) {
@@ -101,13 +142,15 @@ const FormTwo = ({
       setStep((prev) => prev + 1);
     }
   };
+  console.log("parkingNumbers", parkingNumbers);
   return (
     <>
       <form className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
         <MainInput
           label="suckNum"
           bg="bg-[#BDC7BC4D]"
-          type="text"
+          ds
+          type="number"
           value={instrument_number}
           onChange={handleChange("instrument_number")}
         />
@@ -155,6 +198,59 @@ const FormTwo = ({
           type="number"
           value={bathRooms}
           onChange={handleChange("bathRooms")}
+        />
+        <MainSelect
+          label="Furnished"
+          bg="bg-[#BDC7BC4D]"
+          onSelect={handleSelect("furnished")}
+          options={
+            i18n.language === "ar" ? furnishedOptionsAr : furnishedOptionsEn
+          }
+          value={
+            i18n.language === "ar"
+              ? furnishedOptionsAr.find((item) => item?.id === furnished)?.name
+              : furnishedOptionsEn.find((item) => item?.id === furnished)?.name
+          }
+        />
+        <MainSelect
+          label="kitchen"
+          bg="bg-[#BDC7BC4D]"
+          onSelect={handleSelect("kitchen")}
+          options={i18n.language === "ar" ? elevatorsAr : elevatorsEn}
+          value={
+            i18n.language === "ar"
+              ? elevatorsAr.find((item) => item?.id === kitchen)?.name
+              : elevatorsEn.find((item) => item?.id === kitchen)?.name
+          }
+        />
+        <MainInput
+          min={0}
+          label="parkingNumbers"
+          bg="bg-[#BDC7BC4D]"
+          type="number"
+          value={parkingNumbers}
+          onChange={handleChange("parkingNumbers")}
+        />
+        <MainSelect
+          label="parkingType"
+          bg="bg-[#BDC7BC4D]"
+          onSelect={handleSelect("parkingType")}
+          options={i18n.language === "ar" ? parkingTypeAr : parkingTypeEn}
+          value={
+            i18n.language === "ar"
+              ? parkingTypeAr.find((item) => item?.id === parkingType)?.name
+              : parkingTypeEn.find((item) => item?.id === parkingType)?.name
+          }
+          disabled={+parkingNumbers === 0}
+          disabledTitle={true}
+        />
+        <MainInput
+          min={0}
+          label="airConditions"
+          bg="bg-[#BDC7BC4D]"
+          type="number"
+          value={airConditions}
+          onChange={handleChange("airConditions")}
         />
         <MainSelect
           label="elevators"

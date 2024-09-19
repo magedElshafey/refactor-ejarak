@@ -24,6 +24,11 @@ const AddRealstate = () => {
     turn: "",
     paymentType: "",
     service: "",
+    furnished: "",
+    kitchen: "",
+    parkingNumbers: "",
+    parkingType: "",
+    airConditions: "",
   });
   const { t } = useTranslation();
   const [coordinates, setCoordinates] = useState(null);
@@ -102,6 +107,11 @@ const AddRealstate = () => {
           paymentTypesOpt={data?.paymentTypes}
           paymentType={formState.paymentType}
           service={formState.service}
+          furnished={formState.furnished}
+          kitchen={formState.kitchen}
+          parkingNumbers={formState.parkingNumbers}
+          parkingType={formState.parkingType}
+          airConditions={formState.airConditions}
         />
       ) : null}
       {step === 3 ? (
@@ -138,6 +148,11 @@ const AddRealstate = () => {
           paymentType={formState.paymentType}
           service={formState.service}
           coordinates={coordinates}
+          furnished={formState.furnished}
+          kitchen={formState.kitchen}
+          parkingNumbers={formState.parkingNumbers}
+          parkingType={formState.parkingType}
+          airConditions={formState.airConditions}
         />
       ) : null}
     </div>

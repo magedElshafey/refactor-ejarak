@@ -388,3 +388,43 @@ export const tableStatus = [
     value: "refused",
   },
 ];
+export const furnishedOptionsAr = [
+  {
+    name: "نعم",
+    id: 1,
+  },
+  {
+    name: "لا",
+    id: 0,
+  },
+];
+export const furnishedOptionsEn = [
+  {
+    name: "yes",
+    id: 1,
+  },
+  {
+    name: "no",
+    id: 0,
+  },
+];
+export const parkingTypeAr = [
+  {
+    id: 0,
+    name: "بدروم",
+  },
+  {
+    id: 1,
+    name: "أمامي",
+  },
+];
+export const parkingTypeEn = [
+  {
+    id: 0,
+    name: "basement",
+  },
+  {
+    id: 1,
+    name: "front",
+  },
+];
