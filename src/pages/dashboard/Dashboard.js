@@ -8,8 +8,27 @@ import img2 from "../../assets/cities.svg";
 import CitiesChart from "../../components/dashboard/mainpage/CitiesChart";
 import { useTranslation } from "react-i18next";
 import StatisticsChart from "../../components/dashboard/mainpage/StatisticsChart";
+import ReactApexChart from "react-apexcharts";
+const generateRealStatesData = (valuesResponse) => {
+  const months = [
+    "lastFiveMonths",
+    "lastFourMonths",
+    "lastThreeMonths",
+    "lastTwoMonths",
+    "lastMonth",
+    "currentMonth",
+  ];
+
+  return months.map((month) => ({
+    contract: valuesResponse?.[month]?.contract || 0,
+    accepted: valuesResponse?.[month]?.accepted || 0,
+    pending: valuesResponse?.[month]?.pending || 0,
+    refused: valuesResponse?.[month]?.refused || 0,
+  }));
+};
+
 const Dashboard = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [cities, setCities] = useState([]);
   const [labels, setLabels] = useState([]);
   const [totalCities, setTotalCities] = useState({});
@@ -65,7 +84,68 @@ const Dashboard = () => {
       setLabels(citiesNames);
     }
   }, [data, i18n]);
+  const realStatesData = generateRealStatesData(
+    data?.data?.data.realstateStatus
+  );
+  const areaData = {
+    series: [
+      {
+        data: realStatesData?.map((monthData) => monthData?.contract),
+        name: t("contract houses"),
+      },
+      {
+        data: realStatesData?.map((monthData) => monthData?.accepted),
+        name: t("accepted houses"),
+      },
+      {
+        data: realStatesData?.map((monthData) => monthData?.pending),
 
+        name: t("pedding houses"),
+      },
+      {
+        data: realStatesData?.map((monthData) => monthData?.refused),
+
+        name: t("rejected houses"),
+      },
+    ],
+    options: {
+      fill: {
+        type: "gradient",
+        gradient: {
+          opacityFrom: 0.0,
+          opacityTo: 0.4,
+        },
+      },
+
+      legend: {
+        position: "right",
+        fontSize: "15px",
+        margin: "5px",
+      },
+
+      stroke: {
+        curve: "smooth",
+        width: 2,
+      },
+      responsive: [
+        {
+          breakpoint: 768,
+          options: {
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+      xaxis: {
+        categories: data?.Months?.lastSixMonths,
+      },
+
+      colors: ["#008060", "#2CD889", "#FFA84A", "#F7617D"],
+    },
+  };
+
+  const { options, series } = areaData;
   return (
     <>
       {isLoading ? (
@@ -123,7 +203,7 @@ const Dashboard = () => {
               number={data?.data?.data?.Booking?.Booking}
             />
           </div>
-          <div className="flex gap-3 md:gap-5 lg:gap-6 justify-center flex-col lg:flex-row">
+          <div className="flex gap-3 md:gap-5 lg:gap-6 justify-center flex-col lg:flex-row items-center">
             <div className="w-full lg:w-1/3">
               <CitiesChart cities={cities} labels={labels} />
             </div>
@@ -131,6 +211,19 @@ const Dashboard = () => {
               <StatisticsChart
                 totalCities={totalCities}
                 data={data?.data?.data}
+              />
+            </div>
+          </div>
+          <div className="border border-[#7A8499] p-2 rounded-xl mt-8">
+            <span className="font-bold text-xl text-center px-2">
+              {t("Most visited cities")}
+            </span>
+            <div id="chart" className=" h-[280px]">
+              <ReactApexChart
+                options={options}
+                series={series}
+                type="area"
+                height={280}
               />
             </div>
           </div>
