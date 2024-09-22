@@ -571,5 +571,7 @@
   "parkingType": "parking Type",
   "disabled title": "ignore this field",
   "airConditions field is required": "airConditions field is required",
-  "airConditions": "air Conditions"
+  "airConditions": "air Conditions",
+  "static pages settings": "static pages",
+  "real state settings": "real state settings"
 }

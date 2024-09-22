@@ -10,7 +10,7 @@ import { handleLogout } from "../../../services/get/handleLogout";
 import { useMutation } from "react-query";
 import { logout } from "../../../store/auth";
 import Swal from "sweetalert2";
-const LoginBtn = ({ bg }) => {
+const LoginBtn = ({ bg, isDashboard }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { ejarakLogin, userData } = useSelector((state) => state.authSlice);
@@ -65,17 +65,37 @@ const LoginBtn = ({ bg }) => {
           }`}
         >
           <div
-            className={`w-full flex items-center gap-1 p-2 rounded-lg ${
+            className={`w-full flex items-center gap-3 p-2 rounded-lg ${
               bg ? "" : "border border-white "
             }`}
           >
-            <IoMdArrowDropdown size={20} />
-            <img
-              alt="avtar-img"
-              src={userData.avatar?.original}
-              className="w-6 h-6 lg:w-10 lg:h-10 rounded-[50%] object-cover"
-            />
-            <p className={` font-normal md:font-bold`}>{userData?.name}</p>
+            {isDashboard ? (
+              <>
+                <p className="hidden lg:block bg-slate-600 w-[2px] h-[50px]"></p>
+                <IoMdArrowDropdown size={20} />
+                <div className="hidden lg:flex flex-col items-center">
+                  <p className={` font-normal md:font-bold `}>
+                    {userData?.name}
+                  </p>
+                  <p className=" lowercase">{userData?.email?.address}</p>
+                </div>
+                <img
+                  alt="avtar-img"
+                  src={userData.avatar?.original}
+                  className="w-10 h-10 rounded-[50%] object-cover"
+                />
+              </>
+            ) : (
+              <>
+                <IoMdArrowDropdown size={20} />
+                <img
+                  alt="avtar-img"
+                  src={userData.avatar?.original}
+                  className="w-6 h-6 lg:w-10 lg:h-10 rounded-[50%] object-cover"
+                />
+                <p className={` font-normal md:font-bold`}>{userData?.name}</p>
+              </>
+            )}
           </div>
           <ul
             className={`absolute bottom-[-70px] ${

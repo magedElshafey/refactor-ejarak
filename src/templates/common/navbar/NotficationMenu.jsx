@@ -6,7 +6,7 @@ import { getAllNotfications } from "../../../services/get/getAllNotfications";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import ShowNotfications from "../../../components/common/notfications/ShowNotfications";
-const NotficationMenu = ({ bg }) => {
+const NotficationMenu = ({ bg, isDashboard }) => {
   const { i18n, t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const menu = useRef(null);
@@ -23,15 +23,22 @@ const NotficationMenu = ({ bg }) => {
       ref={menu}
       className="cursor-pointer relative"
     >
-      <div
-        className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border  ${
-          bg
-            ? `${bg} text-slate-500`
-            : "md:border-white text-white bg-transparent"
-        }`}
-      >
-        <FaBell size={20} />
-      </div>
+      {isDashboard ? (
+        <div className="w-10 h-10 rounded-[50%] flex items-center justify-center border text-maincolorgreen">
+          <FaBell size={20} />
+        </div>
+      ) : (
+        <div
+          className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border  ${
+            bg
+              ? `${bg} text-slate-500`
+              : "md:border-white text-white bg-transparent"
+          }`}
+        >
+          <FaBell size={20} />
+        </div>
+      )}
+
       {data && data?.data?.un_seen ? (
         <div className=" absolute bottom-0 left-0 w-3 h-3 md:w-5 md:h-5 flex items-center justify-center bg-maincolorgreen text-white rounded-[50%] text-xs md:text-base">
           <p> {data?.data?.un_seen}</p>

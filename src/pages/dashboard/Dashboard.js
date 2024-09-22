@@ -123,11 +123,11 @@ const Dashboard = () => {
               number={data?.data?.data?.Booking?.Booking}
             />
           </div>
-          <div className="flex gap-3 md:gap-5 lg:gap-6 justify-center">
-            <div className="w-full md:w-1/3">
+          <div className="flex gap-3 md:gap-5 lg:gap-6 justify-center flex-col lg:flex-row">
+            <div className="w-full lg:w-1/3">
               <CitiesChart cities={cities} labels={labels} />
             </div>
-            <div className="w-full md:w-2/3">
+            <div className="w-full lg:w-2/3">
               <StatisticsChart
                 totalCities={totalCities}
                 data={data?.data?.data}

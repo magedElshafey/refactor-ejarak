@@ -459,3 +459,17 @@ input[type='checkbox'] {
 /* input[type='checkbox'] {
     border-radius: 1px;
 } */
+a.active.dash {
+    background-color: white;
+    border-radius: 5px;
+    color: var(--mainColor);
+}
+
+a.active.list {
+    font-weight: bold;
+    color: var(--mainColor);
+}
+
+.dashboardMain {
+    background-color: white !important;
+}

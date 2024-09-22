@@ -1,20 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import DashboardSidebar from "./DashboardSidebar";
-import DashboardNavbar from "./DashboardNavbar";
 import Meta from "../../components/common/meta/Meta";
-import Navbar from "../common/navbar/Navbar";
-import { useTranslation } from "react-i18next";
+import DashboardNavbar from "./DashboardNavbar";
 const DashboardLayout = () => {
-  const { t } = useTranslation();
   return (
     <>
       <Meta />
       <DashboardSidebar />
-      <div className="mb-4 lg:ms-[280px]">
-        <Navbar dashboard={true} bg="#f6f5f5" />
+      <div className="lg:ms-[280px]">
+        <DashboardNavbar />
+        {/* <Navbar dashboard={true} bg="bg-[#f9f9f9]" /> */}
       </div>
-      <div className={`lg:ms-[280px]`}>
+      <div className="dashboardMain lg:ms-[280px] py-4">
         <Outlet />
       </div>
     </>
@@ -22,17 +20,3 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
-/**
- *  <div className=" flex">
-        <DashboardSidebar />
-        <div>
-          <div className="mb-4">
-            <Navbar dashboard={true} bg="#f6f5f5" />
-          </div>
-       
-          <div>
-            <Outlet />
-          </div>
-        </div>
-      </div>
- */

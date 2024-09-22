@@ -22,6 +22,8 @@ import {
 } from "react-icons/tb";
 import { GoPackage } from "react-icons/go";
 import { LiaFileContractSolid } from "react-icons/lia";
+import { VscSettings } from "react-icons/vsc";
+import { IoSettings } from "react-icons/io5";
 
 export const navLinks = [
   {
@@ -313,62 +315,64 @@ export const dashboardLinks = [
     role: ["admin", "super_admin"],
   },
   {
-    title: "manual contracts",
-    path: "manual-contracts",
+    title: "contracts",
     icon: <FaNewspaper size={20} />,
     role: ["admin", "super_admin"],
-    list: [],
+    path: "contracts",
+    list: [
+      {
+        path: "manual-contracts",
+        icon: <FaNewspaper size={20} />,
+        title: "manual contracts",
+      },
+      {
+        title: "electronic contracts",
+        path: "electronic-contracts",
+        icon: <LiaFileContractSolid size={20} />,
+      },
+    ],
   },
   {
-    title: "electronic contracts",
-    path: "electronic-contracts",
-    icon: <LiaFileContractSolid size={20} />,
+    path: "static-pages",
+    title: "static pages settings",
+    icon: <VscSettings size={20} />,
     role: ["admin", "super_admin"],
-    list: [],
-  },
-
-  {
-    path: "about-ejarak",
-    title: "about ejarak",
-    role: ["admin", "super_admin"],
-    list: [],
-    icon: <MdOutlineRoundaboutLeft size={20} />,
-  },
-  {
-    path: "faqs",
-    title: "faqs",
-    role: ["admin", "super_admin"],
-    list: [],
-    icon: <FaQuestion size={20} />,
-  },
-  {
-    path: "privacy-policy",
-    title: "privacy and policy",
-    role: ["admin", "super_admin"],
-    list: [],
-    icon: <MdPrivacyTip size={20} />,
-  },
-  {
-    path: "terms-conditions",
-    title: "terms and conditions",
-    role: ["admin", "super_admin"],
-    list: [],
-    icon: <TbAirConditioning size={20} />,
+    list: [
+      {
+        path: "about-ejarak",
+        title: "about ejarak",
+        icon: <MdOutlineRoundaboutLeft size={20} />,
+      },
+      {
+        path: "faqs",
+        title: "faqs",
+        icon: <FaQuestion size={20} />,
+      },
+      {
+        path: "privacy-policy",
+        title: "privacy and policy",
+        icon: <MdPrivacyTip size={20} />,
+      },
+      {
+        path: "terms-conditions",
+        title: "terms and conditions",
+        icon: <TbAirConditioning size={20} />,
+      },
+    ],
   },
   {
-    icon: <FaCity size={20} />,
-    title: "cities",
-    path: "cities",
-    list: [],
+    title: "real state settings",
+    icon: <IoSettings size={20} />,
+    path: "real-state-settings",
     role: ["admin", "super_admin"],
+    list: [
+      {
+        icon: <FaCity size={20} />,
+        title: "cities",
+        path: "cities",
+      },
+    ],
   },
-  // {
-  //   icon: <FaRocketchat size={20} />,
-  //   title: "chat",
-  //   path: "chat",
-  //   list: [],
-  //   role: ["admin", "super_admin", "customer_service"],
-  // },
 ];
 export const tableStatus = [
   {
