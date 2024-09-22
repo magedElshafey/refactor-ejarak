@@ -218,21 +218,6 @@ a.active.home {
     z-index: 2;
 }
 
-/* .sliderLeftValue,
-  .sliderRightValue {
-    color: #dee2e6;
-    font-size: 12px;
-    margin-top: 20px;
-  }
-  
-  .sliderLeftValue {
-    left: 6px;
-  }
-  
-  .sliderRightValue {
-    right: -4px;
-  } */
-
 /* Removing the default appearance */
 .thumb,
 .thumb::-webkit-slider-thumb {

@@ -93,7 +93,6 @@ const EditRealstate = () => {
   const params = useParams();
   const queryClient = useQueryClient();
   const { t, i18n } = useTranslation();
-
   const { isLoading, data } = useQuery(
     ["realstate-details", params.id],
     () => getRealStateDetails(params.id),
@@ -132,6 +131,7 @@ const EditRealstate = () => {
       refetchOnWindowFocus: false,
     }
   );
+  console.log("services room", data?.data?.data?.service_room);
 
   const { isLoading: loadingEdit, mutate } = useMutation(
     async (formData) => {
@@ -428,7 +428,7 @@ const EditRealstate = () => {
               <MainInput
                 type="number"
                 label="service"
-                value={service || ""}
+                value={service}
                 onChange={handleServiceChange}
                 error={serviceError}
               />
