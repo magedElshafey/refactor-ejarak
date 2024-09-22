@@ -18,7 +18,7 @@ const TableBody = ({ bodyData, columns, numbersBeginning }) => {
           <td className="p-2 bg-[#f7f7f7]"> {i + 1 + numbersBeginning} </td>
           {columns?.map((column, j) => {
             const value = column.dataIndex
-              ? getNestedValue(data, column.dataIndex).substr(0, 30) + "..."
+              ? getNestedValue(data, column.dataIndex)
               : null;
             if (column.render) {
               return (
