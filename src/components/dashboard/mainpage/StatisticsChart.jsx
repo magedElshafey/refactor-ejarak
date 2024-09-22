@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { FaRegCircle } from "react-icons/fa";
+import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
+
 const StatisticsChart = ({ totalCities, data }) => {
   const { t } = useTranslation();
   return (
@@ -19,7 +21,14 @@ const StatisticsChart = ({ totalCities, data }) => {
                   <FaRegCircle size={12} className="text-[#7A8499] " />
                   <p>{data?.cities?.number_of_realestate_in_city[item]}</p>
                 </div>
-                <div className="">{item}</div>
+                <div className="flex items-center gap-4">
+                  <div className="">{item}</div>
+                  {item > 10 ? (
+                    <FaArrowTrendUp size={20} className="text-maincolorgreen" />
+                  ) : (
+                    <FaArrowTrendDown size={20} className="text-red-700" />
+                  )}
+                </div>
               </div>
             ))}
         </div>
@@ -35,7 +44,14 @@ const StatisticsChart = ({ totalCities, data }) => {
                   <FaRegCircle size={15} className="text-[#7A8499] " />
                   <p>{data?.cities?.number_of_realestate_in_city[item]}</p>
                 </div>
-                <div className="">{item}</div>
+                <div className="flex items-center gap-4">
+                  <div className="">{item}</div>
+                  {item > 10 ? (
+                    <FaArrowTrendUp size={20} className="text-maincolorgreen" />
+                  ) : (
+                    <FaArrowTrendDown size={20} className="text-red-700" />
+                  )}
+                </div>
               </div>
             ))}
         </div>
