@@ -8,8 +8,8 @@ const Table = ({ columns, bodyData, numbersBeginning = 0 }) => {
   const { t } = useTranslation();
 
   return (
-    <div className="w-full overflow-x-auto text-nowrap">
-      <table className="min-w-full  px-2 text-center">
+    <div className="w-full overflow-x-auto text-nowrap text-center bg-[#f7f7f7] ">
+      <table className="min-w-full  px-2 text-center border-separate border-spacing-y-5">
         <TableHeader columns={columns} />
 
         {bodyData.length > 0 && (

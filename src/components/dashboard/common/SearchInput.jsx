@@ -5,7 +5,7 @@ import { CiSearch } from "react-icons/ci";
 const SearchInput = ({ onSearchChange }) => {
   const { t, i18n } = useTranslation();
   return (
-    <div className="relative">
+    <div className="relative w-full lg:w-[75%]">
       <CiSearch
         size={22}
         className={`text-[#7A8499] absolute top-[28%] ${

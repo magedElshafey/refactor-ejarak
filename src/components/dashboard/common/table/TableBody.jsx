@@ -9,24 +9,27 @@ const getNestedValue = (obj, path) => {
 const TableBody = ({ bodyData, columns, numbersBeginning }) => {
   const { t } = useTranslation();
   return (
-    <tbody className="pt-10">
+    <tbody className="">
       {bodyData?.map((data, i) => (
-        <tr key={i}>
-          <td className="p-2"> {i + 1 + numbersBeginning} </td>
+        <tr
+          key={i}
+          className="border border-slate-700 text-center bg-white text-slate-600 "
+        >
+          <td className="p-2 bg-[#f7f7f7]"> {i + 1 + numbersBeginning} </td>
           {columns?.map((column, j) => {
             const value = column.dataIndex
-              ? getNestedValue(data, column.dataIndex)
+              ? getNestedValue(data, column.dataIndex).substr(0, 30) + "..."
               : null;
             if (column.render) {
               return (
-                <td className="py-1 px-2 font-medium" key={`${i}-${j}`}>
+                <td className="p-3 font-medium " key={`${i}-${j}`}>
                   {column.render(value, data)}
                 </td>
               );
             }
             return (
-              <td className="p-3 font-medium truncate " key={`${i}-${j}`}>
-                {t(value)}
+              <td className="p-3 font-medium truncate" key={`${i}-${j}`}>
+                {t(value).substr(0, 30)} {t(value).length > 30 ? "...." : null}
               </td>
             );
           })}
