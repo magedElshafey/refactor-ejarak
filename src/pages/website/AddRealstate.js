@@ -13,7 +13,7 @@ const AddRealstate = () => {
     district: "",
     address: "",
     notes: "",
-    instrument_number: "",
+    // instrument_number: "",
     subCategoryId: "",
     price: "",
     age: "",
@@ -56,6 +56,28 @@ const AddRealstate = () => {
   const [previewSuck, setPreviewSuck] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [videoPreview, setVideoPrview] = useState(null);
+  const [instrument_number, setInstrumentNum] = useState("");
+  const [instrumentNumError, setInstrumentNumError] = useState("");
+  const handleChangeInstrumentNum = (e) => {
+    const value = e.target.value;
+
+    // السماح فقط بالأرقام
+    if (!/^\d*$/.test(value)) {
+      setInstrumentNumError("يجب أن يحتوي فقط على أرقام");
+      return;
+    }
+
+    // تحديث القيمة إذا كانت الأرقام فقط
+    setInstrumentNum(value);
+
+    // التحقق من الطول
+    if (value.length !== 12) {
+      setInstrumentNumError("يجب أن يتكون من 12 رقمًا");
+    } else {
+      setInstrumentNumError(""); // مسح الخطأ إذا كانت الشروط صحيحة
+    }
+  };
+
   return (
     <div className="container mx-auto px-8 mt-8">
       <h2
@@ -94,7 +116,6 @@ const AddRealstate = () => {
           setStep={setStep}
           handleSelect={handleSelect}
           handleChange={handleChange}
-          instrument_number={formState.instrument_number}
           selectedCategory={selectedCategory}
           subCategoryId={formState.subCategoryId}
           price={formState.price}
@@ -112,6 +133,9 @@ const AddRealstate = () => {
           parkingNumbers={formState.parkingNumbers}
           parkingType={formState.parkingType}
           airConditions={formState.airConditions}
+          instrument_number={instrument_number}
+          instrumentNumError={instrumentNumError}
+          handleChangeInstrumentNum={handleChangeInstrumentNum}
         />
       ) : null}
       {step === 3 ? (
@@ -136,7 +160,7 @@ const AddRealstate = () => {
           district={formState.district}
           address={formState.address}
           notes={formState.notes}
-          instrument_number={formState.instrument_number}
+          instrument_number={instrument_number}
           subCategoryId={formState.subCategoryId}
           price={formState.price}
           age={formState.age}

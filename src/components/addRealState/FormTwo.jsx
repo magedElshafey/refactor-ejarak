@@ -17,7 +17,7 @@ const FormTwo = ({
   setStep,
   handleSelect,
   handleChange,
-  instrument_number,
+
   selectedCategory,
   subCategoryId,
   price,
@@ -35,6 +35,9 @@ const FormTwo = ({
   parkingNumbers,
   parkingType,
   airConditions,
+  instrument_number,
+  instrumentNumError,
+  handleChangeInstrumentNum,
 }) => {
   const { i18n, t } = useTranslation();
   const handleBack = () => {
@@ -138,21 +141,26 @@ const FormTwo = ({
         title: t("service field is required"),
       });
       return;
+    } else if (instrumentNumError) {
+      Swal.fire({
+        icon: "error",
+        title: instrumentNumError,
+      });
+      return;
     } else {
       setStep((prev) => prev + 1);
     }
   };
-  console.log("parkingNumbers", parkingNumbers);
   return (
     <>
       <form className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
         <MainInput
           label="suckNum"
           bg="bg-[#BDC7BC4D]"
-          ds
+          error={instrumentNumError}
           type="number"
           value={instrument_number}
-          onChange={handleChange("instrument_number")}
+          onChange={handleChangeInstrumentNum}
         />
         <MainSelect
           label="unit"

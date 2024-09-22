@@ -16,7 +16,14 @@ import { useGlobalContext } from "../../hooks/GlobalContext";
 import EditRealstateMapSearch from "../../components/editRealstate/EditRealstateMapSearch";
 import EditRealstateMap from "../../components/editRealstate/EditRealstateMap";
 import useNumberInput from "../../hooks/validation/useNumberInput";
-import { elevatorsAr, elevatorsEn } from "../../data/data";
+import {
+  elevatorsAr,
+  elevatorsEn,
+  furnishedOptionsAr,
+  furnishedOptionsEn,
+  parkingTypeAr,
+  parkingTypeEn,
+} from "../../data/data";
 import EditSuck from "../../components/editRealstate/EditSuck";
 import EditVideo from "../../components/editRealstate/EditVideo";
 import { useNavigate } from "react-router-dom";
@@ -133,6 +140,9 @@ const EditRealstate = () => {
           setParkingNumbers(data?.data?.data?.barking_space);
           setParkingType(data?.data?.data?.barking);
           setEstaplished(data?.data?.data?.furniture);
+          setKitchen(data?.data?.data?.kitchen);
+          setAirConditions(data?.data?.data.air_conditioner);
+          setParkingType(data?.data?.data?.barking);
         }
       },
       staleTime: Infinity,
@@ -143,7 +153,7 @@ const EditRealstate = () => {
   );
   console.log("data returned from realstate edit", data?.data?.data);
   console.log("services room", data?.data?.data?.service_room);
-
+  console.log("parking numbers", parkingNumbers);
   const { isLoading: loadingEdit, mutate } = useMutation(
     async (formData) => {
       const response = await axios.post(
@@ -207,7 +217,11 @@ const EditRealstate = () => {
   const handleElevatorChange = (opt) => setElevator(opt.id);
   const handleSuckNumChange = (e) => setSuckNum(e.target.value);
   const handlePaymentChange = (opt) => setPaymentId(opt.id);
-
+  const handleEstaplichedChange = (opt) => setEstaplished(opt.id);
+  const handleKitchenChange = (opt) => setKitchen(opt.id);
+  const handleAirConditionChange = (e) => setAirConditions(e.target.value);
+  const handleParkingNumbersChange = (e) => setParkingNumbers(e.target.value);
+  const handleParkingTypeChange = (opt) => setParkingType(opt?.id);
   const handleSubmit = (e) => {
     const formData = new FormData();
     e.preventDefault();
@@ -306,6 +320,13 @@ const EditRealstate = () => {
       formData.append("price", price);
       formData.append("instrument_number", suckNum);
       formData.append("payment_type_id", paymentId);
+      formData.append("furniture", estaplished);
+      formData.append("kitchen", kitchen);
+      formData.append("air_conditioner", airConditions);
+      formData.append("barking_space", parkingNumbers);
+      if (+parkingNumbers !== 0) {
+        formData.append("barking", parkingType);
+      }
       if (selectedSuck) {
         formData.append("instrument_file", selectedSuck);
       }
@@ -453,6 +474,48 @@ const EditRealstate = () => {
                     : elevatorsEn.find((item) => item?.id === elevator)?.name
                 }
               />
+              <MainSelect
+                label="Furnished"
+                onSelect={handleEstaplichedChange}
+                options={
+                  i18n.language === "ar"
+                    ? furnishedOptionsAr
+                    : furnishedOptionsEn
+                }
+                value={
+                  i18n.language === "ar"
+                    ? furnishedOptionsAr.find(
+                        (item) => item?.id === estaplished
+                      )?.name
+                    : furnishedOptionsEn.find(
+                        (item) => item?.id === estaplished
+                      )?.name
+                }
+              />
+              <MainSelect
+                label="kitchen"
+                options={i18n.language === "ar" ? elevatorsAr : elevatorsEn}
+                value={
+                  i18n.language === "ar"
+                    ? elevatorsAr.find((item) => item?.id === kitchen)?.name
+                    : elevatorsEn.find((item) => item?.id === kitchen)?.name
+                }
+                onSelect={handleKitchenChange}
+              />
+              <MainInput
+                min={0}
+                label="airConditions"
+                type="number"
+                value={airConditions}
+                onChange={handleAirConditionChange}
+              />
+              <MainInput
+                min={0}
+                label="parkingNumbers"
+                type="number"
+                value={parkingNumbers}
+                onChange={handleParkingNumbersChange}
+              />
               <MainInput
                 type="number"
                 label="price"
@@ -475,6 +538,22 @@ const EditRealstate = () => {
                     ?.name || ""
                 }
               />
+              {+parkingNumbers !== 0 ? (
+                <MainSelect
+                  onSelect={handleParkingTypeChange}
+                  label="parkingType"
+                  options={
+                    i18n.language === "ar" ? parkingTypeAr : parkingTypeEn
+                  }
+                  value={
+                    i18n.language === "ar"
+                      ? parkingTypeAr.find((item) => item?.id === parkingType)
+                          ?.name
+                      : parkingTypeEn.find((item) => item?.id === parkingType)
+                          ?.name
+                  }
+                />
+              ) : null}
             </div>
             <div className="my-8">
               <EditSuck
