@@ -12,6 +12,7 @@ const MainSelect = ({
   disabled,
   loading,
   value,
+  disabledTitle,
 }) => {
   const { t, i18n } = useTranslation();
   const [showOptions, setShowOptions] = useState(false);
@@ -52,7 +53,11 @@ const MainSelect = ({
             border ? border : "border border-[#9399A3]"
           } ${bg ? `${bg} border-none` : "bg-white"}`}
         >
-          <p>{selectedOption}</p>
+          {disabled && disabledTitle ? (
+            <p>{t("disabled title")}</p>
+          ) : (
+            <p>{selectedOption}</p>
+          )}
           {!disabled ? (
             <IoMdArrowDropdown size={30} className="text-end" />
           ) : null}

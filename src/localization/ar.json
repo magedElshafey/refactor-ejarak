@@ -579,5 +579,16 @@
   "refused reason field is required": "سبب الرفض مطلوب",
   "change location": "تغيير الموقع",
   "completed": "مكتمل",
-  "login need": "تحتاج الي تسجيل الدخول لكي تتمكن من التواصل مع مالك العقار"
+  "login need": "تحتاج الي تسجيل الدخول لكي تتمكن من التواصل مع مالك العقار",
+  "Furnished": "مؤثث",
+  "furnished field is required": "يجب إختيار هل اذا كان العقار مؤثث ام غير مؤثث",
+  "kitchen": "المطابخ",
+  "kitchen field is required": "يجب إختيار اذا كان العقار يحتوي علي مطابخ ام لا ",
+  "parkingNumbers field is required": "يجب تحديد عدد المواقف للعقار",
+  "parkingNumbers": "عدد المواقف",
+  "parkingType field is required": "يجب إختيار نوع الموقف",
+  "parkingType": "نوع الموقف",
+  "disabled title": "تجاهل هذا الحقل",
+  "airConditions field is required": "يجب إدخال عدد التكييفات",
+  "airConditions": "عدد التكييفات"
 }

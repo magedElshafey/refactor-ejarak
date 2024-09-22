@@ -560,5 +560,16 @@
   "refused reason field is required": "refused reason field is required",
   "change location": "change location",
   "completed": "completed",
-  "login need": "You need to log in to be able to communicate with the realstate owner"
+  "login need": "You need to log in to be able to communicate with the realstate owner",
+  "Furnished": "Furnished",
+  "furnished field is required": "furnished field is required",
+  "kitchen": "kitchens",
+  "kitchen field is required": "kitchen field is required",
+  "parkingNumbers field is required": "parking Numbers field is required",
+  "parkingNumbers": "parking Numbers",
+  "parkingType field is required": "parking Type field is required",
+  "parkingType": "parking Type",
+  "disabled title": "ignore this field",
+  "airConditions field is required": "airConditions field is required",
+  "airConditions": "air Conditions"
 }

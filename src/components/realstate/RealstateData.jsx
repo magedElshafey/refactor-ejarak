@@ -63,6 +63,52 @@ const RealstateData = ({ data }) => {
           <p className="text-black font-bold">{data?.bathrooms_count}</p>
         </div>
         <div>
+          <p className="text-[#4D5F65] mb-1">{t("Furnished")}</p>
+          <p className="text-black font-bold">
+            {data?.furniture === 0 && i18n.language === "ar"
+              ? "لا"
+              : data.furniture === 0 && i18n.language === "en"
+              ? "NO"
+              : data.furniture !== 0 && i18n.language === "ar"
+              ? "نعم"
+              : "Yes"}
+          </p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("kitchen")}</p>
+          <p className="text-black font-bold">
+            {data?.kitchen === 0 && i18n.language === "ar"
+              ? "لا"
+              : data.kitchen === 0 && i18n.language === "en"
+              ? "NO"
+              : data.kitchen !== 0 && i18n.language === "ar"
+              ? "نعم"
+              : "Yes"}
+          </p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("airConditions")}</p>
+          <p className="text-black font-bold">{data?.air_conditioner}</p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("parkingNumbers")}</p>
+          <p className="text-black font-bold">{data?.barking_space}</p>
+        </div>
+        {data?.barking_space ? (
+          <div>
+            <p className="text-[#4D5F65] mb-1">{t("parkingType")}</p>
+            <p className="text-black font-bold">
+              {data?.barking === 0 && i18n.language === "ar"
+                ? "بدروم"
+                : data?.barking === 0 && i18n.language === "en"
+                ? "basement"
+                : data.barking !== 0 && i18n.language === "ar"
+                ? "أمامي"
+                : "front"}
+            </p>
+          </div>
+        ) : null}
+        <div>
           <p className="text-[#4D5F65] mb-1">{t("Number of service rooms")}</p>
           <p className="text-black font-bold">{data.service_room}</p>
         </div>
@@ -70,10 +116,7 @@ const RealstateData = ({ data }) => {
           <p className="text-[#4D5F65] mb-1">{t("payment method")}</p>
           <p className="text-black font-bold">{data.payment_type_id?.name}</p>
         </div>
-        {/* <div>
-          <p className="text-[#4D5F65] mb-1">{t("advertiser type")}</p>
-          <p className="text-black font-bold">{data?.user?.account?.text}</p>
-        </div> */}
+
         <div>
           <p className="text-[#4D5F65] mb-1">{t("suckNum")}</p>
           <p className="text-black font-bold">{data?.instrument_number}</p>

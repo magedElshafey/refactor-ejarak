@@ -44,6 +44,11 @@ const FormThree = ({
   paymentType,
   service,
   coordinates,
+  furnished,
+  kitchen,
+  parkingNumbers,
+  parkingType,
+  airConditions,
 }) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -152,6 +157,11 @@ const FormThree = ({
       formData.append("payment_type_id", paymentType);
       formData.append("instrument_number", instrument_number);
       formData.append("address", address);
+      formData.append("furniture", furnished);
+      formData.append("kitchen", kitchen);
+      formData.append("air_conditioner", airConditions);
+      formData.append("barking_space", parkingNumbers);
+      formData.append("barking", parkingType);
       mutate(formData);
     }
   };

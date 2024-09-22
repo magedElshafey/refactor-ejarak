@@ -49,7 +49,7 @@ const Navbar = ({ bg, dashboard }) => {
     }
   };
   useClickOutside(filterRef, () => dispatch(closeFilter()));
-  const isLogin = auth.ejarakLogin;
+  const isLogin = auth?.ejarakLogin;
   const navigate = useNavigate();
   const type = auth?.userData?.account?.type || null;
   const handleClickOutside = (event) => {
@@ -143,9 +143,9 @@ const Navbar = ({ bg, dashboard }) => {
           </div>
           <LangMenu bg={bg} />
           {ejarakLogin &&
-          (userData.account.type === "owner" ||
-            userData.account.type === "tenant" ||
-            userData.account.type === "customer_service") ? (
+          (userData?.account.type === "owner" ||
+            userData?.account.type === "tenant" ||
+            userData?.account.type === "customer_service") ? (
             <>
               <ChatMenu bg={bg} />
             </>
