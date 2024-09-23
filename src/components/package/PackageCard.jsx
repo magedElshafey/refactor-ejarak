@@ -11,6 +11,7 @@ const PackageCard = ({
   isActive,
   showActivateBtn,
   remainingContracts,
+  packagePage,
 }) => {
   const { t } = useTranslation();
   const params = useParams();
@@ -108,7 +109,7 @@ const PackageCard = ({
               </button>
             )}
           </>
-        ) : isActive ? (
+        ) : isActive && !packagePage ? (
           <>
             {loadingCreateContract ? (
               <div className="max-w-[180px]">

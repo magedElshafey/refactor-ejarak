@@ -6,7 +6,7 @@ import {
   appDetails,
   navLinks,
   aboutUs,
-  accountDetailsNavbar,
+  footerDetails,
 } from "../../../data/data";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
@@ -98,7 +98,7 @@ const Footer = ({ isHome }) => {
                     </p>
                   ) : null}
 
-                  {accountDetailsNavbar
+                  {footerDetails
                     ?.filter((item) => item.role.includes(role))
                     .map((item, index) => (
                       <NavLink
@@ -111,24 +111,6 @@ const Footer = ({ isHome }) => {
                     ))}
                 </div>
               ) : null}
-              {/* <div>
-                <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                  {t(followUs.title)}
-                </p>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {followUs.details.map((item, index) => (
-                    <a
-                      key={index}
-                      href={item.path}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block mb-3 text-white"
-                    >
-                      {item.icon}
-                    </a>
-                  ))}
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
@@ -202,7 +184,7 @@ const Footer = ({ isHome }) => {
                       {t("account")}
                     </p>
                   ) : null}
-                  {accountDetailsNavbar
+                  {footerDetails
                     ?.filter((item) => item.role.includes(role))
                     .map((item, index) => (
                       <NavLink

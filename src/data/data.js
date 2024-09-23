@@ -3,6 +3,7 @@ import {
   BsFillHouseLockFill,
   BsBuildingFill,
   BsFillHousesFill,
+  BsBorderStyle,
 } from "react-icons/bs";
 import Swal from "sweetalert2";
 import { t } from "i18next";
@@ -24,6 +25,7 @@ import { GoPackage } from "react-icons/go";
 import { LiaFileContractSolid } from "react-icons/lia";
 import { VscSettings } from "react-icons/vsc";
 import { IoSettings } from "react-icons/io5";
+import { PiPackageFill } from "react-icons/pi";
 
 export const navLinks = [
   {
@@ -56,6 +58,67 @@ export const navLinks = [
           position: "center",
           title: t("you need to login as a realstate owner"),
         });
+      }
+    },
+  },
+  {
+    arTitle: "الباقات",
+    enTitle: "packages",
+    path: "/website/packages",
+    icon: <PiPackageFill size={20} />,
+    onClick: (e, isLoggedIn, navigate, type) => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        Swal.fire({
+          title: t("you need to login as a realstate owner"),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: t("login"),
+          cancelButtonText: t("cancel"),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/auth/login");
+          } else {
+            return;
+          }
+        });
+      } else if (type !== "owner") {
+        e.preventDefault();
+        Swal.fire({
+          icon: "error",
+          position: "center",
+          title: t("you need to login as a realstate owner"),
+        });
+      }
+    },
+  },
+  {
+    arTitle: "طلباتي",
+    enTitle: "my orders",
+    path: "/website/my-reservations",
+    icon: <BsBorderStyle size={20} />,
+    onClick: (e, isLoggedIn, navigate, setActiveLink) => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        Swal.fire({
+          text: t("login_first"),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: t("login"),
+          cancelButtonText: t("cancel"),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/auth/login");
+          } else {
+            return;
+          }
+        });
+      } else {
+        navigate("/my-reservations");
       }
     },
   },
@@ -187,6 +250,23 @@ export const accountDetailsNavbar = [
     path: "/website/my-realstates",
     role: ["owner"],
   },
+  // {
+  //   title: "my reservations",
+  //   path: "/website/my-reservations",
+  //   role: ["owner", "tenant"],
+  // },
+  // {
+  //   title: "contracts",
+  //   path: "/website/my-contracts",
+  //   role: ["owner", "tenant"],
+  // },
+  // {
+  //   title: "my orders",
+  //   path: "/website/my-orders",
+  //   role: ["owner", "tenant"],
+  // },
+];
+export const myOrdersDetailsNavbar = [
   {
     title: "my reservations",
     path: "/website/my-reservations",
@@ -430,5 +510,17 @@ export const parkingTypeEn = [
   {
     id: 1,
     name: "front",
+  },
+];
+export const footerDetails = [
+  {
+    path: "my-account",
+    title: "my account",
+    role: ["owner", "tenant"],
+  },
+  {
+    path: "my-reservations",
+    title: "my orders",
+    role: ["owner", "tenant"],
   },
 ];

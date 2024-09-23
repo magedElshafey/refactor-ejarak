@@ -592,5 +592,6 @@
   "airConditions field is required": "يجب إدخال عدد التكييفات",
   "airConditions": "عدد التكييفات",
   "static pages settings": "الصفحات الثابتة",
-  "real state settings": "إعدادات العقارات"
+  "real state settings": "إعدادات العقارات",
+  "my orders": "طلباتي"
 }

@@ -35,7 +35,6 @@ const MainInput = ({
       >
         <input
           id={t(label)}
-          required
           placeholder={t(placeholder)}
           type={
             type === "password" && showPassword

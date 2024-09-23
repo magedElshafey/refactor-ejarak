@@ -82,6 +82,9 @@ const RealstateDetails = ({ isDashboard }) => {
               video={data?.data?.data?.video}
               suck={data?.data?.data?.instrument_file}
               setShowSuckModal={setShowSuckModal}
+              realStateOwnerId={data?.data?.data?.user?.id}
+              userId={userId}
+              role={role}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 my-8">
               <RealstateData data={data?.data?.data} />

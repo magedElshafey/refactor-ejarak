@@ -143,9 +143,9 @@ const Navbar = ({ bg, dashboard }) => {
           </div>
           <LangMenu bg={bg} />
           {ejarakLogin &&
-          (userData?.account.type === "owner" ||
-            userData?.account.type === "tenant" ||
-            userData?.account.type === "customer_service") ? (
+          (userData?.account?.type === "owner" ||
+            userData?.account?.type === "tenant" ||
+            userData?.account?.type === "customer_service") ? (
             <>
               <ChatMenu bg={bg} />
             </>
@@ -176,9 +176,9 @@ const Navbar = ({ bg, dashboard }) => {
               </>
             ) : null}
             {ejarakLogin &&
-            (userData.account.type === "owner" ||
-              userData.account.type === "tenant" ||
-              userData.account.type === "customer_service") ? (
+            (userData.account?.type === "owner" ||
+              userData.account?.type === "tenant" ||
+              userData.account?.type === "customer_service") ? (
               <>
                 <ChatMenu bg={bg} />
               </>

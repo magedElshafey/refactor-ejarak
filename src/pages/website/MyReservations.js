@@ -11,6 +11,7 @@ import ReservationCard from "../../components/common/reservations/ReservationCar
 import NoDataTitle from "../../components/common/NoDataTitle";
 import { getCurrentDate } from "../../utils/getCurrentDate";
 import RefusedReason from "../../components/common/RefusedReason";
+import MyOrderDetailsNavbar from "../../components/common/accountDetails/MyOrderDetailsNavbar";
 const MyReservations = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const created_at = getCurrentDate();
@@ -31,7 +32,7 @@ const MyReservations = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-8">
-          <AccountDetailsNavbar />
+          <MyOrderDetailsNavbar />
           <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
             <div className="mb-5">
               <StatusNavbar

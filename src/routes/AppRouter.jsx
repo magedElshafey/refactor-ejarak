@@ -63,6 +63,7 @@ import Reservations from "../pages/dashboard/reservations/Reservations";
 import Success from "../pages/website/Success";
 import PaymentError from "../pages/website/PaymentError";
 import ScrollToTopAfterChangePage from "../components/App/ScrollToTopAfterChangePage";
+import Packagess from "../pages/website/Packagess";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -176,6 +177,10 @@ const router = createBrowserRouter([
       {
         path: "payment/error",
         element: <PaymentError />,
+      },
+      {
+        path: "packages",
+        element: <Packagess />,
       },
     ],
   },

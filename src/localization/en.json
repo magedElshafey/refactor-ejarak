@@ -573,5 +573,6 @@
   "airConditions field is required": "airConditions field is required",
   "airConditions": "air Conditions",
   "static pages settings": "static pages",
-  "real state settings": "real state settings"
+  "real state settings": "real state settings",
+  "my orders": "my orders"
 }

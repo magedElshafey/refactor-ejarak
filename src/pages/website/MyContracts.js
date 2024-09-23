@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { useSelector } from "react-redux";
 import NoDataTitle from "../../components/common/NoDataTitle";
 import ContractCard from "../../components/contracts/ContractCard";
+import MyOrderDetailsNavbar from "../../components/common/accountDetails/MyOrderDetailsNavbar";
 const MyContracts = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [orginalContracts, setOrginalContracts] = useState([]);
@@ -36,7 +37,7 @@ const MyContracts = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-8">
-          <AccountDetailsNavbar />
+          <MyOrderDetailsNavbar />
           <div className="bg-white p-6 rounded-2xl shadow-2xl mt-5">
             <div className="mb-8">
               <StatusNavbar

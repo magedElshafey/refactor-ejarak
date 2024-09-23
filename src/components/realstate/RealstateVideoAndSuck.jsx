@@ -3,8 +3,15 @@ import { useTranslation } from "react-i18next";
 import { FaDownload } from "react-icons/fa";
 import { FaPlay } from "react-icons/fa";
 
-const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
+const RealstateVideoAndSuck = ({
+  video,
+  suck,
+  realStateOwnerId,
+  userId,
+  role,
+}) => {
   const { t } = useTranslation();
+  console.log("role", role);
   const handleDownload = (file) => {
     const link = document.createElement("a");
     link.href = file;
@@ -46,8 +53,8 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
           )}
         </div>
       ) : null}
-
-      {suck.length ? (
+      {role === "super_admin" ||
+      (role === "owner" && realStateOwnerId === userId) ? (
         <div className=" bg-white rounded-lg p-3 shadow-xl flex flex-col items-center justify-center gap-3">
           {suck[0].endsWith(".pdf") ? (
             <>
@@ -78,6 +85,37 @@ const RealstateVideoAndSuck = ({ video, suck, setShowSuckModal }) => {
           )}
         </div>
       ) : null}
+      {/* {suck.length ? (
+        <div className=" bg-white rounded-lg p-3 shadow-xl flex flex-col items-center justify-center gap-3">
+          {suck[0].endsWith(".pdf") ? (
+            <>
+              <p className="font-semibold text-md lg:text-lg xl:text-xl">
+                {t("view suck file")}
+              </p>
+              <div className="bg-[#edf7ee] flex items-center justify-center w-40 h-40 rounded-[50%]">
+                <FaDownload size={50} className="text-maincolorgreen" />
+              </div>
+              <button
+                onClick={() => handleDownload(suck[0])}
+                className=" bg-maincolorgreen text-white p-3 rounded-md font-bold flex items-center justify-center h-fit w-[250px] mx-auto"
+              >
+                {t("sukFile")}
+              </button>
+            </>
+          ) : (
+            <>
+              <p className=" font-semibold text-textColor mb-4 text-md md:text-lg lg:text-xl xl:text-2xl">
+                {t("suck image")}
+              </p>
+              <img
+                alt="suck"
+                src={suck[0]}
+                className="w-full md:w-[350px] lg:w-[550px] h-[300px] mx-auto"
+              />
+            </>
+          )}
+        </div>
+      ) : null} */}
     </div>
   );
 };

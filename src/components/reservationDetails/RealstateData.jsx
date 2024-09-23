@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 const RealstateData = ({ data, downloadContract }) => {
   const { t, i18n } = useTranslation();
+  console.log("data?.air_conditioner", data?.air_conditioner);
+  console.log("data", data);
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300">
       <p className={`text-lg mb-5 bg-slate-200 p-2 rounded-md`}>
@@ -79,6 +81,53 @@ const RealstateData = ({ data, downloadContract }) => {
           <p className="text-[#4D5F65] mb-1">{t("Number of Bathrooms")}</p>
           <p className="text-black">{data?.bathrooms_count}</p>
         </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("Furnished")}</p>
+          <p className="text-black">
+            {data?.furniture === 0 && i18n.language === "ar"
+              ? "لا"
+              : data.furniture === 0 && i18n.language === "en"
+              ? "NO"
+              : data.furniture !== 0 && i18n.language === "ar"
+              ? "نعم"
+              : "Yes"}
+          </p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("kitchen")}</p>
+          <p className="text-black">
+            {data?.kitchen === 0 && i18n.language === "ar"
+              ? "لا"
+              : data.kitchen === 0 && i18n.language === "en"
+              ? "NO"
+              : data.kitchen !== 0 && i18n.language === "ar"
+              ? "نعم"
+              : "Yes"}
+          </p>
+        </div>
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("airConditions")}</p>
+          <p className="text-black">{data?.air_conditioner}</p>
+        </div>
+
+        <div>
+          <p className="text-[#4D5F65] mb-1">{t("parkingNumbers")}</p>
+          <p className="text-black">{data?.barking_space}</p>
+        </div>
+        {data?.barking_space ? (
+          <div>
+            <p className="text-[#4D5F65] mb-1">{t("parkingType")}</p>
+            <p className="text-black">
+              {data?.barking === 0 && i18n.language === "ar"
+                ? "بدروم"
+                : data?.barking === 0 && i18n.language === "en"
+                ? "basement"
+                : data.barking !== 0 && i18n.language === "ar"
+                ? "أمامي"
+                : "front"}
+            </p>
+          </div>
+        ) : null}
         <div>
           <p className="text-[#4D5F65] mb-1">{t("Number of service rooms")}</p>
           <p className="text-black">{data.service_room}</p>
