@@ -126,6 +126,7 @@ const PackageCard = ({
           </>
         ) : null}
       </div>
+      <p className="text-red-600 text-xs md:text-sm">*{t("not include")}</p>
     </div>
   );
 };
