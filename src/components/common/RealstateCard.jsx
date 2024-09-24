@@ -49,8 +49,8 @@ const RealStateCard = ({ data, dep }) => {
         </div>
       </div>
       <div className="px-4 mb-3 ">
-        <div className="flex items-center justify-between flex-col md:flex-row gap-3 md:gap-0">
-          <div className="flex-1 flex flex-col md:flex-row gap-2">
+        <div className="flex items-center justify-between flex-col xl:flex-row gap-3 xl:gap-0">
+          <div className="flex-1 flex flex-col lg:flex-row gap-2">
             <div className="relative">
               <img
                 src={data.images[0]}

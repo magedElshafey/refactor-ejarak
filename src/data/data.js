@@ -84,7 +84,7 @@ export const navLinks = [
             return;
           }
         });
-      } else if (type !== "owner") {
+      } else if (type === "tenant") {
         e.preventDefault();
         Swal.fire({
           icon: "error",

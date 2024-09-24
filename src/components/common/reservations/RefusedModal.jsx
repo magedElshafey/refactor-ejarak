@@ -47,6 +47,12 @@ const RefusedModal = ({ id, dep, setShowModal, data }) => {
         title: t("please fill all fields"),
       });
       return;
+    } else if (reasonKey && !anotherReason.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: t("please fill all fields"),
+      });
+      return;
     } else {
       const reservationData = {
         rent_refused_reasons_id: reason,
