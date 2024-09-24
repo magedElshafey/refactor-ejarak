@@ -514,12 +514,12 @@ export const parkingTypeEn = [
 ];
 export const footerDetails = [
   {
-    path: "my-account",
+    path: "website/my-account",
     title: "my account",
     role: ["owner", "tenant"],
   },
   {
-    path: "my-reservations",
+    path: "website/my-reservations",
     title: "my orders",
     role: ["owner", "tenant"],
   },

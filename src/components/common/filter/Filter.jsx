@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import RealStateCategories from "./RealStateCategories";
@@ -8,17 +8,39 @@ import Bathrooms from "./Bathrooms";
 import Area from "./Area";
 import ResetBtn from "./ResetBtn";
 import { useDispatch } from "react-redux";
-import { closeFilter } from "../../../store/filterSlice";
+import { closeFilter, changeDistance } from "../../../store/filterSlice";
 import { IoClose } from "react-icons/io5";
 import SearchBtn from "./SearchBtn";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { location } = useSelector((state) => state.filterSlice);
+  const { location, distance } = useSelector((state) => state.filterSlice);
+  const [dist, setDist] = useState(distance || ""); // اجعل الحالة تعتمد على Redux
+  const debounceRef = useRef();
+  useEffect(() => {
+    setDist(distance); // تحديث حالة dist عند تغيير distance في Redux
+  }, [distance]);
+  useEffect(() => {
+    if (dist === "") return; // تأكد من عدم إرسال طلب عند الحقل الفارغ
+
+    // تنظيف الـ timeout السابق إذا كان موجودًا
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    // تعيين الـ timeout لإرسال الـ request بعد 1 ثانية
+    debounceRef.current = setTimeout(() => {
+      dispatch(changeDistance(dist));
+    }, 500);
+
+    // تنظيف الـ timeout عند unmounting أو تغيير dist
+    return () => {
+      clearTimeout(debounceRef.current);
+    };
+  }, [dist, dispatch]);
   return (
     <div
       className={`${bg} w-full ${rounded} p-4 px-6 min-h-full ${
@@ -55,6 +77,23 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
               {t("change location")}
             </Link>
           ) : null}
+        </div>
+      ) : null}
+      {pathname === "/website/near-realstates" || pathname === "/" ? (
+        <div className="my-5">
+          <label
+            htmlFor="dist"
+            className="text-lg text-start text-black font-semibold mb-2"
+          >
+            {t("dist")} ({t("km")})
+          </label>
+          <input
+            type="number"
+            id="dist"
+            className="w-full border p-2 rounded-md bg-transparent focus:outline-none"
+            value={dist}
+            onChange={(e) => setDist(e.target.value)}
+          />
         </div>
       ) : null}
       <RealStateCategories />

@@ -575,5 +575,16 @@
   "static pages settings": "static pages",
   "real state settings": "real state settings",
   "my orders": "my orders",
-  "not include": "Does not include Ministry of Housing fees"
+  "not include": "Does not include Ministry of Housing fees",
+  "Are you sure you want to delete the realstate": "Are you sure you want to delete the realstate",
+  "Yes, delete it!": "Yes, delete it!",
+  "Please , Enter the deleted reason": "Please , Enter the deleted reason",
+  "You need to Enter the deleted reason": "You need to Enter the deleted reason",
+  "You won't be able to revert this!": "You won't be able to revert this!",
+  "deleted reason": "deleted reason",
+  "dist": "distnace",
+  "km": "km",
+  "payApp": "pay application fees",
+  "num error": "instrument number field should contain from numbers only",
+  "length error": "instrument number field should contain from 12 charchters only"
 }

@@ -26,6 +26,7 @@ const initialState = {
   sortCreate: "",
   sort: "",
   cityId: "",
+  distance: "",
 };
 
 const filterSlice = createSlice({
@@ -114,6 +115,9 @@ const filterSlice = createSlice({
     changeCityId: (state, action) => {
       state.cityId = action.payload;
     },
+    changeDistance: (state, action) => {
+      state.distance = action.payload;
+    },
     resetFilter: (state) => {
       state.categoryId = "";
       state.subCategoryId = [];
@@ -129,6 +133,7 @@ const filterSlice = createSlice({
       state.sort = "";
       state.sortCreate = "";
       state.cityId = "";
+      state.distance = "";
     },
   },
 });
@@ -154,5 +159,6 @@ export const {
   changeSortCreateHigh,
   changeSortCreateLow,
   changeCityId,
+  changeDistance,
 } = filterSlice.actions;
 export default filterSlice.reducer;

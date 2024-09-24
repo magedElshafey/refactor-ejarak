@@ -1,7 +1,8 @@
 import { request } from "../axios";
-export const deleteRealstate = async (id) => {
+export const deleteRealstate = async (id, data) => {
   return await request({
     url: `/realties/${id}`,
-    method: "delete",
+    method: "PATCH",
+    data,
   });
 };

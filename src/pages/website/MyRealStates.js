@@ -27,7 +27,6 @@ const MyRealStates = () => {
     activeIndex
   );
   const handleAddRealState = () => navigate("/website/add-realstate");
-
   return (
     <>
       {isLoading ? (
@@ -70,9 +69,19 @@ const MyRealStates = () => {
                         <ReservationBtn id={item.id} />
                       ) : null}
                       <EditBtn id={item.id} />
-                      <DeleteBtn id={item.id} dep="my-realstates" />
+                      {item?.status === "pending" && !item?.delete_reason ? (
+                        <DeleteBtn id={item.id} dep="my-realstates" />
+                      ) : null}
                     </div>
                   </div>
+                  {item?.status === "pending" && !item?.delete_reason ? null : (
+                    <div className="flex-1">
+                      <RefusedReason
+                        reason={item.delete_reason}
+                        isDeleted={true}
+                      />
+                    </div>
+                  )}
                 </div>
               ))
             ) : (

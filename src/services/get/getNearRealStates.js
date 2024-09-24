@@ -12,9 +12,10 @@ export const getNearRealStates = (
   name,
   sortPrice,
   sort,
-  sortCreate
+  sortCreate,
+  distance
 ) => {
   return request({
-    url: `/real-estate/near-me?lat=${lat}&lng=${lng}&suggestion=true&name=${name}&cat_id=${categoryId}&sub_cat_id=${subCtegoryId}&price_high=${highPrice}&price_low=${lowPrice}&rooms_count=${rooms}&bathrooms_count=${bathrooms}&area=${area}&sort_price=${sortPrice}&sort_by=${sort}&sort_create=${sortCreate}`,
+    url: `/real-estate/near-me?lat=${lat}&lng=${lng}&suggestion=true&name=${name}&cat_id=${categoryId}&sub_cat_id=${subCtegoryId}&price_high=${highPrice}&price_low=${lowPrice}&rooms_count=${rooms}&bathrooms_count=${bathrooms}&area=${area}&sort_price=${sortPrice}&sort_by=${sort}&sort_create=${sortCreate}&distance=${distance}`,
   });
 };

@@ -37,6 +37,7 @@ const ManualContractDetails = () => {
             <p className="font-bold text-textColor text-md md:text-lg lg:text-xl xl:text-2xl ">
               {t("Create a contract (manually)")}
             </p>
+
             <div className="max-w-[200px]">
               <MainBtn action={downloadPDF} text={t("download contract")} />
             </div>

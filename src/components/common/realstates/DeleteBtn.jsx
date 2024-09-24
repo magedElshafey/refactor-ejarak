@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const DeleteBtn = ({ id, dep }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
-  const { isLoading, mutate } = useMutation(() => deleteRealstate(id), {
+  const { isLoading, mutate } = useMutation((v) => deleteRealstate(id, v), {
     onSuccess: (data) => {
       if (data?.data?.status) {
         Swal.fire({
@@ -24,7 +24,44 @@ const DeleteBtn = ({ id, dep }) => {
     },
   });
   const handleClick = () => {
-    mutate();
+    Swal.fire({
+      title: t("Are you sure you want to delete the realstate"),
+      text: t("You won't be able to revert this!"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#009639",
+      cancelButtonColor: "#ED2E38",
+      confirmButtonText: t("Yes, delete it!"),
+      cancelButtonText: t("cancel"),
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: t("Please , Enter the deleted reason"),
+          input: "text",
+          inputValidator: (value) => {
+            if (!value) {
+              return t("You need to Enter the deleted reason");
+            }
+          },
+          showCancelButton: true,
+          confirmButtonColor: "#009639",
+          confirmButtonText: t("send"),
+          cancelButtonColor: "#ED2E38",
+          cancelButtonText: t("cancel"),
+        }).then((res) => {
+          if (res.isConfirmed) {
+            const delete_reason = res.value;
+            console.log("delete reaseon", delete_reason);
+            const data = { delete_reason };
+            mutate(data);
+          } else {
+            return;
+          }
+        });
+      } else {
+        return;
+      }
+    });
   };
   return (
     <button

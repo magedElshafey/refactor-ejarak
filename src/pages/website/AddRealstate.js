@@ -63,7 +63,7 @@ const AddRealstate = () => {
 
     // السماح فقط بالأرقام
     if (!/^\d*$/.test(value)) {
-      setInstrumentNumError("يجب أن يحتوي فقط على أرقام");
+      setInstrumentNumError(t("num error"));
       return;
     }
 
@@ -72,7 +72,7 @@ const AddRealstate = () => {
 
     // التحقق من الطول
     if (value.length !== 12) {
-      setInstrumentNumError("يجب أن يتكون من 12 رقمًا");
+      setInstrumentNumError(t("length error"));
     } else {
       setInstrumentNumError(""); // مسح الخطأ إذا كانت الشروط صحيحة
     }
