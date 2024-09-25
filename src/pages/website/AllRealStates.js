@@ -12,17 +12,17 @@ import PriceBtn from "../../components/common/filter/PriceBtn";
 import ReviewBtn from "../../components/common/filter/ReviewBtn";
 import NewsBtn from "../../components/common/filter/NewsBtn";
 import Pagination from "../../components/common/Pagination";
-import MainSelect from "../../components/common/inputs/MainSelect";
-import { useGlobalContext } from "../../hooks/GlobalContext";
+// import MainSelect from "../../components/common/inputs/MainSelect";
+// import { useGlobalContext } from "../../hooks/GlobalContext";
 import CityBtn from "../../components/common/filter/CityBtn";
 const AllRealStates = () => {
   const dispatch = useDispatch();
-  const { data: global } = useGlobalContext();
+  // const { data: global } = useGlobalContext();
 
   // reset all redux value when the page loaded
   useEffect(() => {
     dispatch(resetFilter());
-  }, []);
+  }, [dispatch]);
   const {
     categoryId,
     subCategoryId,
