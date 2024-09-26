@@ -27,6 +27,7 @@ const MyRealStates = () => {
     activeIndex
   );
   const handleAddRealState = () => navigate("/website/add-realstate");
+  console.log("filteredData", filteredData);
   return (
     <>
       {isLoading ? (
@@ -74,14 +75,22 @@ const MyRealStates = () => {
                       ) : null}
                     </div>
                   </div>
-                  {item?.status === "pending" && !item?.delete_reason ? null : (
+                  {/* {item?.status === "pending" && !item?.delete_reason ? (
+                    item?.status !== "pending" ? null : (
+                      ""
+                    )
+                  ) : (
+                 
+                  )} */}
+                  {item?.status !== "pending" ? null : item.status ===
+                      "pending" && item?.delete_reason !== null ? (
                     <div className="flex-1">
                       <RefusedReason
                         reason={item.delete_reason}
                         isDeleted={true}
                       />
                     </div>
-                  )}
+                  ) : null}
                 </div>
               ))
             ) : (

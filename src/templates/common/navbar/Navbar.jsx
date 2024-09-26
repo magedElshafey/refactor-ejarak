@@ -116,6 +116,8 @@ const Navbar = ({ bg, dashboard }) => {
         ? [...notifications, ...results]
         : notifications;
       const oldUnseen = response?.data?.un_seen || 0;
+      console.log("old unssen", oldUnseen);
+      console.log("unseen", unseen);
       const newData = {
         ...response,
         data: {

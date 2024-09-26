@@ -459,7 +459,7 @@ input[type='checkbox'] {
 /* input[type='checkbox'] {
     border-radius: 1px;
 } */
-a.active.dash {
+.dash {
     background-color: white;
     border-radius: 5px;
     color: var(--mainColor);
