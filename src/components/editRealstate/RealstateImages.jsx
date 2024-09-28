@@ -15,30 +15,32 @@ const RealstateImages = ({
   selectedPhotos,
   setSelectedPhotos,
   realstateId,
+  deletedIndexes,
+  setDeletedIndexes,
 }) => {
   const { t, i18n } = useTranslation();
-  const queryClient = useQueryClient();
-  const [deletingIndex, setDeletingIndex] = useState(null);
-  const { isLoading, mutate } = useMutation(
-    (v) => deleteRealstateImages(realstateId, v),
-    {
-      onSuccess: (data) => {
-        if (data?.data?.status) {
-          Swal.fire({
-            icon: "success",
-            title: data?.data?.message,
-          });
-          queryClient.invalidateQueries(["realstate-details", realstateId]);
-          queryClient.invalidateQueries("my-realstates");
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: data?.response?.data?.message,
-          });
-        }
-      },
-    }
-  );
+  // const queryClient = useQueryClient();
+  // const [deletingIndex, setDeletingIndex] = useState(null);
+  // const { isLoading, mutate } = useMutation(
+  //   (v) => deleteRealstateImages(realstateId, v),
+  //   {
+  //     onSuccess: (data) => {
+  //       if (data?.data?.status) {
+  //         Swal.fire({
+  //           icon: "success",
+  //           title: data?.data?.message,
+  //         });
+  //         queryClient.invalidateQueries(["realstate-details", realstateId]);
+  //         queryClient.invalidateQueries("my-realstates");
+  //       } else {
+  //         Swal.fire({
+  //           icon: "error",
+  //           title: data?.response?.data?.message,
+  //         });
+  //       }
+  //     },
+  //   }
+  // );
   const sliderRef = useRef(null);
 
   const settings = {
@@ -79,12 +81,13 @@ const RealstateImages = ({
   const slickPrev = () => {
     sliderRef.current.slickPrev();
   };
-  const handleClick = (data) => {
-    setDeletingIndex(data);
-    const userData = {
-      indexes: [data],
-    };
-    mutate(userData);
+  const handleClick = (index) => {
+    // setDeletedIndexes(index);
+    setDeletedIndexes((prev) => [...prev, index]);
+
+    // إزالة الصورة من العرض
+    const newPreviews = previewsPhotos.filter((_, i) => i !== index);
+    setPreveiwsPhotos(newPreviews);
   };
   const inputRef = useRef(null);
   const handleButtonClick = () => inputRef.current.click();
@@ -159,14 +162,13 @@ const RealstateImages = ({
                 alt="preveiw/img"
                 className="w-full h-full object-cover"
               />
-              {!isLoading || deletingIndex !== index ? (
-                <div
-                  onClick={() => handleClick(index)}
-                  className="absolute left-0 top-0 w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer"
-                >
-                  <IoMdClose size={20} className="text-white" />
-                </div>
-              ) : null}
+
+              <div
+                onClick={() => handleClick(index)}
+                className="absolute left-0 top-0 w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer"
+              >
+                <IoMdClose size={20} className="text-white" />
+              </div>
             </div>
           ))
         ) : (

@@ -94,6 +94,7 @@ const EditRealstate = () => {
   const [suckPreview, setSuckPreview] = useState("");
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [videoPreview, setVideoPreview] = useState("");
+  const [deletedIndexes, setDeletedIndexes] = useState([]);
   const { data: global } = useGlobalContext();
   const selectedCategory = global?.categories?.find(
     (item) => item?.id === categoryId
@@ -151,9 +152,7 @@ const EditRealstate = () => {
       refetchOnWindowFocus: false,
     }
   );
-  console.log("data returned from realstate edit", data?.data?.data);
-  console.log("services room", data?.data?.data?.service_room);
-  console.log("parking numbers", parkingNumbers);
+
   const { isLoading: loadingEdit, mutate } = useMutation(
     async (formData) => {
       const response = await axios.post(
@@ -333,6 +332,9 @@ const EditRealstate = () => {
       if (selectedVideo) {
         formData.append("video", selectedVideo);
       }
+      deletedIndexes.forEach((index) => {
+        formData.append("image_delete[]", index);
+      });
     }
 
     mutate(formData);
@@ -358,6 +360,8 @@ const EditRealstate = () => {
               selectedPhotos={selectedPhotos}
               setSelectedPhotos={setSelectedPhotos}
               realstateId={params.id}
+              deletedIndexes={deletedIndexes}
+              setDeletedIndexes={setDeletedIndexes}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-6">
               <MainInput

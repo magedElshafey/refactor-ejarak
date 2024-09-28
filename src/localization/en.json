@@ -586,5 +586,6 @@
   "km": "km",
   "payApp": "pay application fees",
   "num error": "instrument number field should contain from numbers only",
-  "length error": "instrument number field should contain from 12 charchters only"
+  "length error": "instrument number field should contain from 12 charchters only",
+  "add real state": "add real state"
 }

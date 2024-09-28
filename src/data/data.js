@@ -37,7 +37,9 @@ export const navLinks = [
       if (!isLoggedIn) {
         e.preventDefault();
         Swal.fire({
-          title: t("you need to login as a realstate owner"),
+          title: t(
+            "you need to login as a realstate owner or as a super admin"
+          ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -51,12 +53,14 @@ export const navLinks = [
             return;
           }
         });
-      } else if (type !== "owner") {
+      } else if (type !== "owner" && type !== "super_admin") {
         e.preventDefault();
         Swal.fire({
           icon: "error",
           position: "center",
-          title: t("you need to login as a realstate owner"),
+          title: t(
+            "you need to login as a realstate owner or as a super admin"
+          ),
         });
       }
     },
@@ -70,7 +74,9 @@ export const navLinks = [
       if (!isLoggedIn) {
         e.preventDefault();
         Swal.fire({
-          title: t("you need to login as a realstate owner"),
+          title: t(
+            "you need to login as a realstate owner or as a super admin"
+          ),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -89,7 +95,9 @@ export const navLinks = [
         Swal.fire({
           icon: "error",
           position: "center",
-          title: t("you need to login as a realstate owner"),
+          title: t(
+            "you need to login as a realstate owner or as a super admin"
+          ),
         });
       }
     },
