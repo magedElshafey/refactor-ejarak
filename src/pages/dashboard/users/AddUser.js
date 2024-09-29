@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import MainBtn from "../../../components/common/buttons/MainBtn";
 import MainInput from "../../../components/common/inputs/MainInput";
@@ -16,6 +16,8 @@ import { addUser } from "../../../services/post/dashboard/addUser";
 import Swal from "sweetalert2";
 import useAccountType from "../../../hooks/api/useAccountType";
 import { useNavigate } from "react-router-dom";
+import upload from "../../../assets/image-.png";
+import { CiEdit } from "react-icons/ci";
 const AddUser = () => {
   const { t } = useTranslation();
   const { data } = useGlobalContext();
@@ -67,6 +69,21 @@ const AddUser = () => {
   });
   const { loadingAccountType, accountType, error } = useAccountType();
   const navigate = useNavigate();
+  const inputRef = useRef(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const handlePhotoChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedPhoto(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfilePhoto(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -114,7 +131,7 @@ const AddUser = () => {
       formData.append("phone_country_code", data.countries[0].prefix_code);
       formData.append("account_type", userType);
       formData.append(" nationalId,", nationId);
-
+      if (selectedPhoto) formData.append("photo", selectedPhoto);
       mutate(formData);
     }
   };
@@ -125,63 +142,115 @@ const AddUser = () => {
       </p>
       <form
         onSubmit={handleSubmit}
-        className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+        className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8   items-center"
       >
-        <MainInput
-          type="text"
-          label="name"
-          value={name}
-          onChange={handleNameChange}
-          error={nameError}
-        />
-        <MainInput
-          type="email"
-          label="email"
-          placeholder="xx@xxx.xx"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={emailError}
-        />
-        <MobileInput
-          value={phone}
-          error={phoneError}
-          onChange={handlePhoneChange}
-        />
-        <MainSelect
-          label="userType"
-          options={accountType?.data?.data?.account_type}
-          onSelect={handleUserTypeChange}
-          loading={loadingAccountType}
-        />
-        <MainInput
-          label="password"
-          type="password"
-          value={password}
-          error={passwordError}
-          onChange={handlePasswordChange}
-        />
-        <MainInput
-          placeholder="1/2xxxxxxxxx"
-          label={t("nationalId")}
-          value={nationId}
-          onChange={handleNationIdChange}
-          error={nationError}
-        />
-        <div className="mt-8 w-full flex items-center justify-center md:justify-end gap-3">
-          <div className="w-[180px]">
-            {isLoading ? (
-              <LoadingBtn />
-            ) : (
-              <MainBtn type="submit" text="add user" />
-            )}
+        <div className="w-full border border-dashed border-[#9399A3] p-5 py-12 rounded-lg flex items-center justify-center">
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={inputRef}
+            onChange={handlePhotoChange}
+          />
+          {!previewUrl ? (
+            <div className="flex flex-col items-center gap-2">
+              <img
+                alt="upload-icon"
+                src={upload}
+                className="max-w-[68px] max-h-[68px] cursor-pointer"
+                onClick={() => inputRef.current.click()}
+              />
+              <p className="text-[#4D5F65]">{t("upload photo")}</p>
+            </div>
+          ) : (
+            <div className="  flex flex-col items-center gap-3">
+              <img
+                className="max-w-full max-h-[250px]  object-cover"
+                src={profilePhoto ? profilePhoto : previewUrl}
+                alt="Preview"
+              />
+              <div className="w-10 h-10 rounded-[50%] bg-maincolorgreen flex items-center justify-center ">
+                <CiEdit
+                  size={30}
+                  className=" cursor-pointer text-white"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    inputRef.current.click();
+                  }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="bg-[#f7f7f7] rounded-lg p-4">
+          <div className="w-full mb-4">
+            <MainInput
+              type="text"
+              label="name"
+              value={name}
+              onChange={handleNameChange}
+              error={nameError}
+            />
           </div>
-          <button
-            onClick={() => navigate(-1)}
-            className="font-semibold"
-            type="button"
-          >
-            {t("cancel")}
-          </button>
+          <div className="w-full mb-4">
+            <MainInput
+              type="email"
+              label="email"
+              placeholder="xx@xxx.xx"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              error={emailError}
+            />
+          </div>
+          <div className="w-full mb-4">
+            <MobileInput
+              value={phone}
+              error={phoneError}
+              onChange={handlePhoneChange}
+            />
+          </div>
+          <div className="w-full mb-4">
+            <MainSelect
+              label="userType"
+              options={accountType?.data?.data?.account_type}
+              onSelect={handleUserTypeChange}
+              loading={loadingAccountType}
+            />
+          </div>
+          <div className="w-full mb-4">
+            <MainInput
+              label="password"
+              type="password"
+              value={password}
+              error={passwordError}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <div className="w-full mb-4">
+            <MainInput
+              placeholder="1/2xxxxxxxxx"
+              label={t("nationalId")}
+              value={nationId}
+              onChange={handleNationIdChange}
+              error={nationError}
+            />
+          </div>
+          <div className=" w-full flex items-center justify-center md:justify-end gap-3">
+            <div className="w-[180px]">
+              {isLoading ? (
+                <LoadingBtn />
+              ) : (
+                <MainBtn type="submit" text="add user" />
+              )}
+            </div>
+            <button
+              onClick={() => navigate(-1)}
+              className="font-semibold"
+              type="button"
+            >
+              {t("cancel")}
+            </button>
+          </div>
         </div>
       </form>
     </div>

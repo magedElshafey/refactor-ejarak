@@ -587,5 +587,6 @@
   "payApp": "pay application fees",
   "num error": "instrument number field should contain from numbers only",
   "length error": "instrument number field should contain from 12 charchters only",
-  "add real state": "add real state"
+  "add real state": "add real state",
+  "you need to login as a realstate owner or as a super admin": "you need to login as a realstate owner or as a super admin"
 }

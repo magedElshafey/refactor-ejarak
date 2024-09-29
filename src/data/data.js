@@ -219,10 +219,10 @@ export const aboutUs = [
       }
     },
   },
-  {
-    title: "privacy Policy",
-    path: "/website/privacy",
-  },
+  // {
+  //   title: "privacy Policy",
+  //   path: "/website/privacy",
+  // },
   {
     title: "termsAndConditions",
     path: "/website/terms-conditions",
@@ -436,11 +436,11 @@ export const dashboardLinks = [
         title: "faqs",
         icon: <FaQuestion size={20} />,
       },
-      {
-        path: "privacy-policy",
-        title: "privacy and policy",
-        icon: <MdPrivacyTip size={20} />,
-      },
+      // {
+      //   path: "privacy-policy",
+      //   title: "privacy and policy",
+      //   icon: <MdPrivacyTip size={20} />,
+      // },
       {
         path: "terms-conditions",
         title: "terms and conditions",

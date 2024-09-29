@@ -181,6 +181,7 @@ const Reservations = () => {
           <TableStatus
             status={status}
             onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
+            hasNotChange={true}
           />
         );
       },
@@ -193,8 +194,8 @@ const Reservations = () => {
           <TableProperties
             hasEdit={false}
             hasView={true}
-            hasDelete={true}
-            deleteAction={() => handleDelete(row.id)}
+            hasDelete={false}
+            // deleteAction={() => handleDelete(row.id)}
             viewAction={() =>
               navigate(`/dashboard/reservation-details/${row.id}`)
             }
@@ -203,6 +204,7 @@ const Reservations = () => {
       },
     },
   ];
+  console.log("res", filterdData);
   return (
     <>
       {isLoading ? (

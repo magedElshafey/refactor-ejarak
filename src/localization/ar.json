@@ -607,5 +607,6 @@
   "print the contract": "طباعة العقد",
   "num error": "يجب ان يحتوي حقل رقم الصك علي ارقام فقط",
   "length error": "يجب ان يحتوي حقل ملف الصك علي 12 رقم",
-  "add real state": "إضافة عقار"
+  "add real state": "إضافة عقار",
+  "you need to login as a realstate owner or as a super admin": "يجب تسجيل الدخول ك مالك عقار او سوبر ادمن"
 }

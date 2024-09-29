@@ -147,11 +147,10 @@ const Users = () => {
       render: (value, row) => {
         return (
           <TableProperties
-            hasEdit={value === "super_admin" ? false : true}
+            hasEdit={false}
             hasView={true}
             hasDelete={value === "super_admin" ? false : true}
             viewAction={() => navigate(`/dashboard/user-details/${row.id}`)}
-            editAction={() => navigate(`/dashboard/edit-user/${row.id}`)}
             deleteAction={() => handleDelete(row.id)}
             disabled={loadingDelete}
           />

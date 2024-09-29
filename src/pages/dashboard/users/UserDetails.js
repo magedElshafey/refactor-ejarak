@@ -17,15 +17,15 @@ const UserDetails = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-            <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-center">
+            <div className="w-full border border-dashed border-[#9399A3] p-5 rounded-lg flex items-center justify-center">
               <img
                 src={data?.data?.data.avatar?.original}
                 alt={data?.name}
                 className=" w-full md:w-[300px] object-contain rounded-lg"
               />
             </div>
-            <div>
+            <div className="bg-[#f7f7f7] rounded-lg p-4">
               <MainInput disabled value={data?.data?.data?.name} label="name" />
               <div className="my-6">
                 <MainInput

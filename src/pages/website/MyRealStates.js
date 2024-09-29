@@ -70,9 +70,10 @@ const MyRealStates = () => {
                         <ReservationBtn id={item.id} />
                       ) : null}
                       <EditBtn id={item.id} />
-                      {item?.status === "pending" && !item?.delete_reason ? (
+                      {item?.status === "pending" &&
+                      item?.delete_reason ? null : (
                         <DeleteBtn id={item.id} dep="my-realstates" />
-                      ) : null}
+                      )}
                     </div>
                   </div>
                   {/* {item?.status === "pending" && !item?.delete_reason ? (

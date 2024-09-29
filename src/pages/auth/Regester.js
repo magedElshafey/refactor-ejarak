@@ -80,7 +80,6 @@ const Regester = () => {
     if (
       !phone.trim() ||
       !name.trim() ||
-      !email.trim() ||
       !nationId.trim() ||
       !password.trim() ||
       !confirmPassword.trim()

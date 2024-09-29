@@ -5,7 +5,7 @@ import getStatusBackgroundColor from "../../../../utils/dashboard/getStatusBackg
 
 const options = ["pending", "accepted", "refused"];
 
-const TableStatus = ({ status, onChange }) => {
+const TableStatus = ({ status, onChange, hasNotChange }) => {
   const [active, setActive] = useState(false);
   const ref = useRef(null);
   const { t } = useTranslation();
@@ -25,45 +25,58 @@ const TableStatus = ({ status, onChange }) => {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      onClick={status === "pending" ? () => setActive(!active) : undefined}
-      className="w-full relative -z-1"
-    >
-      <div
-        className={`${getStatusBackgroundColor(
-          status
-        )} py-2 w-full rounded-2xl flex items-center text-sm ${
-          status === "pending"
-            ? "justify-between px-4 cursor-pointer"
-            : "justify-center"
-        }`}
-      >
-        <p>{t(status)}</p>
-        {status === "pending" && <IoIosArrowDown />}
-      </div>
-      {active && (
-        <div className="absolute top-full left-0 p-2 w-full border bg-white rounded-xl z-10 gap-2 ">
-          {options
-            .filter((option) => option !== status)
-            .map((option) => {
-              return (
-                <div
-                  key={option}
-                  onClick={(e) => {
-                    onChange(option);
-                    setActive(false);
-                    e.stopPropagation();
-                  }}
-                  className="cursor-pointer hover:bg-gray-200 w-full text-center rounded-lg p-1"
-                >
-                  {t(option)}
-                </div>
-              );
-            })}
+    <>
+      {hasNotChange ? (
+        <div
+          className={`${getStatusBackgroundColor(
+            status
+          )} py-2 w-full rounded-2xl flex items-center text-sm justify-center
+          }`}
+        >
+          <p>{t(status)}</p>
+        </div>
+      ) : (
+        <div
+          ref={ref}
+          onClick={status === "pending" ? () => setActive(!active) : undefined}
+          className="w-full relative -z-1"
+        >
+          <div
+            className={`${getStatusBackgroundColor(
+              status
+            )} py-2 w-full rounded-2xl flex items-center text-sm ${
+              status === "pending"
+                ? "justify-between px-4 cursor-pointer"
+                : "justify-center"
+            }`}
+          >
+            <p>{t(status)}</p>
+            {status === "pending" && <IoIosArrowDown />}
+          </div>
+          {active && (
+            <div className="absolute top-full left-0 p-2 w-full border bg-white rounded-xl z-10 gap-2 ">
+              {options
+                .filter((option) => option !== status)
+                .map((option) => {
+                  return (
+                    <div
+                      key={option}
+                      onClick={(e) => {
+                        onChange(option);
+                        setActive(false);
+                        e.stopPropagation();
+                      }}
+                      className="cursor-pointer hover:bg-gray-200 w-full text-center rounded-lg p-1"
+                    >
+                      {t(option)}
+                    </div>
+                  );
+                })}
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
