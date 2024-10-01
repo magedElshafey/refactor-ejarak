@@ -75,13 +75,14 @@ const AddUser = () => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const handlePhotoChange = (e) => {
     const file = e.target.files[0];
-    setSelectedPhoto(file);
+    setSelectedPhoto(file); // حفظ الملف المحمل في حالة
+
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setProfilePhoto(reader.result);
+        setProfilePhoto(reader.result); // حفظ Data URL في حالة profilePhoto
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // قراءة الملف
     }
   };
   const handleSubmit = (e) => {
@@ -135,6 +136,8 @@ const AddUser = () => {
       mutate(formData);
     }
   };
+  console.log("selected", selectedPhoto);
+  console.log("profile", profilePhoto);
   return (
     <div className="container mx-auto px-8 mt-5">
       <p className="text-textColor font-semibold text-md md:text-lg mb-8">
@@ -152,7 +155,7 @@ const AddUser = () => {
             ref={inputRef}
             onChange={handlePhotoChange}
           />
-          {!previewUrl ? (
+          {!profilePhoto ? (
             <div className="flex flex-col items-center gap-2">
               <img
                 alt="upload-icon"
@@ -163,10 +166,10 @@ const AddUser = () => {
               <p className="text-[#4D5F65]">{t("upload photo")}</p>
             </div>
           ) : (
-            <div className="  flex flex-col items-center gap-3">
+            <div className=" flex flex-col items-center gap-3">
               <img
                 className="max-w-full max-h-[250px]  object-cover"
-                src={profilePhoto ? profilePhoto : previewUrl}
+                src={profilePhoto}
                 alt="Preview"
               />
               <div className="w-10 h-10 rounded-[50%] bg-maincolorgreen flex items-center justify-center ">

@@ -74,9 +74,7 @@ export const navLinks = [
       if (!isLoggedIn) {
         e.preventDefault();
         Swal.fire({
-          title: t(
-            "you need to login as a realstate owner or as a super admin"
-          ),
+          title: t("you need to login as a realstate owner"),
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -90,14 +88,12 @@ export const navLinks = [
             return;
           }
         });
-      } else if (type === "tenant") {
+      } else if (type !== "owner") {
         e.preventDefault();
         Swal.fire({
           icon: "error",
           position: "center",
-          title: t(
-            "you need to login as a realstate owner or as a super admin"
-          ),
+          title: t("you need to login as a realstate owner"),
         });
       }
     },
@@ -458,6 +454,16 @@ export const dashboardLinks = [
         icon: <FaCity size={20} />,
         title: "cities",
         path: "cities",
+      },
+      {
+        icon: <FaCity size={20} />,
+        title: "report reasons",
+        path: "report-reasons",
+      },
+      {
+        icon: <FaCity size={20} />,
+        title: "booking refused reasons",
+        path: "booking-reasons",
       },
     ],
   },

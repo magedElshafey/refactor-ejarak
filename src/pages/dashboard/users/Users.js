@@ -30,6 +30,7 @@ const Users = () => {
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+  console.log("filterd user", filterdData);
   useEffect(() => {
     if (data) {
       if (search) {
@@ -122,7 +123,7 @@ const Users = () => {
     },
     {
       title: "status",
-      dataIndex: "email.is_verified",
+      dataIndex: "phone.is_verified",
       render: (value) => {
         return (
           <>
@@ -177,7 +178,7 @@ const Users = () => {
           </div>
           <Table
             columns={columns}
-            bodyData={filterdData.slice(offset, offset + itemsPerPage) || []}
+            bodyData={filterdData?.slice(offset, offset + itemsPerPage) || []}
           />
           {filterdData?.length > itemsPerPage ? (
             <div className="mt-12">

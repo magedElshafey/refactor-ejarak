@@ -608,5 +608,17 @@
   "num error": "يجب ان يحتوي حقل رقم الصك علي ارقام فقط",
   "length error": "يجب ان يحتوي حقل ملف الصك علي 12 رقم",
   "add real state": "إضافة عقار",
-  "you need to login as a realstate owner or as a super admin": "يجب تسجيل الدخول ك مالك عقار او سوبر ادمن"
+  "you need to login as a realstate owner or as a super admin": "يجب تسجيل الدخول ك مالك عقار او سوبر ادمن",
+  "report reasons": "أسباب الإبلاغ",
+  "report name in english": "السبب بالإنجليزية",
+  "report name in arabic": "السبب بالعربية",
+  "you need to choose the reason you want to edit": "يجب عليك اختيار السبب الذي تريد تعديلة اولا",
+  "do you sure you want to edit the reason": "هل أنت متأكد من تعديل السبب ؟ ",
+  "old report name in english": "السبب القجيم بالإنجليزية",
+  "old report name in arabic": "السبب القديم بالعربية",
+  "report name in arabic field is required": "حقل السبب بالعربي مطلوب",
+  "report name in english field is required": "حقل السبب بالإنجليزية مطلوب",
+  "booking refused reasons": "أسباب رفض الحجوزات",
+  "booking refused  reason in arabic field is required": "سبب رفض الحجز بالعربية مطلوب",
+  "booking refused  reason in english field is required": "سبب رفض الحجز بالإنجليزية"
 }

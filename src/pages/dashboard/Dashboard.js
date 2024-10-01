@@ -216,7 +216,7 @@ const Dashboard = () => {
           </div>
           <div className="border border-[#7A8499] p-2 rounded-xl mt-8">
             <span className="font-bold text-xl text-center px-2">
-              {t("Most visited cities")}
+              {t("realstates")}
             </span>
             <div id="chart" className=" h-[280px]">
               <ReactApexChart

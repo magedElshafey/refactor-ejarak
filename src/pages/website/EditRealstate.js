@@ -586,6 +586,7 @@ const EditRealstate = () => {
               <button
                 type="reset"
                 className="bg-red-600 text-white p-3 flex items-center justify-center rounded-md"
+                onClick={() => navigate(-1)}
               >
                 {t("cancel")}
               </button>

@@ -64,6 +64,8 @@ import Success from "../pages/website/Success";
 import PaymentError from "../pages/website/PaymentError";
 import ScrollToTopAfterChangePage from "../components/App/ScrollToTopAfterChangePage";
 import Packagess from "../pages/website/Packagess";
+import ReportReasons from "../pages/dashboard/ReportReasons";
+import BookingReasons from "../pages/dashboard/BookingReasons";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -328,6 +330,14 @@ const router = createBrowserRouter([
       {
         path: "reservation-details/:id",
         element: <ReservationDetails />,
+      },
+      {
+        path: "report-reasons",
+        element: <ReportReasons />,
+      },
+      {
+        path: "booking-reasons",
+        element: <BookingReasons />,
       },
     ],
   },
