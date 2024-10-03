@@ -600,5 +600,9 @@
   "report name in english field is required": "report name in english field is required",
   "booking refused reasons": "booking refused reasons",
   "booking refused  reason in english field is required": "booking refused  reason in english field is required",
-  "booking refused  reason in arabic field is required": "booking refused  reason in arabic field is required"
+  "booking refused  reason in arabic field is required": "booking refused  reason in arabic field is required",
+  "realstate types": "realstate types",
+  "category name in english": "category name in english",
+  "category name in arabic": "category name in arabic",
+  "payment types": "payment types"
 }

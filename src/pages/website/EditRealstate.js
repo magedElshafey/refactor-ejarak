@@ -365,7 +365,7 @@ const EditRealstate = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-6">
               <MainInput
-                value={name || ""}
+                value={name}
                 type="text"
                 onChange={handleNameChnage}
                 label="adArabicTitle"
@@ -402,17 +402,17 @@ const EditRealstate = () => {
                 onSelect={handleCityChange}
               />
               <MainInput
-                value={district || ""}
+                value={district}
                 onChange={handleDistrictChange}
                 label="district"
               />
               <MainInput
-                value={address || ""}
+                value={address}
                 onChange={handleAddressChange}
                 label="allDetails"
               />
               <MainInput
-                value={notes || ""}
+                value={notes}
                 onChange={handleNotesChange}
                 label="notes"
               />
@@ -429,35 +429,35 @@ const EditRealstate = () => {
               <MainInput
                 type="number"
                 label="age"
-                value={age || ""}
+                value={age}
                 onChange={handleAgeChange}
                 error={ageError}
               />
               <MainInput
                 type="number"
                 label="area"
-                value={area || ""}
+                value={area}
                 onChange={handleAreaChange}
                 error={areaError}
               />
               <MainInput
                 type="number"
                 label="turn"
-                value={turn || ""}
+                value={turn}
                 onChange={handleTurnChange}
                 error={turnError}
               />
               <MainInput
                 type="number"
                 label="roomNum"
-                value={rooms || ""}
+                value={rooms}
                 onChange={handleRoomsChange}
                 error={roomsError}
               />
               <MainInput
                 type="number"
                 label="bathRooms"
-                value={bathRooms || ""}
+                value={bathRooms}
                 onChange={handleBathRoomsChange}
                 error={bathRoomsError}
               />
@@ -523,14 +523,14 @@ const EditRealstate = () => {
               <MainInput
                 type="number"
                 label="price"
-                value={price || ""}
+                value={price}
                 onChange={handlePriceChange}
                 error={priceError}
               />
               <MainInput
                 type="text"
                 label="suckNum"
-                value={suckNum || ""}
+                value={suckNum}
                 onChange={handleSuckNumChange}
               />
               <MainSelect
@@ -595,7 +595,7 @@ const EditRealstate = () => {
           {loadingEdit && (
             <div className=" fixed top-0 left-0 bg-black bg-opacity-25 w-full h-full flex items-center">
               <div className="container mx-auto px-8">
-                <div className="w-full bg-white shadow-2xl h-1/2 flex items-center p-4 md:w-[400px] lg:w-[650px] mx-auto rounded-lg">
+                <div className="w-full bg-white  shadow-2xl h-1/2 flex items-center  p-4 md:w-[400px] lg:w-[650px] mx-auto rounded-lg">
                   <div className="w-full">
                     <p className="text-red-600 mb-2">{t("not refresh")}</p>
                     <p className="text-maincolorgreen mb-2">{t("uploading")}</p>

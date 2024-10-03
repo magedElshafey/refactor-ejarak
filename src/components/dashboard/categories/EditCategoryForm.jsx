@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import MainBtn from "../../common/buttons/MainBtn";
 import LoadingBtn from "../../common/buttons/LoadingBtn";
@@ -6,40 +6,43 @@ import MainInput from "../../common/inputs/MainInput";
 import Swal from "sweetalert2";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
-import { getCityById } from "../../../services/get/dashboard/getCityById";
 import { editCity } from "../../../services/post/dashboard/editCity";
-import { getCategoryById } from "../../../services/get/dashboard/getCategoryById";
-const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
+import { editCategory } from "../../../services/post/dashboard/editCategory";
+const EditCategoryForm = ({
+  showEditCategoryForm,
+  setShowEditCategoryForm,
+  id,
+}) => {
   const { t } = useTranslation();
   const { data } = useQuery(
-    ["category-details", id],
-    () => getCategoryById(id),
+    ["categoryDetails-details", id],
+    () => editCategory(id),
     {
       enabled: !!id,
     }
   );
   const queryClient = useQueryClient();
-  const [cityName, setCityName] = useState({
+  const [categoryName, setCategoryName] = useState({
     ar: "",
     en: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCityName((prev) => ({ ...prev, [name]: value }));
+    setCategoryName((prev) => ({ ...prev, [name]: value }));
   };
-  const { isLoading, mutate } = useMutation((v) => editCity(id, v), {
+  const { isLoading, mutate } = useMutation((v) => editCategory(id, v), {
     onSuccess: (data) => {
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",
           title: data?.data?.message,
         });
-        queryClient.invalidateQueries("cities");
-        setCityName({
+        queryClient.invalidateQueries("categories");
+        setCategoryName({
           ar: "",
           en: "",
         });
-        setShowEditCityForm(false);
+        setShowEditCategoryForm(false);
       } else {
         Swal.fire({
           icon: "error",
@@ -50,28 +53,27 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!cityName.ar && !cityName.en) {
+    if (!categoryName.ar && !categoryName.en) {
       Swal.fire({
         icon: "error",
         title: t("please fill all fields"),
       });
       return;
-    } else if (!cityName.ar) {
+    } else if (!categoryName.ar) {
       Swal.fire({
         icon: "error",
         title: t("city name in arabic field is required"),
       });
       return;
-    } else if (!cityName.en) {
+    } else if (!categoryName.en) {
       Swal.fire({
         icon: "error",
         title: t("city name in english field is required"),
       });
     } else {
       const formData = new FormData();
-      formData.append("name[ar]", cityName.ar);
-      formData.append("name[en]", cityName.en);
-      formData.append("country_id", 1);
+      formData.append("name[ar]", categoryName.ar);
+      formData.append("name[en]", categoryName.en);
 
       mutate(formData);
     }
@@ -79,7 +81,7 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
   return (
     <div
       className={`duration-300 fixed top-0 ${
-        showEditCityForm ? "left-0" : "left-[-400%]"
+        showEditCategoryForm ? "left-0" : "left-[-400%]"
       } w-screen h-screen bg-black bg-opacity-35 flex items-center justify-center z-[250]`}
     >
       <div className="container mx-auto px-8">
@@ -90,13 +92,13 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
           <IoCloseSharp
             size={30}
             className="text-red-600 cursor-pointer mb-4"
-            onClick={() => setShowEditCityForm(false)}
+            onClick={() => setShowEditCategoryForm(false)}
           />
           <div className="my-6">
             <MainInput
               type="text"
               name="ar"
-              label="old city name in arabic"
+              label="old category name in arabic"
               disabled
               value={data?.data?.data?.translations?.name?.ar}
             />
@@ -105,7 +107,7 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
             <MainInput
               type="text"
               name="en"
-              label="old city name in english"
+              label="old category name in english"
               disabled
               value={data?.data?.data?.translations?.name?.en}
             />
@@ -113,8 +115,8 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
           <MainInput
             type="text"
             name="ar"
-            label="city name in arabic"
-            value={cityName.ar}
+            label="category in arabic"
+            value={categoryName.ar}
             onChange={handleChange}
           />
 
@@ -122,8 +124,8 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
             <MainInput
               type="text"
               name="en"
-              label="city name in english"
-              value={cityName.en}
+              label="category name in english"
+              value={categoryName.en}
               onChange={handleChange}
             />
           </div>
@@ -138,7 +140,7 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
             <button
               className="font-semibold"
               type="button"
-              onClick={() => setShowEditCityForm(false)}
+              onClick={() => setShowEditCategoryForm(false)}
             >
               {t("cancel")}
             </button>
@@ -149,4 +151,4 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
   );
 };
 
-export default EditCityForm;
+export default EditCategoryForm;

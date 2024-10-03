@@ -620,5 +620,9 @@
   "report name in english field is required": "حقل السبب بالإنجليزية مطلوب",
   "booking refused reasons": "أسباب رفض الحجوزات",
   "booking refused  reason in arabic field is required": "سبب رفض الحجز بالعربية مطلوب",
-  "booking refused  reason in english field is required": "سبب رفض الحجز بالإنجليزية"
+  "booking refused  reason in english field is required": "سبب رفض الحجز بالإنجليزية",
+  "realstate types": "أنواع العقارات",
+  "category name in english": "نوع العقار بالإنجليزية",
+  "category name in arabic": "نوع العقار بالعربية",
+  "payment types": "طرق الدفع"
 }

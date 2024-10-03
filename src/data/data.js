@@ -452,6 +452,16 @@ export const dashboardLinks = [
     list: [
       {
         icon: <FaCity size={20} />,
+        title: "realstate types",
+        path: "reaalstate-categories",
+      },
+      {
+        icon: <FaCity size={20} />,
+        title: "payment types",
+        path: "payments",
+      },
+      {
+        icon: <FaCity size={20} />,
         title: "cities",
         path: "cities",
       },

@@ -87,13 +87,7 @@ const AddUser = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !phone.trim() ||
-      !name.trim() ||
-      !email.trim() ||
-      !nationId.trim() ||
-      !password.trim()
-    ) {
+    if (!phone.trim() || !name.trim() || !nationId.trim() || !password.trim()) {
       Swal.fire({
         icon: "error",
         title: t("please fill all fields"),
@@ -111,7 +105,7 @@ const AddUser = () => {
         title: t(phoneError),
       });
       return;
-    } else if (emailError) {
+    } else if (emailError !== "") {
       Swal.fire({
         icon: "error",
         title: t(emailError),
@@ -136,8 +130,7 @@ const AddUser = () => {
       mutate(formData);
     }
   };
-  console.log("selected", selectedPhoto);
-  console.log("profile", profilePhoto);
+
   return (
     <div className="container mx-auto px-8 mt-5">
       <p className="text-textColor font-semibold text-md md:text-lg mb-8">

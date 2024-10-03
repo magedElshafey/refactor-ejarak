@@ -69,9 +69,9 @@ const RealStatesBody = ({ tableSearch }) => {
       )
     : filteredRealStates;
 
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [data?.data?.data]);
+  // useEffect(() => {
+  //   setCurrentPage(0);
+  // }, [data?.data?.data]);
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);

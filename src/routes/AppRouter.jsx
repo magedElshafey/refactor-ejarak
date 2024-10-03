@@ -66,6 +66,8 @@ import ScrollToTopAfterChangePage from "../components/App/ScrollToTopAfterChange
 import Packagess from "../pages/website/Packagess";
 import ReportReasons from "../pages/dashboard/ReportReasons";
 import BookingReasons from "../pages/dashboard/BookingReasons";
+import Categories from "../pages/dashboard/Categories";
+import Payments from "../pages/dashboard/Payments";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -338,6 +340,14 @@ const router = createBrowserRouter([
       {
         path: "booking-reasons",
         element: <BookingReasons />,
+      },
+      {
+        path: "reaalstate-categories",
+        element: <Categories />,
+      },
+      {
+        path: "payments",
+        element: <Payments />,
       },
     ],
   },
