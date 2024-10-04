@@ -119,16 +119,17 @@ const RealstateDetails = ({ isDashboard }) => {
             {isDashboard ? null : ejarakLogin &&
               data?.data?.data?.user?.id !== userId ? (
               <div className="flex items-center justify-center md:justify-between gap-1 flex-wrap my-8">
-                {role !== "owner" ? (
+                {role === "tenant" ? (
                   <BookingBtn toggleShowBookingForm={toggleShowBookingForm} />
                 ) : null}
-
-                <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
-                  <ContactWithCustomerServiceBtn />
-                  <ReportRealstateBtn
-                    toggleShowReportForm={toggleShowReportForm}
-                  />
-                </div>
+                {role === "tenant" || role === "owner" ? (
+                  <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
+                    <ContactWithCustomerServiceBtn />
+                    <ReportRealstateBtn
+                      toggleShowReportForm={toggleShowReportForm}
+                    />
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </div>

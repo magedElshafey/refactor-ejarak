@@ -29,6 +29,52 @@ import { PiPackageFill } from "react-icons/pi";
 
 export const navLinks = [
   {
+    arTitle: " العقارات القريبة",
+    enTitle: "near realstate",
+    path: "/website/near-realstates",
+    icon: <BsBuildingFill size={20} />,
+    role: ["owner", "tenant", "super_admin", "customer_service", "admin"],
+    needLogin: false,
+  },
+  {
+    arTitle: "جميع العقارات",
+    enTitle: "All realstate",
+    path: "/website/all-realstates",
+    icon: <BsBuildingFill size={20} />,
+    role: ["owner", "tenant", "super_admin", "customer_service", "admin"],
+    needLogin: false,
+  },
+  {
+    arTitle: "العقارات المفضلة",
+    enTitle: "WishList",
+    path: "/website/wishlist",
+    icon: <FaHeart size={20} />,
+    onClick: (e, isLoggedIn, navigate, setActiveLink) => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        Swal.fire({
+          text: t("login_first"),
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: t("login"),
+          cancelButtonText: t("cancel"),
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/auth/login");
+          } else {
+            return;
+          }
+        });
+      } else {
+        navigate("/wishlist");
+      }
+    },
+    role: ["owner", "tenant", "super_admin", "customer_service", "admin"],
+    needLogin: false,
+  },
+  {
     arTitle: "اعلن عن عقارك",
     enTitle: "Advertise",
     path: "/website/add-realstate",
@@ -64,6 +110,8 @@ export const navLinks = [
         });
       }
     },
+    role: ["owner", "super_admin", "admin"],
+    needLogin: true,
   },
   {
     arTitle: "الباقات",
@@ -97,6 +145,8 @@ export const navLinks = [
         });
       }
     },
+    role: ["owner"],
+    needLogin: true,
   },
   {
     arTitle: "طلباتي",
@@ -125,46 +175,8 @@ export const navLinks = [
         navigate("/my-reservations");
       }
     },
-  },
-  {
-    arTitle: "العقارات المفضلة",
-    enTitle: "WishList",
-    path: "/website/wishlist",
-    icon: <FaHeart size={20} />,
-    onClick: (e, isLoggedIn, navigate, setActiveLink) => {
-      if (!isLoggedIn) {
-        e.preventDefault();
-        Swal.fire({
-          text: t("login_first"),
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: t("login"),
-          cancelButtonText: t("cancel"),
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate("/auth/login");
-          } else {
-            return;
-          }
-        });
-      } else {
-        navigate("/wishlist");
-      }
-    },
-  },
-  {
-    arTitle: " العقارات القريبة",
-    enTitle: "near realstate",
-    path: "/website/near-realstates",
-    icon: <BsBuildingFill size={20} />,
-  },
-  {
-    arTitle: "جميع العقارات",
-    enTitle: "All realstate",
-    path: "/website/all-realstates",
-    icon: <BsBuildingFill size={20} />,
+    role: ["owner", "tenant", "super_admin", "admin"],
+    needLogin: true,
   },
 ];
 export const numbers = [

@@ -10,6 +10,17 @@ const NavLinks = ({ navLinks, logo, bg }) => {
   const auth = useSelector((state) => state.authSlice);
   const isLogin = auth.ejarakLogin;
   const type = auth?.userData?.account?.type;
+  const filteredLinks = navLinks.filter((item) => {
+    if (!item.needLogin) {
+      // عرض الروابط التي لا تحتاج إلى تسجيل دخول دائمًا
+      return true;
+    }
+    if (isLogin && item.role.includes(type)) {
+      // عرض الروابط بناءً على الـ role إذا كان المستخدم مسجلًا الدخول
+      return true;
+    }
+    return false;
+  });
   return (
     <div
       className={`w-full flex items-center gap-2 justify-evenly text-nowrap ${
@@ -17,7 +28,7 @@ const NavLinks = ({ navLinks, logo, bg }) => {
       }`}
     >
       <Logo img={logo} />
-      {navLinks.map((item, index) => (
+      {filteredLinks.map((item, index) => (
         <NavLink
           onClick={(e) =>
             item.onClick && item.onClick(e, isLogin, navigate, type)

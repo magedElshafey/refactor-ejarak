@@ -43,7 +43,7 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   }, [dist, dispatch]);
   return (
     <div
-      className={`${bg} w-full ${rounded} p-4 px-6 min-h-full ${
+      className={`${bg} w-full ${rounded} p-4 px-6 h-screen md:h-[500px] lg:h-[600px] overflow-y-auto ${
         mobileVieow ? "" : "shadow-lg"
       }`}
     >

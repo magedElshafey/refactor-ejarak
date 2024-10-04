@@ -624,5 +624,7 @@
   "realstate types": "أنواع العقارات",
   "category name in english": "نوع العقار بالإنجليزية",
   "category name in arabic": "نوع العقار بالعربية",
-  "payment types": "طرق الدفع"
+  "payment types": "طرق الدفع",
+  "payment name in arabic": "طريقة الدفع بالعربية",
+  "payment name in english": "طريقة الدفع بالإنجليزية"
 }

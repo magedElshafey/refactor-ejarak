@@ -25,7 +25,7 @@ const Payments = () => {
               <MainSelect
                 onSelect={handleCategoryChnage}
                 label="payment types"
-                options={data?.data?.data}
+                options={data?.data?.data || []}
                 value={
                   paymentId
                     ? data?.data?.data?.find((item) => item.id === +paymentId)
@@ -51,11 +51,11 @@ const Payments = () => {
         setShowPaymentForm={setShowPaymentForm}
       />
 
-      <EditPaymentForm
+      {/* <EditPaymentForm
         showEditPaymentForm={showEditPaymentForm}
         setShowEditPaymentForm={setShowEditPaymentForm}
         id={paymentId}
-      />
+      /> */}
     </>
   );
 };
