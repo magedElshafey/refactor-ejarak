@@ -11,7 +11,6 @@ const RealstateVideoAndSuck = ({
   role,
 }) => {
   const { t } = useTranslation();
-  console.log("role", role);
   const handleDownload = (file) => {
     const link = document.createElement("a");
     link.href = file;

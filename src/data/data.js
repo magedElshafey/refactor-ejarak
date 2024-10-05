@@ -13,7 +13,8 @@ import { FaHeart, FaNewspaper, FaQuestion } from "react-icons/fa";
 import {
   MdOutlineDashboard,
   MdOutlineRoundaboutLeft,
-  MdPrivacyTip,
+  MdPayments,
+  MdReport,
 } from "react-icons/md";
 import { FaUsers, FaCity } from "react-icons/fa6";
 import {
@@ -26,6 +27,9 @@ import { LiaFileContractSolid } from "react-icons/lia";
 import { VscSettings } from "react-icons/vsc";
 import { IoSettings } from "react-icons/io5";
 import { PiPackageFill } from "react-icons/pi";
+import { BiSolidCategory } from "react-icons/bi";
+import { SiGooglepubsub } from "react-icons/si";
+import { RiFileCloseFill } from "react-icons/ri";
 
 export const navLinks = [
   {
@@ -444,11 +448,6 @@ export const dashboardLinks = [
         title: "faqs",
         icon: <FaQuestion size={20} />,
       },
-      // {
-      //   path: "privacy-policy",
-      //   title: "privacy and policy",
-      //   icon: <MdPrivacyTip size={20} />,
-      // },
       {
         path: "terms-conditions",
         title: "terms and conditions",
@@ -464,26 +463,31 @@ export const dashboardLinks = [
     list: [
       {
         icon: <FaCity size={20} />,
-        title: "realstate types",
-        path: "reaalstate-categories",
-      },
-      {
-        icon: <FaCity size={20} />,
-        title: "payment types",
-        path: "payments",
-      },
-      {
-        icon: <FaCity size={20} />,
         title: "cities",
         path: "cities",
       },
       {
-        icon: <FaCity size={20} />,
+        icon: <BiSolidCategory size={20} />,
+        title: "realstate types",
+        path: "reaalstate-categories",
+      },
+      {
+        icon: <SiGooglepubsub size={20} />,
+        title: "unit types",
+        path: "reaalstate-sub-categories",
+      },
+      {
+        icon: <MdPayments size={20} />,
+        title: "payment types",
+        path: "payments",
+      },
+      {
+        icon: <MdReport size={20} />,
         title: "report reasons",
         path: "report-reasons",
       },
       {
-        icon: <FaCity size={20} />,
+        icon: <RiFileCloseFill size={20} />,
         title: "booking refused reasons",
         path: "booking-reasons",
       },

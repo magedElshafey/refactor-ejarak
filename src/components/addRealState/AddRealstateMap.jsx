@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import GoogleMap from "google-map-react";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
 const AddRealstateMap = ({ coordinates }) => {
   const { lat, lng } = useSelector((state) => state.filterSlice);
-  const { t, i18n } = useTranslation();
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   // api key for map
   const apiKey = process.env.GOOGLE_MAP_API_KEY;

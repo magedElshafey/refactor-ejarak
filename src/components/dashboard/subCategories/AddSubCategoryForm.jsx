@@ -1,37 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import MainBtn from "../../common/buttons/MainBtn";
 import LoadingBtn from "../../common/buttons/LoadingBtn";
 import MainInput from "../../common/inputs/MainInput";
 import Swal from "sweetalert2";
-import { useMutation, useQueryClient, useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
-import { editCategory } from "../../../services/post/dashboard/editCategory";
-import { getCategoryById } from "../../../services/get/dashboard/getCategoryById";
-const EditCategoryForm = ({
-  showEditCategoryForm,
-  setShowEditCategoryForm,
-  id,
+import { addSubCategories } from "../../../services/post/dashboard/addSubCategories";
+const AddSubCategoryForm = ({
+  showAddSubCategoryForm,
+  setShowAddSubCategoryForm,
+  cateogryValue,
+  categoryId,
   setCategoryId,
+  setSubCategoryId,
 }) => {
+  const ref = useRef(null);
   const { t } = useTranslation();
-  const { data } = useQuery(
-    ["categoryDetails-details", id],
-    () => getCategoryById(id),
-    {
-      enabled: !!id,
-    }
-  );
   const queryClient = useQueryClient();
-  const [categoryName, setCategoryName] = useState({
+  const [subCategoryName, setSubCategoryName] = useState({
     ar: "",
     en: "",
   });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCategoryName((prev) => ({ ...prev, [name]: value }));
-  };
-  const { isLoading, mutate } = useMutation((v) => editCategory(id, v), {
+  const { isLoading, mutate } = useMutation((v) => addSubCategories(v), {
     onSuccess: (data) => {
       if (data?.data?.status) {
         Swal.fire({
@@ -40,12 +31,14 @@ const EditCategoryForm = ({
         });
         queryClient.invalidateQueries("categories");
         queryClient.invalidateQueries("featuers");
-        setCategoryName({
+        queryClient.invalidateQueries(["sub-categories", categoryId]);
+        setSubCategoryName({
           ar: "",
           en: "",
         });
-        setShowEditCategoryForm(false);
         setCategoryId("");
+        setSubCategoryId("");
+        setShowAddSubCategoryForm(false);
       } else {
         Swal.fire({
           icon: "error",
@@ -56,80 +49,80 @@ const EditCategoryForm = ({
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!categoryName.ar && !categoryName.en) {
+    if (!subCategoryName.ar && !subCategoryName.en) {
       Swal.fire({
         icon: "error",
         title: t("please fill all fields"),
       });
       return;
-    } else if (!categoryName.ar) {
+    } else if (!subCategoryName.ar) {
       Swal.fire({
         icon: "error",
-        title: t("category name in arabic field is required"),
+        title: t("sub category name in arabic field is required"),
       });
       return;
-    } else if (!categoryName.en) {
+    } else if (!subCategoryName.en) {
       Swal.fire({
         icon: "error",
-        title: t("category name in english field is required"),
+        title: t("sub category name in english field is required"),
       });
     } else {
       const formData = new FormData();
-      formData.append("name[ar]", categoryName.ar);
-      formData.append("name[en]", categoryName.en);
+      formData.append("name[ar]", subCategoryName.ar);
+      formData.append("name[en]", subCategoryName.en);
+      formData.append("category_id", categoryId);
 
       mutate(formData);
     }
   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSubCategoryName((prev) => ({ ...prev, [name]: value }));
+  };
   return (
     <div
       className={`duration-300 fixed top-0 ${
-        showEditCategoryForm ? "left-0" : "left-[-400%]"
+        showAddSubCategoryForm ? "left-0" : "left-[-400%]"
       } w-screen h-screen bg-black bg-opacity-35 flex items-center justify-center z-[250]`}
     >
       <div className="container mx-auto px-8">
         <form
+          ref={ref}
           onSubmit={handleSubmit}
           className="w-full md:w-[450px] lg:w-[550px] bg-white p-3 rounded-lg shadow-lg mx-auto"
         >
           <IoCloseSharp
             size={30}
             className="text-red-600 cursor-pointer mb-4"
-            onClick={() => setShowEditCategoryForm(false)}
+            onClick={() => setShowAddSubCategoryForm(false)}
           />
+          {cateogryValue ? (
+            <div className="mb-6">
+              <MainInput
+                type="text"
+                name="en"
+                value={cateogryValue}
+                label="category name"
+                disabled={true}
+              />
+            </div>
+          ) : null}
           <div className="my-6">
             <MainInput
               type="text"
               name="ar"
-              label="old category name in arabic"
-              disabled
-              value={data?.data?.data?.translations?.name?.ar}
-            />
-          </div>
-          <div className="my-6">
-            <MainInput
-              type="text"
-              name="en"
-              label="old category name in english"
-              disabled
-              value={data?.data?.data?.translations?.name?.en}
-            />
-          </div>
-          <MainInput
-            type="text"
-            name="ar"
-            label="category name in arabic"
-            value={categoryName.ar}
-            onChange={handleChange}
-          />
-
-          <div className="my-6">
-            <MainInput
-              type="text"
-              name="en"
-              label="category name in english"
-              value={categoryName.en}
+              value={subCategoryName.ar}
               onChange={handleChange}
+              label="sub category name in arabic"
+            />
+          </div>
+          <div className="my-6">
+            <MainInput
+              type="text"
+              name="en"
+              value={subCategoryName.en}
+              onChange={handleChange}
+              label="sub category name in english"
             />
           </div>
           <div className="flex justify-center md:justify-end gap-4 md:gap-6 lg:gap-8">
@@ -143,7 +136,7 @@ const EditCategoryForm = ({
             <button
               className="font-semibold"
               type="button"
-              onClick={() => setShowEditCategoryForm(false)}
+              onClick={() => setShowAddSubCategoryForm(false)}
             >
               {t("cancel")}
             </button>
@@ -154,4 +147,4 @@ const EditCategoryForm = ({
   );
 };
 
-export default EditCategoryForm;
+export default AddSubCategoryForm;

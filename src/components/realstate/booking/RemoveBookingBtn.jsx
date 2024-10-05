@@ -14,6 +14,7 @@ const RemoveBookingBtn = ({ id, setReasonId }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("booking-refused-reasons");
+        queryClient.invalidateQueries("featuers");
         setReasonId("");
       } else {
         Swal.fire({

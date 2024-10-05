@@ -41,7 +41,7 @@ const Payments = () => {
                 setShowEditPaymentForm={setShowEditPaymentForm}
                 id={paymentId}
               />
-              <RmovePaymentBtn id={paymentId} setCategoryId={setPaymentId} />
+              <RmovePaymentBtn id={paymentId} setPaymentId={setPaymentId} />
             </div>
           </div>
         </div>
@@ -51,11 +51,12 @@ const Payments = () => {
         setShowPaymentForm={setShowPaymentForm}
       />
 
-      {/* <EditPaymentForm
+      <EditPaymentForm
         showEditPaymentForm={showEditPaymentForm}
         setShowEditPaymentForm={setShowEditPaymentForm}
         id={paymentId}
-      /> */}
+        setPaymentId={setPaymentId}
+      />
     </>
   );
 };

@@ -14,6 +14,7 @@ const RemoveReportBtn = ({ id, setReasonId }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("reports");
+        queryClient.invalidateQueries("featuers");
         setReasonId("");
       } else {
         Swal.fire({

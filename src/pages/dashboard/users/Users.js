@@ -30,7 +30,6 @@ const Users = () => {
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  console.log("filterd user", filterdData);
   useEffect(() => {
     if (data) {
       if (search) {

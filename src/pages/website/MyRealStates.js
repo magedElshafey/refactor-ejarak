@@ -27,7 +27,6 @@ const MyRealStates = () => {
     activeIndex
   );
   const handleAddRealState = () => navigate("/website/add-realstate");
-  console.log("filteredData", filteredData);
   return (
     <>
       {isLoading ? (

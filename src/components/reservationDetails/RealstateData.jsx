@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 const RealstateData = ({ data, downloadContract }) => {
   const { t, i18n } = useTranslation();
-  console.log("data?.air_conditioner", data?.air_conditioner);
-  console.log("data", data);
   return (
     <div className="py-3 px-5 rounded-2xl border border-slate-300">
       <p className={`text-lg mb-5 bg-slate-200 p-2 rounded-md`}>

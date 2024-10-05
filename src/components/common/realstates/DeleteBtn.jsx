@@ -51,7 +51,6 @@ const DeleteBtn = ({ id, dep }) => {
         }).then((res) => {
           if (res.isConfirmed) {
             const delete_reason = res.value;
-            console.log("delete reaseon", delete_reason);
             const data = { delete_reason };
             mutate(data);
           } else {

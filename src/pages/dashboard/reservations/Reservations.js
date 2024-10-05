@@ -204,7 +204,6 @@ const Reservations = () => {
       },
     },
   ];
-  console.log("res", filterdData);
   return (
     <>
       {isLoading ? (

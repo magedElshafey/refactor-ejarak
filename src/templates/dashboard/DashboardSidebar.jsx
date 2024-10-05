@@ -1,53 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/logobglight.png";
 import Logo from "../../components/common/Logo";
 import { dashboardLinks } from "../../data/data";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 
 const DashboardSidebar = () => {
   const { i18n, t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-  // const handleActiveIndexClick = (index, item) => {
-  //   if (item.list.length > 0) {
-  //     setActiveIndex(index);
-  //   } else {
-  //     setActiveIndex(null);
-  //   }
-  // };
-  // const handleActiveIndexClick = (index, item) => {
-  //   // إذا كانت القائمة مفتوحة، أغلقها
-  //   if (activeIndex === index) {
-  //     setActiveIndex(null);
-  //   } else {
-  //     // إذا كانت القائمة تحتوي على روابط فرعية، افتحها وانتقل لأول رابط
-  //     if (item.list.length > 0) {
-  //       setActiveIndex(index);
-  //     } else {
-  //       // إذا لم تكن تحتوي على روابط فرعية، فقط أغلق القائمة
-  //       setActiveIndex(null);
-  //     }
-  //   }
-  // };
-  // const handleActiveIndexClick = (index, item) => {
-  //   // إذا كانت القائمة المفتوحة هي نفس القائمة، أغلقها
-  //   if (activeIndex === index) {
-  //     setActiveIndex(null);
-  //   } else {
-  //     // إذا كانت القائمة تحتوي على روابط فرعية، افتح القائمة وانتقل لأول عنصر
-  //     if (item.list.length > 0) {
-  //       setActiveIndex(index);
-  //       // التنقل لأول عنصر فقط إذا كانت القائمة مغلقة
-  //       navigate(item.list[0].path);
-  //     } else {
-  //       // إذا لم تكن تحتوي على روابط فرعية، فقط أغلق القائمة
-  //       setActiveIndex(null);
-  //     }
-  //   }
-  // };
+
   const handleActiveIndexClick = (index, item) => {
     if (activeIndex === index) {
       setActiveIndex(null);
@@ -65,7 +28,7 @@ const DashboardSidebar = () => {
         <div
           className={`fixed ${
             i18n.language === "ar" ? "right-0" : "left-0"
-          } top-0 min-h-screen  bg-[#f7f7f7] rounded-lg w-[150px] lg:w-[250px] overflow-y-scroll flex  justify-center`}
+          } top-0 h-screen  bg-[#f7f7f7] rounded-lg w-[150px] lg:w-[250px] overflow-y-scroll flex  justify-center`}
         >
           <div>
             <div className="my-8 w-full flex justify-center">

@@ -17,7 +17,6 @@ const CreateManualContract = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { isLoading, data } = useReservationDetails(params.id);
-  console.log("data from manual contract", data?.data?.data);
   const navigate = useNavigate();
   const handleNavigate = () =>
     navigate(`/website/manual-contract/details/${params.id}`);
@@ -31,7 +30,6 @@ const CreateManualContract = () => {
 
   const { isLoading: loadingPayment, mutate } = useMutation(handlePayment, {
     onSuccess: (data) => {
-      console.log("data returned from pay", data);
       if (data?.data?.status === 200) {
         window.open(data?.data?.data, "_blank");
         queryClient.invalidateQueries(["reservation-details", params.id]);

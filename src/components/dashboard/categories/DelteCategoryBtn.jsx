@@ -14,6 +14,7 @@ const DelteCategoryBtn = ({ id, setCategoryId }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("categories");
+        queryClient.invalidateQueries("featuers");
         setCategoryId("");
       } else {
         Swal.fire({
@@ -27,12 +28,12 @@ const DelteCategoryBtn = ({ id, setCategoryId }) => {
     if (!id) {
       Swal.fire({
         icon: "error",
-        title: t("you need to choose the city you want to remove"),
+        title: t("you need to choose the category you want to remove"),
       });
       return;
     } else {
       Swal.fire({
-        text: t("do you sure you want to remove the city"),
+        text: t("do you sure you want to remove the category"),
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

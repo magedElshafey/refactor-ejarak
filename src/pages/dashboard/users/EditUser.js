@@ -75,7 +75,6 @@ const EditUser = () => {
       setPreviewUrl(data?.data?.data?.avatar.original);
     }
   }, [data]);
-  console.log("datta", data?.data?.data);
   const { isLoading: loadingSubmit, mutate } = useMutation(
     (v) => editUser(params.id, v),
     {

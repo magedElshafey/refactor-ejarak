@@ -3,14 +3,12 @@ import Spinner from "../../components/common/Spinner";
 import { useQuery } from "react-query";
 import { getCities } from "../../services/get/dashboard/getCities";
 import MainSelect from "../../components/common/inputs/MainSelect";
-import { useTranslation } from "react-i18next";
 import AddCityBtn from "../../components/dashboard/city/AddCityBtn";
 import RemoveCityBtn from "../../components/dashboard/city/RemoveCityBtn";
 import AddCityForm from "../../components/dashboard/city/AddCityForm";
 import EditCityBtn from "../../components/dashboard/city/EditCityBtn";
 import EditCityForm from "../../components/dashboard/city/EditCityForm";
 const Cities = () => {
-  const { t } = useTranslation();
   const { isLoading, data } = useQuery("cities", getCities);
   const [cityId, setCityId] = useState("");
   const handleCitiyChange = (opt) => setCityId(opt.id);
@@ -27,7 +25,7 @@ const Cities = () => {
               <MainSelect
                 onSelect={handleCitiyChange}
                 label="region"
-                options={data?.data?.data}
+                options={data?.data?.data || []}
                 value={
                   cityId
                     ? data?.data?.data?.find((item) => item.id === +cityId).name
@@ -49,11 +47,13 @@ const Cities = () => {
       <AddCityForm
         showAddCityForm={showAddCityForm}
         setShowAddCityForm={setShowAddCityForm}
+        setCityId={setCityId}
       />
       <EditCityForm
         showEditCityForm={showEditCityForm}
         setShowEditCityForm={setShowEditCityForm}
         id={cityId}
+        setCityId={setCityId}
       />
     </>
   );

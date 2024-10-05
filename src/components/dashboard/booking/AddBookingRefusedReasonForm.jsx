@@ -20,13 +20,13 @@ const AddBookingRefusedReasonForm = ({
   });
   const { isLoading, mutate } = useMutation((v) => addBookings(v), {
     onSuccess: (data) => {
-      console.log("data", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("booking-refused-reasons");
+        queryClient.invalidateQueries("featuers");
         setReportName({
           ar: "",
           en: "",

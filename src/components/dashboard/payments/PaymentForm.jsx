@@ -23,6 +23,7 @@ const PaymentForm = ({ showPaymentForm, setShowPaymentForm }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("payments");
+        queryClient.invalidateQueries("featuers");
         setPaymentName({
           ar: "",
           en: "",

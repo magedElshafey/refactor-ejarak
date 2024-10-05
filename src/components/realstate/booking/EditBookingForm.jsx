@@ -8,7 +8,12 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
 import { editBookingReason } from "../../../services/post/dashboard/editBookingReasons";
 import { getBookingById } from "../../../services/get/dashboard/getBookingById";
-const EditBookingForm = ({ showeditReportForm, setShoweditReportForm, id }) => {
+const EditBookingForm = ({
+  showeditReportForm,
+  setShoweditReportForm,
+  id,
+  setReasonId,
+}) => {
   const { t } = useTranslation();
   const { data } = useQuery(["report-details", id], () => getBookingById(id), {
     enabled: !!id,
@@ -30,11 +35,13 @@ const EditBookingForm = ({ showeditReportForm, setShoweditReportForm, id }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("booking-refused-reasons");
+        queryClient.invalidateQueries("featuers");
         setReportName({
           ar: "",
           en: "",
         });
         setShoweditReportForm(false);
+        setReasonId("");
       } else {
         Swal.fire({
           icon: "error",

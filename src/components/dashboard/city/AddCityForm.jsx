@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { useMutation, useQueryClient } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
 import { addCity } from "../../../services/post/dashboard/addCity";
-const AddCityForm = ({ showAddCityForm, setShowAddCityForm }) => {
+const AddCityForm = ({ showAddCityForm, setShowAddCityForm, setCityId }) => {
   const ref = useRef(null);
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -23,10 +23,12 @@ const AddCityForm = ({ showAddCityForm, setShowAddCityForm }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("cities");
+        queryClient.invalidateQueries("featuers");
         setCityName({
           ar: "",
           en: "",
         });
+        setCityId("");
         setShowAddCityForm(false);
       } else {
         Swal.fire({

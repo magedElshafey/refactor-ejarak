@@ -35,6 +35,7 @@ const MainSelect = ({
     if (value) {
       setSelectedOption(value);
     } else {
+      setSelectedOption("");
       return;
     }
   }, [value]);
@@ -68,7 +69,7 @@ const MainSelect = ({
           } ${showOptions ? "block" : "hidden"} `}
         >
           {loading ? (
-            <div className="spinner2"></div>
+            <div className="w-12 h-12 border-4  border-maincolorgreen border-dashed rounded-full animate-spin text-center p-2 mx-auto"></div>
           ) : options.length ? (
             options.map((item) => (
               <p

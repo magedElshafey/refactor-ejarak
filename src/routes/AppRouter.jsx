@@ -68,6 +68,7 @@ import ReportReasons from "../pages/dashboard/ReportReasons";
 import BookingReasons from "../pages/dashboard/BookingReasons";
 import Categories from "../pages/dashboard/Categories";
 import Payments from "../pages/dashboard/Payments";
+import SubCategories from "../pages/dashboard/SubCategories";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -344,6 +345,10 @@ const router = createBrowserRouter([
       {
         path: "reaalstate-categories",
         element: <Categories />,
+      },
+      {
+        path: "reaalstate-sub-categories",
+        element: <SubCategories />,
       },
       {
         path: "payments",

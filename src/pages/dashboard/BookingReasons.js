@@ -55,14 +55,12 @@ const BookingReasons = () => {
         showBookingForm={showBookingForm}
         setShowBookingForm={setShowBookingForm}
       />
-      {/* <AddReportReasonsForm
-        showReportForm={showReportForm}
-        setShowReportForm={setShowReportForm}
-      /> */}
+
       <EditBookingForm
         showeditReportForm={showEditReportForm}
         setShoweditReportForm={setShowEditReportForm}
         id={reasonId}
+        setReasonId={setReasonId}
       />
     </>
   );

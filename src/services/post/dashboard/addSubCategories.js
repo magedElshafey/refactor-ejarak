@@ -1,7 +1,7 @@
 import { request } from "../../axios";
-export const addPayment = async (data) => {
+export const addSubCategories = async (data) => {
   return await request({
-    url: "/Dashboard/payment-type",
+    url: "/Dashboard/subCategories",
     method: "POST",
     data,
   });

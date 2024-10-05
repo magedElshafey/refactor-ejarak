@@ -8,7 +8,12 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
 import { editReport } from "../../../services/post/dashboard/editReport";
 import { getReportById } from "../../../services/get/dashboard/getReportById";
-const EditReportForm = ({ showeditReportForm, setShoweditReportForm, id }) => {
+const EditReportForm = ({
+  showeditReportForm,
+  setShoweditReportForm,
+  id,
+  setReasonId,
+}) => {
   const { t } = useTranslation();
   const { data } = useQuery(["report-details", id], () => getReportById(id), {
     enabled: !!id,
@@ -30,6 +35,8 @@ const EditReportForm = ({ showeditReportForm, setShoweditReportForm, id }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("reports");
+        queryClient.invalidateQueries("featuers");
+        setReasonId("");
         setReportName({
           ar: "",
           en: "",
@@ -60,7 +67,7 @@ const EditReportForm = ({ showeditReportForm, setShoweditReportForm, id }) => {
     } else if (!reportName.en) {
       Swal.fire({
         icon: "error",
-        title: t("report name in english field is required"),
+        title: t("report name in englishh field is required"),
       });
     } else {
       const formData = new FormData();

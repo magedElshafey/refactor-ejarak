@@ -25,7 +25,7 @@ const Categories = () => {
               <MainSelect
                 onSelect={handleCategoryChnage}
                 label="realstate types"
-                options={data?.data?.data}
+                options={data?.data?.data || []}
                 value={
                   categoryId
                     ? data?.data?.data?.find((item) => item.id === +categoryId)
@@ -55,6 +55,7 @@ const Categories = () => {
         showEditCategoryForm={showEditCategoryForm}
         setShowEditCategoryForm={setShowEditCategoryForm}
         id={categoryId}
+        setCategoryId={setCategoryId}
       />
     </>
   );

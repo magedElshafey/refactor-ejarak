@@ -17,13 +17,13 @@ const AddReportReasonsForm = ({ showReportForm, setShowReportForm }) => {
   });
   const { isLoading, mutate } = useMutation((v) => addReports(v), {
     onSuccess: (data) => {
-      console.log("data", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("reports");
+        queryClient.invalidateQueries("featuers");
         setReportName({
           ar: "",
           en: "",
@@ -48,13 +48,13 @@ const AddReportReasonsForm = ({ showReportForm, setShowReportForm }) => {
     } else if (!reportsName.ar) {
       Swal.fire({
         icon: "error",
-        title: t("city name in arabic field is required"),
+        title: t("report name in arabic field is required"),
       });
       return;
     } else if (!reportsName.en) {
       Swal.fire({
         icon: "error",
-        title: t("city name in english field is required"),
+        title: t("report name in englishh field is required"),
       });
     } else {
       const formData = new FormData();

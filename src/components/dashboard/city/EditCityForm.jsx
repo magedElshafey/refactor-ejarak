@@ -8,16 +8,16 @@ import { useMutation, useQueryClient, useQuery } from "react-query";
 import { IoCloseSharp } from "react-icons/io5";
 import { getCityById } from "../../../services/get/dashboard/getCityById";
 import { editCity } from "../../../services/post/dashboard/editCity";
-import { getCategoryById } from "../../../services/get/dashboard/getCategoryById";
-const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
+const EditCityForm = ({
+  showEditCityForm,
+  setShowEditCityForm,
+  id,
+  setCityId,
+}) => {
   const { t } = useTranslation();
-  const { data } = useQuery(
-    ["category-details", id],
-    () => getCategoryById(id),
-    {
-      enabled: !!id,
-    }
-  );
+  const { data } = useQuery(["city-details", id], () => getCityById(id), {
+    enabled: !!id,
+  });
   const queryClient = useQueryClient();
   const [cityName, setCityName] = useState({
     ar: "",
@@ -35,10 +35,12 @@ const EditCityForm = ({ showEditCityForm, setShowEditCityForm, id }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("cities");
+        queryClient.invalidateQueries("featuers");
         setCityName({
           ar: "",
           en: "",
         });
+        setCityId("");
         setShowEditCityForm(false);
       } else {
         Swal.fire({

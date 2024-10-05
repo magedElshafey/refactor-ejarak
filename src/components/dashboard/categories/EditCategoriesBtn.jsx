@@ -7,12 +7,12 @@ const EditCategoriesBtn = ({ id, setShowEditCategoryForm }) => {
     if (!id) {
       Swal.fire({
         icon: "error",
-        title: t("you need to choose the city you want to edit"),
+        title: t("you need to choose the category you want to edit"),
       });
       return;
     } else {
       Swal.fire({
-        text: t("do you sure you want to edit the city"),
+        text: t("do you sure you want to edit the category"),
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

@@ -14,6 +14,7 @@ const RemoveCityBtn = ({ id, setCityId }) => {
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("cities");
+        queryClient.invalidateQueries("featuers");
         setCityId("");
       } else {
         Swal.fire({

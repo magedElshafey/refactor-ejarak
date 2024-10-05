@@ -85,7 +85,6 @@ const RealStatesBody = ({ tableSearch }) => {
   const offset = currentPage * itemsPerPage;
   const realStateData =
     filteredRealStates?.slice(offset, offset + itemsPerPage) || [];
-  console.log("realstate data", realStateData);
   const handleStatusChange = (id, newStatus) => {
     if (newStatus === "refused") {
       setSelectedRowId(id);
@@ -139,7 +138,6 @@ const RealStatesBody = ({ tableSearch }) => {
 const RealStateTable = ({ data, onStatusChange }) => {
   const { userData } = useSelector((state) => state.authSlice);
   const userId = userData?.id || null;
-  console.log("user id", userId);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -211,7 +209,6 @@ const RealStateTable = ({ data, onStatusChange }) => {
       title: "properties",
       render: (value, row) => (
         <>
-          {console.log("row", row)}
           <TableProperties
             hasView={true}
             hasDelete={value === "super_admin" ? false : true}

@@ -17,13 +17,13 @@ const AddCategoryForm = ({ showCategoryForm, setShowCategoryForm }) => {
   });
   const { isLoading, mutate } = useMutation((v) => addCategories(v), {
     onSuccess: (data) => {
-      console.log("data", data);
       if (data?.data?.status) {
         Swal.fire({
           icon: "success",
           title: data?.data?.message,
         });
         queryClient.invalidateQueries("categories");
+        queryClient.invalidateQueries("featuers");
         setCategoryName({
           ar: "",
           en: "",
@@ -48,13 +48,13 @@ const AddCategoryForm = ({ showCategoryForm, setShowCategoryForm }) => {
     } else if (!categoryName.ar) {
       Swal.fire({
         icon: "error",
-        title: t("booking refused  reason in arabic field is required"),
+        title: t("category name in arabic field is required"),
       });
       return;
     } else if (!categoryName.en) {
       Swal.fire({
         icon: "error",
-        title: t("booking refused  reason in english field is required"),
+        title: t("category name in english field is required"),
       });
     } else {
       const formData = new FormData();
@@ -64,7 +64,6 @@ const AddCategoryForm = ({ showCategoryForm, setShowCategoryForm }) => {
       mutate(formData);
     }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCategoryName((prev) => ({ ...prev, [name]: value }));

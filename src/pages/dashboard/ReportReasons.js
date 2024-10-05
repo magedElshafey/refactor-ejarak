@@ -25,7 +25,7 @@ const ReportReasons = () => {
               <MainSelect
                 onSelect={handleReasonChange}
                 label="report reasons"
-                options={data?.data?.data}
+                options={data?.data?.data || []}
                 value={
                   reasonId
                     ? data?.data?.data?.find((item) => item.id === +reasonId)
@@ -54,6 +54,7 @@ const ReportReasons = () => {
         showeditReportForm={showEditReportForm}
         setShoweditReportForm={setShowEditReportForm}
         id={reasonId}
+        setReasonId={setReasonId}
       />
     </>
   );
