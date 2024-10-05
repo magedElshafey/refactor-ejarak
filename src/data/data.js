@@ -103,7 +103,11 @@ export const navLinks = [
             return;
           }
         });
-      } else if (type !== "owner" && type !== "super_admin") {
+      } else if (
+        type !== "owner" &&
+        type !== "super_admin" &&
+        type !== "admin"
+      ) {
         e.preventDefault();
         Swal.fire({
           icon: "error",
