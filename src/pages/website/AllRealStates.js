@@ -12,13 +12,11 @@ import PriceBtn from "../../components/common/filter/PriceBtn";
 import ReviewBtn from "../../components/common/filter/ReviewBtn";
 import NewsBtn from "../../components/common/filter/NewsBtn";
 import Pagination from "../../components/common/Pagination";
-// import MainSelect from "../../components/common/inputs/MainSelect";
-// import { useGlobalContext } from "../../hooks/GlobalContext";
 import CityBtn from "../../components/common/filter/CityBtn";
 const AllRealStates = () => {
   const dispatch = useDispatch();
-  // const { data: global } = useGlobalContext();
-
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState(0);
   // reset all redux value when the page loaded
   useEffect(() => {
     dispatch(resetFilter());
@@ -37,7 +35,23 @@ const AllRealStates = () => {
     sort,
     cityId,
   } = useSelector((state) => state.filterSlice);
-
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [
+    categoryId,
+    subCategoryId,
+    highPrice,
+    lowPrice,
+    roomNumbers,
+    bathrooms,
+    area,
+    name,
+    priceCreate,
+    sortCreate,
+    sort,
+    cityId,
+  ]);
   const { isLoading, data } = useQuery(
     [
       "all-realstates",
@@ -53,6 +67,8 @@ const AllRealStates = () => {
       sort,
       sortCreate,
       cityId,
+      currentPage, // بدء الترقيم من 1 في الـ API
+      itemsPerPage,
     ],
     () =>
       getAllRealstates(
@@ -67,15 +83,14 @@ const AllRealStates = () => {
         sort,
         priceCreate,
         sortCreate,
-        cityId
-      )
+        cityId,
+        currentPage + 1, // بدء الترقيم من 1 في الـ API
+        itemsPerPage
+      ),
+    {
+      keepPreviousData: true, // للحفاظ على البيانات السابقة عند التغيير
+    }
   );
-
-  const itemsPerPage = 8;
-  const [currentPage, setCurrentPage] = useState(0);
-  useEffect(() => {
-    setCurrentPage(0); // Reset to first page when data changes
-  }, [data?.data?.data]);
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);
@@ -85,7 +100,6 @@ const AllRealStates = () => {
       behavior: "smooth",
     });
   };
-  const offset = currentPage * itemsPerPage;
   return (
     <>
       <div className="container mx-auto px-8 mt-8">
@@ -113,20 +127,18 @@ const AllRealStates = () => {
             {isLoading ? (
               <LoadingTitle />
             ) : data?.data?.data.length ? (
-              data?.data?.data
-                .slice(offset, offset + itemsPerPage)
-                .map((item, index) => (
-                  <RealstateCard key={index} data={item} dep="all-realstates" />
-                ))
+              data?.data?.data?.map((item, index) => (
+                <RealstateCard key={index} data={item} dep="all-realstates" />
+              ))
             ) : (
               <NoDataTitle />
             )}
-            {data?.data?.data?.length > itemsPerPage ? (
+            {data?.data?.meta.total > itemsPerPage ? (
               <Pagination
-                itemsPerPage={itemsPerPage}
-                totalItems={data?.data?.data.length}
                 onPageChange={handlePageChange}
                 currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                totalItems={data?.data?.meta?.total}
               />
             ) : null}
           </div>

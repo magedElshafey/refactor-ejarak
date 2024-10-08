@@ -68,29 +68,23 @@ const MyRealStates = () => {
                       {item.status === "accepted" ? (
                         <ReservationBtn id={item.id} />
                       ) : null}
-                      <EditBtn id={item.id} />
-                      {item?.status === "pending" &&
-                      item?.delete_reason ? null : (
-                        <DeleteBtn id={item.id} dep="my-realstates" />
-                      )}
+                      {item?.status !== "deleted" ? (
+                        <>
+                          <EditBtn id={item.id} />
+                          <DeleteBtn id={item.id} dep="my-realstates" />
+                        </>
+                      ) : null}
+                      {item?.status === "deleted" &&
+                      item?.delete_reason !== null ? (
+                        <div className="flex-1">
+                          <RefusedReason
+                            reason={item.delete_reason}
+                            isDeleted={true}
+                          />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
-                  {/* {item?.status === "pending" && !item?.delete_reason ? (
-                    item?.status !== "pending" ? null : (
-                      ""
-                    )
-                  ) : (
-                 
-                  )} */}
-                  {item?.status !== "pending" ? null : item.status ===
-                      "pending" && item?.delete_reason !== null ? (
-                    <div className="flex-1">
-                      <RefusedReason
-                        reason={item.delete_reason}
-                        isDeleted={true}
-                      />
-                    </div>
-                  ) : null}
                 </div>
               ))
             ) : (

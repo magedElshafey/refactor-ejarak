@@ -8,6 +8,8 @@ const getStatusBackgroundColor = (status) => {
       return "bg-[#FED7DC]";
     case "contract_created":
       return "bg-[#79BAEC]";
+    case "deleted":
+      return "bg-[#DC3545]";
     default:
       return "";
   }

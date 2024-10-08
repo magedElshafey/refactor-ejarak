@@ -643,5 +643,6 @@
   "you need to choose the reports you want to remove": "you need to choose the reports you want to remove",
   "do you sure you want to remove the reports": "do you sure you want to remove the reports",
   "you need to choose the reason you want to remove": "you need to choose the reason you want to remove",
-  "do you sure you want to remove the reason": "do you sure you want to remove the reason"
+  "do you sure you want to remove the reason": "do you sure you want to remove the reason",
+  "deleted": "deleted request"
 }

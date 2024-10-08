@@ -48,7 +48,7 @@ const TableStatus = ({ status, onChange, hasNotChange }) => {
               status === "pending"
                 ? "justify-between px-4 cursor-pointer"
                 : "justify-center"
-            }`}
+            } ${status === "deleted" ? "text-white" : null}`}
           >
             <p>{t(status)}</p>
             {status === "pending" && <IoIosArrowDown />}

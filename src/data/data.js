@@ -319,6 +319,11 @@ export const statusFilter = [
     enTitle: "Rejected",
     value: "refused",
   },
+  {
+    arTitle: "العقارات المحذوفة",
+    enTitle: "deleted",
+    value: "deleted",
+  },
 ];
 export const filterdReservations = [
   {
