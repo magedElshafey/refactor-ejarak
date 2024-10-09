@@ -36,7 +36,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               <p className="font-bold">{data?.tenant?.name}</p>
             </div>
             <div className="flex flex-col items-start md:items-center">
-              <p className="text-textColor mb-1">{t("admin")}</p>
+              <p className="text-textColor mb-1">{t("adminn")}</p>
               <p className="font-bold">
                 {data.contract_fee_payer === "owner" && i18n.language === "ar"
                   ? "المالك"

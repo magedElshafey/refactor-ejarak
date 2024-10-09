@@ -37,7 +37,7 @@ const ReservationData = ({ data, downloadContract }) => {
           </div>
         ) : null}
         <div>
-          <p className="text-[#4D5F65] mb-1">{t("admin")}</p>
+          <p className="text-[#4D5F65] mb-1">{t("adminn")}</p>
           <p className="text-black">
             {data.contract_fee_payer === "owner" && i18n.language === "ar"
               ? "المالك"

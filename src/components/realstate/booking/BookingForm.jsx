@@ -192,7 +192,7 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
               htmlFor="startDate"
               className="text-textColor font-semibold block mb-1"
             >
-              {t("admin")}
+              {t("adminn")}
             </label>
             <MainSelect
               options={global.account_type}
