@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { getDashboardRealstates } from "../../../services/get/dashboard/getDashboardRealstates";
 import TableProperties from "../../../components/dashboard/common/table/TableProperties";
@@ -12,7 +12,6 @@ import updateRealStateStatus from "../../../services/post/dashboard/updateRealSt
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { formatDateTime } from "../../../utils/formateDateTime";
 
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import { deleteRealState } from "../../../services/delete/dashboard/deleteRealState";
@@ -68,10 +67,6 @@ const RealStatesBody = ({ tableSearch }) => {
         realEstate.name.includes(tableSearch)
       )
     : filteredRealStates;
-
-  // useEffect(() => {
-  //   setCurrentPage(0);
-  // }, [data?.data?.data]);
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);
@@ -138,6 +133,7 @@ const RealStatesBody = ({ tableSearch }) => {
 const RealStateTable = ({ data, onStatusChange }) => {
   const { userData } = useSelector((state) => state.authSlice);
   const userId = userData?.id || null;
+
   const navigate = useNavigate();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
