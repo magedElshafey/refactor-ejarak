@@ -13,6 +13,10 @@ import { IoClose } from "react-icons/io5";
 import SearchBtn from "./SearchBtn";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AirConditions from "./AirConditions";
+import ParkingNumbers from "./ParkingNumbers";
+import Estaplish from "./Estaplish";
+import Kitchens from "./Kitchens";
 const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -100,6 +104,10 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
       <Price min={1000} max={50000} />
       <Rooms />
       <Bathrooms />
+      <AirConditions />
+      <ParkingNumbers />
+      <Estaplish />
+      <Kitchens />
       <Area min={1} max={1000} />
       <div className="flex items-center justify-between">
         {mobileVieow ? <SearchBtn /> : null}

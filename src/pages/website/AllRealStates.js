@@ -34,6 +34,10 @@ const AllRealStates = () => {
     sortCreate,
     sort,
     cityId,
+    airConditions,
+    parkingNumbers,
+    hasKitchen,
+    isEstaplished,
   } = useSelector((state) => state.filterSlice);
   // Reset to first page when filters change
   useEffect(() => {
@@ -51,6 +55,10 @@ const AllRealStates = () => {
     sortCreate,
     sort,
     cityId,
+    airConditions,
+    parkingNumbers,
+    hasKitchen,
+    isEstaplished,
   ]);
   const { isLoading, data } = useQuery(
     [
@@ -69,6 +77,10 @@ const AllRealStates = () => {
       cityId,
       currentPage, // بدء الترقيم من 1 في الـ API
       itemsPerPage,
+      airConditions,
+      parkingNumbers,
+      hasKitchen,
+      isEstaplished,
     ],
     () =>
       getAllRealstates(
@@ -85,7 +97,11 @@ const AllRealStates = () => {
         sortCreate,
         cityId,
         currentPage + 1, // بدء الترقيم من 1 في الـ API
-        itemsPerPage
+        itemsPerPage,
+        airConditions,
+        parkingNumbers,
+        hasKitchen,
+        isEstaplished
       ),
     {
       keepPreviousData: true, // للحفاظ على البيانات السابقة عند التغيير
@@ -133,7 +149,7 @@ const AllRealStates = () => {
             ) : (
               <NoDataTitle />
             )}
-            {data?.data?.meta.total > itemsPerPage ? (
+            {data?.data?.meta?.total > itemsPerPage ? (
               <Pagination
                 onPageChange={handlePageChange}
                 currentPage={currentPage}

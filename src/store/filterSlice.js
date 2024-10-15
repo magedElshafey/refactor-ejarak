@@ -27,6 +27,10 @@ const initialState = {
   sort: "",
   cityId: "",
   distance: "",
+  airConditions: "",
+  parkingNumbers: "",
+  hasKitchen: "",
+  isEstaplished: "",
 };
 
 const filterSlice = createSlice({
@@ -118,6 +122,18 @@ const filterSlice = createSlice({
     changeDistance: (state, action) => {
       state.distance = action.payload;
     },
+    changeAirConditions: (state, action) => {
+      state.airConditions = action.payload;
+    },
+    changeParkingNumbers: (state, action) => {
+      state.parkingNumbers = action.payload;
+    },
+    changeHasKitchen: (state, action) => {
+      state.hasKitchen = action.payload;
+    },
+    changeIsEstaplished: (state, action) => {
+      state.isEstaplished = action.payload;
+    },
     resetFilter: (state) => {
       state.categoryId = "";
       state.subCategoryId = [];
@@ -134,6 +150,10 @@ const filterSlice = createSlice({
       state.sortCreate = "";
       state.cityId = "";
       state.distance = "";
+      state.airConditions = "";
+      state.parkingNumbers = "";
+      state.isEstaplished = "";
+      state.hasKitchen = "";
     },
   },
 });
@@ -160,5 +180,9 @@ export const {
   changeSortCreateLow,
   changeCityId,
   changeDistance,
+  changeAirConditions,
+  changeParkingNumbers,
+  changeHasKitchen,
+  changeIsEstaplished,
 } = filterSlice.actions;
 export default filterSlice.reducer;

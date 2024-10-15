@@ -664,5 +664,7 @@
   "do you sure you want to remove the reports": "هل أنت متأكد من حذف السبب ؟",
   "you need to choose the reason you want to remove": "يجب تحديد السبب الذي تريد حذفه اولا",
   "do you sure you want to remove the reason": "هل أنت متأكد من حذف السبب ؟",
-  "deleted": "طلب حذف"
+  "deleted": "طلب حذف",
+  "yes": "يوجد",
+  "no": "لا يوجد"
 }
