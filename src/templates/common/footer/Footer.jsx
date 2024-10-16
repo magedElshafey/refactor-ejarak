@@ -2,12 +2,7 @@ import React from "react";
 import logo from "../../../assets/logo footer.png";
 import Logo from "../../../components/common/Logo";
 import { useNavigate } from "react-router-dom";
-import {
-  appDetails,
-  navLinks,
-  aboutUs,
-  footerDetails,
-} from "../../../data/data";
+import { appDetails, navLinks, aboutUs } from "../../../data/data";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -18,15 +13,11 @@ const Footer = ({ isHome }) => {
   const auth = useSelector((state) => state.authSlice);
   const isLogin = ejarakLogin;
   const type = auth?.userData?.account?.type;
-  const { userData } = useSelector((state) => state.authSlice);
-  const role = userData?.account?.type;
   const filteredLinks = navLinks.filter((item) => {
     if (!item.needLogin) {
-      // عرض الروابط التي لا تحتاج إلى تسجيل دخول دائمًا
       return true;
     }
     if (isLogin && item.role.includes(type)) {
-      // عرض الروابط بناءً على الـ role إذا كان المستخدم مسجلًا الدخول
       return true;
     }
     return false;
@@ -158,25 +149,6 @@ const Footer = ({ isHome }) => {
                   </NavLink>
                 ))}
               </div>
-
-              {/* <div>
-                <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                  {t(followUs.title)}
-                </p>
-                <div className="flex items-center gap-2 flex-wrap">
-                  {followUs.details.map((item, index) => (
-                    <a
-                      key={index}
-                      href={item.path}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="block mb-3 text-white"
-                    >
-                      {item.icon}
-                    </a>
-                  ))}
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
