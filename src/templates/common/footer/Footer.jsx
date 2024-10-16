@@ -38,16 +38,9 @@ const Footer = ({ isHome }) => {
           <div className="container mx-auto px-8">
             <div className="w-full flex justify-center flex-col items-center gap-3 mb-8">
               <Logo img={logo} />
-              {/* <p className="text-white">
-                هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد
-                هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو
-                العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف
-              </p> */}
             </div>
             <div
-              className={`grid grid-cols-1 w-full justify-center ${
-                ejarakLogin ? "lg:grid-cols-4" : "lg:grid-cols-3"
-              } gap-4 lg:gap-16`}
+              className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full justify-center  gap-4 lg:gap-16`}
             >
               <div>
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
@@ -101,27 +94,6 @@ const Footer = ({ isHome }) => {
                   </NavLink>
                 ))}
               </div>
-              {ejarakLogin ? (
-                <div>
-                  {role === "owner" || role === "tenant" ? (
-                    <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                      {t("account")}
-                    </p>
-                  ) : null}
-
-                  {footerDetails
-                    ?.filter((item) => item.role.includes(role))
-                    .map((item, index) => (
-                      <NavLink
-                        to={item.path}
-                        key={index}
-                        className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
-                      >
-                        <p>{t(item.title)}</p>
-                      </NavLink>
-                    ))}
-                </div>
-              ) : null}
             </div>
           </div>
         </div>
@@ -132,9 +104,7 @@ const Footer = ({ isHome }) => {
               <Logo img={logo} />
             </div>
             <div
-              className={`grid grid-cols-1 ${
-                ejarakLogin ? "lg:grid-cols-4" : "lg:grid-cols-3"
-              } gap-4 lg:gap-16`}
+              className={`grid grid-cols-1 px-6 lg:px-12  md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16`}
             >
               <div>
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
@@ -188,26 +158,7 @@ const Footer = ({ isHome }) => {
                   </NavLink>
                 ))}
               </div>
-              {ejarakLogin ? (
-                <div>
-                  {role === "owner" || role === "tenant" ? (
-                    <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
-                      {t("account")}
-                    </p>
-                  ) : null}
-                  {footerDetails
-                    ?.filter((item) => item.role.includes(role))
-                    .map((item, index) => (
-                      <NavLink
-                        to={item.path}
-                        key={index}
-                        className={`w-fit flex items-center gap-2 mb-4 footer text-white`}
-                      >
-                        <p>{t(item.title)}</p>
-                      </NavLink>
-                    ))}
-                </div>
-              ) : null}
+
               {/* <div>
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                   {t(followUs.title)}
