@@ -15,7 +15,7 @@ import Pagination from "../../components/common/Pagination";
 import CityBtn from "../../components/common/filter/CityBtn";
 const AllRealStates = () => {
   const dispatch = useDispatch();
-  const itemsPerPage = 8;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(0);
   // reset all redux value when the page loaded
   useEffect(() => {
