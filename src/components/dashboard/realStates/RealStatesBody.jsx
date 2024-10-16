@@ -20,14 +20,16 @@ import Spinner from "../../common/Spinner";
 import { useSelector } from "react-redux";
 const itemsPerPage = 10;
 
-const RealStatesBody = ({ tableSearch }) => {
+const RealStatesBody = ({ tableSearch, realstateStatus }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [popupOpen, setPopupOpen] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
   const [selectedRowId, setSelectedRowId] = useState(null);
 
   const queryClient = useQueryClient();
-  const { isLoading, data } = useQuery(["realstates"], getDashboardRealstates);
+  const { isLoading, data } = useQuery(["realstates", realstateStatus], () =>
+    getDashboardRealstates(realstateStatus)
+  );
 
   const { isLoading: loadingStatus, mutate } = useMutation(
     ({ status, id, rejectionReason }) =>

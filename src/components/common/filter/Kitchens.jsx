@@ -19,7 +19,7 @@ const Kitchens = () => {
           <input
             type="radio"
             value={1}
-            name="est"
+            name="kitchen"
             id="yes"
             checked={hasKitchen === 1}
             onChange={handleRadioChange}
@@ -30,7 +30,7 @@ const Kitchens = () => {
           <input
             type="radio"
             value={0}
-            name="est"
+            name="kitchen"
             id="no"
             checked={hasKitchen === 0}
             onChange={handleRadioChange}

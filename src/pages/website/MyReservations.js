@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AccountDetailsNavbar from "../../components/common/accountDetails/AccountDetailsNavbar";
 import { filterdReservations } from "../../data/data";
 import StatusNavbar from "../../components/common/status/StatusNavbar";
 import useFilteredData from "../../hooks/useFilteredData";

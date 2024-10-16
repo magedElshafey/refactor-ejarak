@@ -5,6 +5,7 @@ import Spinner from "../../../components/common/Spinner";
 import MainInput from "../../../components/common/inputs/MainInput";
 import useUserDetails from "../../../hooks/api/useUserDetails";
 import { FaRegCircleDot } from "react-icons/fa6";
+import ksa from "../../../assets/ksa.jpg";
 const UserDetails = () => {
   const { t } = useTranslation();
   const params = useParams();
@@ -40,12 +41,15 @@ const UserDetails = () => {
                   value={data?.data?.data?.nationalId}
                   label="nationalId"
                 />
-                <div className="my-6">
+                <div className="my-6 flex items-center gap-3">
                   <MainInput
                     disabled
                     value={data?.data?.data?.phone.number}
                     label="mobilePhone"
                   />
+                  <div className="p-2 w-[50px] border border-[#9399A3] rounded-xl flex items-center justify-center h-[50px] mt-[25px] bg-white">
+                    <img alt="ksa-flag" src={ksa} className="w-[24px] " />
+                  </div>
                 </div>
               </div>
               <div className="my-6">

@@ -12,21 +12,33 @@ import { getUsers } from "../../../services/get/dashboard/getUsers";
 import Swal from "sweetalert2";
 import { FaRegCircleDot } from "react-icons/fa6";
 import { deleteUser } from "../../../services/delete/dashboard/deleteUser";
+import useAccountType from "../../../hooks/api/useAccountType";
+import { MdFilterAlt } from "react-icons/md";
+import MainSelect from "../../../components/common/inputs/MainSelect";
 const itemsPerPage = 10;
 
 const Users = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { isLoading, data } = useQuery("users", getUsers, {
-    onSuccess: (data) => {
-      if (data?.data?.status) {
-        setFitlerdData(data?.data?.data);
-      } else {
-        setFitlerdData([]);
-      }
-    },
-  });
+  const [showFilter, setShowFilter] = useState(false);
+  const handleShowFilter = () => setShowFilter(!showFilter);
+  const { loadingAccountType, accountType, error } = useAccountType();
+  const [userType, setUserType] = useState("");
+  const handleUserTypeChange = (e) => setUserType(e.id);
+  const { isLoading, data } = useQuery(
+    ["users", userType],
+    () => getUsers(userType),
+    {
+      onSuccess: (data) => {
+        if (data?.data?.status) {
+          setFitlerdData(data?.data?.data);
+        } else {
+          setFitlerdData([]);
+        }
+      },
+    }
+  );
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
@@ -159,7 +171,10 @@ const Users = () => {
     },
   ];
   const handleAddUser = () => navigate("/dashboard/add-user");
-
+  const newAccountType = {
+    name: t("all"), // Assuming `t` is your translation function
+    id: "",
+  };
   return (
     <>
       {isLoading ? (
@@ -171,8 +186,41 @@ const Users = () => {
               <SearchInput onSearchChange={setSearch} />
             </div>
 
-            <div className="w-full md:w-[180px]">
-              <MainBtn text="add user" action={handleAddUser} />
+            <div className="flex items-center gap-3 flex-col lg:flex-row">
+              <button
+                onClick={handleShowFilter}
+                className="flex items-center justify-center gap-3 p-3 bg-white text-maincolorgreen font-semibold border border-slate-400 rounded-lg min-w-[140px]"
+              >
+                <p>{t("filter")}</p>
+                <MdFilterAlt size={20} />
+              </button>
+              <div className="w-full md:w-[180px]">
+                <MainBtn text="add user" action={handleAddUser} />
+              </div>
+            </div>
+          </div>
+          <div
+            className={`w-full p-3 flex items-center gap-3 rounded-lg bg-white shadow-sm my-8 duration-300 border border-slate-500 ${
+              showFilter ? "block opacity-100" : "hidden opacity-0"
+            }`}
+          >
+            <div className="w-[180px]">
+              <MainSelect
+                label="userType"
+                options={[
+                  newAccountType,
+                  ...accountType?.data?.data?.account_type,
+                ]}
+                onSelect={handleUserTypeChange}
+                loading={loadingAccountType}
+                value={
+                  userType === ""
+                    ? t("all")
+                    : accountType?.data?.data?.account_type?.find(
+                        (item) => item?.id === userType
+                      )?.name
+                }
+              />
             </div>
           </div>
           <Table

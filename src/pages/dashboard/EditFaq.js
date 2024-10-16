@@ -88,7 +88,7 @@ const EditFaq = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div>
+        <div className="container mx-auto px-8 mt-8">
           <p className="text-md md:text-lg lg:text-xl xl:text-2xl mb-3 font-bold text-maincolorgreen">
             {t("edit question")}
           </p>

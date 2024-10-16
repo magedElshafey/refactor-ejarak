@@ -302,12 +302,12 @@ export const myOrdersDetailsNavbar = [
   {
     title: "my reservations",
     path: "/website/my-reservations",
-    role: ["owner", "tenant"],
+    role: ["owner", "tenant", "super_admin"],
   },
   {
     title: "contracts",
     path: "/website/my-contracts",
-    role: ["owner", "tenant"],
+    role: ["owner", "tenant", "super_admin"],
   },
 ];
 export const statusFilter = [
@@ -331,6 +331,42 @@ export const statusFilter = [
     arTitle: "العقارات المحذوفة",
     enTitle: "deleted",
     value: "deleted",
+  },
+];
+export const statusFilterDashboardEn = [
+  {
+    id: "",
+    name: "all",
+  },
+  {
+    id: "pending",
+    name: "pending",
+  },
+  {
+    id: "accepted",
+    name: "accepted",
+  },
+  {
+    id: "refused",
+    name: "refused",
+  },
+];
+export const statusFilterDashboardAr = [
+  {
+    id: "",
+    name: "عرض الكل",
+  },
+  {
+    id: "pending",
+    name: "قيد المراجعة",
+  },
+  {
+    id: "accepted",
+    name: "العقارات المقبولة",
+  },
+  {
+    id: "refused",
+    name: "العقارات المرفوضة",
   },
 ];
 export const filterdReservations = [

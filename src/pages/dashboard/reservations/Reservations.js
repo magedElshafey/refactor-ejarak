@@ -23,6 +23,7 @@ const Reservations = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const queryClient = useQueryClient();
   const { isLoading, data } = useQuery("reservations", getReservations);
+  console.log("data returned from reservations", data);
   useEffect(() => {
     if (data) {
       if (search) {
@@ -181,7 +182,7 @@ const Reservations = () => {
           <TableStatus
             status={status}
             onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
-            hasNotChange={true}
+            hasNotChange={row.realestate?.user?.account?.type !== "super_admin"}
           />
         );
       },

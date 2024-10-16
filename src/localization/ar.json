@@ -548,7 +548,7 @@
   "city name in arabic field is required": "إسم المدينة بالعربية مطلوب",
   "city name in english field is required": "إسم المدينة بالإنجليزية مطلوب",
   "you need to choose the city you want to edit": "يجب علىك اختيار المدينة التي تريد تعديلها اولا ",
-  "do you sure you want to edit the city": "هل أنت متأكد من تعديل الميدنة ؟",
+  "do you sure you want to edit the city": "هل أنت متأكد من تعديل المدينة ؟",
   "old city name in arabic": "إسم المدينة الحالي بالعربية",
   "old city name in english": "إسم المدينة الحالي بالإنجليزية",
   "do you sure you want to remove the package": "هل أنت متاكد من حذف الباقة ؟",
@@ -666,5 +666,6 @@
   "do you sure you want to remove the reason": "هل أنت متأكد من حذف السبب ؟",
   "deleted": "طلب حذف",
   "yes": "يوجد",
-  "no": "لا يوجد"
+  "no": "لا يوجد",
+  "filter": "التصنيف"
 }

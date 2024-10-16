@@ -81,7 +81,7 @@ const EditReportForm = ({
     <div
       className={`duration-300 fixed top-0 ${
         showeditReportForm ? "left-0" : "left-[-400%]"
-      } w-screen h-screen bg-black bg-opareport-35 flex items-center justify-center z-[250]`}
+      } w-screen h-screen bg-black bg-opacity-35 flex items-center justify-center z-[250]`}
     >
       <div className="container mx-auto px-8">
         <form

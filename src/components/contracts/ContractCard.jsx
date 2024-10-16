@@ -18,6 +18,7 @@ const ContractCard = ({
   contractId,
 }) => {
   const { t, i18n } = useTranslation();
+  console.log("data returned from contract card", data);
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">
@@ -42,13 +43,14 @@ const ContractCard = ({
                 {role === "owner" ? t("tentName") : t("ownerName")}
               </p>
               <p className="font-bold">
-                {role === "owner" ? data?.tenant?.name : data?.owner?.name}
+                {role === "owner"
+                  ? data?.tenant?.name
+                  : data?.realestate?.user.name}
               </p>
             </div>
             <div className="flex flex-col items-center">
               <p className="text-textColor mb-1">{t("adminn")}</p>
               <p className="font-bold">
-                {" "}
                 {data.contract_fee_payer === "owner" && i18n.language === "ar"
                   ? "المالك"
                   : data.contract_fee_payer === "owner" &&

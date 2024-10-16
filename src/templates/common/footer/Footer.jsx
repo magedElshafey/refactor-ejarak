@@ -20,6 +20,17 @@ const Footer = ({ isHome }) => {
   const type = auth?.userData?.account?.type;
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
+  const filteredLinks = navLinks.filter((item) => {
+    if (!item.needLogin) {
+      // عرض الروابط التي لا تحتاج إلى تسجيل دخول دائمًا
+      return true;
+    }
+    if (isLogin && item.role.includes(type)) {
+      // عرض الروابط بناءً على الـ role إذا كان المستخدم مسجلًا الدخول
+      return true;
+    }
+    return false;
+  });
   return (
     <>
       {isHome ? (
@@ -58,7 +69,7 @@ const Footer = ({ isHome }) => {
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                   {t("important links")}
                 </p>
-                {navLinks.map((item, index) => (
+                {filteredLinks.map((item, index) => (
                   <NavLink
                     to={item.path}
                     key={index}
@@ -145,7 +156,7 @@ const Footer = ({ isHome }) => {
                 <p className="text-white font-bold text-md md:text-lg lg:text-xl xl:text-2xl mb-3">
                   {t("important links")}
                 </p>
-                {navLinks.map((item, index) => (
+                {filteredLinks.map((item, index) => (
                   <NavLink
                     onClick={(e) =>
                       item.onClick && item.onClick(e, isLogin, navigate, type)
