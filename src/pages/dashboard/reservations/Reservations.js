@@ -14,16 +14,35 @@ import { deleteReservation } from "../../../services/delete/dashboard/deleteRese
 import { updateReservationStatus } from "../../../services/get/dashboard/updateReservationStatus";
 import RejectedPopup from "../../../components/dashboard/common/RejectedPopup";
 import { getCurrentDate } from "../../../utils/getCurrentDate";
+import { MdFilterAlt } from "react-icons/md";
+import { getCategories } from "../../../services/get/dashboard/getCategories";
+import MainSelect from "../../../components/common/inputs/MainSelect";
+import {
+  filterdReservationDashboardAr,
+  filterdReservationDashboardEn,
+} from "../../../data/data";
 const itemsPerPage = 10;
 const Reservations = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const { isLoading: loadinCategories, data: categories } = useQuery(
+    "categories",
+    getCategories
+  );
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const queryClient = useQueryClient();
-  const { isLoading, data } = useQuery("reservations", getReservations);
-  console.log("data returned from reservations", data);
+  const [showFilter, setShowFilter] = useState(false);
+  const handleShowFilter = () => setShowFilter(!showFilter);
+  const [reservationState, setReservationState] = useState("");
+  const handleReservationStateChnage = (opt) => setReservationState(opt.id);
+  const [realstateType, setRealstateType] = useState("");
+  const handleRealstateTypeChange = (opt) => setRealstateType(opt.id);
+  const { isLoading, data } = useQuery(
+    ["reservations", realstateType, reservationState],
+    () => getReservations(realstateType, reservationState)
+  );
   useEffect(() => {
     if (data) {
       if (search) {
@@ -205,6 +224,10 @@ const Reservations = () => {
       },
     },
   ];
+  const newAccountType = {
+    name: t("all"), // Assuming `t` is your translation function
+    id: "",
+  };
   return (
     <>
       {isLoading ? (
@@ -214,6 +237,54 @@ const Reservations = () => {
           <div className="w-full mb-8 flex items-center justify-between gap-5">
             <div className="md:w-1/2">
               <SearchInput onSearchChange={setSearch} />
+            </div>
+            <button
+              onClick={handleShowFilter}
+              className="flex items-center justify-center gap-3 p-3 bg-white text-maincolorgreen font-semibold border border-slate-400 rounded-lg min-w-[140px]"
+            >
+              <p>{t("filter")}</p>
+              <MdFilterAlt size={20} />
+            </button>
+          </div>
+          <div
+            className={`w-full relative p-3 flex items-center flex-wrap gap-3 rounded-lg bg-white shadow-sm my-8 duration-300 border border-slate-500 ${
+              showFilter ? "block opacity-100" : "hidden opacity-0"
+            }`}
+          >
+            <div className="w-[180px]">
+              <MainSelect
+                onSelect={handleRealstateTypeChange}
+                loading={loadinCategories}
+                label="realstate types"
+                options={[newAccountType, ...categories?.data?.data] || []}
+                value={
+                  realstateType === ""
+                    ? t("all")
+                    : categories?.data?.data?.find(
+                        (item) => item?.id === +realstateType
+                      )?.name
+                }
+              />
+            </div>
+            <div className="w-[250px]">
+              <MainSelect
+                label="reservation status"
+                options={
+                  i18n.language === "ar"
+                    ? filterdReservationDashboardAr
+                    : filterdReservationDashboardEn
+                }
+                onSelect={handleReservationStateChnage}
+                value={
+                  i18n.language === "en"
+                    ? filterdReservationDashboardEn?.find(
+                        (item) => item?.id === reservationState
+                      )?.name
+                    : filterdReservationDashboardAr?.find(
+                        (item) => item?.id === reservationState
+                      )?.name
+                }
+              />
             </div>
           </div>
           <Table

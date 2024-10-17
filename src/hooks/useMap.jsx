@@ -27,6 +27,10 @@ const useMap = () => {
     sort,
     sortCreate,
     distance,
+    airConditions,
+    parkingNumbers,
+    hasKitchen,
+    isEstaplished,
   } = useSelector((state) => state.filterSlice);
   const [address, setAddress] = useState("");
   const [markers, setMarkers] = useState(null);
@@ -57,6 +61,10 @@ const useMap = () => {
       sort,
       sortCreate,
       distance,
+      airConditions,
+      parkingNumbers,
+      hasKitchen,
+      isEstaplished,
     ],
     () =>
       getNearRealStates(
@@ -73,7 +81,11 @@ const useMap = () => {
         priceCreate,
         sort,
         sortCreate,
-        distance
+        distance,
+        airConditions,
+        parkingNumbers,
+        hasKitchen,
+        isEstaplished
       ),
     {
       onSuccess: (data) => {

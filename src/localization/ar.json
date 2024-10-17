@@ -667,5 +667,6 @@
   "deleted": "طلب حذف",
   "yes": "يوجد",
   "no": "لا يوجد",
-  "filter": "التصنيف"
+  "filter": "التصنيف",
+  "reservation status": "حالة الحجز"
 }

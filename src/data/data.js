@@ -392,6 +392,50 @@ export const filterdReservations = [
     value: "contract_created",
   },
 ];
+export const filterdReservationDashboardAr = [
+  {
+    id: "",
+    name: "عرض الكل",
+  },
+  {
+    name: "الحجوزات قيد المراجعة",
+    id: "pending",
+  },
+  {
+    name: "الحجوزات المقبولة",
+    id: "accepted",
+  },
+  {
+    name: "الحجوزات المرفوضة",
+    id: "refused",
+  },
+  {
+    name: "الحجوزات المكتملة",
+    id: "contract_created",
+  },
+];
+export const filterdReservationDashboardEn = [
+  {
+    id: "",
+    name: "all",
+  },
+  {
+    name: "Under Review",
+    id: "pending",
+  },
+  {
+    name: "Acceptable",
+    id: "accepted",
+  },
+  {
+    name: "Rejected",
+    id: "refused",
+  },
+  {
+    name: "completed reservations",
+    id: "contract_created",
+  },
+];
 export const filterdContrancts = [
   {
     arTitle: "العقود اليدوية",

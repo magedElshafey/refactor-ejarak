@@ -15,10 +15,12 @@ import { deleteUser } from "../../../services/delete/dashboard/deleteUser";
 import useAccountType from "../../../hooks/api/useAccountType";
 import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../../components/common/inputs/MainSelect";
+import { IoMdClose } from "react-icons/io";
+
 const itemsPerPage = 10;
 
 const Users = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showFilter, setShowFilter] = useState(false);
@@ -200,7 +202,7 @@ const Users = () => {
             </div>
           </div>
           <div
-            className={`w-full p-3 flex items-center gap-3 rounded-lg bg-white shadow-sm my-8 duration-300 border border-slate-500 ${
+            className={`w-full relative p-3 flex items-center gap-3 rounded-lg bg-white shadow-sm my-8 duration-300 border border-slate-500 ${
               showFilter ? "block opacity-100" : "hidden opacity-0"
             }`}
           >

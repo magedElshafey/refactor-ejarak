@@ -15,17 +15,21 @@ const TableBody = ({ bodyData, columns, numbersBeginning }) => {
           key={i}
           className=" text-center bg-white text-slate-600    border-slate-500 rounded-lg "
         >
-          <td className="p-2 bg-[#f7f7f7]   border-slate-500">
+          <td className="p-2 bg-[#f7f7f7]   border-slate-500 border-l rounded-tr-2xl">
             {i + 1 + numbersBeginning}{" "}
           </td>
           {columns?.map((column, j) => {
             const value = column.dataIndex
               ? getNestedValue(data, column.dataIndex)
               : null;
+            const isLastColumn = j === columns.length - 1;
+
             if (column.render) {
               return (
                 <td
-                  className="p-3 font-medium border-t border-b  border-slate-500"
+                  className={`p-3 font-medium border-t border-b  border-slate-500 ${
+                    isLastColumn ? "border-l" : null
+                  } `}
                   key={`${i}-${j}`}
                 >
                   {column.render(value, data)}
@@ -34,7 +38,9 @@ const TableBody = ({ bodyData, columns, numbersBeginning }) => {
             }
             return (
               <td
-                className="p-3 font-medium truncate border-t border-b  border-slate-500"
+                className={`p-3 font-medium truncate border-t border-b  border-slate-500 ${
+                  isLastColumn ? "border-l" : null
+                } `}
                 key={`${i}-${j}`}
               >
                 {t(value).substr(0, 30)} {t(value).length > 30 ? "...." : null}
