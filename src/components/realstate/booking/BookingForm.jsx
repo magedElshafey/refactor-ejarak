@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import LoadingBtn from "../../common/buttons/LoadingBtn";
 import useNumberInput from "../../../hooks/validation/useNumberInput";
 const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
+  console.log("data category", data?.category);
   const { t } = useTranslation();
   const ref = useRef(null);
   const [startDate, setStartDate] = useState("");
@@ -166,7 +167,8 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
               <div className="my-2 text-red-500">{periodError}</div>
             ) : null}
           </div>
-          {data?.category?.id === 2 ? (
+          {data?.category?.translations?.name?.ar === "سكني" ||
+          data?.category?.translations?.name?.en === "residential" ? (
             <div className="mb-3 md:mb-4 lg:mb-5">
               <label
                 htmlFor="familyNum"

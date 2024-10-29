@@ -306,8 +306,8 @@
   "Name of the drug reported": "اسم العقار المبلغ عنة",
   "tryAgainLater": "يرجى اعادة المحاولة لاحقا",
   "reservationPeriod": "مدة الحجز",
-  "lessorName": "اسم المؤجر",
-  "lessorId": "رقم هوية المؤجر",
+  "lessorName": "اسم المالك",
+  "lessorId": "رقم هوية المالك",
   "tenantId": "رقم هوية المستأجر",
   "person submitting the report": "اسم مقدم البلاغ ",
   "report details": "تفاصيل البلاغ",
@@ -668,5 +668,6 @@
   "yes": "يوجد",
   "no": "لا يوجد",
   "filter": "التصنيف",
-  "reservation status": "حالة الحجز"
+  "reservation status": "حالة الحجز",
+  "inactive": "غير نشط"
 }

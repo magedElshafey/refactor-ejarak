@@ -489,10 +489,10 @@ const EditRealstate = () => {
                 value={
                   i18n.language === "ar"
                     ? furnishedOptionsAr.find(
-                        (item) => item?.id === estaplished
+                        (item) => item?.id === +estaplished
                       )?.name
                     : furnishedOptionsEn.find(
-                        (item) => item?.id === estaplished
+                        (item) => item?.id === +estaplished
                       )?.name
                 }
               />
@@ -501,8 +501,8 @@ const EditRealstate = () => {
                 options={i18n.language === "ar" ? elevatorsAr : elevatorsEn}
                 value={
                   i18n.language === "ar"
-                    ? elevatorsAr.find((item) => item?.id === kitchen)?.name
-                    : elevatorsEn.find((item) => item?.id === kitchen)?.name
+                    ? elevatorsAr.find((item) => item?.id === +kitchen)?.name
+                    : elevatorsEn.find((item) => item?.id === +kitchen)?.name
                 }
                 onSelect={handleKitchenChange}
               />

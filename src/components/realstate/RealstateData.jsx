@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/formateDateTime";
 const RealstateData = ({ data }) => {
   const { t, i18n } = useTranslation();
+  console.log("data?.created_at", data?.created_at);
   return (
     <div className="bg-white p-7 rounded-lg shadow-lg">
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -65,9 +66,9 @@ const RealstateData = ({ data }) => {
         <div>
           <p className="text-[#4D5F65] mb-1">{t("Furnished")}</p>
           <p className="text-black font-bold">
-            {data?.furniture === 0 && i18n.language === "ar"
+            {+data?.furniture === 0 && i18n.language === "ar"
               ? "لا"
-              : data.furniture === 0 && i18n.language === "en"
+              : +data.furniture === 0 && i18n.language === "en"
               ? "NO"
               : data.furniture !== 0 && i18n.language === "ar"
               ? "نعم"
@@ -77,9 +78,9 @@ const RealstateData = ({ data }) => {
         <div>
           <p className="text-[#4D5F65] mb-1">{t("kitchen")}</p>
           <p className="text-black font-bold">
-            {data?.kitchen === 0 && i18n.language === "ar"
+            {+data?.kitchen === 0 && i18n.language === "ar"
               ? "لا"
-              : data.kitchen === 0 && i18n.language === "en"
+              : +data.kitchen === 0 && i18n.language === "en"
               ? "NO"
               : data.kitchen !== 0 && i18n.language === "ar"
               ? "نعم"

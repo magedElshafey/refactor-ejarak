@@ -18,11 +18,11 @@ const ManualContractDetails = () => {
   const downloadPDF = () => {
     const element = document.getElementById("pdf-content");
     const options = {
-      margin: 1,
+      margin: 0,
       filename: "contract.pdf",
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      html2canvas: { scale: 3 },
+      jsPDF: { unit: "mm", format: "a3", orientation: "portrait" }, // استخدام `A3`
     };
 
     html2pdf().from(element).set(options).save();

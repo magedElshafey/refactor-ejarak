@@ -72,7 +72,7 @@ export const navLinks = [
           }
         });
       } else {
-        navigate("/wishlist");
+        navigate("/website/wishlist");
       }
     },
     role: ["owner", "tenant", "super_admin", "customer_service", "admin"],
@@ -180,7 +180,7 @@ export const navLinks = [
           }
         });
       } else {
-        navigate("/my-reservations");
+        navigate("/website/my-reservations");
       }
     },
     role: ["owner", "tenant", "super_admin", "admin"],

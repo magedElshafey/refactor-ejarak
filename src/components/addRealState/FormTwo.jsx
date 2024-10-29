@@ -40,6 +40,9 @@ const FormTwo = ({
   handleChangeInstrumentNum,
 }) => {
   const { i18n, t } = useTranslation();
+  console.log("real state age", age);
+  console.log("realstate kitchen", kitchen);
+  console.log("realstate frunised", furnished);
   const handleBack = () => {
     setStep((prev) => prev - 1);
   };

@@ -18,11 +18,13 @@ const ReservationData = ({ data, downloadContract }) => {
       >
         <div>
           <p className="text-[#4D5F65] mb-1">{t("reservationBeginsAt")}</p>
-          <p className="text-black">{contractBeginning.toLocaleDateString()}</p>
+          <p className="text-black">
+            {contractBeginning.toLocaleDateString("en-GB")}
+          </p>
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("reservationEndsAt")}</p>
-          <p className="text-black">{endDate.toLocaleDateString()}</p>
+          <p className="text-black">{endDate.toLocaleDateString("en-GB")}</p>
         </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("reservationPeriod")}</p>

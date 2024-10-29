@@ -16,6 +16,7 @@ import useAccountType from "../../../hooks/api/useAccountType";
 import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../../components/common/inputs/MainSelect";
 import { IoMdClose } from "react-icons/io";
+import { request } from "../../../services/axios";
 
 const itemsPerPage = 10;
 
@@ -108,6 +109,39 @@ const Users = () => {
       }
     });
   };
+  const handleuserActivation = async (id, data) => {
+    return await request({
+      url: `/Dashboard/users/active-user/${id}`,
+      method: "PATCH",
+      data,
+    });
+  };
+
+  const { isLoading: specialLoading, mutate: specialRealStateMutate } =
+    useMutation(({ id, data }) => handleuserActivation(id, data), {
+      onSuccess: (data) => {
+        console.log("data from success", data);
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+          queryClient.invalidateQueries("users");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
+      },
+    });
+
+  const handleSpecialRealState = (v, id) => {
+    const data = {
+      active: v ? 2 : 1,
+    };
+    specialRealStateMutate({ id, data });
+  };
   const columns = [
     {
       title: "image",
@@ -137,21 +171,28 @@ const Users = () => {
     {
       title: "status",
       dataIndex: "phone.is_verified",
-      render: (value) => {
+      render: (value, row) => {
+        console.log("value", value);
+        console.log("row", row);
         return (
-          <>
-            {value ? (
-              <span className="text-[#00AA4B]  mx-auto w-24 rounded-full py-1 px-2  flex items-center gap-x-1">
-                <FaRegCircleDot className="text-[#00AA4B]" />
-                {t("active")}
-              </span>
-            ) : (
-              <span className="text-[#FF697C]  mx-auto w-24 rounded-full py-1 px-2 flex items-center gap-x-1 ">
-                <FaRegCircleDot className="text-[#FF697C]" />
-                {t("not active")}
-              </span>
-            )}
-          </>
+          <label className="inline-flex items-center me-5 cursor-pointer">
+            <>
+              <input
+                type="checkbox"
+                value=""
+                checked={value}
+                className="sr-only peer"
+                onChange={() => handleSpecialRealState(value, row.id)}
+                disabled={specialLoading}
+              />
+              <div
+                className={`relative w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-[${
+                  value ? "-100%" : "0"
+                }] rtl:peer-checked:after:-translate-x-0 peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600`}
+              ></div>
+              <p className="mx-2">{value ? t("active") : t("inactive")}</p>
+            </>
+          </label>
         );
       },
     },
