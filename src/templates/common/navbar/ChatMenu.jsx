@@ -217,7 +217,7 @@ export const MessagesListMenu = ({ closeMenu = () => null, className }) => {
   );
 };
 
-const ChatMenu = ({ bg }) => {
+const ChatMenu = ({ bg, isDashboard }) => {
   const loggedUser = useSelector((state) => state?.authSlice?.userData);
   // local states =================
   const { data: notifications, isLoading } = useQuery(
@@ -241,29 +241,51 @@ const ChatMenu = ({ bg }) => {
   useClickOutside(menuRef, closeMenu);
 
   return (
-    <div
-      onClick={() => setMenuActive(!menuActive)}
-      ref={menuRef}
-      className="cursor-pointer relative"
-    >
-      <div
-        className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border mx-1 md:mx-0 ${
-          bg
-            ? `${bg} text-slate-500`
-            : "md:border-white text-white bg-transparent"
-        }`}
-      >
-        <MdOutlineMessage size={20} />
-        {messagesCount > 0 && !menuActive && (
-          <div className="absolute -bottom-[20%] -left-[20%] bg-maincolorgreen text-white w-6 h-6 flex items-center justify-center rounded-full">
-            <p>{messagesCount}</p>
+    <>
+      {isDashboard ? (
+        <div
+          onClick={() => setMenuActive(!menuActive)}
+          ref={menuRef}
+          className="cursor-pointer relative"
+        >
+          <div className="w-10 h-10 rounded-[50%] flex items-center justify-center border border-slate-300 text-maincolorgreen">
+            <MdOutlineMessage size={20} />
+            {messagesCount > 0 && !menuActive && (
+              <div className="absolute -bottom-[20%] -left-[20%] bg-maincolorgreen text-white w-6 h-6 flex items-center justify-center rounded-full">
+                <p>{messagesCount}</p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      {menuActive && (
-        <MessagesListMenu closeMenu={() => setMenuActive(false)} />
+          {menuActive && (
+            <MessagesListMenu closeMenu={() => setMenuActive(false)} />
+          )}
+        </div>
+      ) : (
+        <div
+          onClick={() => setMenuActive(!menuActive)}
+          ref={menuRef}
+          className="cursor-pointer relative"
+        >
+          <div
+            className={`w-8 h-8 md:w-12 md:h-12 md:p-2 flex items-center rounded-md justify-center md:border mx-1 md:mx-0 ${
+              bg
+                ? `${bg} text-slate-500`
+                : "md:border-white text-white bg-transparent"
+            }`}
+          >
+            <MdOutlineMessage size={20} />
+            {messagesCount > 0 && !menuActive && (
+              <div className="absolute -bottom-[20%] -left-[20%] bg-maincolorgreen text-white w-6 h-6 flex items-center justify-center rounded-full">
+                <p>{messagesCount}</p>
+              </div>
+            )}
+          </div>
+          {menuActive && (
+            <MessagesListMenu closeMenu={() => setMenuActive(false)} />
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

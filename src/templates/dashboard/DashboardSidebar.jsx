@@ -5,12 +5,16 @@ import Logo from "../../components/common/Logo";
 import { dashboardLinks } from "../../data/data";
 import { NavLink, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { useSelector } from "react-redux";
 const DashboardSidebar = () => {
   const { i18n, t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(null);
   const navigate = useNavigate();
-
+  const { userData } = useSelector((state) => state.authSlice);
+  const role = userData?.account?.type;
+  const filteredLinks = dashboardLinks.filter((link) =>
+    link.role.includes(role)
+  );
   const handleActiveIndexClick = (index, item) => {
     if (activeIndex === index) {
       setActiveIndex(null);
@@ -35,7 +39,7 @@ const DashboardSidebar = () => {
               <Logo img={logo} />
             </div>
             <ul className="w-full">
-              {dashboardLinks?.map((item, index) => (
+              {filteredLinks?.map((item, index) => (
                 <li
                   onClick={() => handleActiveIndexClick(index, item)}
                   key={index}

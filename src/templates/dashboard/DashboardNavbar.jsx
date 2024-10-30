@@ -13,6 +13,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { changeLanguage } from "../../services/post/changeLangauge";
 import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
+import ChatMenu from "../common/navbar/ChatMenu";
 const DashboardNavbar = () => {
   const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { i18n, t } = useTranslation();
@@ -85,6 +86,7 @@ const DashboardNavbar = () => {
                 </div>
                 {/**notfication*/}
                 <NotficationMenu isDashboard={true} />
+                <ChatMenu isDashboard={true} />
               </div>
             </div>
             <LoginBtn bg="bg-transparent" isDashboard={true} />

@@ -474,7 +474,7 @@ export const dashboardLinks = [
     title: "dashboard",
     path: "dashboard",
     list: [],
-    role: ["admin", "super_admin"],
+    role: ["admin", "super_admin", "customer_service"],
   },
   {
     icon: <BsFillHousesFill size={20} />,
