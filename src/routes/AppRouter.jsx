@@ -70,6 +70,8 @@ import Categories from "../pages/dashboard/Categories";
 import Payments from "../pages/dashboard/Payments";
 import SubCategories from "../pages/dashboard/SubCategories";
 import ProtectedRoutes from "./ProtectedRoutes";
+import RedirectIfLoggedIn from "./RedirectIfLoggedIn";
+import ProtectedDashboard from "./ProtectedDashboard";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -269,27 +271,51 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <Login />,
+        element: (
+          <RedirectIfLoggedIn>
+            <Login />
+          </RedirectIfLoggedIn>
+        ),
       },
       {
         path: "regester",
-        element: <Regester />,
+        element: (
+          <RedirectIfLoggedIn>
+            <Regester />
+          </RedirectIfLoggedIn>
+        ),
       },
       {
         path: "email-verfication",
-        element: <EmailVerfication />,
+        element: (
+          <RedirectIfLoggedIn>
+            <EmailVerfication />
+          </RedirectIfLoggedIn>
+        ),
       },
       {
         path: "forget-password",
-        element: <ForgetPassword />,
+        element: (
+          <RedirectIfLoggedIn>
+            <ForgetPassword />
+          </RedirectIfLoggedIn>
+        ),
       },
       {
         path: "forget-password-code",
-        element: <ForgetPasswordCode />,
+        element: (
+          <RedirectIfLoggedIn>
+            <ForgetPasswordCode />
+          </RedirectIfLoggedIn>
+        ),
       },
       {
         path: "new-password",
-        element: <NewPassword />,
+        element: (
+          <RedirectIfLoggedIn>
+            <NewPassword />
+          </RedirectIfLoggedIn>
+        ),
       },
     ],
   },
@@ -300,12 +326,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedDashboard>
+            <Dashboard />
+          </ProtectedDashboard>
+        ),
         index: true,
       },
       {
         path: "realstates",
-        element: <Realstates />,
+        element: (
+          <ProtectedDashboard>
+            <Realstates />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "realstate/:id",
@@ -313,119 +347,235 @@ const router = createBrowserRouter([
       },
       {
         path: "about-ejarak",
-        element: <AboutEjarak />,
+        element: (
+          <ProtectedDashboard>
+            <AboutEjarak />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "terms-conditions",
-        element: <TermsAndConditions />,
+        element: (
+          <ProtectedDashboard>
+            <TermsAndConditions />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "privacy-policy",
-        element: <PrivacyAndPolicy />,
+        element: (
+          <ProtectedDashboard>
+            <PrivacyAndPolicy />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "faqs",
-        element: <Faqs />,
+        element: (
+          <ProtectedDashboard>
+            <Faqs />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "faqs/add",
-        element: <AddFaq />,
+        element: (
+          <ProtectedDashboard>
+            <AddFaq />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "faqs/edit/:id",
-        element: <EditFaq />,
+        element: (
+          <ProtectedDashboard>
+            <EditFaq />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "faq-details/:id",
-        element: <FAQ />,
+        element: (
+          <ProtectedDashboard>
+            <FAQ />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "cities",
-        element: <Cities />,
+        element: (
+          <ProtectedDashboard>
+            <Cities />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "packages",
-        element: <Packages />,
+        element: (
+          <ProtectedDashboard>
+            <Packages />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "add-package",
-        element: <AddPackage />,
+        element: (
+          <ProtectedDashboard>
+            <AddPackage />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "package-details/:id",
-        element: <PackageDetails />,
+        element: (
+          <ProtectedDashboard>
+            <PackageDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "edit-package/:id",
-        element: <EditPackage />,
+        element: (
+          <ProtectedDashboard>
+            <EditPackage />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "reports",
-        element: <Reports />,
+        element: (
+          <ProtectedDashboard>
+            <Reports />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "report-details/:id",
-        element: <ReportDetails />,
+        element: (
+          <ProtectedDashboard>
+            <ReportDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "manual-contracts",
-        element: <ManualContracts />,
+        element: (
+          <ProtectedDashboard>
+            <ManualContracts />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "manual-contracts-details/:id",
-        element: <ManualContractDetails />,
+        element: (
+          <ProtectedDashboard>
+            <ManualContractDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "electronic-contracts",
-        element: <ElectronicContracts />,
+        element: (
+          <ProtectedDashboard>
+            <ElectronicContracts />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "electronic-contracts-details/:id",
-        element: <ReservationDetails />,
+        element: (
+          <ProtectedDashboard>
+            <ReservationDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <ProtectedDashboard>
+            <Users />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "add-user",
-        element: <AddUser />,
+        element: (
+          <ProtectedDashboard>
+            <AddUser />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "user-details/:id",
-        element: <UserDetails />,
+        element: (
+          <ProtectedDashboard>
+            <UserDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "edit-user/:id",
-        element: <EditUser />,
+        element: (
+          <ProtectedDashboard>
+            <EditUser />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "reservations",
-        element: <Reservations />,
+        element: (
+          <ProtectedDashboard>
+            <Reservations />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "reservation-details/:id",
-        element: <ReservationDetails />,
+        element: (
+          <ProtectedDashboard>
+            <ReservationDetails />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "report-reasons",
-        element: <ReportReasons />,
+        element: (
+          <ProtectedDashboard>
+            <ReportReasons />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "booking-reasons",
-        element: <BookingReasons />,
+        element: (
+          <ProtectedDashboard>
+            <BookingReasons />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "reaalstate-categories",
-        element: <Categories />,
+        element: (
+          <ProtectedDashboard>
+            <Categories />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "reaalstate-sub-categories",
-        element: <SubCategories />,
+        element: (
+          <ProtectedDashboard>
+            <SubCategories />
+          </ProtectedDashboard>
+        ),
       },
       {
         path: "payments",
-        element: <Payments />,
+        element: (
+          <ProtectedDashboard>
+            <Payments />
+          </ProtectedDashboard>
+        ),
       },
     ],
   },
