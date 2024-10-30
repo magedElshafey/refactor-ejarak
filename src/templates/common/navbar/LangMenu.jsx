@@ -23,7 +23,7 @@ const LangMenu = ({ bg }) => {
       language: v,
     };
     mutate(data);
-    i18n.changeLanguage(v);
+    // i18n.changeLanguage(v);
     if (!ejarakLogin) {
       window.location.reload();
     } else {

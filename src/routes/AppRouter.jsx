@@ -69,6 +69,7 @@ import BookingReasons from "../pages/dashboard/BookingReasons";
 import Categories from "../pages/dashboard/Categories";
 import Payments from "../pages/dashboard/Payments";
 import SubCategories from "../pages/dashboard/SubCategories";
+import ProtectedRoutes from "./ProtectedRoutes";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -97,55 +98,107 @@ const router = createBrowserRouter([
       },
       {
         path: "wishlist",
-        element: <Whishlist />,
+        element: (
+          <ProtectedRoutes>
+            <Whishlist />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "add-realstate",
-        element: <AddRealstate />,
+        element: (
+          <ProtectedRoutes>
+            <AddRealstate />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "edit-realstate/:id",
-        element: <EditRealstate />,
+        element: (
+          <ProtectedRoutes>
+            <EditRealstate />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "my-account",
-        element: <MyAccount />,
+        element: (
+          <ProtectedRoutes>
+            <MyAccount />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "my-realstates",
-        element: <MyRealStates />,
+        element: (
+          <ProtectedRoutes>
+            <MyRealStates />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "my-reservations",
-        element: <MyReservations />,
+        element: (
+          <ProtectedRoutes>
+            <MyReservations />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "my-contracts",
-        element: <MyContracts />,
+        element: (
+          <ProtectedRoutes>
+            <MyContracts />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "realstate/reservation-details/:id",
-        element: <RealStateReservation />,
+        element: (
+          <ProtectedRoutes>
+            <RealStateReservation />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "reservation-details/:id",
-        element: <ReservationDetails />,
+        element: (
+          <ProtectedRoutes>
+            <ReservationDetails />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "create-contract/manual/:id",
-        element: <CreateManualContract />,
+        element: (
+          <ProtectedRoutes>
+            <CreateManualContract />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "manual-contract/details/:id",
-        element: <ManualContractDetails />,
+        element: (
+          <ProtectedRoutes>
+            <ManualContractDetails />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "create-contract/electronic/:id",
-        element: <CreateElectronicContract />,
+        element: (
+          <ProtectedRoutes>
+            <CreateElectronicContract />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "all-notfications",
-        element: <AllNotfications />,
+        element: (
+          <ProtectedRoutes>
+            <AllNotfications />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "privacy",
@@ -169,23 +222,43 @@ const router = createBrowserRouter([
       },
       {
         path: "chat/",
-        element: <Chat />,
+        element: (
+          <ProtectedRoutes>
+            <Chat />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "chat/:id",
-        element: <Chat />,
+        element: (
+          <ProtectedRoutes>
+            <Chat />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "payment/success",
-        element: <Success />,
+        element: (
+          <ProtectedRoutes>
+            <Success />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "payment/error",
-        element: <PaymentError />,
+        element: (
+          <ProtectedRoutes>
+            <PaymentError />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "packages",
-        element: <Packagess />,
+        element: (
+          <ProtectedRoutes>
+            <Packagess />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },

@@ -5,10 +5,12 @@ import Hero from "../../components/common/Hero";
 import Navbar from "../common/navbar/Navbar";
 import Footer from "../common/footer/Footer";
 import Meta from "../../components/common/meta/Meta";
+import FixedBtn from "../../components/common/buttons/FixedBtn";
 const HomeLayout = () => {
   return (
     <div>
       <Meta />
+      <FixedBtn />
       <Hero hasoverlay={false} img={heroImg}>
         <Navbar />
         {<Outlet />}

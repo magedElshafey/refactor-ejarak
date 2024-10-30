@@ -10,7 +10,11 @@ import logo from "../../assets/logobglight.png";
 import { dashboardLinks } from "../../data/data";
 import { NavLink, useLocation } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import { changeLanguage } from "../../services/post/changeLangauge";
+import { useMutation } from "react-query";
+import { useSelector } from "react-redux";
 const DashboardNavbar = () => {
+  const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { i18n, t } = useTranslation();
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
@@ -27,6 +31,28 @@ const DashboardNavbar = () => {
       return;
     } else {
       setShowSidebar(false);
+    }
+  };
+  const { mutate } = useMutation((v) => changeLanguage(v), {
+    onSuccess: (data) => {
+      if (data?.data?.status) {
+        window.location.reload();
+      }
+    },
+  });
+  const handleChangeLang = () => {
+    localStorage.setItem(
+      "lang",
+      JSON.stringify(i18n.language === "ar" ? "en" : "ar")
+    );
+    const data = {
+      language: i18n.language === "ar" ? "en" : "ar",
+    };
+    mutate(data);
+    if (!ejarakLogin) {
+      window.location.reload();
+    } else {
+      return;
     }
   };
   return (

@@ -3,13 +3,19 @@ import { useTranslation } from "react-i18next";
 const HandleLanguages = () => {
   const { i18n } = useTranslation();
   useEffect(() => {
-    localStorage.setItem("lang", JSON.stringify(i18n.language));
-  }, [i18n.language]);
+    const savedLang = JSON.parse(localStorage.getItem("lang"));
+    if (savedLang) {
+      i18n.changeLanguage(savedLang);
+    }
+  }, [i18n]);
 
   useEffect(() => {
     document.documentElement.setAttribute("lang", i18n.language);
-    document.getElementsByTagName("body")[0].style.direction =
-      i18n.language === "ar" ? "rtl" : "ltr";
+    if (i18n.language === "ar") {
+      document.body.style.direction = "rtl";
+    } else {
+      document.body.style.direction = "ltr";
+    }
   }, [i18n.language]);
 
   return null;
