@@ -375,11 +375,6 @@ export const filterdReservations = [
     enTitle: "Under Review",
     value: "pending",
   },
-  {
-    arTitle: "الحجوزات المقبولة",
-    enTitle: "Acceptable",
-    value: "accepted",
-  },
 
   {
     arTitle: "الحجوزات المرفوضة",
@@ -389,7 +384,7 @@ export const filterdReservations = [
   {
     arTitle: "الحجوزات المكتملة",
     enTitle: "completed reservations",
-    value: "contract_created",
+    value: "completed",
   },
 ];
 export const filterdReservationDashboardAr = [

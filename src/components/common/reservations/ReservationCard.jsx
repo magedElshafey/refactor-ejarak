@@ -94,11 +94,11 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               (data.status === "pending" && role === "tenant") ? (
                 <ReservationDetailsBtn id={data?.id} />
               ) : null}
-              {data?.status === "accepted" &&
+              {data?.status === "completed" &&
               role === data.contract_fee_payer ? (
                 <PayBtn id={data?.id} dep={dep} />
               ) : null}
-              {data?.status === "contract_created" && role === "owner" ? (
+              {data?.status === "completed" && role === "owner" ? (
                 <CreateContractBtn id={data?.id} />
               ) : null}
             </div>

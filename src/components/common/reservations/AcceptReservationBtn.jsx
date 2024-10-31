@@ -37,7 +37,7 @@ const AcceptReservationBtn = ({ id, data, dep }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const reservationData = {
-          status: "accepted",
+          status: "completed",
           accepted_at: data,
         };
         mutate(reservationData);
