@@ -72,12 +72,13 @@ const CreateManualContract = () => {
             <ReservationData data={data?.data?.data} />
             <OwnerData data={data?.data?.data?.realestate?.user} />
             <TenantData data={data?.data?.data?.tenant} />
-
-            <div className="w-full flex justify-center">
-              <div className="min-w-[220px]">
-                <MainBtn text="print the contract" action={handleNavigate} />
+            {data?.data?.data?.pay ? (
+              <div className="w-full flex justify-center">
+                <div className="min-w-[220px]">
+                  <MainBtn text="print the contract" action={handleNavigate} />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       )}
