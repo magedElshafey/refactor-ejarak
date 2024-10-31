@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { getDashboardRealstates } from "../../../services/get/dashboard/getDashboardRealstates";
 import TableProperties from "../../../components/dashboard/common/table/TableProperties";
@@ -63,12 +63,7 @@ const RealStatesBody = ({ tableSearch, realstateStatus }) => {
   );
 
   // * handle Table search
-  let filteredRealStates = data?.data?.data || [];
-  filteredRealStates = tableSearch
-    ? filteredRealStates.filter((realEstate) =>
-        realEstate.name.includes(tableSearch)
-      )
-    : filteredRealStates;
+  // Apply filter for search term and realstate status
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);
@@ -79,9 +74,6 @@ const RealStatesBody = ({ tableSearch, realstateStatus }) => {
     });
   };
 
-  const offset = currentPage * itemsPerPage;
-  const realStateData =
-    filteredRealStates?.slice(offset, offset + itemsPerPage) || [];
   const handleStatusChange = (id, newStatus) => {
     if (newStatus === "refused") {
       setSelectedRowId(id);
@@ -103,6 +95,36 @@ const RealStatesBody = ({ tableSearch, realstateStatus }) => {
     setPopupOpen(false);
     setSelectedRowId(null);
   };
+
+  const handleSearchAndFilter = () => {
+    let filteredData = data?.data?.data || [];
+
+    // Apply search filter
+    if (tableSearch) {
+      filteredData = filteredData.filter((realEstate) =>
+        realEstate.name.includes(tableSearch)
+      );
+    }
+
+    // Apply status filter
+    if (realstateStatus) {
+      filteredData = filteredData.filter(
+        (realEstate) => realEstate.status === realstateStatus
+      );
+    }
+
+    return filteredData;
+  };
+
+  const filteredRealStates = handleSearchAndFilter();
+
+  // Reset page when search or filter changes
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [tableSearch, realstateStatus]);
+
+  const offset = currentPage * itemsPerPage;
+  const realStateData = filteredRealStates.slice(offset, offset + itemsPerPage);
   return (
     <>
       {isLoading ? (
