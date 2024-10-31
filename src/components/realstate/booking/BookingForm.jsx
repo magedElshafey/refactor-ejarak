@@ -10,7 +10,7 @@ import { bookingRealstate } from "../../../services/post/bookingRealstate";
 import Swal from "sweetalert2";
 import LoadingBtn from "../../common/buttons/LoadingBtn";
 import useNumberInput from "../../../hooks/validation/useNumberInput";
-const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
+const BookingForm = ({ showBookingForm, setShowBookingForm, data, owner }) => {
   console.log("data category", data?.category);
   const { t } = useTranslation();
   const ref = useRef(null);
@@ -82,7 +82,7 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!period.trim() || !userType || !startDate.trim()) {
+    if (!period.trim() || !startDate.trim()) {
       Swal.fire({
         icon: "error",
         title: t("please fill all fields"),
@@ -98,6 +98,12 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
       Swal.fire({
         icon: "error",
         title: periodError,
+      });
+      return;
+    } else if (owner === "owner" && !userType) {
+      Swal.fire({
+        icon: "error",
+        title: t("please fill all fields"),
       });
       return;
     } else {
@@ -189,22 +195,25 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data }) => {
               ) : null}
             </div>
           ) : null}
-          <div className="mb-3 md:mb-4 lg:mb-5">
-            <label
-              htmlFor="startDate"
-              className="text-textColor font-semibold block mb-1"
-            >
-              {t("adminn")}
-            </label>
-            <MainSelect
-              options={global.account_type}
-              value={
-                global.account_type?.find((option) => option.id === userType)
-                  ?.name
-              }
-              onSelect={handleUserTypeChange}
-            />
-          </div>
+          {owner === "admin" || owner === "super_admin" ? null : (
+            <div className="mb-3 md:mb-4 lg:mb-5">
+              <label
+                htmlFor="startDate"
+                className="text-textColor font-semibold block mb-1"
+              >
+                {t("adminn")}
+              </label>
+              <MainSelect
+                options={global.account_type}
+                value={
+                  global.account_type?.find((option) => option.id === userType)
+                    ?.name
+                }
+                onSelect={handleUserTypeChange}
+              />
+            </div>
+          )}
+
           <div className="flex items-center justify-center gap-6 md:gap-8 lg:gap-12">
             {isLoading ? (
               <LoadingBtn />

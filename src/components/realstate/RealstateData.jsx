@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/formateDateTime";
 const RealstateData = ({ data }) => {
   const { t, i18n } = useTranslation();
-  console.log("data?.created_at", data?.created_at);
+  console.log("data?.created_at", data);
+  const currentYear = new Date().getFullYear();
   return (
     <div className="bg-white p-7 rounded-lg shadow-lg">
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -18,7 +19,7 @@ const RealstateData = ({ data }) => {
         <div>
           <p className="text-[#4D5F65] mb-1">{t("years")}</p>
           <p className="text-black font-bold">
-            {new Date(Date.parse(data?.created_at)).getFullYear()}
+            {+currentYear - parseInt(data?.year_of_construction)}
           </p>
         </div>
         <div>

@@ -53,6 +53,7 @@ const RealstateDetails = ({ isDashboard }) => {
   const [showReportForm, setShowReportForm] = useState(false);
   const toggleShowReportForm = () => setShowReportForm(!showBookingForm);
   const [showSuckModal, setShowSuckModal] = useState(false);
+  console.log("realstate details", data?.data?.data?.user?.account?.type);
   return (
     <>
       {isLoading || loadingSimilars ? (
@@ -249,6 +250,7 @@ const RealstateDetails = ({ isDashboard }) => {
             showBookingForm={showBookingForm}
             setShowBookingForm={setShowBookingForm}
             data={data?.data?.data}
+            owner={data?.data?.data?.user?.account?.type}
           />
           <ReportForm
             showReportForm={showReportForm}
