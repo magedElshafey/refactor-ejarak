@@ -78,7 +78,7 @@ const PackageCard = ({
     >
       <div className="bg-slate-100 rounded-xl w-full p-4 mb-8">
         <p className="text-center font-bold mb-4">{data?.name}</p>
-        <div className="w-full flex items-center justify-between flex-col lg:flex-row gap-3 ">
+        <div className="w-full flex items-center justify-between flex-col flex-wrap text-nowrap lg:flex-row gap-3 ">
           <p className="bg-maincolorgreen text-white rounded-lg p-2">
             {t("contractCount")} : {data?.no_contracts}
           </p>
