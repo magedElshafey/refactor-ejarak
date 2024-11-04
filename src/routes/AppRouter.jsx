@@ -271,51 +271,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: (
-          <RedirectIfLoggedIn>
-            <Login />
-          </RedirectIfLoggedIn>
-        ),
+        element: <Login />,
       },
       {
         path: "regester",
-        element: (
-          <RedirectIfLoggedIn>
-            <Regester />
-          </RedirectIfLoggedIn>
-        ),
+        element: <Regester />,
       },
       {
         path: "email-verfication",
-        element: (
-          <RedirectIfLoggedIn>
-            <EmailVerfication />
-          </RedirectIfLoggedIn>
-        ),
+        element: <EmailVerfication />,
       },
       {
         path: "forget-password",
-        element: (
-          <RedirectIfLoggedIn>
-            <ForgetPassword />
-          </RedirectIfLoggedIn>
-        ),
+        element: <ForgetPassword />,
       },
       {
         path: "forget-password-code",
-        element: (
-          <RedirectIfLoggedIn>
-            <ForgetPasswordCode />
-          </RedirectIfLoggedIn>
-        ),
+        element: <ForgetPasswordCode />,
       },
       {
         path: "new-password",
-        element: (
-          <RedirectIfLoggedIn>
-            <NewPassword />
-          </RedirectIfLoggedIn>
-        ),
+        element: <NewPassword />,
       },
     ],
   },

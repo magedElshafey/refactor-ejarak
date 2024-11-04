@@ -10,20 +10,16 @@ import NafazBtn from "../../components/common/buttons/NafazBtn";
 import { handleLogin } from "../../services/post/handleLogin";
 import { useMutation } from "react-query";
 import LoadingBtn from "../../components/common/buttons/LoadingBtn";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { login, addToken } from "../../store/auth";
 import usePasswordValidation from "../../hooks/validation/usePasswordValidation";
 import { IoMdCheckmark } from "react-icons/io";
 
-const dashboardRoles = ["super_admin", "admin", "customer_service"];
-
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userData } = useSelector((state) => state.authSlice);
-  const role = userData?.account?.type;
   const [rememberMe, setRememberMe] = useState(false);
 
   const {
@@ -68,15 +64,7 @@ const Login = () => {
           localStorage.removeItem("phone");
           localStorage.removeItem("password");
         }
-
-        setPassword("");
-        setPhone("");
-
-        if (dashboardRoles.includes(data?.data?.data?.user?.account?.type)) {
-          navigate("/dashboard/dashboard");
-        } else {
-          navigate("/");
-        }
+        navigate("/website/all-realstates");
       } else {
         Swal.fire({
           icon: "error",

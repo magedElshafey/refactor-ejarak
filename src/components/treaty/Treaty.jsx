@@ -2,12 +2,25 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import MainBtn from "../common/buttons/MainBtn";
+import { useDispatch } from "react-redux";
+import { addToken, login } from "../../store/auth";
 const Treaty = ({ showTreaty, setShowTreaty }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const user = localStorage.getItem("treaty-user")
+    ? JSON.parse(localStorage.getItem("treaty-user"))
+    : null;
+  const token = localStorage.getItem("treaty-token")
+    ? JSON.parse(localStorage.getItem("treaty-token"))
+    : null;
+  const dispatch = useDispatch();
   const handleAccepted = () => {
+    dispatch(login(user));
+    dispatch(addToken(token));
     setShowTreaty(false);
-    navigate("/auth/login");
+    navigate("/website/all-realstates");
+    localStorage.removeItem("treaty-token");
+    localStorage.removeItem("treaty-user");
   };
   return (
     <div

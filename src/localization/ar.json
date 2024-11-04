@@ -669,5 +669,7 @@
   "no": "لا يوجد",
   "filter": "التصنيف",
   "reservation status": "حالة الحجز",
-  "inactive": "غير نشط"
+  "inactive": "غير نشط",
+  "expired session": "انتهت صلاحية تسجيل الدخول",
+  "need to login again": "تحتاج الي اعادة تسجيل الدخول"
 }

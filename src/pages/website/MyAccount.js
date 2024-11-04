@@ -12,7 +12,15 @@ import useEmailValidation from "../../hooks/validation/useEmailValidation";
 import useNationalIdValidation from "../../hooks/validation/useNationalIdValidation";
 import usePasswordValidation from "../../hooks/validation/usePasswordValidation";
 import UpdatePasswordForm from "../../components/myAccount/UpdatePasswordForm";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../store/auth";
 const MyAccount = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [countryCode, setCountryCode] = useState("");
@@ -58,7 +66,18 @@ const MyAccount = () => {
         setPreviewUrl(data?.data?.data?.user?.avatar.original);
         setType(data?.data?.data?.user?.account?.text);
         setNationId(data?.data?.data?.user?.nationalId);
-      } else {
+      } else if (data?.response?.status === 401) {
+        Swal.fire({
+          icon: "error",
+          title: t("expired session"),
+          text: t("need to login again"),
+        }).then((res) => {
+          if (res?.isConfirmed) {
+            dispatch(logout());
+            window.location.reload();
+            navigate("/auth/login");
+          }
+        });
       }
     },
   });

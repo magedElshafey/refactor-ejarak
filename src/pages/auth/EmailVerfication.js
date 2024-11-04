@@ -7,36 +7,38 @@ import LoadingBtn from "../../components/common/buttons/LoadingBtn";
 import OtpInput from "react-otp-input";
 import { handleEmailVerfication } from "../../services/post/handleEmailVerfication";
 import { handleResendEmailVerficationCode } from "../../services/post/handleResendEmailVerficationCode";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import Treaty from "../../components/treaty/Treaty";
+import { login, addToken } from "../../store/auth";
 const EmailVerfication = () => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
   const [showTreaty, setShowTreaty] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { isLoading, mutate } = useMutation(handleEmailVerfication, {
     onSuccess: (data) => {
-      const hasResponseKey = Object.keys(data).includes("response");
-      if (!hasResponseKey) {
-        if (data.status === 200) {
-          Swal.fire({
-            icon: "success",
-            title: data?.data?.message,
-          });
-          navigate("/auth/login");
-          if (data?.data?.status) {
-            setShowTreaty(true);
-          } else {
-            return;
-          }
-        }
+      console.log("data from verfication", data);
+      if (data?.data?.status) {
+        Swal.fire({
+          icon: "success",
+          title: data?.data?.message,
+        });
+        setShowTreaty(true);
+        localStorage.setItem(
+          "treaty-user",
+          JSON.stringify(data?.data?.data?.user)
+        );
+        localStorage.setItem(
+          "treaty-token",
+          JSON.stringify(data?.data?.data?.token)
+        );
       } else {
-        if (data?.response?.status !== 200) {
-          Swal.fire({
-            icon: "error",
-            title: data?.response?.data?.message,
-          });
-        }
+        Swal.fire({
+          icon: "error",
+          title: data?.response?.data?.message,
+        });
       }
     },
   });
@@ -130,3 +132,25 @@ const EmailVerfication = () => {
 };
 
 export default EmailVerfication;
+/**
+ *  const hasResponseKey = Object.keys(data).includes("response");
+      if (!hasResponseKey) {
+        if (data.status === 200) {
+        
+        
+          navigate("/website/all-realstates");
+          if (data?.data?.status) {
+            setShowTreaty(true);
+          } else {
+            return;
+          }
+        }
+      } else {
+        if (data?.response?.status !== 200) {
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
+      }
+ */
