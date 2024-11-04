@@ -56,7 +56,16 @@ const Login = () => {
         });
         dispatch(login(data?.data?.data?.user));
         dispatch(addToken(data?.data?.data?.token));
-
+        console.log("user", data?.data?.data?.user);
+        if (
+          data?.data?.data?.user?.account?.type === "admin" ||
+          data?.data?.data?.user?.account?.type === "super_admin" ||
+          data?.data?.data?.user?.account?.type === "customer_service"
+        ) {
+          navigate("/dashboard/dashboard");
+        } else {
+          navigate("/website/all-realstates");
+        }
         if (rememberMe) {
           localStorage.setItem("phone", phone);
           localStorage.setItem("password", password);
@@ -64,7 +73,6 @@ const Login = () => {
           localStorage.removeItem("phone");
           localStorage.removeItem("password");
         }
-        navigate("/website/all-realstates");
       } else {
         Swal.fire({
           icon: "error",

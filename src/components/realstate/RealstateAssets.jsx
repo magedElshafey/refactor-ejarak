@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
@@ -6,6 +6,8 @@ import Slider from "react-slick";
 import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa";
 import newIcon from "../../assets/fire.svg";
+import { IoCloseSharp } from "react-icons/io5";
+
 const RealstateAssets = ({ images, data }) => {
   const { t, i18n } = useTranslation();
   const settings = {
@@ -54,6 +56,12 @@ const RealstateAssets = ({ images, data }) => {
       sliderRef.current.slickPrev();
     }
   };
+  const [showImgsModal, setShowImgsModal] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const handleClick = (index) => {
+    setShowImgsModal(true);
+    setActiveIndex(index);
+  };
   return (
     <div>
       <p className="mb-3 font-medium text-base md:text-md lg:text-lg xl:text-xl">
@@ -89,7 +97,8 @@ const RealstateAssets = ({ images, data }) => {
               <img
                 alt={item}
                 src={item}
-                className="w-full h-[250px] object-cover rounded-lg "
+                className="w-full h-[250px] object-cover rounded-lg cursor-pointer "
+                onClick={() => handleClick(index)}
               />
               {data?.special || data?.year_of_construction <= 2 ? (
                 <div
@@ -112,6 +121,45 @@ const RealstateAssets = ({ images, data }) => {
             </div>
           ))}
         </Slider>
+      </div>
+      <div
+        className={`fixed left-0 duration-300 w-screen h-screen flex items-center justify-center bg-black bg-opacity-60 z-[4500] ${
+          showImgsModal ? "top-0" : "top-[-300%]"
+        }`}
+      >
+        <div className="flex flex-col items-center gap-8">
+          <div className="bg-white p-5 flex items-center justify-center border-3 rounded-md border-maincolorgreen">
+            <img
+              alt="title"
+              src={images[activeIndex]}
+              className="max-h-[500px]"
+            />
+          </div>
+
+          <div className="flex items-center gap-2 flex-wrap">
+            {images?.map((item, index) => (
+              <div key={index} className="px-3 relative">
+                <img
+                  alt={item}
+                  src={item}
+                  className="w-[80px] h-[80px] object-contain  cursor-pointer "
+                  onClick={() => setActiveIndex(index)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div
+          onClick={() => {
+            setShowImgsModal(false);
+            setActiveIndex(null);
+          }}
+          className={`absolute top-5 ${
+            i18n.language === "ar" ? "right-5" : "left-5"
+          } flex items-center justify-center bg-red-700 text-white cursor-pointer w-8 h-8`}
+        >
+          <IoCloseSharp size={20} />
+        </div>
       </div>
     </div>
   );

@@ -27,11 +27,11 @@ const Packagess = () => {
           <h2 className="font-bold text-lg lg:text-2xl text-textColor mb-5">
             {t("Creating the contract (via the electronic agent)")}
           </h2>
-          <div className="bg-white p-3 shadow-2xl rounded-lg">
+          <div className="bg-white p-6 shadow-2xl rounded-lg">
             <h4 className="font-semibold lg:text-lg mb-8 ">
               {t("Choose the package that suits you")}
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 md:gap-8">
               {isSuscribed ? (
                 <>
                   {dataWhenSubscriped?.map((item, index) => (
