@@ -62,7 +62,13 @@ const RealStateReservation = () => {
                     isContract={false}
                   />
                   {item.status === "refused" ? (
-                    <RefusedReason reason={item?.rent_refused_reasons_id} />
+                    <RefusedReason
+                      reason={
+                        item?.other_reasons
+                          ? item?.other_reasons
+                          : item?.rent_refused_reasons_id
+                      }
+                    />
                   ) : null}
                 </div>
               ))

@@ -10,6 +10,7 @@ import PayBtn from "./PayBtn";
 import CreateContractBtn from "./CreateContractBtn";
 const ReservationCard = ({ data, index, role, created_at, dep }) => {
   const { t, i18n } = useTranslation();
+  console.log("reservation details", data);
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">

@@ -20,8 +20,9 @@ const RefusedModal = ({ id, dep, setShowModal, data }) => {
     setReason(e.id);
     setReasonKey(e.key);
   };
+
   const { isLoading, mutate } = useMutation(
-    () => handleRefusedReservation(id, { ...data, status: "refused" }),
+    (v) => handleRefusedReservation(id, v),
     {
       onSuccess: (data) => {
         if (data?.data?.status) {
@@ -60,6 +61,7 @@ const RefusedModal = ({ id, dep, setShowModal, data }) => {
         status: "refused",
         accepted_at: data,
       };
+      console.log("reservation data", reservationData);
       mutate(reservationData);
     }
   };
