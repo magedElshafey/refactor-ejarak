@@ -62,6 +62,17 @@ const RealstateAssets = ({ images, data }) => {
     setShowImgsModal(true);
     setActiveIndex(index);
   };
+  const handleNext = () => {
+    if (activeIndex < images.length - 1) {
+      setActiveIndex((prev) => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      setActiveIndex((prev) => prev - 1);
+    }
+  };
   return (
     <div>
       <p className="mb-3 font-medium text-base md:text-md lg:text-lg xl:text-xl">
@@ -127,6 +138,15 @@ const RealstateAssets = ({ images, data }) => {
           showImgsModal ? "top-0" : "top-[-300%]"
         }`}
       >
+        <div className="flex items-center gap-4 absolute top-1/2 left-5">
+          <button
+            onClick={handlePrev}
+            disabled={activeIndex === 0}
+            className="p-2 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-200 disabled:bg-gray-400"
+          >
+            <FaChevronLeft size={20} />
+          </button>
+        </div>
         <div className="flex flex-col items-center gap-8">
           <div className="bg-white p-5 flex items-center justify-center border-3 rounded-md border-maincolorgreen">
             <img
@@ -148,6 +168,15 @@ const RealstateAssets = ({ images, data }) => {
               </div>
             ))}
           </div>
+        </div>
+        <div className="flex items-center gap-4 absolute top-1/2 right-5">
+          <button
+            onClick={handleNext}
+            disabled={activeIndex === images.length - 1}
+            className="p-2 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-200 disabled:bg-gray-400"
+          >
+            <FaChevronRight size={20} />
+          </button>
         </div>
         <div
           onClick={() => {
