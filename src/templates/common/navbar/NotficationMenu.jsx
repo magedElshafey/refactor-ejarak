@@ -12,11 +12,15 @@ const NotficationMenu = ({ bg, isDashboard }) => {
   const menu = useRef(null);
   const closeMenu = () => setShowMenu(false);
   useClickOutside(menu, closeMenu);
-  const { isLoading, data } = useQuery("all-notfications", getAllNotfications, {
-    staleTime: "Infinity",
-    refetchOnMount: true,
-    refetchOnWindowFocus: false,
-  });
+  const { isLoading, data, refetch } = useQuery(
+    "all-notfications",
+    getAllNotfications,
+    {
+      staleTime: "Infinity",
+      refetchOnMount: true,
+      refetchOnWindowFocus: false,
+    }
+  );
   return (
     <div
       onClick={() => setShowMenu(!showMenu)}
@@ -65,7 +69,12 @@ const NotficationMenu = ({ bg, isDashboard }) => {
               </Link>
             </div>
             {data?.data?.data?.slice(0, 5).map((item, index) => (
-              <ShowNotfications isMenu={true} key={index} data={item} />
+              <ShowNotfications
+                refetch={refetch}
+                isMenu={true}
+                key={index}
+                data={item}
+              />
             ))}
           </div>
         )}

@@ -192,7 +192,7 @@ const ContactsList = ({ search, onChoose }) => {
   // clear the norifications from the current chat, if there is a current chat.
   useEffect(() => {
     if (receiverId) {
-      queryClient.setQueryData("contacts", (data) => {
+      queryClient.setQueryData(["contacts"], (data) => {
         const newData = data?.map((contact) => {
           if (contact.otherParty.id !== parseInt(receiverId)) return contact;
           return {

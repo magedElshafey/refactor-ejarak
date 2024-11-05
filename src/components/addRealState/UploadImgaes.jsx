@@ -1,9 +1,8 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import { IoMdClose } from "react-icons/io";
 import { FaPlus, FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import img from "../../assets/image-.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -17,50 +16,55 @@ const UploadImgaes = ({
   const { t, i18n } = useTranslation();
   const inputRef = useRef(null);
   const sliderRef = useRef(null);
-
+  const [isNextDisabled, setIsNextDisabled] = useState(false);
+  const [isPrevDisabled, setIsPrevDisabled] = useState(true);
+  const updateButtonStates = (current = 0) => {
+    const slidesToShow = Math.min(4, previewImages.length + 1);
+    setIsPrevDisabled(current === 0);
+    setIsNextDisabled(current >= previewImages.length - slidesToShow);
+  };
   const settings = {
     dots: false,
     infinite: false,
     arrows: false,
     autoplay: false,
-    slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToShow: Math.min(4, previewImages.length + 1),
+    slidesToScroll: Math.min(4, previewImages.length + 1),
+    rtl: i18n.language === "ar",
     initialSlide: 0,
-    cssEase: "linear",
+    swipeToSlide: true,
+    draggable: true,
+    afterChange: (current) => updateButtonStates(current),
+
     responsive: [
       {
         breakpoint: 1224,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: Math.min(4, previewImages.length + 1),
+          slidesToScroll: Math.min(4, previewImages.length + 1),
         },
       },
       {
         breakpoint: 992,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: Math.min(3, previewImages.length + 1),
+          slidesToScroll: Math.min(3, previewImages.length + 1),
         },
       },
       {
         breakpoint: 540,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: Math.min(1, previewImages.length + 1),
+          slidesToScroll: Math.min(1, previewImages.length + 1),
         },
       },
     ],
   };
 
-  const slickNext = () => {
-    sliderRef.current.slickNext();
-  };
-
-  const slickPrev = () => {
-    sliderRef.current.slickPrev();
-  };
-
   const handleClick = () => inputRef.current.click();
 
   const handleFileChange = (event) => {
-    const maxSizeInBytes = 20 * 1024 * 1024; // 20 MB
+    const maxSizeInBytes = 20 * 1024 * 1024;
     let totalSizeInBytes = 0;
     const files = Array.from(event.target.files);
 
@@ -78,6 +82,9 @@ const UploadImgaes = ({
       setSelectedImages([...selectedImages, ...files]);
       const previews = files.map((file) => URL.createObjectURL(file));
       setPreviewImages([...previewImages, ...previews]);
+      // if (sliderRef.current) {
+      //   sliderRef.current.slickGoTo(previewImages.length + files.length);
+      // }
     }
   };
 
@@ -88,8 +95,27 @@ const UploadImgaes = ({
     previews.splice(index, 1);
     setSelectedImages(files);
     setPreviewImages(previews);
+    updateButtonStates();
+    // Center remaining slides after removal
+    // if (sliderRef.current) {
+    //   const newSlideIndex = Math.max(0, Math.min(index, previews.length - 1));
+    //   sliderRef.current.slickGoTo(newSlideIndex);
+    // }
+  };
+  const slickNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
   };
 
+  const slickPrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+  useEffect(() => {
+    updateButtonStates();
+  }, [previewImages.length]);
   return (
     <div className="mb-5">
       <p className="text-textColor font-medium mb-3">{t("photoRole")}</p>
@@ -101,129 +127,65 @@ const UploadImgaes = ({
         onChange={handleFileChange}
         accept="image/*"
       />
-      <div className="relative">
+      <div className=" relative">
         <div className="flex items-center justify-start mb-2 gap-2">
           <button
-            className="cursor-pointer flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%]"
-            onClick={slickNext}
+            className={`flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%] ${
+              isPrevDisabled
+                ? "bg-opacity-35 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+            onClick={slickPrev}
+            disabled={isPrevDisabled}
           >
-            {i18n.language === "ar" ? (
-              <FaChevronRight onClick={slickNext} />
-            ) : (
-              <FaChevronLeft onClick={slickNext} />
-            )}
+            {i18n.language === "ar" ? <FaChevronRight /> : <FaChevronLeft />}
           </button>
           <button
-            className="cursor-pointer flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%]"
-            onClick={slickPrev}
+            className={`flex items-center justify-center text-white bg-maincolorgreen h-8 w-8 rounded-[50%] ${
+              isNextDisabled
+                ? "bg-opacity-35 cursor-not-allowed"
+                : "cursor-pointer"
+            }`}
+            onClick={slickNext}
+            disabled={isNextDisabled}
           >
-            {i18n.language === "ar" ? (
-              <FaChevronLeft onClick={slickPrev} />
-            ) : (
-              <FaChevronRight onClick={slickPrev} />
-            )}
+            {i18n.language === "ar" ? <FaChevronLeft /> : <FaChevronRight />}
           </button>
         </div>
       </div>
+
       <Slider
-        dir={i18n.language === "ar" ? "rtl" : "ltr"}
         ref={sliderRef}
         {...settings}
-        className="bg-[#BDC7BC4D] rounded-[13px] border border-dashed border-[#4D5F65] h-[250px] p-1 "
+        className="bg-[#BDC7BC4D] rounded-[13px] border border-dashed border-[#4D5F65] h-[250px] p-3  items-center justify-center px-6 gap-3"
       >
-        {previewImages.length > 0 && (
-          <div
-            className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] bg-[#BDC7BC4D] border border-dashed cursor-pointer mt-4 px-4"
-            onClick={handleClick}
-          >
-            <FaPlus
-              size={30}
-              className="text-maincolorgreen  absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
-            />
-          </div>
-        )}
-        {previewImages.length ? (
-          previewImages.map((item, index) => (
-            <div
-              key={index}
-              className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] px-3 mt-4"
-            >
+        {previewImages.map((item, index) => (
+          <div key={index} className="mx-3">
+            <div className="relative  h-[100px] l lg:h-[170px]  xl:h-[200px] p-3 bg-white border mx-4 flex justify-center items-center mt-3">
               <img
                 src={item}
-                alt="preveiw/img"
-                className="w-full h-full object-cover"
+                alt="preview/img"
+                className="max-w-full max-h-full mx-auto"
               />
-              <div className="absolute left-[10px] top-[5px] w-8 h-8 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
+              <div className="absolute left-0 top-0 w-7 h-7 bg-slate-800 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
                 <IoMdClose size={20} onClick={() => handleRemovePhoto(index)} />
               </div>
             </div>
-          ))
-        ) : (
-          <div className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px]  cursor-pointer mt-5 flex items-center justify-center ">
-            <img
-              src={img}
-              alt="img"
-              className="cursor-pointer w-[37px] h-[37px] object-contai absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
-              onClick={handleClick}
-            />
           </div>
-        )}
+        ))}
+
+        <div
+          className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] bg-[#BDC7BC4D] border border-dashed cursor-pointer mt-4 px-4 mx-4"
+          onClick={handleClick}
+        >
+          <FaPlus
+            size={30}
+            className="text-maincolorgreen absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+          />
+        </div>
       </Slider>
     </div>
   );
 };
 
 export default UploadImgaes;
-
-/**
- *   {previewImages?.length > 4 ? (
-              <div className="flex gap-2 overflow-x-scroll">
-                {previewImages.slice(0, 4).map((item, index) => (
-                  <div
-                    className="flex items-center justify-center gap-2"
-                    key={index}
-                  >
-                    <div className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] ">
-                      <img
-                        src={item}
-                        alt="preveiw/img"
-                        className=" w-full h-full object-cover"
-                      />
-                      <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-600 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
-                        <IoMdClose
-                          size={20}
-                          className="text-white"
-                          onClick={() => handleRemovePhoto(index)}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                <div className="flex items-center justify-center bg-maincolorgreen bg-opacity-35 text-white w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] text-md md:text-lg lg:text-xl xl:text-2xl font-extralight">
-                  + {previewImages.length - 4}
-                </div>
-              </div>
-            ) : (
-              previewImages.map((item, index) => (
-                <div
-                  className="flex items-center justify-center  px-1"
-                  key={index}
-                >
-                  <div className="relative w-[100px] h-[100px] lg:w-[170px] lg:h-[170px] xl:w-[200px] xl:h-[200px] mx-3">
-                    <img
-                      src={item}
-                      alt="preveiw/img"
-                      className=" w-full h-full object-cover"
-                    />
-                    <div className=" absolute left-0 top-0 w-8 h-8 bg-slate-600 bg-opacity-55 flex items-center justify-center text-white cursor-pointer">
-                      <IoMdClose
-                        size={20}
-                        className="text-white"
-                        onClick={() => handleRemovePhoto(index)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
- */

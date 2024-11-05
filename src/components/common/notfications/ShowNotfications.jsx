@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { formatDateTime } from "../../../utils/formateDateTime";
 import getNotificationLink from "../../../utils/getNotificationLink";
-const ShowNotfications = ({ data }) => {
+const ShowNotfications = ({ data, refetch }) => {
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
   const navigate = useNavigate();
@@ -14,7 +14,10 @@ const ShowNotfications = ({ data }) => {
 
   return (
     <div
-      onClick={() => handleNavigate(data?.realty_id)}
+      onClick={() => {
+        handleNavigate(data?.realty_id);
+        refetch();
+      }}
       className={`cursor-pointer mb-3 w-full flex items-center justify-between  p-1 rounded-md ${
         data.seen === 1 ? "bg-[#f6f5f5]" : "bg-slate-100"
       }`}

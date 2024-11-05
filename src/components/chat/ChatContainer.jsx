@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { useParams } from "react-router-dom";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import fetchUserNamePhoto from "../../services/get/fetchUserNamePhoto";
 import fetchMessages from "../../services/get/fetchMessages";
 import sendMessageAsync from "../../services/get/sendMessageAsync";
@@ -127,6 +127,7 @@ const ChatContainer = () => {
   const { id: receiverId } = useParams();
   const { t } = useTranslation();
   const loggedUser = useSelector((state) => state?.authSlice?.userData);
+  const queryClient = useQueryClient();
 
   // local states
   const [messages, setMessages] = useState(getInitialState);
@@ -156,6 +157,19 @@ const ChatContainer = () => {
           ...oldMessages.data?.slice(index + 1),
         ];
         return { ...oldMessages, data: newMessages };
+      });
+
+      queryClient.setQueryData(["contacts"], (oldContacts) => {
+        if (!oldContacts) return;
+        const newContacts = oldContacts.map((contact) => {
+          if (contact.otherParty.id == receiverId) {
+            return { ...contact, message: data.message, time: data.date };
+          }
+          return contact;
+        });
+        return newContacts.sort((a, b) =>
+          a.otherParty.id == receiverId ? -1 : 1
+        );
       });
     },
     onMutate(messageObj) {
