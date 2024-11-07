@@ -208,7 +208,10 @@ const RealStateTable = ({ data, onStatusChange }) => {
     {
       title: "created date",
       dataIndex: "created_at",
-      render: (date) => formatDateTime(date),
+      render: (date) => {
+        console.log("date", date);
+        return formatDateTime(date);
+      },
     },
     {
       title: "house status",

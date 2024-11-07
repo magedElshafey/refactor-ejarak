@@ -36,11 +36,11 @@ export function formatDateTime(dateTimeString) {
   const formattedTimeArabic =
     language === "ar" ? `${minutes}:${hours}` : `${hours}:${minutes}`;
 
-  // Combine date and time with the period
+  // Combine date and time with the period, adding a space between date and time
   const formattedDateTime =
     language === "ar"
-      ? `${formattedDate} ${formattedTimeArabic} ${formattedPeriod}`
-      : `${formattedDate} ${time} ${formattedPeriod}`;
+      ? `${formattedTimeArabic} ${formattedPeriod}  -  ${formattedDate}`
+      : `${formattedDate} - ${time} ${formattedPeriod}`;
 
   return formattedDateTime;
 }

@@ -70,7 +70,7 @@
   "district": "الحي",
   "place": "المكان",
   "placeonMap": "الموقع على الخريطة",
-  "adArabicTitle": "عنوان الإعلان ",
+  "adArabicTitle": "إسم العقار",
   "adEnglishtTitle": "عنوان الإعلان بالإنجليزية",
   "AdArDetails": "تفاصيل أخرى ",
   "adEnDetails": "تفاصيل الإعلان بالإنجليزية",
@@ -351,7 +351,7 @@
   "map": "الخريطة",
   "houses": "العقارات",
   "fillTheRequiredFields": "الرجاء ملئ جميع الخانات المطلوبة",
-  "special realStates": "العقارات الخاصه",
+  "special realStates": "العقارات المميزة",
   "somethingWrongHappened": "حدث خطأ, يرجى اعادة المحاولة لاحقاً",
   "the formula of question": "صيغة السؤال",
   "answer": "الإجابة",
@@ -671,5 +671,7 @@
   "reservation status": "حالة الحجز",
   "inactive": "غير نشط",
   "expired session": "انتهت صلاحية تسجيل الدخول",
-  "need to login again": "تحتاج الي اعادة تسجيل الدخول"
+  "need to login again": "تحتاج الي اعادة تسجيل الدخول",
+  "chat": "الرسائل",
+  "my contracts": "عقودي"
 }

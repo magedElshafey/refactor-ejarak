@@ -10,6 +10,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../components/common/inputs/MainSelect";
+import { useLocation } from "react-router-dom";
 const Realstates = () => {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState();
@@ -17,7 +18,9 @@ const Realstates = () => {
   const action = () => navigate("/website/add-realstate");
   const [showFilter, setShowFilter] = useState(false);
   const handleShowFilter = () => setShowFilter(!showFilter);
-  const [realstateStatus, setRealstateStatus] = useState("");
+  const location = useLocation();
+  const id = location.state?.id;
+  const [realstateStatus, setRealstateStatus] = useState(id ? id : "");
   const handleRealstateStatusChange = (opt) => setRealstateStatus(opt.id);
   return (
     <div className="container mx-auto px-8 ">

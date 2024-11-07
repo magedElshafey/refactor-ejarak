@@ -21,7 +21,7 @@ import notificationSound from "../../../assets/sounds/notification.wav";
 import { useQueryClient } from "react-query";
 import useListenToMessages from "../../../hooks/useListenToMessages";
 import Sidebar from "../../dashboard/Sidebar";
-
+import whiteLogo from "../../../assets/logo/png/2.png";
 const notificationAudio = new Audio(notificationSound);
 
 const Navbar = ({ bg, dashboard }) => {

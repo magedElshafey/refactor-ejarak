@@ -30,6 +30,8 @@ import { PiPackageFill } from "react-icons/pi";
 import { BiSolidCategory } from "react-icons/bi";
 import { SiGooglepubsub } from "react-icons/si";
 import { RiFileCloseFill } from "react-icons/ri";
+import { FaMessage } from "react-icons/fa6";
+import { FaFirstOrder } from "react-icons/fa6";
 
 export const navLinks = [
   {
@@ -275,12 +277,12 @@ export const accountDetailsNavbar = [
   {
     title: "my account",
     path: "/website/my-account",
-    role: ["owner", "tenant"],
+    role: ["owner", "tenant", "super_admin", "admin", "customer_service"],
   },
   {
     title: "my houses",
     path: "/website/my-realstates",
-    role: ["owner"],
+    role: ["owner", "super_admin", "admin"],
   },
   // {
   //   title: "my reservations",
@@ -302,12 +304,12 @@ export const myOrdersDetailsNavbar = [
   {
     title: "my reservations",
     path: "/website/my-reservations",
-    role: ["owner", "tenant", "super_admin"],
+    role: ["owner", "tenant", "super_admin", "admin"],
   },
   {
     title: "contracts",
     path: "/website/my-contracts",
-    role: ["owner", "tenant", "super_admin"],
+    role: ["owner", "tenant", "super_admin", "admin"],
   },
 ];
 export const statusFilter = [
@@ -584,6 +586,20 @@ export const dashboardLinks = [
         path: "booking-reasons",
       },
     ],
+  },
+  {
+    title: "chat",
+    icon: <FaMessage size={20} />,
+    path: "/website/chat/",
+    role: ["admin", "super_admin", "customer_service"],
+    list: [],
+  },
+  {
+    title: "my orders",
+    icon: <FaFirstOrder size={20} />,
+    path: "/website/my-reservations",
+    role: ["admin", "super_admin"],
+    list: [],
   },
 ];
 export const tableStatus = [

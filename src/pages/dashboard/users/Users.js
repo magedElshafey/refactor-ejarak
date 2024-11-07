@@ -10,14 +10,12 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import Spinner from "../../../components/common/Spinner";
 import { getUsers } from "../../../services/get/dashboard/getUsers";
 import Swal from "sweetalert2";
-import { FaRegCircleDot } from "react-icons/fa6";
 import { deleteUser } from "../../../services/delete/dashboard/deleteUser";
 import useAccountType from "../../../hooks/api/useAccountType";
 import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../../components/common/inputs/MainSelect";
-import { IoMdClose } from "react-icons/io";
 import { request } from "../../../services/axios";
-
+import { useLocation } from "react-router-dom";
 const itemsPerPage = 10;
 
 const Users = () => {
@@ -27,8 +25,12 @@ const Users = () => {
   const [showFilter, setShowFilter] = useState(false);
   const handleShowFilter = () => setShowFilter(!showFilter);
   const { loadingAccountType, accountType, error } = useAccountType();
-  const [userType, setUserType] = useState("");
+
+  const location = useLocation();
+  const id = location.state?.id;
+  const [userType, setUserType] = useState(id ? id : "");
   const handleUserTypeChange = (e) => setUserType(e.id);
+
   const { isLoading, data } = useQuery(
     ["users", userType],
     () => getUsers(userType),

@@ -98,24 +98,24 @@ const LoginBtn = ({ bg, isDashboard }) => {
             )}
           </div>
           <ul
-            className={`absolute bottom-[-70px] ${
+            className={`absolute top-[50px] ${
               i18n.language === "ar" ? "left-[30px]" : "right-[30px]"
-            } text-start bg-white shadow-lg rounded-md p-3 z-40 duration-300 min-w-[180px] ${
+            } text-start bg-white shadow-lg rounded-md p-5 z-40 duration-300 min-w-[180px] ${
               showMenu ? "block" : "hidden"
             }`}
           >
-            {userData?.account?.type === "owner" ||
-            userData?.account?.type === "tenant" ? (
-              <li
-                className=" cursor-pointer mb-2 text-black"
-                onClick={() => {
-                  navigate("/website/my-account");
-                  setShowMenu(false);
-                }}
-              >
-                {t("account")}
-              </li>
-            ) : (
+            <li
+              className=" cursor-pointer mb-2 text-black"
+              onClick={() => {
+                navigate("/website/my-account");
+                setShowMenu(false);
+              }}
+            >
+              {t("account")}
+            </li>
+            {userData?.account?.type === "admin" ||
+            userData?.account?.type === "super_admin" ||
+            userData?.account?.type === "customer_service" ? (
               <li
                 className=" cursor-pointer mb-2 text-black"
                 onClick={() => {
@@ -125,8 +125,36 @@ const LoginBtn = ({ bg, isDashboard }) => {
               >
                 {t("dashboard")}
               </li>
+            ) : null}
+            {userData?.account?.type === "tenant" ? null : (
+              <li
+                className=" cursor-pointer mb-2 text-black"
+                onClick={() => {
+                  navigate("/website/my-realstates");
+                  setShowMenu(false);
+                }}
+              >
+                {t("my houses")}
+              </li>
             )}
-
+            <li
+              className=" cursor-pointer mb-2 text-black"
+              onClick={() => {
+                navigate("/website/my-reservations");
+                setShowMenu(false);
+              }}
+            >
+              {t("my reservations")}
+            </li>
+            <li
+              className=" cursor-pointer mb-2 text-black"
+              onClick={() => {
+                navigate("/website/my-contracts");
+                setShowMenu(false);
+              }}
+            >
+              {t("my contracts")}
+            </li>
             <li className=" cursor-pointer text-black ">
               <button
                 onClick={() => {
@@ -146,3 +174,19 @@ const LoginBtn = ({ bg, isDashboard }) => {
 };
 
 export default LoginBtn;
+/**
+ *    {userData?.account?.type === "owner" ||
+            userData?.account?.type === "tenant" ? (
+              <li
+                className=" cursor-pointer mb-2 text-black"
+                onClick={() => {
+                  navigate("/website/my-account");
+                  setShowMenu(false);
+                }}
+              >
+                {t("account")}
+              </li>
+            ) : (
+           
+            )}
+ */

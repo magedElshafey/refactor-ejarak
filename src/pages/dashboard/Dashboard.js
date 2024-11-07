@@ -158,18 +158,23 @@ const Dashboard = () => {
               title="Moderators"
               bgColor="bg-[#AEF0D2]"
               number={data?.data?.data?.user?.admins}
+              path="/dashboard/users"
+              state={2}
             />
             <StatisticsCard
               img={img}
               title="users"
               bgColor="bg-[#FFF7E9]"
               number={data?.data?.data?.user?.users}
+              path="/dashboard/users"
             />
             <StatisticsCard
               img={img}
               title="owners"
               bgColor="bg-[#FBE7E6]"
               number={data?.data?.data?.user?.owners}
+              path="/dashboard/users"
+              state={3}
             />
 
             <StatisticsCard
@@ -177,30 +182,38 @@ const Dashboard = () => {
               title="tenants"
               bgColor="bg-[#FFF7E9]"
               number={data?.data?.data?.user?.tenants}
+              path="/dashboard/users"
+              state={4}
             />
             <StatisticsCard
               img={img2}
               title="houses number"
               bgColor="bg-[#FFF7E9]"
               number={data?.data?.data?.Realestates?.Realestates}
+              path="/dashboard/realstates"
             />
             <StatisticsCard
               img={img2}
               title="accepted houses number"
               bgColor="bg-[#EEF1FF]"
               number={data?.data?.data?.Realestates?.accepted}
+              path="/dashboard/realstates"
+              state="accepted"
             />
             <StatisticsCard
               img={img2}
               title="refused houses number"
               bgColor="bg-[#FBE7E6]"
               number={data?.data?.data?.Realestates?.refused}
+              path="/dashboard/realstates"
+              state="refused"
             />
             <StatisticsCard
               img={img2}
               title="booking"
               bgColor="bg-[#EEF1FF]"
               number={data?.data?.data?.Booking?.Booking}
+              path="/dashboard/reservations"
             />
           </div>
           <div className="flex gap-3 md:gap-5 lg:gap-6 justify-center flex-col lg:flex-row items-center">

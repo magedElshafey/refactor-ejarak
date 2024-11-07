@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 const HandleLanguages = () => {
   const { i18n } = useTranslation();
+  // useEffect(() => {
+  //   const savedLang = JSON.parse(localStorage.getItem("lang"));
+  //   if (savedLang) {
+  //     i18n.changeLanguage(savedLang);
+  //   }
+  // }, [i18n]);
   useEffect(() => {
-    const savedLang = JSON.parse(localStorage.getItem("lang"));
-    if (savedLang) {
-      i18n.changeLanguage(savedLang);
-    }
-  }, [i18n]);
-
+    localStorage.setItem("lang", JSON.stringify(i18n.language));
+  }, [i18n.language]);
   useEffect(() => {
     document.documentElement.setAttribute("lang", i18n.language);
     if (i18n.language === "ar") {
