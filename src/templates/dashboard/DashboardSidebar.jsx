@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import logo from "../../assets/logobglight.png";
+import logo from "../../assets/ejark green.png";
 import Logo from "../../components/common/Logo";
 import { dashboardLinks } from "../../data/data";
 import { NavLink, useNavigate } from "react-router-dom";

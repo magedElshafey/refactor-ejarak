@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/logo footer.png";
+import logo from "../../../assets/ejark white.png";
 import Logo from "../../../components/common/Logo";
 import { useNavigate } from "react-router-dom";
 import { appDetails, navLinks, aboutUs } from "../../../data/data";
@@ -28,7 +28,7 @@ const Footer = ({ isHome }) => {
         <div className="w-screen p-3 flex items-center bg-secondcolorgreen">
           <div className="container mx-auto px-8">
             <div className="w-full flex justify-center flex-col items-center gap-3 mb-8">
-              <Logo img={logo} />
+              <Logo img={logo} isFooter={true} />
             </div>
             <div
               className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full justify-center  gap-4 lg:gap-16`}
@@ -92,7 +92,7 @@ const Footer = ({ isHome }) => {
         <div className="w-screen p-3 flex items-center footerr mt-8">
           <div className="container mx-auto px-8">
             <div className="w-full flex justify-center flex-col items-center gap-3 mb-8  mt-24 md:mt-20 lg:mt-8">
-              <Logo img={logo} />
+              <Logo img={logo} isFooter={true} />
             </div>
             <div
               className={`grid grid-cols-1 px-6 lg:px-12  md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16`}

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo footer.png";
+import logo from "../../assets/ejark white.png";
 const Spinner = () => {
   return (
     <div className=" w-screen h-screen fixed top-0 left-0 z-[3500] bg-slate-900 flex items-center justify-center">

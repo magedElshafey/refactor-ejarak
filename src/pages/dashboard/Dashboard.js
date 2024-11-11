@@ -85,8 +85,39 @@ const Dashboard = () => {
     }
   }, [data, i18n]);
   const realStatesData = generateRealStatesData(
-    data?.data?.data.realstateStatus
+    data?.data?.data?.realstateStatus
   );
+  const monthNames = {
+    ar: [
+      "يناير",
+      "فبراير",
+      "مارس",
+      "أبريل",
+      "مايو",
+      "يونيو",
+      "يوليو",
+      "أغسطس",
+      "سبتمبر",
+      "أكتوبر",
+      "نوفمبر",
+      "ديسمبر",
+    ],
+    en: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+  };
+  const currentLanguage = i18n.language;
   const areaData = {
     series: [
       {
@@ -99,12 +130,10 @@ const Dashboard = () => {
       },
       {
         data: realStatesData?.map((monthData) => monthData?.pending),
-
-        name: t("pedding houses"),
+        name: t("pending houses"),
       },
       {
         data: realStatesData?.map((monthData) => monthData?.refused),
-
         name: t("rejected houses"),
       },
     ],
@@ -116,16 +145,17 @@ const Dashboard = () => {
           opacityTo: 0.4,
         },
       },
-
       legend: {
         position: "right",
         fontSize: "15px",
         margin: "5px",
       },
-
       stroke: {
         curve: "smooth",
         width: 2,
+      },
+      markers: {
+        size: 0, // إخفاء النقاط
       },
       responsive: [
         {
@@ -138,10 +168,38 @@ const Dashboard = () => {
         },
       ],
       xaxis: {
-        categories: data?.Months?.lastSixMonths,
-      },
+        categories: [
+          `${monthNames[currentLanguage][0]}`, // يناير
+          `${monthNames[currentLanguage][2]}`, // مارس
+          `${monthNames[currentLanguage][5]}`, // يونيو
+          `${monthNames[currentLanguage][8]}`, // سبتمبر
+          `${monthNames[currentLanguage][11]}`, // ديسمبر
+        ],
+        tickAmount: 5, // عدد الفواصل بين الشهور
+        axisTicks: {
+          show: false, // إخفاء الفواصل على محور x
+        },
+        labels: {
+          show: true, // إبقاء أسماء الشهور
+        },
 
+        endOnTick: true, // لضمان الانتهاء عند ديسمبر
+      },
+      yaxis: {
+        min: 0,
+        max: 12,
+        tickAmount: 4,
+      },
       colors: ["#008060", "#2CD889", "#FFA84A", "#F7617D"],
+      tooltip: {
+        x: {
+          formatter: function (value) {
+            // استخدم index لتحديد اسم الشهر
+            const monthIndex = parseInt(value); // تحويل القيمة إلى رقم
+            return monthNames[currentLanguage][monthIndex] || ""; // عرض اسم الشهر
+          },
+        },
+      },
     },
   };
 

@@ -1,7 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { navLinks } from "../../../data/data";
-import logo from "../../../assets/logo footer.png";
-import logo2 from "../../../assets/logobglight.png";
 import LangMenu from "./LangMenu";
 import NavLinks from "./NavLinks";
 import ChatMenu from "./ChatMenu";
@@ -21,7 +19,8 @@ import notificationSound from "../../../assets/sounds/notification.wav";
 import { useQueryClient } from "react-query";
 import useListenToMessages from "../../../hooks/useListenToMessages";
 import Sidebar from "../../dashboard/Sidebar";
-import whiteLogo from "../../../assets/logo/png/2.png";
+import ejarakWhite from "../../../assets/ejark white.png";
+import ejarakGreen from "../../../assets/ejark green.png";
 const notificationAudio = new Audio(notificationSound);
 
 const Navbar = ({ bg, dashboard }) => {
@@ -138,7 +137,11 @@ const Navbar = ({ bg, dashboard }) => {
             }`}
           >
             {dashboard ? null : (
-              <NavLinks navLinks={navLinks} logo={bg ? logo2 : logo} bg={bg} />
+              <NavLinks
+                navLinks={navLinks}
+                logo={bg ? ejarakGreen : ejarakWhite}
+                bg={bg}
+              />
             )}
           </div>
           <LangMenu bg={bg} />
