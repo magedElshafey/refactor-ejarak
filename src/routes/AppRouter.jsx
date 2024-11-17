@@ -72,6 +72,8 @@ import SubCategories from "../pages/dashboard/SubCategories";
 import ProtectedRoutes from "./ProtectedRoutes";
 import RedirectIfLoggedIn from "./RedirectIfLoggedIn";
 import ProtectedDashboard from "./ProtectedDashboard";
+import ContractsPayments from "../pages/dashboard/transactions/ContractsPayments";
+import ApplicationPayments from "../pages/dashboard/transactions/ApplicationPayments";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -550,6 +552,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedDashboard>
             <Payments />
+          </ProtectedDashboard>
+        ),
+      },
+      {
+        path: "contracts-payments",
+        element: (
+          <ProtectedDashboard>
+            <ContractsPayments />
+          </ProtectedDashboard>
+        ),
+      },
+      {
+        path: "application-payments",
+        element: (
+          <ProtectedDashboard>
+            <ApplicationPayments />
           </ProtectedDashboard>
         ),
       },

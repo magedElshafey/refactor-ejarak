@@ -15,6 +15,8 @@ import {
   MdOutlineRoundaboutLeft,
   MdPayments,
   MdReport,
+  MdOutlinePayment,
+  MdOutlinePayments,
 } from "react-icons/md";
 import { FaUsers, FaCity } from "react-icons/fa6";
 import {
@@ -598,6 +600,20 @@ export const dashboardLinks = [
     title: "my orders",
     icon: <FaFirstOrder size={20} />,
     path: "/website/my-reservations",
+    role: ["admin", "super_admin"],
+    list: [],
+  },
+  {
+    title: "contracts payments",
+    icon: <MdOutlinePayments size={20} />,
+    path: "/dashboard/contracts-payments",
+    role: ["admin", "super_admin"],
+    list: [],
+  },
+  {
+    title: "application payments",
+    icon: <MdOutlinePayment size={20} />,
+    path: "/dashboard/application-payments",
     role: ["admin", "super_admin"],
     list: [],
   },

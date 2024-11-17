@@ -674,5 +674,13 @@
   "need to login again": "تحتاج الي اعادة تسجيل الدخول",
   "chat": "الرسائل",
   "my contracts": "عقودي",
-  "pending houses": "عقارات قيد المراجعة"
+  "pending houses": "عقارات قيد المراجعة",
+  "contracts payments": "مدفوعات العقود",
+  "application payments": "مدفوعات التطبيق",
+  "transaction number": "رقم العملية",
+  "transaction type": "نوع العملية",
+  "contractFees": "رسوم دفع العقد",
+  "realstate name": "إسم العقار",
+  "amount": "المبلغ",
+  "appFees": "رسوم دفع التطبيق"
 }
