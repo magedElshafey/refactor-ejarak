@@ -5,18 +5,23 @@ import useMap from "../../../hooks/useMap";
 import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt, FaStar, FaFireAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { IoLocationSharp, IoClose } from "react-icons/io5";
+import { IoLocationSharp } from "react-icons/io5";
 import { useLocation, useNavigate } from "react-router-dom";
 import ErrorHandling from "../ErrorHandling";
 
 const MapView = () => {
   // hooks
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const { lat, lng } = useSelector((state) => state.filterSlice);
   const [isSatelliteView, setIsSatelliteView] = useState(false);
-  const { nearestRealStates, loadinNearRealStates, markers, isError } =
-    useMap();
+  const {
+    nearestRealStates,
+    loadinNearRealStates,
+    markers,
+    isError,
+    handleMapClick,
+  } = useMap();
 
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   const [activeId, setActiveId] = useState(null);
@@ -80,6 +85,7 @@ const MapView = () => {
             </div>
           ) : null}
           <GoogleMap
+            onClick={handleMapClick}
             key={mapKey}
             bootstrapURLKeys={{
               key: apiKey,

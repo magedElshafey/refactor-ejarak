@@ -93,6 +93,7 @@ const Faqs = () => {
       render: (value, row) => {
         return (
           <TableProperties
+            
             hasDelete={true}
             hasEdit={true}
             hasView={true}

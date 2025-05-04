@@ -1,9 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
-import { deleteRealstateImages } from "../../services/delete/deleteRealstateImages";
-import { useMutation, useQueryClient } from "react-query";
-import Swal from "sweetalert2";
+
 import { FaPlus, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -19,28 +17,7 @@ const RealstateImages = ({
   setDeletedIndexes,
 }) => {
   const { t, i18n } = useTranslation();
-  // const queryClient = useQueryClient();
-  // const [deletingIndex, setDeletingIndex] = useState(null);
-  // const { isLoading, mutate } = useMutation(
-  //   (v) => deleteRealstateImages(realstateId, v),
-  //   {
-  //     onSuccess: (data) => {
-  //       if (data?.data?.status) {
-  //         Swal.fire({
-  //           icon: "success",
-  //           title: data?.data?.message,
-  //         });
-  //         queryClient.invalidateQueries(["realstate-details", realstateId]);
-  //         queryClient.invalidateQueries("my-realstates");
-  //       } else {
-  //         Swal.fire({
-  //           icon: "error",
-  //           title: data?.response?.data?.message,
-  //         });
-  //       }
-  //     },
-  //   }
-  // );
+
   const sliderRef = useRef(null);
 
   const settings = {
@@ -82,10 +59,7 @@ const RealstateImages = ({
     sliderRef.current.slickPrev();
   };
   const handleClick = (index) => {
-    // setDeletedIndexes(index);
     setDeletedIndexes((prev) => [...prev, index]);
-
-    // إزالة الصورة من العرض
     const newPreviews = previewsPhotos.filter((_, i) => i !== index);
     setPreveiwsPhotos(newPreviews);
   };

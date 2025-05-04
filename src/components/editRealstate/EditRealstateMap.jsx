@@ -2,7 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import GoogleMap from "google-map-react";
 import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
-const EditRealstateMap = ({ coordinates }) => {
+import { geocodeByAddress } from "react-places-autocomplete";
+
+const EditRealstateMap = ({
+  coordinates,
+  setCoordinates,
+  setSearchAddress,
+}) => {
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   // api key for map
   const apiKey = process.env.GOOGLE_MAP_API_KEY;
@@ -37,6 +43,19 @@ const EditRealstateMap = ({ coordinates }) => {
       });
     }
   }, [coordinates]);
+  const handleMapClick = async ({ lat, lng }) => {
+    const clickedCoordinates = { lat, lng };
+    setCoordinates(clickedCoordinates);
+    try {
+      const results = await geocodeByAddress(`${lat},${lng}`);
+      if (results && results.length > 0) {
+        const address = results[0].formatted_address;
+        setSearchAddress(address);
+      }
+    } catch (error) {
+      console.error("Error geocoding coordinates:", error);
+    }
+  };
   return (
     <div className="h-[350px] relative">
       <button
@@ -51,6 +70,7 @@ const EditRealstateMap = ({ coordinates }) => {
         )}
       </button>
       <GoogleMap
+        onClick={handleMapClick}
         key={mapKey}
         bootstrapURLKeys={{ key: apiKey }}
         defaultCenter={defaultProps.center}

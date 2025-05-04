@@ -151,7 +151,11 @@ const FormOne = ({
           </div>
         </div>
         <div className="w-full md:w-1/3">
-          <AddRealstateMap coordinates={coordinates} />
+          <AddRealstateMap
+            coordinates={coordinates}
+            setCoordinates={setCoordinates}
+            setSearchAddress={setSearchAddress}
+          />
         </div>
       </form>
       <div className="mt-5 w-full flex items-center justify-center lg:justify-end gap-4">

@@ -52,7 +52,7 @@ const ContractsPayments = () => {
   };
 
   const offset = currentPage * itemsPerPage;
-  console.log("data from contracts payment", data?.data?.data);
+
   const columns = [
     {
       title: "transaction number",

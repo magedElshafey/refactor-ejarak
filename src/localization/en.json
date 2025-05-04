@@ -646,5 +646,6 @@
   "do you sure you want to remove the reason": "do you sure you want to remove the reason",
   "deleted": "deleted request",
   "adminn": "Responsible for paying the reservation fees",
-  "reservation status": "reservation status"
+  "reservation status": "reservation status",
+  "At least 1 photos must be uploaded": "At least 1 photos must be uploaded"
 }

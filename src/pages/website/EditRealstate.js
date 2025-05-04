@@ -224,10 +224,10 @@ const EditRealstate = () => {
   const handleSubmit = (e) => {
     const formData = new FormData();
     e.preventDefault();
-    if (previewsPhotos.length < 4) {
+    if (previewsPhotos.length < 1) {
       Swal.fire({
         icon: "error",
-        title: t("At least 4 photos must be uploaded"),
+        title: t("At least 1 photos must be uploaded"),
       });
       return false;
     } else if (categoryId && !subCategoryId) {
@@ -424,7 +424,11 @@ const EditRealstate = () => {
                 setSearchAddress={setSearchAddress}
               />
               <div className="row-span-3">
-                <EditRealstateMap coordinates={coordinates} />
+                <EditRealstateMap
+                  coordinates={coordinates}
+                  setCoordinates={setCoordinates}
+                  setSearchAddress={setSearchAddress}
+                />
               </div>
               <MainInput
                 type="number"

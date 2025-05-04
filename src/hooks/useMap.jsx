@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useQuery } from "react-query";
 import { getNearRealStates } from "../services/get/getNearRealStates";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLat, changeLng, changeLocation } from "../store/filterSlice";
-import ErrorHandling from "../components/common/ErrorHandling";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -129,7 +128,24 @@ const useMap = () => {
       console.error("Error while getting coordinates:", error);
     }
   };
+  const handleMapClick = ({ lat, lng }) => {
+    const clickedCoordinates = { lat, lng };
+    setCoordinates(clickedCoordinates);
 
+    geocodeByAddress(`${lat}, ${lng}`)
+      .then((results) => results[0].formatted_address)
+      .then((formattedAddress) => {
+        setAddress(formattedAddress);
+        if (pathname === "/") {
+          dispatch(changeLat(lat));
+          dispatch(changeLng(lng));
+          dispatch(changeLocation(formattedAddress));
+        }
+      })
+      .catch((error) => console.error("Error while reverse geocoding:", error));
+    setMarkers(clickedCoordinates);
+  };
+  console.log("address from click on map", address);
   return {
     handleSelect,
     address,
@@ -139,6 +155,7 @@ const useMap = () => {
     nearestRealStates,
     loadinNearRealStates,
     isError,
+    handleMapClick,
   };
 };
 

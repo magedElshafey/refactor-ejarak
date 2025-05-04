@@ -110,14 +110,14 @@ const FormThree = ({
   );
 
   const handleSubmit = () => {
-    const totalImagesSize = selectedImages.reduce(
-      (acc, image) => acc + image.size,
-      0
-    );
-    if (selectedImages.length && selectedImages.length < 4) {
+    // const totalImagesSize = selectedImages.reduce(
+    //   (acc, image) => acc + image.size,
+    //   0
+    // );
+    if (selectedImages.length && selectedImages.length < 1) {
       Swal.fire({
         icon: "error",
-        title: t("At least 4 photos must be uploaded"),
+        title: t("At least 1 photos must be uploaded"),
       });
       return;
     } else if (!selectedImages.length) {

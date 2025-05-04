@@ -3,7 +3,9 @@ import GoogleMap from "google-map-react";
 import { useSelector } from "react-redux";
 import { MdOutlineSatelliteAlt } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
-const AddRealstateMap = ({ coordinates }) => {
+import { geocodeByAddress } from "react-places-autocomplete";
+
+const AddRealstateMap = ({ coordinates, setCoordinates, setSearchAddress }) => {
   const { lat, lng } = useSelector((state) => state.filterSlice);
   const [mapKey, setMapKey] = useState(0); // Key to force re-render of GoogleMap component
   // api key for map
@@ -33,16 +35,7 @@ const AddRealstateMap = ({ coordinates }) => {
       strictBounds: true,
     },
   };
-  // useEffect(() => {
-  //   if (coordinates && mapRef.current) {
-  //     const bounds = new window.google.maps.LatLngBounds();
-  //     bounds.extend({
-  //       lat: coordinates.lat,
-  //       lng: coordinates.lng,
-  //     });
-  //     mapRef.current.fitBounds(bounds);
-  //   }
-  // }, [coordinates]);
+
   useEffect(() => {
     if (coordinates && mapRef.current) {
       // Move the map to the new marker's position without changing the zoom level
@@ -52,6 +45,20 @@ const AddRealstateMap = ({ coordinates }) => {
       });
     }
   }, [coordinates]);
+
+  const handleMapClick = async ({ lat, lng }) => {
+    const clickedCoordinates = { lat, lng };
+    setCoordinates(clickedCoordinates);
+    try {
+      const results = await geocodeByAddress(`${lat},${lng}`);
+      if (results && results.length > 0) {
+        const address = results[0].formatted_address;
+        setSearchAddress(address);
+      }
+    } catch (error) {
+      console.error("Error geocoding coordinates:", error);
+    }
+  };
   return (
     <div className="h-[450px] relative">
       <button
@@ -66,6 +73,7 @@ const AddRealstateMap = ({ coordinates }) => {
         )}
       </button>
       <GoogleMap
+        onClick={handleMapClick}
         key={mapKey}
         bootstrapURLKeys={{ key: apiKey }}
         defaultCenter={defaultProps.center}

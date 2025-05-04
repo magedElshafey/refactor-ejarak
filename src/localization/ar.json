@@ -682,5 +682,6 @@
   "contractFees": "رسوم دفع العقد",
   "realstate name": "إسم العقار",
   "amount": "المبلغ",
-  "appFees": "رسوم دفع التطبيق"
+  "appFees": "رسوم دفع التطبيق",
+  "At least 1 photos must be uploaded": "يجب رفع صورة واحدة علي الأقل"
 }
