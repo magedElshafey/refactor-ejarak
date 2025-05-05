@@ -155,10 +155,10 @@ const Login = () => {
           </Link>
         </div>
         {isLoading ? <LoadingBtn /> : <MainBtn text="login" type="submit" />}
-        <div className="my-4">
+        {/* <div className="my-4">
           <NafazBtn />
-        </div>
-        <div className="flex items-center gap-1 justify-center mb-4">
+        </div> */}
+        <div className="flex items-center gap-1 justify-center my-4">
           <p className="text-xs text-textColor">{t("haveAccount")}</p>
           <Link
             to="/auth/regester"

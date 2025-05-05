@@ -70,7 +70,6 @@ import Categories from "../pages/dashboard/Categories";
 import Payments from "../pages/dashboard/Payments";
 import SubCategories from "../pages/dashboard/SubCategories";
 import ProtectedRoutes from "./ProtectedRoutes";
-import RedirectIfLoggedIn from "./RedirectIfLoggedIn";
 import ProtectedDashboard from "./ProtectedDashboard";
 import ContractsPayments from "../pages/dashboard/transactions/ContractsPayments";
 import ApplicationPayments from "../pages/dashboard/transactions/ApplicationPayments";

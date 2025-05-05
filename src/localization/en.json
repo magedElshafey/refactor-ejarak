@@ -647,5 +647,12 @@
   "deleted": "deleted request",
   "adminn": "Responsible for paying the reservation fees",
   "reservation status": "reservation status",
-  "At least 1 photos must be uploaded": "At least 1 photos must be uploaded"
+  "At least 1 photos must be uploaded": "At least 1 photos must be uploaded",
+  "continue": "continue",
+  "order number": "order number",
+  "The order number has been copied. Please confirm with the Nafath application.": "The order number has been copied. Please confirm with the Nafath application.",
+  "Your order number has expired. Please check again.": "Your order number has expired. Please check again.",
+  "Waiting for confirmation with Nafath app": "Waiting for confirmation with Nafath app",
+  "The wrong number was chosen": "The wrong number was chosen",
+  "Please check the availability first.": "Please check the availability first."
 }

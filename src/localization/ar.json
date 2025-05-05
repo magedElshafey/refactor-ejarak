@@ -683,5 +683,13 @@
   "realstate name": "إسم العقار",
   "amount": "المبلغ",
   "appFees": "رسوم دفع التطبيق",
-  "At least 1 photos must be uploaded": "يجب رفع صورة واحدة علي الأقل"
+  "At least 1 photos must be uploaded": "يجب رفع صورة واحدة علي الأقل",
+  "nafaz check": "تحقق بواسطة نفاذ",
+  "continue": "متابعة",
+  "order number": "رقم الطلب",
+  "The order number has been copied. Please confirm with the Nafath application.": "تم نسخ رقم الطلب برجاء التأكيد مع تطبيق نفاذ",
+  "Your order number has expired. Please check again.": "انتهت صلاحية رقم الطلب يرجي التحقق مرة اخري",
+  "Waiting for confirmation with Nafath app": "في انتظار تأكيد مع تطبيق نفاذ",
+  "The wrong number was chosen": "تم اختيار رقم خاطئ ",
+  "Please check the availability first.": "يرجي التحقق من نفاذ اولا"
 }
