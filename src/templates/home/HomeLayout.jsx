@@ -13,11 +13,13 @@ import { logout } from "../../store/auth";
 import { getMyAccountDetails } from "../../services/get/getMyAccountDetails";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useNafath } from "../../hooks/useNafath";
+import NafathModal from "../../components/common/naftahmodal/NafathModal";
 const HomeLayout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { token } = useSelector((state) => state.authSlice);
+  const { userData, token } = useSelector((state) => state.authSlice);
   const { isLoading, data: profileData } = useQuery(
     "account-details",
     getMyAccountDetails,
@@ -42,17 +44,77 @@ const HomeLayout = () => {
       },
     }
   );
+  const {
+    showModal,
+    randomNum,
+    nafazStatus,
+    loadingNafazStatus,
+    loadingNafaz,
+    handleStart,
+    handleStatusCheck,
+    setRandomNum,
+    setNafazStatus,
+    role,
+  } = useNafath();
   return (
-    <div>
-      <Meta />
-      <FixedBtn />
-      <Hero hasoverlay={false} img={heroImg}>
-        <Navbar />
-        {<Outlet />}
-        <Footer isHome={true} />
-      </Hero>
-    </div>
+    <>
+      {userData ? (
+        userData?.confirmed_with_nafath || nafazStatus === "COMPLETED" ? (
+          <>
+            <Meta />
+            <FixedBtn />
+            <Hero hasoverlay={false} img={heroImg}>
+              <Navbar />
+              {<Outlet />}
+              <Footer isHome={true} />
+            </Hero>
+          </>
+        ) : (
+          <NafathModal
+            showModal={showModal}
+            randomNum={randomNum}
+            nafazStatus={nafazStatus}
+            loadingNafaz={loadingNafaz}
+            loadingNafazStatus={loadingNafazStatus}
+            onCheckStatus={handleStatusCheck}
+            onRetry={() => {
+              setRandomNum("");
+              handleStart();
+              setNafazStatus("");
+            }}
+            role={role}
+          />
+        )
+      ) : (
+        <>
+          <Meta />
+          <FixedBtn />
+          <Hero hasoverlay={false} img={heroImg}>
+            <Navbar />
+            {<Outlet />}
+            <Footer isHome={true} />
+          </Hero>
+        </>
+      )}
+    </>
   );
 };
 
 export default HomeLayout;
+/**
+ *   <>
+      {nafazStatus === "COMPLETED" ? (
+        <>
+          <Meta />
+          <FixedBtn />
+          <Hero hasoverlay={false} img={heroImg}>
+            <Navbar />
+            {<Outlet />}
+            <Footer isHome={true} />
+          </Hero>
+        </>
+      ) : (
+       
+      )}
+    </>
+ */

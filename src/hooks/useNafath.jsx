@@ -1,93 +1,118 @@
-// hooks/useNafath.js
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useMutation } from "react-query";
 import Swal from "sweetalert2";
 import { request } from "../services/axios";
+
+/**
+ * Custom hook to manage the Nafath authentication flow.
+ * It handles initiating the Nafath request, checking its status,
+ * and managing the related UI state (like a modal).
+ */
 export const useNafath = () => {
   const { userData } = useSelector((state) => state.authSlice);
-  const role = userData?.account?.type;
   const [nafazStatus, setNafazStatus] = useState("");
   const [randomNum, setRandomNum] = useState("");
   const [transId, setTransId] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const handleNafazCheck = async (data) => {
-    return await request({
-      url: "/nafath/mfa/request",
-      method: "POST",
-      data,
-    });
-  };
-
-  const handleNafazStatusCheck = async (data) => {
-    return await request({
-      url: "/nafath/mfa/request/status",
-      method: "POST",
-      data,
-    });
-  };
-
+  // Mutation to initiate the Nafath MFA request
   const { isLoading: loadingNafaz, mutate: mutateNafaz } = useMutation(
-    handleNafazCheck,
+    (data) =>
+      request({
+        url: "/nafath/mfa/request",
+        method: "POST",
+        data,
+      }), // <-- Add comma here
     {
+      // <-- Add options object wrapper
       onSuccess: (data) => {
-        if (data?.status === 200) {
+        console.log("data from success", data);
+        // <-- Add onSuccess key and function wrapper
+        if (data?.data) {
           const random = data?.data?.random;
-          setRandomNum(random);
-          if (document.hasFocus()) {
-            navigator.clipboard
-              .writeText(random)
-              .then(() => {
-                console.log("Random number copied to clipboard:", random);
-              })
-              .catch((err) => {
-                console.error("Failed to copy:", err);
-              });
-          } else {
-            console.warn("Document not focused. Skipping clipboard copy.");
+          if (random) {
+            setRandomNum(random);
+            setShowModal(true);
+            if (document.hasFocus()) {
+              navigator.clipboard
+                .writeText(random)
+                .then(() => {
+                  console.log("Random number copied to clipboard:", random);
+                })
+                .catch((err) => {
+                  console.error("Failed to copy:", err);
+                });
+            } else {
+              console.warn("Document not focused. Skipping clipboard copy.");
+            }
           }
+
           setTransId(data?.data?.transId);
-          setShowModal(true);
         } else {
           Swal.fire({
             icon: "error",
             title: "حدث خطأ، يرجى المحاولة لاحقاً",
           });
         }
-      },
+      }, // <-- Close onSuccess block
       onError: (err) => {
         Swal.fire({
           icon: "error",
           title: err?.response?.data?.message || "حدث خطأ",
         });
       },
-    }
+    } // <-- Close options object
   );
 
+  // Mutation to check the status of an ongoing Nafath MFA request
   const { isLoading: loadingNafazStatus, mutate: mutateNafazStatus } =
-    useMutation(handleNafazStatusCheck, {
-      onSuccess: (data) => {
-        setNafazStatus(data?.data?.status);
-        if (data?.data?.status === "COMPLETED") {
-          setShowModal(false);
-        }
-      },
-      onError: (err) => {
-        Swal.fire({
-          icon: "error",
-          title: err?.response?.data?.message || "حدث خطأ",
-        });
-      },
-    });
+    useMutation(
+      (data) =>
+        request({
+          url: "/nafath/mfa/request/status",
+          method: "POST",
+          data,
+        }),
+      {
+        onSuccess: (data) => {
+          console.log("status sucess", data);
+          setNafazStatus(data?.data?.status);
+          if (data?.data?.status === "COMPLETED") {
+            setShowModal(false);
+          }
+        },
+        onError: (err) => {
+          Swal.fire({
+            icon: "error",
+            title: err?.response?.data?.message || "حدث خطأ",
+          });
+        },
+      }
+    );
 
+  // Function to start the Nafath process
   const handleStart = () => {
+    // Ensure nationalId exists before mutating
     if (userData?.nationalId) {
       mutateNafaz({ nationalId: userData.nationalId });
+    } else {
+      console.error("Nafath: National ID is missing from user data.");
+      // Optionally show an error to the user
+      Swal.fire({
+        icon: "error",
+        title: "بيانات المستخدم غير مكتملة للتحقق عبر نفاذ",
+      });
     }
   };
 
+  // Function to check the status of the current Nafath transaction
   const handleStatusCheck = () => {
+    // Ensure required data is available
+    if (!userData?.nationalId || !transId || !randomNum) {
+      console.error("Nafath: Missing data for status check.");
+      return; // Prevent API call with incomplete data
+    }
     mutateNafazStatus({
       nationalId: userData?.nationalId,
       transId,
@@ -96,9 +121,13 @@ export const useNafath = () => {
   };
 
   useEffect(() => {
-    handleStart();
-  }, [userData?.nationalId]);
-
+    // Start Nafath check automatically if user data is loaded,
+    // the user is not yet confirmed via Nafath, and a check is not already loading or shown.
+    // Ensure userData itself is available before checking its properties.
+    if (userData && !userData?.confirmed_with_nafath) {
+      handleStart();
+    }
+  }, []);
   return {
     showModal,
     randomNum,
@@ -108,8 +137,5 @@ export const useNafath = () => {
     handleStart,
     handleStatusCheck,
     setShowModal,
-    setRandomNum,
-    setNafazStatus,
-    role,
   };
 };

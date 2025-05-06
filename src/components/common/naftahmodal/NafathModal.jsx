@@ -15,7 +15,6 @@ const NafathModal = ({
 
   if (
     !showModal ||
-    !randomNum ||
     role === "admin" ||
     role === "super_admin" ||
     role === "customer_service"
@@ -57,21 +56,6 @@ const NafathModal = ({
               </div>
             )}
 
-            {nafazStatus === "REJECTED" && (
-              <div className="mb-3 text-center">
-                <p className="mb-2 text-red-600 text-sm">
-                  {t("The wrong number was chosen")}
-                </p>
-                <button
-                  disabled={loadingNafaz}
-                  className="font-semibold underline disabled:cursor-not-allowed"
-                  onClick={onRetry}
-                >
-                  {t("try again")}
-                </button>
-              </div>
-            )}
-
             {nafazStatus === "WAITING" && (
               <p className="text-maincolorgreen text-sm mb-3 text-center">
                 {t("Waiting for confirmation with Nafath app")}
@@ -81,7 +65,7 @@ const NafathModal = ({
 
           <button
             onClick={onCheckStatus}
-            disabled={loadingNafazStatus || nafazStatus === "WAITING"}
+            disabled={loadingNafazStatus}
             className="w-full py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white font-semibold disabled:cursor-not-allowed disabled:bg-opacity-30"
           >
             {loadingNafazStatus ? (

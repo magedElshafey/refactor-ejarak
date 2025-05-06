@@ -11,11 +11,13 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "react-query";
 import { logout } from "../../store/auth";
 import { getMyAccountDetails } from "../../services/get/getMyAccountDetails";
+import { useNafath } from "../../hooks/useNafath";
+import NafathModal from "../../components/common/naftahmodal/NafathModal";
 const WebsiteLayout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { token } = useSelector((state) => state.authSlice);
+  const { userData, token } = useSelector((state) => state.authSlice);
   const { isLoading, data: profileData } = useQuery(
     "account-details",
     getMyAccountDetails,
@@ -40,19 +42,74 @@ const WebsiteLayout = () => {
       },
     }
   );
+  const {
+    showModal,
+    randomNum,
+    nafazStatus,
+    loadingNafazStatus,
+    loadingNafaz,
+    handleStart,
+    handleStatusCheck,
+    setRandomNum,
+    setNafazStatus,
+    role,
+  } = useNafath();
+
   return (
-    <div>
-      <Meta />
-      <FixedBtn />
-      <Navbar bg="bg-[#e7ebe7]" />
-      {
-        <div className="main">
-          <Outlet />
-        </div>
-      }
-      <Footer isHome={false} />
-    </div>
+    <>
+      {userData ? (
+        userData?.confirmed_with_nafath || nafazStatus === "COMPLETED" ? (
+          <>
+            <Meta />
+            <FixedBtn />
+            <Navbar bg="bg-[#e7ebe7]" />
+            {
+              <div className="main">
+                <Outlet />
+              </div>
+            }
+            <Footer isHome={false} />
+          </>
+        ) : (
+          <NafathModal
+            showModal={showModal}
+            randomNum={randomNum}
+            nafazStatus={nafazStatus}
+            loadingNafaz={loadingNafaz}
+            loadingNafazStatus={loadingNafazStatus}
+            onCheckStatus={handleStatusCheck}
+            onRetry={() => {
+              setRandomNum("");
+              handleStart();
+              setNafazStatus("");
+            }}
+            role={role}
+          />
+        )
+      ) : (
+        <>
+          <Meta />
+          <FixedBtn />
+          <Navbar bg="bg-[#e7ebe7]" />
+          {
+            <div className="main">
+              <Outlet />
+            </div>
+          }
+          <Footer isHome={false} />
+        </>
+      )}
+    </>
   );
 };
 
 export default WebsiteLayout;
+/**
+ *    { ? (
+        <>
+          
+        </>
+      ) : (
+       
+      )}
+ */

@@ -2,21 +2,8 @@ import React from "react";
 import SearchOnMap from "../../components/common/map/SearchOnMap";
 import MapView from "../../components/common/map/MapView";
 import Filter from "../../components/common/filter/Filter";
-import { useNafath } from "../../hooks/useNafath";
-import NafathModal from "../../components/common/naftahmodal/NafathModal";
+
 const Home = () => {
-  const {
-    showModal,
-    randomNum,
-    nafazStatus,
-    loadingNafazStatus,
-    loadingNafaz,
-    handleStart,
-    handleStatusCheck,
-    setRandomNum,
-    setNafazStatus,
-    role,
-  } = useNafath();
   return (
     <>
       <div className="h mt-8  flex items-center">
@@ -35,20 +22,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <NafathModal
-        showModal={showModal}
-        randomNum={randomNum}
-        nafazStatus={nafazStatus}
-        loadingNafaz={loadingNafaz}
-        loadingNafazStatus={loadingNafazStatus}
-        onCheckStatus={handleStatusCheck}
-        onRetry={() => {
-          setRandomNum("");
-          handleStart();
-          setNafazStatus("");
-        }}
-        role={role}
-      />
     </>
   );
 };

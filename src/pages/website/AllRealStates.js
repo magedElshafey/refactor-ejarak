@@ -13,22 +13,10 @@ import ReviewBtn from "../../components/common/filter/ReviewBtn";
 import NewsBtn from "../../components/common/filter/NewsBtn";
 import Pagination from "../../components/common/Pagination";
 import CityBtn from "../../components/common/filter/CityBtn";
-import { useNafath } from "../../hooks/useNafath";
-import NafathModal from "../../components/common/naftahmodal/NafathModal";
+
 const AllRealStates = () => {
   const dispatch = useDispatch();
-  const {
-    showModal,
-    randomNum,
-    nafazStatus,
-    loadingNafazStatus,
-    loadingNafaz,
-    handleStart,
-    handleStatusCheck,
-    setRandomNum,
-    setNafazStatus,
-    role,
-  } = useNafath();
+
   const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(0);
   // reset all redux value when the page loaded
@@ -174,20 +162,6 @@ const AllRealStates = () => {
           </div>
         </div>
       </div>
-      <NafathModal
-        showModal={showModal}
-        randomNum={randomNum}
-        nafazStatus={nafazStatus}
-        loadingNafaz={loadingNafaz}
-        loadingNafazStatus={loadingNafazStatus}
-        onCheckStatus={handleStatusCheck}
-        onRetry={() => {
-          setRandomNum("");
-          handleStart();
-          setNafazStatus("");
-        }}
-        role={role}
-      />
     </>
   );
 };
