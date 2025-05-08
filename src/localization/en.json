@@ -654,5 +654,7 @@
   "Your order number has expired. Please check again.": "Your order number has expired. Please check again.",
   "Waiting for confirmation with Nafath app": "Waiting for confirmation with Nafath app",
   "The wrong number was chosen": "The wrong number was chosen",
-  "Please check the availability first.": "Please check the availability first."
+  "Please check the availability first.": "Please check the availability first.",
+  "activeee": "active",
+  "inactivee": "inactive"
 }

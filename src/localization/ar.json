@@ -691,5 +691,13 @@
   "Your order number has expired. Please check again.": "انتهت صلاحية رقم الطلب يرجي التحقق مرة اخري",
   "Waiting for confirmation with Nafath app": "في انتظار تأكيد مع تطبيق نفاذ",
   "The wrong number was chosen": "تم اختيار رقم خاطئ ",
-  "Please check the availability first.": "يرجي التحقق من نفاذ اولا"
+  "Please check the availability first.": "يرجي التحقق من نفاذ اولا",
+  "nafaz status": "حالة نفاذ",
+  "activeee": "مفعل",
+  "inactivee": "غير مفعل",
+  "INACTIVE": "غير مفعل",
+  "COMPLETED": "مكتمل",
+  "EXPIRED": "غير صالح",
+  "WAITING": "قيد الإنتظار",
+  "REJECTED": "مرفوض "
 }

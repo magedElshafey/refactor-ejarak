@@ -214,6 +214,23 @@ const Users = () => {
         );
       },
     },
+    {
+      title: "nafaz status",
+      dataIndex: "nafath_status",
+      render: (value) => (
+        <p
+          className={`flex items-center justify-center py-1 px-3 rounded-md text-white ${
+            value === "COMPLETED"
+              ? "bg-maincolorgreen"
+              : value === "WAITING"
+              ? "bg-orange-300"
+              : "bg-red-600"
+          }`}
+        >
+          {t(value)}
+        </p>
+      ),
+    },
   ];
   const handleAddUser = () => navigate("/dashboard/add-user");
   const newAccountType = {
