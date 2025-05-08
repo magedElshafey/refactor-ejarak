@@ -53,6 +53,8 @@ const WebsiteLayout = () => {
     setRandomNum,
     setNafazStatus,
     role,
+    error,
+    errorMessage,
   } = useNafath();
 
   return (
@@ -84,6 +86,8 @@ const WebsiteLayout = () => {
               setNafazStatus("");
             }}
             role={role}
+            error={error}
+            errorMessage={errorMessage}
           />
         )
       ) : (
@@ -104,12 +108,3 @@ const WebsiteLayout = () => {
 };
 
 export default WebsiteLayout;
-/**
- *    { ? (
-        <>
-          
-        </>
-      ) : (
-       
-      )}
- */

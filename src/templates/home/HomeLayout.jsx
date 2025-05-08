@@ -55,7 +55,10 @@ const HomeLayout = () => {
     setRandomNum,
     setNafazStatus,
     role,
+    error,
+    errorMessage,
   } = useNafath();
+
   return (
     <>
       {userData ? (
@@ -83,6 +86,8 @@ const HomeLayout = () => {
               setNafazStatus("");
             }}
             role={role}
+            error={error}
+            errorMessage={errorMessage}
           />
         )
       ) : (

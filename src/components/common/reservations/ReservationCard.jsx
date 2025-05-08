@@ -10,7 +10,6 @@ import PayBtn from "./PayBtn";
 import CreateContractBtn from "./CreateContractBtn";
 const ReservationCard = ({ data, index, role, created_at, dep }) => {
   const { t, i18n } = useTranslation();
-  console.log("reservation details", data);
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">
@@ -24,7 +23,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
         </div>
         <div className="px-6">
           <Link
-            to={`/website/realstate/${data.realty_id}`}
+            to={`/website/realstate/${data?.realty_id}`}
             className="block font-bold lg:text-lg mb-4 md:w-[80%] text-maincolorgreen underline"
           >
             {data?.reality}
@@ -39,12 +38,12 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
             <div className="flex flex-col items-start md:items-center">
               <p className="text-textColor mb-1">{t("adminn")}</p>
               <p className="font-bold">
-                {data.contract_fee_payer === "owner" && i18n.language === "ar"
+                {data?.contract_fee_payer === "owner" && i18n.language === "ar"
                   ? "المالك"
-                  : data.contract_fee_payer === "owner" &&
+                  : data?.contract_fee_payer === "owner" &&
                     i18n.language === "en"
                   ? "owner"
-                  : data.contract_fee_payer === "tenant" &&
+                  : data?.contract_fee_payer === "tenant" &&
                     i18n.language === "ar"
                   ? "المستأجر"
                   : "tenant"}
@@ -53,28 +52,28 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
             {data?.family_number ? (
               <div className="flex flex-col items-start md:items-center">
                 <p className="text-textColor mb-1">{t("familyNum")}</p>
-                <p className="font-bold">{data.family_number}</p>
+                <p className="font-bold">{data?.family_number}</p>
               </div>
             ) : null}
             <div className="flex flex-col items-start md:items-center">
               <p className="text-textColor mb-1">{t("period")}</p>
               <p className="font-bold">
-                {data.contract_period} {t("months")}
+                {data?.contract_period} {t("months")}
               </p>
             </div>
             <div className="flex flex-col items-start md:items-center">
               <p className="text-textColor mb-1">{t("periodFrom")}</p>
               <p className="font-bold">
-                {formatDateTime(data.contract_start_date)}
+                {formatDateTime(data?.contract_start_date)}
               </p>
             </div>
           </div>
           <div className="flex items-center justify-between flex-col md:flex-row gap-3 md:gap-0 mb-3">
             <UserContactCard
               role={role}
-              phone={`tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`}
-              whatsapp={`tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`}
-              chat={`/website/chat/${data.tenant.id}`}
+              phone={`tel:${data?.tenant?.phone?.country_code}${data?.tenant?.phone?.number}`}
+              whatsapp={`tel:${data?.tenant?.phone?.country_code}${data?.tenant?.phone?.number}`}
+              chat={`/website/chat/${data?.tenant?.id}`}
             />
             <div className="flex items-center gap-3 flex-wrap">
               {data?.status === "pending" && role === "owner" ? (
@@ -96,7 +95,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
                 <ReservationDetailsBtn id={data?.id} />
               ) : null}
               {data?.status === "completed" &&
-              role === data.contract_fee_payer ? (
+              role === data?.contract_fee_payer ? (
                 <PayBtn id={data?.id} dep={dep} />
               ) : null}
               {data?.status === "completed" && role === "owner" ? (

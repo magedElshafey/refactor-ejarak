@@ -656,5 +656,6 @@
   "The wrong number was chosen": "The wrong number was chosen",
   "Please check the availability first.": "Please check the availability first.",
   "activeee": "active",
-  "inactivee": "inactive"
+  "inactivee": "inactive",
+  "Please wait a moment and try again.": "Please wait a moment and try again."
 }

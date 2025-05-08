@@ -36,6 +36,7 @@ const RealStatesBody = ({ tableSearch, realstateStatus }) => {
       updateRealStateStatus(status, id, rejectionReason),
     {
       onSuccess: (data) => {
+        console.log("data from success", data);
         if (data?.data?.status) {
           Swal.fire({
             icon: "success",
@@ -61,9 +62,6 @@ const RealStatesBody = ({ tableSearch, realstateStatus }) => {
       },
     }
   );
-
-  // * handle Table search
-  // Apply filter for search term and realstate status
 
   const handlePageChange = (selectedPage) => {
     setCurrentPage(selectedPage);

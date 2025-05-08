@@ -699,5 +699,6 @@
   "COMPLETED": "مكتمل",
   "EXPIRED": "غير صالح",
   "WAITING": "قيد الإنتظار",
-  "REJECTED": "مرفوض "
+  "REJECTED": "مرفوض",
+  "Please wait a moment and try again.": "يرجي الانتظار قليلا و اعادة المحاولة"
 }

@@ -14,8 +14,10 @@ export const useNafath = () => {
   const [nafazStatus, setNafazStatus] = useState("");
   const [randomNum, setRandomNum] = useState("");
   const [transId, setTransId] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
-
+  console.log("error is", error);
   // Mutation to initiate the Nafath MFA request
   const { isLoading: loadingNafaz, mutate: mutateNafaz } = useMutation(
     (data) =>
@@ -27,33 +29,32 @@ export const useNafath = () => {
     {
       // <-- Add options object wrapper
       onSuccess: (data) => {
-        console.log("data from success", data);
+        console.log("data from success", data?.data);
+        setShowModal(true);
         // <-- Add onSuccess key and function wrapper
-        if (data?.data) {
-          const random = data?.data?.random;
-          if (random) {
-            setRandomNum(random);
-            setShowModal(true);
-            if (document.hasFocus()) {
-              navigator.clipboard
-                .writeText(random)
-                .then(() => {
-                  console.log("Random number copied to clipboard:", random);
-                })
-                .catch((err) => {
-                  console.error("Failed to copy:", err);
-                });
-            } else {
-              console.warn("Document not focused. Skipping clipboard copy.");
-            }
-          }
-
+        if (data?.data?.random) {
           setTransId(data?.data?.transId);
+          const random = data?.data?.random;
+          setRandomNum(random);
+
+          if (document.hasFocus()) {
+            navigator.clipboard
+              .writeText(random)
+              .then(() => {
+                console.log("Random number copied to clipboard:", random);
+              })
+              .catch((err) => {
+                console.error("Failed to copy:", err);
+              });
+          } else {
+            console.warn("Document not focused. Skipping clipboard copy.");
+          }
+        } else if (data?.data?.error) {
+          setError(true);
+          setErrorMessage(data?.data?.message);
         } else {
-          Swal.fire({
-            icon: "error",
-            title: "حدث خطأ، يرجى المحاولة لاحقاً",
-          });
+          setError(true);
+          setErrorMessage(data?.data?.message);
         }
       }, // <-- Close onSuccess block
       onError: (err) => {
@@ -76,7 +77,6 @@ export const useNafath = () => {
         }),
       {
         onSuccess: (data) => {
-          console.log("status sucess", data);
           setNafazStatus(data?.data?.status);
           if (data?.data?.status === "COMPLETED") {
             setShowModal(false);
@@ -137,5 +137,7 @@ export const useNafath = () => {
     handleStart,
     handleStatusCheck,
     setShowModal,
+    error,
+    errorMessage,
   };
 };

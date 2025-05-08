@@ -26,7 +26,7 @@ const MyContracts = () => {
   useEffect(() => {
     if (orginalContracts?.length > 0) {
       const value = filterdContrancts?.[activeIndex]?.value;
-      const newData = orginalContracts?.filter((item) => item.type === value);
+      const newData = orginalContracts?.filter((item) => item?.type === value);
       setFilterdContracts(newData);
     }
   }, [orginalContracts, activeIndex, filterdContrancts]);
@@ -50,14 +50,14 @@ const MyContracts = () => {
               filterdContracts?.map((item, index) => (
                 <div key={index}>
                   <ContractCard
-                    title={item.booking.realestate.name}
-                    realstateId={item.booking.realestate.id}
-                    data={item.booking}
+                    title={item?.booking?.realestate?.name}
+                    realstateId={item?.booking?.realestate?.id}
+                    data={item?.booking}
                     index={index}
                     role={role}
-                    contractDate={item.created_at}
-                    type={item.type}
-                    contractId={item.booking.id}
+                    contractDate={item?.created_at}
+                    type={item?.type}
+                    contractId={item?.booking?.id}
                   />
                 </div>
               ))

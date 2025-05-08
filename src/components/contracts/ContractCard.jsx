@@ -45,18 +45,18 @@ const ContractCard = ({
               <p className="font-bold">
                 {role === "owner"
                   ? data?.tenant?.name
-                  : data?.realestate?.user.name}
+                  : data?.realestate?.user?.name}
               </p>
             </div>
             <div className="flex flex-col items-center">
               <p className="text-textColor mb-1">{t("adminn")}</p>
               <p className="font-bold">
-                {data.contract_fee_payer === "owner" && i18n.language === "ar"
+                {data?.contract_fee_payer === "owner" && i18n.language === "ar"
                   ? "المالك"
-                  : data.contract_fee_payer === "owner" &&
+                  : data?.contract_fee_payer === "owner" &&
                     i18n.language === "en"
                   ? "owner"
-                  : data.contract_fee_payer === "tenant" &&
+                  : data?.contract_fee_payer === "tenant" &&
                     i18n.language === "ar"
                   ? "المستأجر"
                   : "tenant"}
@@ -71,13 +71,13 @@ const ContractCard = ({
             <div className="flex flex-col items-center">
               <p className="text-textColor mb-1">{t("period")}</p>
               <p className="font-bold">
-                {data.contract_period} {t("months")}
+                {data?.contract_period} {t("months")}
               </p>
             </div>
             <div className="flex flex-col items-center">
               <p className="text-textColor mb-1">{t("periodFrom")}</p>
               <p className="font-bold">
-                {formatDateTime(data.contract_start_date)}
+                {formatDateTime(data?.contract_start_date)}
               </p>
             </div>
           </div>
@@ -86,17 +86,17 @@ const ContractCard = ({
               role={role}
               phone={
                 role === "owner"
-                  ? `tel:${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`
-                  : `tel:${data?.owner?.phone?.country_code}${data.owner?.phone?.number}`
+                  ? `tel:${data?.tenant?.phone?.country_code}${data?.tenant?.phone?.number}`
+                  : `tel:${data?.owner?.phone?.country_code}${data?.owner?.phone?.number}`
               }
               whatsapp={
                 role === "owner"
-                  ? `https://wa.me/${data?.tenant?.phone?.country_code}${data.tenant?.phone?.number}`
-                  : `https://wa.me/${data?.owner?.phone?.country_code}${data.owner?.phone?.number}`
+                  ? `https://wa.me/${data?.tenant?.phone?.country_code}${data?.tenant?.phone?.number}`
+                  : `https://wa.me/${data?.owner?.phone?.country_code}${data?.owner?.phone?.number}`
               }
               chat={
                 role === "owner"
-                  ? `/website/chat/${data.tenant.id}`
+                  ? `/website/chat/${data?.tenant?.id}`
                   : `/website/chat/${data?.owner?.id}`
               }
             />

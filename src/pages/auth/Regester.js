@@ -28,6 +28,8 @@ const Regester = () => {
   const [randomNum, setRandomNum] = useState("");
   const [transId, setTransId] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const {
     value: phone,
     error: phoneError,
@@ -91,24 +93,29 @@ const Regester = () => {
     handleNafazCheck,
     {
       onSuccess: (data) => {
-        if (data?.status === 200) {
+        setShowModal(true);
+        if (data?.data?.random) {
+          setTransId(data?.data?.transId);
           const random = data?.data?.random;
           setRandomNum(random);
-          navigator.clipboard
-            .writeText(random)
-            .then(() => {
-              console.log("Random number copied to clipboard:", random);
-            })
-            .catch((err) => {
-              console.error("Failed to copy:", err);
-            });
-          setTransId(data?.data?.transId);
-          setShowModal(true);
+          if (document.hasFocus()) {
+            navigator.clipboard
+              .writeText(random)
+              .then(() => {
+                console.log("Random number copied to clipboard:", random);
+              })
+              .catch((err) => {
+                console.error("Failed to copy:", err);
+              });
+          } else {
+            console.warn("Document not focused. Skipping clipboard copy.");
+          }
+        } else if (data?.data?.error) {
+          setError(true);
+          setErrorMessage(data?.data?.message);
         } else {
-          Swal.fire({
-            icon: "error",
-            title: t("there is an issue occured , please try again later"),
-          });
+          setError(true);
+          setErrorMessage(data?.data?.message);
         }
       },
       onError: (data) => {
@@ -338,11 +345,11 @@ const Regester = () => {
           </div>
         </form>
       </div>
-      {showModal && randomNum ? (
+      {showModal && randomNum && !error ? (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-95 flex items-center justify-center">
           <div className="container mx-auto px-8 md:px-16 flex">
             <div className="w-full md:w-[300px] lg:w-[350px] xl:w-[400px] 2xl:w-[500px] mx-auto bg-white shadow-md border border-maincolorgreen">
-              <div className="px-4 pt-3">
+              <div className="px-4 py-3">
                 <div className="w-full flex justify-center mb-4">
                   <img alt="logo" src={logo} loading="lazy" className="h-12" />
                 </div>
@@ -403,21 +410,55 @@ const Regester = () => {
                   </p>
                 ) : null}
               </div>
-              <button
-                onClick={handleNafazStatusClick}
-                disabled={loadingNafazStatus}
-                className="w-full py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white text-nowrap font-semibold disabled:cursor-not-allowed disabled:bg-opacity-30 disabled:font-normal"
-              >
-                {loadingNafazStatus ? (
-                  <div className="w-8 h-8 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                  t("continue")
-                )}
-              </button>
+              <div className="w-full flex items-center justify-center gap-4 flex-wrap p-3">
+                <button
+                  className="bg-red-600 flex items-center justify-center text-white rounded-md disabled:cursor-not-allowed disabled:bg-opacity-30 py-2 px-4 min-w-[100px]"
+                  onClick={() => setShowModal(false)}
+                >
+                  {t("cancel")}
+                </button>
+                <button
+                  onClick={handleNafazStatusClick}
+                  disabled={loadingNafazStatus}
+                  className="py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white text-nowrap font-semibold disabled:cursor-not-allowed disabled:bg-opacity-30 disabled:font-normal min-w-[100px]"
+                >
+                  {loadingNafazStatus ? (
+                    <div className="w-8 h-8 border-8 border-white border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    t("continue")
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        showModal &&
+        error && (
+          <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-95 flex items-center justify-center z-50">
+            <div className="container mx-auto px-8 md:px-16">
+              <div className="w-full md:w-[300px] lg:w-[350px] xl:w-[400px] 2xl:w-[500px] mx-auto bg-white shadow-md border border-maincolorgreen">
+                <div className="p-5 w-full flex flex-col items-center justify-center gap-4">
+                  {errorMessage ? (
+                    <p className="font-medium text-md md:text-lg lg:text-xl xl:text-2xl text-red-600">
+                      {errorMessage}
+                    </p>
+                  ) : null}
+                  <p>{t("Please wait a moment and try again.")}</p>
+                  <button
+                    onClick={() => {
+                      setShowModal(false);
+                    }}
+                    className="bg-red-600 flex items-center justify-center text-white rounded-md disabled:cursor-not-allowed disabled:bg-opacity-30 py-2 px-4 min-w-[100px]"
+                  >
+                    {t("cancel")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      )}
     </>
   );
 };
