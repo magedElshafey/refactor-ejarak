@@ -107,6 +107,9 @@ const AllRealStates = () => {
       ),
     {
       keepPreviousData: true, // للحفاظ على البيانات السابقة عند التغيير
+      onError: (err) => {
+        console.error("fetch error:", err); // مهم جداً
+      },
     }
   );
 
@@ -146,7 +149,11 @@ const AllRealStates = () => {
               <LoadingTitle />
             ) : data?.data?.data.length ? (
               data?.data?.data?.map((item, index) => (
-                <RealstateCard key={index} data={item} dep="all-realstates" />
+                <RealstateCard
+                  key={item?.id}
+                  data={item}
+                  dep="all-realstates"
+                />
               ))
             ) : (
               <NoDataTitle />
