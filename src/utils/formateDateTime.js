@@ -29,7 +29,7 @@ export function formatDateTime(dateTimeString) {
       ? "ص"
       : period === "PM" && language === "ar"
       ? "م"
-      : period.toLowerCase();
+      : period?.toLowerCase();
 
   // Rearrange time format if the language is Arabic
   const [hours, minutes] = time.split(":");

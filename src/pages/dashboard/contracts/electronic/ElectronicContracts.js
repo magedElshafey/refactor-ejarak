@@ -64,7 +64,7 @@ const ElectronicContracts = () => {
           data?.data?.data?.filter((item) =>
             item?.booking?.realestate?.name
               ?.toLowerCase()
-              .includes(search.toLowerCase())
+              .includes(search?.toLowerCase())
           )
         );
       } else {

@@ -52,7 +52,7 @@ const Users = () => {
       if (search) {
         setFitlerdData(
           data?.data?.data?.filter((item) =>
-            item?.name?.toLowerCase().includes(search.toLowerCase())
+            item?.name?.toLowerCase().includes(search?.toLowerCase())
           )
         );
       } else {

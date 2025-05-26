@@ -73,7 +73,7 @@ const Contact = ({ message, time, type, otherParty, unseen, id, onChoose }) => {
         ? "ص"
         : period === "PM" && language === "ar"
         ? "م"
-        : period.toLowerCase();
+        : period?.toLowerCase();
 
     // Rearrange time format if the language is Arabic
     const [hours, minutes] = time.split(":");

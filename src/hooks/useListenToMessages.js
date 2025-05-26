@@ -50,7 +50,9 @@ const useListenToMessages = () => {
     const splittedLocation = location.pathname.split("/");
     if (
       splittedLocation.find((path) =>
-        chatURLs.find((chatURL) => chatURL.toLowerCase() === path.toLowerCase())
+        chatURLs.find(
+          (chatURL) => chatURL?.toLowerCase() === path?.toLowerCase()
+        )
       ) &&
       receiverId
     ) {

@@ -30,7 +30,7 @@ const ApplicationPayments = () => {
       if (search) {
         setFitlerdData(
           data?.data?.data?.filter((item) =>
-            item?.realestate_name?.toLowerCase().includes(search.toLowerCase())
+            item?.realestate_name?.toLowerCase().includes(search?.toLowerCase())
           )
         );
       } else {

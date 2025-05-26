@@ -55,7 +55,9 @@ const Reports = () => {
       if (search) {
         setFitlerdData(
           data?.data?.data?.filter((item) =>
-            item?.realestate?.name?.toLowerCase().includes(search.toLowerCase())
+            item?.realestate?.name
+              ?.toLowerCase()
+              .includes(search?.toLowerCase())
           )
         );
       } else {
