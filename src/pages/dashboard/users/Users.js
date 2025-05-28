@@ -16,10 +16,12 @@ import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../../components/common/inputs/MainSelect";
 import { request } from "../../../services/axios";
 import { useLocation } from "react-router-dom";
+import { FaFileExport } from "react-icons/fa";
+
 const itemsPerPage = 10;
 
 const Users = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [showFilter, setShowFilter] = useState(false);
@@ -237,6 +239,44 @@ const Users = () => {
     name: t("all"), // Assuming `t` is your translation function
     id: "",
   };
+  // const handleExport = async () => {
+  //   return await request({
+  //     url: `/Dashboard/users/export`,
+  //   });
+  // };
+  const handleExport = async () => {
+    const response = await request({
+      url: `/Dashboard/users/export`,
+      method: "GET",
+      responseType: "blob", // مهم جداً للتعامل مع الملفات
+    });
+
+    // إنشاء رابط من نوع Blob وتحميل الملف
+    const blob = new Blob([response], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "users.xlsx"; // اسم الملف اللي هيظهر في التنزيل
+    document.body.appendChild(a);
+    a.click();
+
+    // تنظيف الرابط بعد التحميل
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+
+    return true;
+  };
+
+  const { refetch, isFetching: isLoadingExport } = useQuery(
+    ["exports"],
+    handleExport,
+    {
+      enabled: false,
+    }
+  );
   return (
     <>
       {isLoading ? (
@@ -259,6 +299,13 @@ const Users = () => {
               <div className="w-full md:w-[180px]">
                 <MainBtn text="add user" action={handleAddUser} />
               </div>
+              <button
+                disabled={isLoadingExport}
+                onClick={() => refetch()}
+                className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
+              >
+                <FaFileExport size={20} />
+              </button>
             </div>
           </div>
           <div

@@ -111,6 +111,7 @@ const RealstateAssets = ({ images, data }) => {
                 className="w-full h-[250px] object-cover rounded-lg cursor-pointer "
                 onClick={() => handleClick(index)}
               />
+
               {data?.special || data?.year_of_construction <= 2 ? (
                 <div
                   className={`rounded-md absolute top-[5px] p-2 min-w-10 h-10 flex items-center justify-center gap-2   bg-white  ${
