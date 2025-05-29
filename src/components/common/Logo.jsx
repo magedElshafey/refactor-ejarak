@@ -8,7 +8,9 @@ const Logo = ({ img, isFooter }) => {
         alt="logo"
         src={img}
         loading="lazy"
-        className={`${isFooter ? " h-28" : "h-20"}`}
+        className={`w-16 md:w-auto object-contain ${
+          isFooter ? " h-28" : "h-20"
+        }`}
       />
     </Link>
   );

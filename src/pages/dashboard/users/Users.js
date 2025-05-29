@@ -239,19 +239,13 @@ const Users = () => {
     name: t("all"), // Assuming `t` is your translation function
     id: "",
   };
-  // const handleExport = async () => {
-  //   return await request({
-  //     url: `/Dashboard/users/export`,
-  //   });
-  // };
+
   const handleExport = async () => {
     const response = await request({
       url: `/Dashboard/users/export`,
       method: "GET",
-      responseType: "blob", // مهم جداً للتعامل مع الملفات
+      responseType: "blob",
     });
-
-    // إنشاء رابط من نوع Blob وتحميل الملف
     const blob = new Blob([response], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
@@ -259,11 +253,9 @@ const Users = () => {
 
     const a = document.createElement("a");
     a.href = url;
-    a.download = "users.xlsx"; // اسم الملف اللي هيظهر في التنزيل
+    a.download = "users.xlsx";
     document.body.appendChild(a);
     a.click();
-
-    // تنظيف الرابط بعد التحميل
     window.URL.revokeObjectURL(url);
     document.body.removeChild(a);
 

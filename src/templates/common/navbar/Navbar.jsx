@@ -21,6 +21,7 @@ import useListenToMessages from "../../../hooks/useListenToMessages";
 import Sidebar from "../../dashboard/Sidebar";
 import ejarakWhite from "../../../assets/ejark white.png";
 import ejarakGreen from "../../../assets/ejark green.png";
+import Logo from "../../../components/common/Logo";
 const notificationAudio = new Audio(notificationSound);
 
 const Navbar = ({ bg, dashboard }) => {
@@ -161,6 +162,7 @@ const Navbar = ({ bg, dashboard }) => {
           <LoginBtn bg={bg} />
         </div>
       </div>
+
       <div className="lg:hidden">
         <div className="flex items-center justify-between ">
           <div className="flex items-center ">
@@ -187,6 +189,7 @@ const Navbar = ({ bg, dashboard }) => {
               </>
             ) : null}
           </div>
+          <Logo img={bg ? ejarakGreen : ejarakWhite} />
           <div className="flex items-center gap-2">
             {pathname === "/" ||
             pathname === "/website/near-realstates" ||

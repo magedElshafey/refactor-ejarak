@@ -63,7 +63,7 @@ const RealstateDetails = ({ isDashboard }) => {
         <div>
           <div className="container mx-auto px-8 mt-8">
             <Meta title={data?.data?.data?.name} />
-
+            <AppBtn />
             <RealstateInfo
               name={data?.data?.data?.name}
               realStateOwnerId={data?.data?.data?.user?.id}
@@ -72,7 +72,6 @@ const RealstateDetails = ({ isDashboard }) => {
               id={params.id}
               isDashboard={isDashboard}
             />
-            <AppBtn />
 
             {data?.data?.data?.status === "pending" ? (
               <PendingRealstate num={data?.data?.data?.number_ad} />

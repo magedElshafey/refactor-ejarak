@@ -30,14 +30,14 @@ const AppBtn = () => {
         href={storeLink.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-black text-white px-6 py-2 flex items-center justify-center gap-3  shadow-lg hover:bg-maincolorgreen transition my-3"
+        className="text-white px-6 py-2 flex items-center justify-center gap-3  shadow-lg bg-maincolorgreen transition my-3"
       >
         <span>{t("Watch it on the app")}</span>
         <img
           alt="logo"
           src={logo}
           loading="lazy"
-          className="w-8 h-8 object-contain"
+          className="w-12 h-12 object-contain"
         />
       </a>
     </div>
