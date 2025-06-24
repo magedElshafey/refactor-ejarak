@@ -1,4 +1,4 @@
-export function formatDateTime(dateTimeString) {
+export function formatDateTime(dateTimeString, isContract = false) {
   const dateTime = new Date(dateTimeString);
 
   // Get the current language
@@ -39,8 +39,10 @@ export function formatDateTime(dateTimeString) {
   // Combine date and time with the period, adding a space between date and time
   const formattedDateTime =
     language === "ar"
-      ? `${formattedTimeArabic} ${formattedPeriod}  -  ${formattedDate}`
-      : `${formattedDate} - ${time} ${formattedPeriod}`;
+      ? `${
+          !isContract ? `${formattedTimeArabic} ${formattedPeriod}  -` : ""
+        }  ${formattedDate}`
+      : `${formattedDate} ${!isContract ? `- ${time} ${formattedPeriod}` : ""}`;
 
   return formattedDateTime;
 }

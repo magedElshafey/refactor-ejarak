@@ -7,6 +7,7 @@ import SearchInput from "../../../../components/dashboard/common/SearchInput";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getElectronicContracts } from "../../../../services/get/dashboard/getElectronicContracts";
+import { formatDateTime } from "../../../../utils/formateDateTime";
 const itemsPerPage = 10;
 const ElectronicContracts = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -18,6 +19,11 @@ const ElectronicContracts = () => {
     getElectronicContracts
   );
   const columns = [
+    {
+      title: "date",
+      dataIndex: "created_at",
+      render: (v) => <p>{formatDateTime(v, true)}</p>,
+    },
     {
       title: "house title",
       dataIndex: "booking.realestate.name",

@@ -7,6 +7,7 @@ import SearchInput from "../../../../components/dashboard/common/SearchInput";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getManualContracts } from "../../../../services/get/dashboard/getManualContracts";
+import { formatDateTime } from "../../../../utils/formateDateTime";
 const itemsPerPage = 10;
 const ManualContracts = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -14,7 +15,13 @@ const ManualContracts = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
   const { isLoading, data } = useQuery("contracts-manual", getManualContracts);
+  console.log("data from manual contracts", data);
   const columns = [
+    {
+      title: "date",
+      dataIndex: "created_at",
+      render: (v) => <p>{formatDateTime(v, true)}</p>,
+    },
     {
       title: "house title",
       dataIndex: "booking.realestate.name",
