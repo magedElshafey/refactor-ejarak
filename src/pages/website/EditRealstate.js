@@ -44,9 +44,9 @@ const EditRealstate = () => {
   const [suckNum, setSuckNum] = useState("");
   const [paymentId, setPaymentId] = useState("");
   const [kitchen, setKitchen] = useState("");
-  const [airConditions, setAirConditions] = useState("");
-  const [parkingNumbers, setParkingNumbers] = useState("");
-  const [parkingType, setParkingType] = useState("");
+  // const [airConditions, setAirConditions] = useState("");
+  // const [parkingNumbers, setParkingNumbers] = useState("");
+  // const [parkingType, setParkingType] = useState("");
   const [estaplished, setEstaplished] = useState("");
   const {
     value: age,
@@ -137,13 +137,13 @@ const EditRealstate = () => {
           setSuckPreview(data?.data?.data?.instrument_file[0]);
           setVideoPreview(data?.data?.data?.video);
           setKitchen(data?.data?.data?.kitchen);
-          setAirConditions(data?.data?.data?.air_conditioner);
-          setParkingNumbers(data?.data?.data?.barking_space);
-          setParkingType(data?.data?.data?.barking);
+          // setAirConditions(data?.data?.data?.air_conditioner);
+          // setParkingNumbers(data?.data?.data?.barking_space);
+          // setParkingType(data?.data?.data?.barking);
           setEstaplished(data?.data?.data?.furniture);
           setKitchen(data?.data?.data?.kitchen);
-          setAirConditions(data?.data?.data.air_conditioner);
-          setParkingType(data?.data?.data?.barking);
+          // setAirConditions(data?.data?.data.air_conditioner);
+          // setParkingType(data?.data?.data?.barking);
         }
       },
       staleTime: Infinity,
@@ -218,9 +218,9 @@ const EditRealstate = () => {
   const handlePaymentChange = (opt) => setPaymentId(opt.id);
   const handleEstaplichedChange = (opt) => setEstaplished(opt.id);
   const handleKitchenChange = (opt) => setKitchen(opt.id);
-  const handleAirConditionChange = (e) => setAirConditions(e.target.value);
-  const handleParkingNumbersChange = (e) => setParkingNumbers(e.target.value);
-  const handleParkingTypeChange = (opt) => setParkingType(opt?.id);
+  // const handleAirConditionChange = (e) => setAirConditions(e.target.value);
+  // const handleParkingNumbersChange = (e) => setParkingNumbers(e.target.value);
+  // const handleParkingTypeChange = (opt) => setParkingType(opt?.id);
   const handleSubmit = (e) => {
     const formData = new FormData();
     e.preventDefault();
@@ -321,11 +321,11 @@ const EditRealstate = () => {
       formData.append("payment_type_id", paymentId);
       formData.append("furniture", estaplished);
       formData.append("kitchen", kitchen);
-      formData.append("air_conditioner", airConditions);
-      formData.append("barking_space", parkingNumbers);
-      if (+parkingNumbers !== 0) {
-        formData.append("barking", parkingType);
-      }
+      // formData.append("air_conditioner", airConditions);
+      // formData.append("barking_space", parkingNumbers);
+      // if (+parkingNumbers !== 0) {
+      //   formData.append("barking", parkingType);
+      // }
       if (selectedSuck) {
         formData.append("instrument_file", selectedSuck);
       }
@@ -510,20 +510,20 @@ const EditRealstate = () => {
                 }
                 onSelect={handleKitchenChange}
               />
-              <MainInput
+              {/* <MainInput
                 min={0}
                 label="airConditions"
                 type="number"
                 value={airConditions}
                 onChange={handleAirConditionChange}
-              />
-              <MainInput
+              /> */}
+              {/* <MainInput
                 min={0}
                 label="parkingNumbers"
                 type="number"
                 value={parkingNumbers}
                 onChange={handleParkingNumbersChange}
-              />
+              /> */}
               <MainInput
                 type="number"
                 label="price"
@@ -546,7 +546,7 @@ const EditRealstate = () => {
                     ?.name || ""
                 }
               />
-              {+parkingNumbers !== 0 ? (
+              {/* {+parkingNumbers !== 0 ? (
                 <MainSelect
                   onSelect={handleParkingTypeChange}
                   label="parkingType"
@@ -561,7 +561,7 @@ const EditRealstate = () => {
                           ?.name
                   }
                 />
-              ) : null}
+              ) : null} */}
             </div>
             <div className="my-8">
               <EditSuck

@@ -32,9 +32,9 @@ const FormTwo = ({
   service,
   furnished,
   kitchen,
-  parkingNumbers,
-  parkingType,
-  airConditions,
+  // parkingNumbers,
+  // parkingType,
+  // airConditions,
   instrument_number,
   instrumentNumError,
   handleChangeInstrumentNum,
@@ -102,28 +102,10 @@ const FormTwo = ({
         title: t("kitchen field is required"),
       });
       return;
-    } else if (parkingNumbers === "") {
-      Swal.fire({
-        icon: "error",
-        title: t("parkingNumbers field is required"),
-      });
-      return;
-    } else if (parkingNumbers > 0 && parkingType === "") {
-      Swal.fire({
-        icon: "error",
-        title: t("parkingType field is required"),
-      });
-      return;
     } else if (!area.trim()) {
       Swal.fire({
         icon: "error",
         title: t("area field is required"),
-      });
-      return;
-    } else if (airConditions === "") {
-      Swal.fire({
-        icon: "error",
-        title: t("airConditions field is required"),
       });
       return;
     } else if (!turn.trim()) {
@@ -234,15 +216,15 @@ const FormTwo = ({
               : elevatorsEn.find((item) => item?.id === kitchen)?.name
           }
         />
-        <MainInput
+        {/* <MainInput
           min={0}
           label="parkingNumbers"
           bg="bg-[#BDC7BC4D]"
           type="number"
           value={parkingNumbers}
           onChange={handleChange("parkingNumbers")}
-        />
-        <MainSelect
+        /> */}
+        {/* <MainSelect
           label="parkingType"
           bg="bg-[#BDC7BC4D]"
           onSelect={handleSelect("parkingType")}
@@ -254,8 +236,9 @@ const FormTwo = ({
           }
           disabled={+parkingNumbers === 0}
           disabledTitle={true}
-        />
-        <MainInput
+        /> */}
+        {/**
+ *   <MainInput
           min={0}
           label="airConditions"
           bg="bg-[#BDC7BC4D]"
@@ -263,6 +246,7 @@ const FormTwo = ({
           value={airConditions}
           onChange={handleChange("airConditions")}
         />
+ */}
         <MainSelect
           label="elevators"
           bg="bg-[#BDC7BC4D]"

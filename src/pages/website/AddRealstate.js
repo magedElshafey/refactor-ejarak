@@ -26,9 +26,9 @@ const AddRealstate = () => {
     service: "",
     furnished: "",
     kitchen: "",
-    parkingNumbers: "",
-    parkingType: "",
-    airConditions: "",
+    // parkingNumbers: "",
+    // parkingType: "",
+    // airConditions: "",
   });
   const { t } = useTranslation();
   const [coordinates, setCoordinates] = useState(null);
@@ -130,9 +130,9 @@ const AddRealstate = () => {
           service={formState.service}
           furnished={formState.furnished}
           kitchen={formState.kitchen}
-          parkingNumbers={formState.parkingNumbers}
-          parkingType={formState.parkingType}
-          airConditions={formState.airConditions}
+          // parkingNumbers={formState.parkingNumbers}
+          // parkingType={formState.parkingType}
+          // airConditions={formState.airConditions}
           instrument_number={instrument_number}
           instrumentNumError={instrumentNumError}
           handleChangeInstrumentNum={handleChangeInstrumentNum}
@@ -174,9 +174,9 @@ const AddRealstate = () => {
           coordinates={coordinates}
           furnished={formState.furnished}
           kitchen={formState.kitchen}
-          parkingNumbers={formState.parkingNumbers}
-          parkingType={formState.parkingType}
-          airConditions={formState.airConditions}
+          // parkingNumbers={formState.parkingNumbers}
+          // parkingType={formState.parkingType}
+          // airConditions={formState.airConditions}
         />
       ) : null}
     </div>

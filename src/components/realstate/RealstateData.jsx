@@ -1,10 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/formateDateTime";
+import { useSelector } from "react-redux";
 const RealstateData = ({ data }) => {
   const { t, i18n } = useTranslation();
-  console.log("data?.created_at", data);
   const currentYear = new Date().getFullYear();
+  const { userData } = useSelector((state) => state.authSlice);
+  const role = userData?.account?.type;
   return (
     <div className="bg-white p-7 rounded-lg shadow-lg">
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
@@ -88,15 +90,15 @@ const RealstateData = ({ data }) => {
               : "Yes"}
           </p>
         </div>
-        <div>
+        {/* <div>
           <p className="text-[#4D5F65] mb-1">{t("airConditions")}</p>
           <p className="text-black font-bold">{data?.air_conditioner}</p>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <p className="text-[#4D5F65] mb-1">{t("parkingNumbers")}</p>
           <p className="text-black font-bold">{data?.barking_space}</p>
-        </div>
-        {data?.barking_space ? (
+        </div> */}
+        {/* {data?.barking_space ? (
           <div>
             <p className="text-[#4D5F65] mb-1">{t("parkingType")}</p>
             <p className="text-black font-bold">
@@ -109,7 +111,7 @@ const RealstateData = ({ data }) => {
                 : "front"}
             </p>
           </div>
-        ) : null}
+        ) : null} */}
         <div>
           <p className="text-[#4D5F65] mb-1">{t("Number of service rooms")}</p>
           <p className="text-black font-bold">{data.service_room}</p>
@@ -118,11 +120,13 @@ const RealstateData = ({ data }) => {
           <p className="text-[#4D5F65] mb-1">{t("payment method")}</p>
           <p className="text-black font-bold">{data.payment_type_id?.name}</p>
         </div>
+        {role === "admin" || role === "super_admin" ? (
+          <div>
+            <p className="text-[#4D5F65] mb-1">{t("suckNum")}</p>
+            <p className="text-black font-bold">{data?.instrument_number}</p>
+          </div>
+        ) : null}
 
-        <div>
-          <p className="text-[#4D5F65] mb-1">{t("suckNum")}</p>
-          <p className="text-black font-bold">{data?.instrument_number}</p>
-        </div>
         <div>
           <p className="text-[#4D5F65] mb-1">{t("advertisement number")}</p>
           <p className="text-black font-bold">{data?.number_ad}</p>
