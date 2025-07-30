@@ -8,6 +8,8 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getElectronicContracts } from "../../../../services/get/dashboard/getElectronicContracts";
 import { formatDateTime } from "../../../../utils/formateDateTime";
+import { request } from "../../../../services/axios";
+import { FaFileExport } from "react-icons/fa";
 const itemsPerPage = 10;
 const ElectronicContracts = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -90,15 +92,54 @@ const ElectronicContracts = () => {
     });
   };
   const offset = currentPage * itemsPerPage;
+  const handleExport = async () => {
+    const response = await request({
+      url: `/Dashboard/eleAgent/contract/export`,
+      method: "GET",
+      responseType: "blob",
+    });
+    const blob = new Blob([response], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "users.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+
+    return true;
+  };
+
+  const { refetch, isFetching: isLoadingExport } = useQuery(
+    ["exports"],
+    handleExport,
+    {
+      enabled: false,
+    }
+  );
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="md:w-1/2 mb-8">
-            <SearchInput onSearchChange={setSearch} />
+          <div className="flex items-center justify-between gap-4 mb-8">
+            <div className="md:w-1/2">
+              <SearchInput onSearchChange={setSearch} />
+            </div>
+            <button
+              disabled={isLoadingExport}
+              onClick={() => refetch()}
+              className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
+            >
+              <FaFileExport size={20} />
+            </button>
           </div>
+
           <Table
             columns={columns}
             bodyData={filterdData.slice(offset, offset + itemsPerPage) || []}

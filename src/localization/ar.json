@@ -702,5 +702,7 @@
   "REJECTED": "مرفوض",
   "Please wait a moment and try again.": "يرجي الانتظار قليلا و اعادة المحاولة",
   "Watch it on the app": "شاهده علي التطبيق",
-  "date": "التاريخ"
+  "date": "التاريخ",
+  "date-from": "الفترة من",
+  "date-to": "الفترة الي"
 }

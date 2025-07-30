@@ -658,5 +658,7 @@
   "activeee": "active",
   "inactivee": "inactive",
   "Please wait a moment and try again.": "Please wait a moment and try again.",
-  "Watch it on the app": "Watch it on the app"
+  "Watch it on the app": "Watch it on the app",
+  "date-from": "date from",
+  "date-to": "date to"
 }

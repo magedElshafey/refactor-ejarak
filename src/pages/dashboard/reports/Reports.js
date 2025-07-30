@@ -8,6 +8,8 @@ import { getReports } from "../../../services/get/dashboard/getReports";
 import { useQuery } from "react-query";
 import { formatDateTime } from "../../../utils/formateDateTime";
 import { useNavigate } from "react-router-dom";
+import { FaFileExport } from "react-icons/fa";
+import { request } from "../../../services/axios";
 const itemsPerPage = 10;
 const Reports = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -32,7 +34,7 @@ const Reports = () => {
       title: "report date",
       dataIndex: "created_at",
       render: (date) => {
-        return formatDateTime(date);
+        return formatDateTime(date, true);
       },
     },
     {
@@ -79,15 +81,54 @@ const Reports = () => {
   };
 
   const offset = currentPage * itemsPerPage;
+  const handleExport = async () => {
+    const response = await request({
+      url: `/Dashboard/reports/export`,
+      method: "GET",
+      responseType: "blob",
+    });
+    const blob = new Blob([response], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
+    const url = window.URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "users.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+
+    return true;
+  };
+
+  const { refetch, isFetching: isLoadingExport } = useQuery(
+    ["exports"],
+    handleExport,
+    {
+      enabled: false,
+    }
+  );
   return (
     <>
       {isLoading ? (
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="w-1/2 mb-8">
-            <SearchInput onSearchChange={setSearch} />
+          <div className="w-full flex items-center justify-between gap-3 mb-8">
+            <div className="w-1/2">
+              <SearchInput onSearchChange={setSearch} />
+            </div>
+            <button
+              disabled={isLoadingExport}
+              onClick={() => refetch()}
+              className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
+            >
+              <FaFileExport size={20} />
+            </button>
           </div>
+
           <Table
             columns={columns}
             bodyData={filterdData.slice(offset, offset + itemsPerPage) || []}
