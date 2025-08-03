@@ -2,7 +2,7 @@ import React from "react";
 import { numbersWithZero } from "../../../data/data";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { changeParkingNumbers } from "../../../store/filterSlice";
+// import { changeParkingNumbers } from "../../../store/filterSlice";
 const ParkingNumbers = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const ParkingNumbers = () => {
       <div className="flex gap-2 flex-wrap">
         {numbersWithZero?.map((item, index) => (
           <div
-            onClick={() => dispatch(changeParkingNumbers(item.number))}
+            // onClick={() => dispatch(changeParkingNumbers(item.number))}
             key={index}
             className={` duration-300 px-4 py-2 flex items-center justify-center rounded-md cursor-pointer ${
               item.number === parkingNumbers

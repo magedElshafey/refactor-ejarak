@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getParse } from "../utils/getParse";
 import { addToLocalStorage } from "../utils/addToLocalStorage";
 const initialState = {
   openFilter: false,
@@ -27,10 +26,11 @@ const initialState = {
   sort: "",
   cityId: "",
   distance: "",
-  airConditions: "",
-  parkingNumbers: "",
+  // airConditions: "",
+  // parkingNumbers: "",
   hasKitchen: "",
   isEstaplished: "",
+  paymentType: "",
 };
 
 const filterSlice = createSlice({
@@ -122,17 +122,20 @@ const filterSlice = createSlice({
     changeDistance: (state, action) => {
       state.distance = action.payload;
     },
-    changeAirConditions: (state, action) => {
-      state.airConditions = action.payload;
-    },
-    changeParkingNumbers: (state, action) => {
-      state.parkingNumbers = action.payload;
-    },
+    // changeAirConditions: (state, action) => {
+    //   state.airConditions = action.payload;
+    // },
+    // changeParkingNumbers: (state, action) => {
+    //   state.parkingNumbers = action.payload;
+    // },
     changeHasKitchen: (state, action) => {
       state.hasKitchen = action.payload;
     },
     changeIsEstaplished: (state, action) => {
       state.isEstaplished = action.payload;
+    },
+    changePaymentType: (state, action) => {
+      state.paymentType = action.payload;
     },
     resetFilter: (state) => {
       state.categoryId = "";
@@ -154,6 +157,7 @@ const filterSlice = createSlice({
       state.parkingNumbers = "";
       state.isEstaplished = "";
       state.hasKitchen = "";
+      state.paymentType = "";
     },
   },
 });
@@ -180,9 +184,10 @@ export const {
   changeSortCreateLow,
   changeCityId,
   changeDistance,
-  changeAirConditions,
-  changeParkingNumbers,
+  // changeAirConditions,
+  // changeParkingNumbers,
   changeHasKitchen,
   changeIsEstaplished,
+  changePaymentType,
 } = filterSlice.actions;
 export default filterSlice.reducer;

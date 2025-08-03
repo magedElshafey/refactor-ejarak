@@ -17,6 +17,9 @@ import AirConditions from "./AirConditions";
 import ParkingNumbers from "./ParkingNumbers";
 import Estaplish from "./Estaplish";
 import Kitchens from "./Kitchens";
+import { useGlobalContext } from "../../../hooks/GlobalContext";
+import MainSelect from "../inputs/MainSelect";
+import { changePaymentType } from "../../../store/filterSlice";
 const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -45,6 +48,9 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
       clearTimeout(debounceRef.current);
     };
   }, [dist, dispatch]);
+  const { data } = useGlobalContext();
+  const { paymentType } = useSelector((state) => state.filterSlice);
+  console.log("paymentType from filter is :", paymentType);
   return (
     <div
       className={`${bg} w-full ${rounded} p-4 px-6 h-screen md:h-[500px] lg:h-[600px] overflow-y-auto ${
@@ -102,13 +108,27 @@ const Filter = ({ bg, rounded, showRealStateBtn, mobileVieow }) => {
       ) : null}
       <RealStateCategories />
       <Price min={1000} max={50000} />
+      <div className="my-4">
+        <MainSelect
+          label="methods"
+          bg="bg-[#BDC7BC4D]"
+          options={data?.paymentTypes}
+          onSelect={(selected) => dispatch(changePaymentType(selected.id))}
+          value={
+            data?.paymentTypes
+              ? data?.paymentTypes.find((item) => item.id === paymentType)?.name
+              : null
+          }
+        />
+      </div>
       <Rooms />
       <Bathrooms />
-      <AirConditions />
-      <ParkingNumbers />
+      {/* <AirConditions />
+      <ParkingNumbers /> */}
       <Estaplish />
       <Kitchens />
       <Area min={1} max={1000} />
+
       <div className="flex items-center justify-between">
         {mobileVieow ? <SearchBtn /> : null}
         <ResetBtn />

@@ -30,6 +30,7 @@ const useMap = () => {
     parkingNumbers,
     hasKitchen,
     isEstaplished,
+    paymentType,
   } = useSelector((state) => state.filterSlice);
   const [address, setAddress] = useState("");
   const [markers, setMarkers] = useState(null);
@@ -64,6 +65,7 @@ const useMap = () => {
       parkingNumbers,
       hasKitchen,
       isEstaplished,
+      paymentType,
     ],
     () =>
       getNearRealStates(
@@ -84,7 +86,8 @@ const useMap = () => {
         airConditions,
         parkingNumbers,
         hasKitchen,
-        isEstaplished
+        isEstaplished,
+        paymentType
       ),
     {
       onSuccess: (data) => {
