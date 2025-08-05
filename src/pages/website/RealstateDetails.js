@@ -89,7 +89,11 @@ const RealstateDetails = ({ isDashboard }) => {
               role={role}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 my-8">
-              <RealstateData data={data?.data?.data} />
+              <RealstateData
+                realStateOwnerId={data?.data?.data?.user?.id}
+                userId={userId}
+                data={data?.data?.data}
+              />
               <RealstateLocation data={data?.data?.data} />
             </div>
             <div className="flex flex-col md:flex-row gap-4 md:gap-8 my-8">

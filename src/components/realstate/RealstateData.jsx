@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { formatDateTime } from "../../utils/formateDateTime";
 import { useSelector } from "react-redux";
-const RealstateData = ({ data }) => {
+const RealstateData = ({ data, realStateOwnerId, userId }) => {
   const { t, i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
   const { userData } = useSelector((state) => state.authSlice);
@@ -120,7 +120,9 @@ const RealstateData = ({ data }) => {
           <p className="text-[#4D5F65] mb-1">{t("payment method")}</p>
           <p className="text-black font-bold">{data.payment_type_id?.name}</p>
         </div>
-        {role === "admin" || role === "super_admin" ? (
+        {role === "admin" ||
+        role === "super_admin" ||
+        realStateOwnerId === userId ? (
           <div>
             <p className="text-[#4D5F65] mb-1">{t("suckNum")}</p>
             <p className="text-black font-bold">{data?.instrument_number}</p>
