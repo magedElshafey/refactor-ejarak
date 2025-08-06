@@ -24,7 +24,6 @@ const MyReservations = () => {
     filterdReservations,
     activeIndex
   );
-  console.log("filterd data", filteredData);
   return (
     <>
       {isLoading ? (

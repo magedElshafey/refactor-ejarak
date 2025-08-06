@@ -64,14 +64,10 @@ const Message = ({
 
     // Rearrange time format if the language is Arabic
     const [hours, minutes] = time.split(":");
-    const formattedTimeArabic =
-      language === "ar" ? `${minutes}:${hours}` : `${hours}:${minutes}`;
+    const formattedTimeArabic = `${hours}:${minutes}`;
 
     // Combine date and time with the period
-    const formattedDateTime =
-      language === "ar"
-        ? `${formattedDate} ${formattedTimeArabic} ${formattedPeriod}`
-        : `${formattedDate} ${time} ${formattedPeriod}`;
+    const formattedDateTime = `${formattedDate} | ${formattedTimeArabic} ${formattedPeriod}`;
 
     return formattedDateTime;
   }

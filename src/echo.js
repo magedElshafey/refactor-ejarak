@@ -5,7 +5,7 @@ const token = localStorage.getItem("token")
   : "";
 const echo = new Echo({
   broadcaster: "pusher",
-  key: "69a780a14544bf6a150b",
+  key: "8801e6e1f35ffc6b8591",
   cluster: "eu",
   forceTLS: false,
   authEndpoint: `https://api.ejark.sa/api/broadcasting/auth`,

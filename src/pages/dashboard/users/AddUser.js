@@ -130,7 +130,11 @@ const AddUser = () => {
       mutate(formData);
     }
   };
-
+  console.log("accounts", accountType?.data?.data?.account_type);
+  const types = accountType?.data?.data?.account_type?.filter(
+    (item) => item?.id !== 5
+  );
+  console.log("types", types);
   return (
     <div className="container mx-auto px-8 mt-5">
       <p className="text-textColor font-semibold text-md md:text-lg mb-8">
@@ -208,7 +212,7 @@ const AddUser = () => {
           <div className="w-full mb-4">
             <MainSelect
               label="userType"
-              options={accountType?.data?.data?.account_type}
+              options={types || []}
               onSelect={handleUserTypeChange}
               loading={loadingAccountType}
             />
