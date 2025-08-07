@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/logobglight.png";
+import logo from "../../../assets//ejark green.png";
 import Logo from "../../common/Logo";
 const AuthCard = ({ children }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useTranslation } from "react-i18next";
-import logo from "../../../assets/logobglight.png";
+import logo from "../../../assets/ejark green.png";
 const Meta = ({ title, desc, fav }) => {
   const { t } = useTranslation();
   return (

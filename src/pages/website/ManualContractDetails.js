@@ -9,7 +9,7 @@ import ReservationData from "../../components/reservationDetails/ReservationData
 import useReservationDetails from "../../hooks/useReservationDetails";
 import MainBtn from "../../components/common/buttons/MainBtn";
 import html2pdf from "html2pdf.js";
-import logo from "../../assets/logobglight.png";
+import logo from "../../assets//ejark green.png";
 import Logo from "../../components/common/Logo";
 const ManualContractDetails = () => {
   const params = useParams();
