@@ -483,6 +483,13 @@ export const dashboardLinks = [
     role: ["admin", "super_admin"],
   },
   {
+    path: "track-status",
+    title: "track status",
+    icon: <VscSettings size={20} />,
+    role: ["admin", "super_admin"],
+    list: [],
+  },
+  {
     icon: <FaUsers size={20} />,
     path: "users",
     title: "users",

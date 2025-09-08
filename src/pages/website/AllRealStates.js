@@ -22,7 +22,7 @@ const AllRealStates = () => {
   // reset all redux value when the page loaded
   useEffect(() => {
     dispatch(resetFilter());
-  }, [dispatch]);
+  }, []);
   const {
     categoryId,
     subCategoryId,
@@ -79,38 +79,35 @@ const AllRealStates = () => {
       sort,
       sortCreate,
       cityId,
-      currentPage, // بدء الترقيم من 1 في الـ API
+      currentPage,
       itemsPerPage,
-      // airConditions,
-      // parkingNumbers,
+
       hasKitchen,
       isEstaplished,
       paymentType,
     ],
     () =>
-      getAllRealstates(
+      getAllRealstates({
         name,
-        roomNumbers,
-        bathrooms,
-        highPrice,
-        lowPrice,
+        rooms_count: roomNumbers,
+        bathrooms_count: bathrooms,
+        price_high: highPrice,
+        price_low: lowPrice,
         area,
-        categoryId,
-        subCategoryId,
-        sort,
-        priceCreate,
-        sortCreate,
-        cityId,
-        currentPage + 1, // بدء الترقيم من 1 في الـ API
-        itemsPerPage,
-        // airConditions,
-        // parkingNumbers,
-        hasKitchen,
-        isEstaplished,
-        paymentType
-      ),
+        cat_id: categoryId,
+        sub_cat_id: subCategoryId,
+        sort_by: sort,
+        sort_price: priceCreate,
+        sort_create: sortCreate,
+        city_id: cityId,
+        kitchen: hasKitchen,
+        furniture: isEstaplished,
+        page: currentPage + 1,
+        per_page: itemsPerPage,
+        payment_type_id: paymentType,
+      }),
     {
-      keepPreviousData: true, // للحفاظ على البيانات السابقة عند التغيير
+      keepPreviousData: true,
       onError: (err) => {
         console.error("fetch error:", err); // مهم جداً
       },
