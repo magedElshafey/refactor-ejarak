@@ -2,12 +2,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { handleAcceptReservation } from "../../../services/post/handleAcceptReservation";
 import { useMutation, useQueryClient } from "react-query";
+import { getCurrentDate } from "../../../utils/getCurrentDate";
 import Swal from "sweetalert2";
 const AcceptReservationBtn = ({ id, data, dep }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation(
-    () => handleAcceptReservation(id, { ...data, status: "accepted" }),
+    () =>
+      handleAcceptReservation(id, {
+        ...data,
+        status: "completed",
+        accepted_at: getCurrentDate(),
+      }),
     {
       onSuccess: (data) => {
         if (data?.data?.status) {

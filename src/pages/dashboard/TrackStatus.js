@@ -6,7 +6,6 @@ import TableProperties from "../../components/dashboard/common/table/TableProper
 import Pagination from "../../components/common/Pagination";
 import SearchInput from "../../components/dashboard/common/SearchInput";
 import { useTranslation } from "react-i18next";
-import { getReservations } from "../../services/get/dashboard/getReservations";
 import { useNavigate } from "react-router-dom";
 import TableStatus from "../../components/dashboard/common/table/TableStatus";
 import { MdFilterAlt } from "react-icons/md";
@@ -19,22 +18,23 @@ import {
   filterdReservationDashboardEn,
 } from "../../data/data";
 import { FaFileExport } from "react-icons/fa";
+import { getBooking } from "./getBooking";
 const itemsPerPage = 10;
 
 const TrackStatus = () => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [dateFrom, setDateFrom] = useState("");
-  const handleDateFromChange = (e) => setDateFrom(e.target.value);
-  const [dateTo, setDateTo] = useState("");
-  const handleDateToChange = (e) => setDateTo(e.target.value);
-  const getTodayDateFormatted = () => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); // الشهر من 0 إلى 11
-    const dd = String(today.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
-  };
+  // const [dateFrom, setDateFrom] = useState("");
+  // const handleDateFromChange = (e) => setDateFrom(e.target.value);
+  // const [dateTo, setDateTo] = useState("");
+  // const handleDateToChange = (e) => setDateTo(e.target.value);
+  // const getTodayDateFormatted = () => {
+  //   const today = new Date();
+  //   const yyyy = today.getFullYear();
+  //   const mm = String(today.getMonth() + 1).padStart(2, "0"); // الشهر من 0 إلى 11
+  //   const dd = String(today.getDate()).padStart(2, "0");
+  //   return `${yyyy}-${mm}-${dd}`;
+  // };
   const { isLoading: loadinCategories, data: categories } = useQuery(
     "categories",
     getCategories
@@ -48,11 +48,8 @@ const TrackStatus = () => {
   const handleReservationStateChnage = (opt) => setReservationState(opt.id);
   const [realstateType, setRealstateType] = useState("");
   const handleRealstateTypeChange = (opt) => setRealstateType(opt.id);
-  const to = dateTo ? dateTo : getTodayDateFormatted();
-  const { isLoading, data } = useQuery(
-    ["reservations", realstateType, reservationState, dateFrom, to],
-    () => getReservations(realstateType, reservationState, dateFrom, to)
-  );
+  // const to = dateTo ? dateTo : getTodayDateFormatted();
+  const { isLoading, data } = useQuery(["get-booking"], () => getBooking());
   useEffect(() => {
     if (data) {
       if (search) {
@@ -93,7 +90,7 @@ const TrackStatus = () => {
     },
     {
       title: "house title",
-      dataIndex: "realestate.name",
+      dataIndex: "reality",
     },
     {
       title: "houseType",
@@ -107,29 +104,19 @@ const TrackStatus = () => {
       title: "tentName",
       dataIndex: "tenant.name",
     },
-    {
-      title: "reservationPeriod",
-      dataIndex: "contract_period",
-      render: (value) => {
-        return (
-          <p>
-            {value} {t("months")}
-          </p>
-        );
-      },
-    },
+
     {
       title: "reservationStatus",
       dataIndex: "status",
-      render: (status, row) => {
-        return (
-          <TableStatus
-            status={status}
-            // onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
-            hasNotChange={row.realestate?.user?.account?.type !== "super_admin"}
-          />
-        );
-      },
+      // render: (status, row) => {
+      //   return (
+      //     <TableStatus
+      //       status={status}
+      //       // onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
+      //       hasNotChange={row.realestate?.user?.account?.type !== "super_admin"}
+      //     />
+      //   );
+      // },
     },
     {
       title: "properties",
@@ -183,8 +170,8 @@ const TrackStatus = () => {
     }
   );
   const handleReset = () => {
-    setDateFrom("");
-    setDateTo("");
+    // setDateFrom("");
+    // setDateTo("");
     setSearch("");
     setReservationState("");
     setRealstateType("");
@@ -257,7 +244,7 @@ const TrackStatus = () => {
                   }
                 />
               </div>
-              <div className="w-[250px]">
+              {/* <div className="w-[250px]">
                 <label className="block mb-1" htmlFor="date-from">
                   {t("date-from")}
                 </label>
@@ -280,7 +267,7 @@ const TrackStatus = () => {
                   value={dateTo}
                   onChange={handleDateToChange}
                 />
-              </div>
+              </div> */}
             </div>
             <button
               className="w-[150px] flex items-center justify-center bg-red-600 text-white p-3 rounded-xl"
