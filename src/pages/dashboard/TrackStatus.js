@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
 import Table from "../../components/dashboard/common/table/Table";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import Spinner from "../../components/common/Spinner";
-import TableProperties from "../../components/dashboard/common/table/TableProperties";
 import Pagination from "../../components/common/Pagination";
 import SearchInput from "../../components/dashboard/common/SearchInput";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import TableStatus from "../../components/dashboard/common/table/TableStatus";
-import { MdFilterAlt } from "react-icons/md";
-import { getCategories } from "../../services/get/dashboard/getCategories";
-import MainSelect from "../../components/common/inputs/MainSelect";
+import { Link } from "react-router-dom";
+// import { MdFilterAlt } from "react-icons/md";
+// import { getCategories } from "../../services/get/dashboard/getCategories";
+// import MainSelect from "../../components/common/inputs/MainSelect";
 import { request } from "../../services/axios";
 import { formatDateTime } from "../../utils/formateDateTime";
-import {
-  filterdReservationDashboardAr,
-  filterdReservationDashboardEn,
-} from "../../data/data";
+// import {
+//   filterdReservationDashboardAr,
+//   filterdReservationDashboardEn,
+// } from "../../data/data";
 import { FaFileExport } from "react-icons/fa";
 import { getBooking } from "./getBooking";
+import StepProgress from "../../components/common/reservations/StepProgress";
+import { FaEye } from "react-icons/fa";
 const itemsPerPage = 10;
-
+const handleVerifcation = (contractId) => {
+  return request({
+    url: `/booking-contracts/approve/${contractId}`,
+    method: "POST",
+  });
+};
 const TrackStatus = () => {
-  const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
+  const { t } = useTranslation();
+  const queryClient = useQueryClient();
   // const [dateFrom, setDateFrom] = useState("");
   // const handleDateFromChange = (e) => setDateFrom(e.target.value);
   // const [dateTo, setDateTo] = useState("");
@@ -35,21 +40,21 @@ const TrackStatus = () => {
   //   const dd = String(today.getDate()).padStart(2, "0");
   //   return `${yyyy}-${mm}-${dd}`;
   // };
-  const { isLoading: loadinCategories, data: categories } = useQuery(
-    "categories",
-    getCategories
-  );
+  // const { isLoading: loadinCategories, data: categories } = useQuery(
+  //   "categories",
+  //   getCategories
+  // );
   const [filterdData, setFitlerdData] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [showFilter, setShowFilter] = useState(false);
-  const handleShowFilter = () => setShowFilter(!showFilter);
-  const [reservationState, setReservationState] = useState("");
-  const handleReservationStateChnage = (opt) => setReservationState(opt.id);
-  const [realstateType, setRealstateType] = useState("");
-  const handleRealstateTypeChange = (opt) => setRealstateType(opt.id);
+  // const [showFilter, setShowFilter] = useState(false);
+  // const handleShowFilter = () => setShowFilter(!showFilter);
+  // const [reservationState, setReservationState] = useState("");
+  // const handleReservationStateChnage = (opt) => setReservationState(opt.id);
+  // const [realstateType, setRealstateType] = useState("");
+  // const handleRealstateTypeChange = (opt) => setRealstateType(opt.id);
   // const to = dateTo ? dateTo : getTodayDateFormatted();
-  const { isLoading, data } = useQuery(["get-booking"], () => getBooking());
+  const { isLoading, data } = useQuery("get-booking", () => getBooking());
   useEffect(() => {
     if (data) {
       if (search) {
@@ -79,6 +84,14 @@ const TrackStatus = () => {
   };
 
   const offset = currentPage * itemsPerPage;
+  const { isLoading: loadingVerifcationContract, mutate } = useMutation(
+    (id) => handleVerifcation(id),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("get-booking");
+      },
+    }
+  );
 
   const columns = [
     {
@@ -96,50 +109,49 @@ const TrackStatus = () => {
       title: "houseType",
       dataIndex: "realestate.category.name",
     },
-    {
-      title: "houseOwner",
-      dataIndex: "realestate.user.name",
-    },
-    {
-      title: "tentName",
-      dataIndex: "tenant.name",
-    },
+    // {
+    //   title: "houseOwner",
+    //   dataIndex: "realestate.user.name",
+    // },
+    // {
+    //   title: "tentName",
+    //   dataIndex: "tenant.name",
+    // },
 
     {
-      title: "reservationStatus",
-      dataIndex: "status",
-      // render: (status, row) => {
-      //   return (
-      //     <TableStatus
-      //       status={status}
-      //       // onChange={(newStatus) => handleStatusChange(row.id, newStatus)}
-      //       hasNotChange={row.realestate?.user?.account?.type !== "super_admin"}
-      //     />
-      //   );
-      // },
+      title: "status",
+      dataIndex: "status_name",
+      render: (status) => {
+        return <StepProgress status={status} />;
+      },
     },
     {
       title: "properties",
       dataIndex: "",
       render: (value, row) => {
         return (
-          <TableProperties
-            hasEdit={false}
-            hasView={true}
-            hasDelete={false}
-            // deleteAction={() => handleDelete(row.id)}
-            viewAction={() =>
-              navigate(`/dashboard/reservation-details/${row.id}`)
-            }
-          />
+          <div className="flex items-center justify-center gap-3">
+            {row?.contract_id && (
+              <button
+                disabled={loadingVerifcationContract}
+                onClick={() => mutate(row?.contract_id)}
+                className="py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white rounded-md cursor-pointer disabled:cursor-not-allowed disabled:opacity-30"
+              >
+                {t("verify contract")}
+              </button>
+            )}
+            <Link to={`/dashboard/reservation-details/${row.id}`}>
+              <FaEye size={20} className=" cursor-pointer" />
+            </Link>
+          </div>
         );
       },
     },
   ];
-  const newAccountType = {
-    name: t("all"), // Assuming `t` is your translation function
-    id: "",
-  };
+  // const newAccountType = {
+  //   name: t("all"), // Assuming `t` is your translation function
+  //   id: "",
+  // };
   const handleExport = async () => {
     const response = await request({
       url: `/Dashboard/bookings/export`,
@@ -169,13 +181,13 @@ const TrackStatus = () => {
       enabled: false,
     }
   );
-  const handleReset = () => {
-    // setDateFrom("");
-    // setDateTo("");
-    setSearch("");
-    setReservationState("");
-    setRealstateType("");
-  };
+  // const handleReset = () => {
+  //   // setDateFrom("");
+  //   // setDateTo("");
+  //   setSearch("");
+  //   setReservationState("");
+  //   setRealstateType("");
+  // };
   return (
     <>
       {isLoading ? (
@@ -187,13 +199,13 @@ const TrackStatus = () => {
               <SearchInput onSearchChange={setSearch} />
             </div>
             <div className="flex items-center gap-3 flex-col lg:flex-row">
-              <button
+              {/* <button
                 onClick={handleShowFilter}
                 className="flex items-center justify-center gap-3 p-3 bg-white text-maincolorgreen font-semibold border border-slate-400 rounded-lg min-w-[140px]"
               >
                 <p>{t("filter")}</p>
                 <MdFilterAlt size={20} />
-              </button>
+              </button> */}
               <button
                 disabled={isLoadingExport}
                 onClick={() => refetch()}
@@ -203,13 +215,13 @@ const TrackStatus = () => {
               </button>
             </div>
           </div>
-          <div
+          {/* <div
             className={`w-full relative p-3 flex items-center justify-between gap-4 flex-wrap  rounded-lg bg-white shadow-sm my-8 duration-300 border border-slate-500 ${
               showFilter ? "block opacity-100" : "hidden opacity-0"
             }`}
-          >
-            <div className="flex-1 flex items-center gap-3">
-              <div className="w-[180px]">
+          > */}
+          {/* <div className="flex-1 flex items-center gap-3"> */}
+          {/* <div className="w-[180px]">
                 <MainSelect
                   onSelect={handleRealstateTypeChange}
                   loading={loadinCategories}
@@ -243,8 +255,8 @@ const TrackStatus = () => {
                         )?.name
                   }
                 />
-              </div>
-              {/* <div className="w-[250px]">
+              </div> */}
+          {/* <div className="w-[250px]">
                 <label className="block mb-1" htmlFor="date-from">
                   {t("date-from")}
                 </label>
@@ -268,14 +280,14 @@ const TrackStatus = () => {
                   onChange={handleDateToChange}
                 />
               </div> */}
-            </div>
-            <button
+          {/* </div> */}
+          {/* <button
               className="w-[150px] flex items-center justify-center bg-red-600 text-white p-3 rounded-xl"
               onClick={handleReset}
             >
               {t("reset")}
-            </button>
-          </div>
+            </button> */}
+          {/* </div> */}
           <Table
             columns={columns}
             bodyData={filterdData.slice(offset, offset + itemsPerPage) || []}
