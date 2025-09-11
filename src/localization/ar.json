@@ -706,5 +706,7 @@
   "date-from": "الفترة من",
   "date-to": "الفترة الي",
   "track status": "تتبع الحالة",
-  "verify contract": "توثيق العقد"
+  "verify contract": "توثيق العقد",
+  "Export as Excel": "التصدير ك ملف Excel",
+  "Export as PDF": "التصدير ك ملف PDF"
 }

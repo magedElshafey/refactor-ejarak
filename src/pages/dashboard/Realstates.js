@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../components/common/inputs/MainSelect";
 import { useLocation } from "react-router-dom";
+import ExportButton from "../../components/common/ExportButton";
 const Realstates = () => {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState();
@@ -36,6 +37,11 @@ const Realstates = () => {
             <p>{t("filter")}</p>
             <MdFilterAlt size={20} />
           </button>
+          <ExportButton
+            excelEndpoint="/Dashboard/realties/export"
+            pdfEndpoint="/Dashboard/realties/export_pdf"
+            fileName="realstates"
+          />
           <div className="w-[150px] md:w-[200px] lg:w-[220px]">
             <MainBtn text="add real state" action={action} />
           </div>

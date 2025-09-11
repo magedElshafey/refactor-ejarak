@@ -16,8 +16,7 @@ import { MdFilterAlt } from "react-icons/md";
 import MainSelect from "../../../components/common/inputs/MainSelect";
 import { request } from "../../../services/axios";
 import { useLocation } from "react-router-dom";
-import { FaFileExport } from "react-icons/fa";
-
+import ExportButton from "../../../components/common/ExportButton";
 const itemsPerPage = 10;
 
 const Users = () => {
@@ -240,35 +239,35 @@ const Users = () => {
     id: "",
   };
 
-  const handleExport = async () => {
-    const response = await request({
-      url: `/Dashboard/users/export`,
-      method: "GET",
-      responseType: "blob",
-    });
-    const blob = new Blob([response], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    });
-    const url = window.URL.createObjectURL(blob);
+  // const handleExport = async () => {
+  //   const response = await request({
+  //     url: `/Dashboard/users/export`,
+  //     method: "GET",
+  //     responseType: "blob",
+  //   });
+  //   const blob = new Blob([response], {
+  //     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  //   });
+  //   const url = window.URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "users.xlsx";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+  //   const a = document.createElement("a");
+  //   a.href = url;
+  //   a.download = "users.xlsx";
+  //   document.body.appendChild(a);
+  //   a.click();
+  //   window.URL.revokeObjectURL(url);
+  //   document.body.removeChild(a);
 
-    return true;
-  };
+  //   return true;
+  // };
 
-  const { refetch, isFetching: isLoadingExport } = useQuery(
-    ["exports"],
-    handleExport,
-    {
-      enabled: false,
-    }
-  );
+  // const { refetch, isFetching: isLoadingExport } = useQuery(
+  //   ["exports"],
+  //   handleExport,
+  //   {
+  //     enabled: false,
+  //   }
+  // );
   return (
     <>
       {isLoading ? (
@@ -288,16 +287,21 @@ const Users = () => {
                 <p>{t("filter")}</p>
                 <MdFilterAlt size={20} />
               </button>
+              <ExportButton
+                excelEndpoint="/Dashboard/users/export"
+                pdfEndpoint="/Dashboard/users/export_pdf"
+                fileName="users"
+              />
               <div className="w-full md:w-[180px]">
                 <MainBtn text="add user" action={handleAddUser} />
               </div>
-              <button
+              {/* <button
                 disabled={isLoadingExport}
                 onClick={() => refetch()}
                 className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
               >
                 <FaFileExport size={20} />
-              </button>
+              </button> */}
             </div>
           </div>
           <div

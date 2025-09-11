@@ -10,6 +10,7 @@ import { formatDateTime } from "../../../utils/formateDateTime";
 import { useNavigate } from "react-router-dom";
 import { FaFileExport } from "react-icons/fa";
 import { request } from "../../../services/axios";
+import ExportButton from "../../../components/common/ExportButton";
 const itemsPerPage = 10;
 const Reports = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -120,13 +121,18 @@ const Reports = () => {
             <div className="w-1/2">
               <SearchInput onSearchChange={setSearch} />
             </div>
-            <button
+            <ExportButton
+              excelEndpoint="/Dashboard/reports/export"
+              pdfEndpoint="/Dashboard/reports/export_pdf"
+              fileName="reports"
+            />
+            {/* <button
               disabled={isLoadingExport}
               onClick={() => refetch()}
               className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
             >
               <FaFileExport size={20} />
-            </button>
+            </button> */}
           </div>
 
           <Table

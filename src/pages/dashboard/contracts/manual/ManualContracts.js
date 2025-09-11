@@ -10,6 +10,7 @@ import { getManualContracts } from "../../../../services/get/dashboard/getManual
 import { formatDateTime } from "../../../../utils/formateDateTime";
 import { request } from "../../../../services/axios";
 import { FaFileExport } from "react-icons/fa";
+import ExportButton from "../../../../components/common/ExportButton";
 const itemsPerPage = 10;
 const ManualContracts = () => {
   const [filterdData, setFitlerdData] = useState([]);
@@ -127,13 +128,18 @@ const ManualContracts = () => {
             <div className="md:w-1/2">
               <SearchInput onSearchChange={setSearch} />
             </div>
-            <button
+            <ExportButton
+              excelEndpoint="/Dashboard/manual/contract/export"
+              pdfEndpoint="/Dashboard/manual/contract/export_pdf"
+              fileName="manual-contracts"
+            />
+            {/* <button
               disabled={isLoadingExport}
               onClick={() => refetch()}
               className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
             >
               <FaFileExport size={20} />
-            </button>
+            </button> */}
           </div>
 
           <Table

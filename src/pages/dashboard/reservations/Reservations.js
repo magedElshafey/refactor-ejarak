@@ -19,6 +19,7 @@ import { getCategories } from "../../../services/get/dashboard/getCategories";
 import MainSelect from "../../../components/common/inputs/MainSelect";
 import { request } from "../../../services/axios";
 import { formatDateTime } from "../../../utils/formateDateTime";
+import ExportButton from "../../../components/common/ExportButton";
 import {
   filterdReservationDashboardAr,
   filterdReservationDashboardEn,
@@ -299,6 +300,11 @@ const Reservations = () => {
               <SearchInput onSearchChange={setSearch} />
             </div>
             <div className="flex items-center gap-3 flex-col lg:flex-row">
+              <ExportButton
+                excelEndpoint="/Dashboard/bookings/export"
+                pdfEndpoint="/Dashboard/bookings/export_pdf"
+                fileName="bookings"
+              />
               <button
                 onClick={handleShowFilter}
                 className="flex items-center justify-center gap-3 p-3 bg-white text-maincolorgreen font-semibold border border-slate-400 rounded-lg min-w-[140px]"
@@ -306,13 +312,13 @@ const Reservations = () => {
                 <p>{t("filter")}</p>
                 <MdFilterAlt size={20} />
               </button>
-              <button
+              {/* <button
                 disabled={isLoadingExport}
                 onClick={() => refetch()}
                 className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
               >
                 <FaFileExport size={20} />
-              </button>
+              </button> */}
             </div>
           </div>
           <div
