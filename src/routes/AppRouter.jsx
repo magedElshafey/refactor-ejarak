@@ -74,6 +74,7 @@ import ProtectedDashboard from "./ProtectedDashboard";
 import ContractsPayments from "../pages/dashboard/transactions/ContractsPayments";
 import ApplicationPayments from "../pages/dashboard/transactions/ApplicationPayments";
 import TrackStatus from "../pages/dashboard/TrackStatus";
+import TrackMyOrders from "../pages/website/TrackMyOrders";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -201,6 +202,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <AllNotfications />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "track-my-orders",
+        element: (
+          <ProtectedRoutes>
+            <TrackMyOrders />
           </ProtectedRoutes>
         ),
       },

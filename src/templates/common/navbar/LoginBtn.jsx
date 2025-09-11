@@ -155,6 +155,19 @@ const LoginBtn = ({ bg, isDashboard }) => {
             >
               {t("my contracts")}
             </li>
+            {userData?.account?.type === "admin" ||
+            userData?.account?.type === "super_admin" ||
+            userData?.account?.type === "customer_service" ? null : (
+              <li
+                className=" cursor-pointer mb-2 text-black"
+                onClick={() => {
+                  navigate("/website/track-my-orders");
+                  setShowMenu(false);
+                }}
+              >
+                {t("track my orders")}
+              </li>
+            )}
             <li className=" cursor-pointer text-black ">
               <button
                 onClick={() => {

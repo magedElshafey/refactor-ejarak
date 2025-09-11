@@ -17,8 +17,6 @@ const StepProgress = ({ status }) => {
 
   // نجيب رقم الخطوة الحالية
   const currentStep = getStepFromStatus(status);
-  console.log("status is", status);
-  console.log("current step is", currentStep);
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* الخط الأساسي الرمادي */}

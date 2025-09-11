@@ -15,7 +15,6 @@ import { formatDateTime } from "../../utils/formateDateTime";
 //   filterdReservationDashboardAr,
 //   filterdReservationDashboardEn,
 // } from "../../data/data";
-import { FaFileExport } from "react-icons/fa";
 import { getBooking } from "./getBooking";
 import StepProgress from "../../components/common/reservations/StepProgress";
 import { FaEye } from "react-icons/fa";
@@ -109,14 +108,6 @@ const TrackStatus = () => {
       title: "houseType",
       dataIndex: "realestate.category.name",
     },
-    // {
-    //   title: "houseOwner",
-    //   dataIndex: "realestate.user.name",
-    // },
-    // {
-    //   title: "tentName",
-    //   dataIndex: "tenant.name",
-    // },
 
     {
       title: "status",
@@ -152,35 +143,7 @@ const TrackStatus = () => {
   //   name: t("all"), // Assuming `t` is your translation function
   //   id: "",
   // };
-  const handleExport = async () => {
-    const response = await request({
-      url: `/Dashboard/bookings/export`,
-      method: "GET",
-      responseType: "blob",
-    });
-    const blob = new Blob([response], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    });
-    const url = window.URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "users.xlsx";
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-
-    return true;
-  };
-
-  const { refetch, isFetching: isLoadingExport } = useQuery(
-    ["exports"],
-    handleExport,
-    {
-      enabled: false,
-    }
-  );
   // const handleReset = () => {
   //   // setDateFrom("");
   //   // setDateTo("");
@@ -197,22 +160,6 @@ const TrackStatus = () => {
           <div className="w-full mb-8 flex items-center justify-between gap-5">
             <div className="md:w-1/2">
               <SearchInput onSearchChange={setSearch} />
-            </div>
-            <div className="flex items-center gap-3 flex-col lg:flex-row">
-              {/* <button
-                onClick={handleShowFilter}
-                className="flex items-center justify-center gap-3 p-3 bg-white text-maincolorgreen font-semibold border border-slate-400 rounded-lg min-w-[140px]"
-              >
-                <p>{t("filter")}</p>
-                <MdFilterAlt size={20} />
-              </button> */}
-              <button
-                disabled={isLoadingExport}
-                onClick={() => refetch()}
-                className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
-              >
-                <FaFileExport size={20} />
-              </button>
             </div>
           </div>
           {/* <div
