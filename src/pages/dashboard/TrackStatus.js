@@ -129,12 +129,13 @@ const TrackStatus = () => {
       title: "properties",
       dataIndex: "",
       render: (_, row) => {
+        console.log("row", row);
         return (
           <div className="flex items-center justify-center gap-3">
             {row?.status_name === "contract_created" && (
               <button
                 disabled={loadingVerifcationContract}
-                onClick={() => console.log(row.contract_id)}
+                onClick={() => mutate(row.contract_id)}
                 className="py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white rounded-md cursor-pointer disabled:cursor-not-allowed disabled:opacity-30"
               >
                 {t("verify contract")}
