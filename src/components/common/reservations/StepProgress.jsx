@@ -28,7 +28,7 @@ const StepProgress = ({ status }) => {
           i18n.language === "ar" ? "right-0" : "left-0"
         } h-1 bg-green-600 z-0 transition-all duration-300`}
         style={{
-          width: `${(currentStep / (steps.length - 1)) * 100}%`,
+          width: `${(currentStep / steps.length) * 100}%`,
         }}
       ></div>
 

@@ -5,10 +5,8 @@ import { request } from "../../services/axios";
 import Table from "../../components/dashboard/common/table/Table";
 import StepProgress from "../../components/common/reservations/StepProgress";
 import { formatDateTime } from "../../utils/formateDateTime";
-import { useTranslation } from "react-i18next";
 import Spinner from "../../components/common/Spinner";
 const TrackMyOrders = () => {
-  const { t } = useTranslation();
   const { userData } = useSelector((state) => state.authSlice);
   const ownerUrl = `/booking-contracts?owner_id=${userData?.id}`;
   const tenantUrl = `/booking-contracts?tenant_id=${userData?.id}`;
@@ -30,6 +28,21 @@ const TrackMyOrders = () => {
         return formatDateTime(date, true);
       },
     },
+    // {
+    //   title: "house image",
+    //   dataIndex: "realestate.images",
+    //   render: (value) => {
+    //     console.log(value);
+    //     return (
+    //       <img
+    //         src={value[0]}
+    //         loading="lazy"
+    //         alt="realstate-image"
+    //         className="w-48 h-24 mx-auto"
+    //       />
+    //     );
+    //   },
+    // },
     {
       title: "house title",
       dataIndex: "reality",

@@ -6,6 +6,8 @@ import Pagination from "../../components/common/Pagination";
 import SearchInput from "../../components/dashboard/common/SearchInput";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 // import { MdFilterAlt } from "react-icons/md";
 // import { getCategories } from "../../services/get/dashboard/getCategories";
 // import MainSelect from "../../components/common/inputs/MainSelect";
@@ -86,8 +88,16 @@ const TrackStatus = () => {
   const { isLoading: loadingVerifcationContract, mutate } = useMutation(
     (id) => handleVerifcation(id),
     {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        console.log("data from suc", data);
         queryClient.invalidateQueries("get-booking");
+      },
+      onError: (data) => {
+        console.log("data from err", data);
+        Swal.fire({
+          icon: "error",
+          title: t("advertise field are required"),
+        });
       },
     }
   );
@@ -120,12 +130,14 @@ const TrackStatus = () => {
       title: "properties",
       dataIndex: "",
       render: (value, row) => {
+        console.log(row);
+        console.log("row", row?.contract_id);
         return (
           <div className="flex items-center justify-center gap-3">
-            {row?.contract_id && (
+            {row?.status_name === "contract_created" && (
               <button
                 disabled={loadingVerifcationContract}
-                onClick={() => mutate(row?.contract_id)}
+                onClick={() => console.log(row.contract_id)}
                 className="py-2 px-4 flex items-center justify-center bg-maincolorgreen text-white rounded-md cursor-pointer disabled:cursor-not-allowed disabled:opacity-30"
               >
                 {t("verify contract")}
