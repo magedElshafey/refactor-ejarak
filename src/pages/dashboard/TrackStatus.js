@@ -89,13 +89,25 @@ const TrackStatus = () => {
     {
       onSuccess: (data) => {
         console.log("data from suc", data);
+        if (data?.data?.status) {
+          Swal.fire({
+            icon: "success",
+            title: data?.data?.message,
+          });
+        } else {
+          console.log("data from err", data);
+          Swal.fire({
+            icon: "error",
+            title: data?.response?.data?.message,
+          });
+        }
         queryClient.invalidateQueries("get-booking");
       },
       onError: (data) => {
         console.log("data from err", data);
         Swal.fire({
           icon: "error",
-          title: t("advertise field are required"),
+          title: data?.response?.data?.message,
         });
       },
     }
