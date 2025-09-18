@@ -7,7 +7,6 @@ import SearchInput from "../../components/dashboard/common/SearchInput";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-
 // import { MdFilterAlt } from "react-icons/md";
 // import { getCategories } from "../../services/get/dashboard/getCategories";
 // import MainSelect from "../../components/common/inputs/MainSelect";
@@ -129,9 +128,7 @@ const TrackStatus = () => {
     {
       title: "properties",
       dataIndex: "",
-      render: (value, row) => {
-        console.log(row);
-        console.log("row", row?.contract_id);
+      render: (_, row) => {
         return (
           <div className="flex items-center justify-center gap-3">
             {row?.status_name === "contract_created" && (
