@@ -73,6 +73,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import ProtectedDashboard from "./ProtectedDashboard";
 import ContractsPayments from "../pages/dashboard/transactions/ContractsPayments";
 import ApplicationPayments from "../pages/dashboard/transactions/ApplicationPayments";
+import PaclagesPayment from "../pages/dashboard/transactions/PacakgesPayment";
 import TrackStatus from "../pages/dashboard/TrackStatus";
 import TrackMyOrders from "../pages/website/TrackMyOrders";
 const router = createBrowserRouter([
@@ -578,6 +579,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedDashboard>
             <ContractsPayments />
+          </ProtectedDashboard>
+        ),
+      },
+      {
+        path: "packages-payments",
+        element: (
+          <ProtectedDashboard>
+            <PaclagesPayment />
           </ProtectedDashboard>
         ),
       },

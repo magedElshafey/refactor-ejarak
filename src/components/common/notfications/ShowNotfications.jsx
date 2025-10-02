@@ -7,6 +7,7 @@ const ShowNotfications = ({ data, refetch }) => {
   const { userData } = useSelector((state) => state.authSlice);
   const role = userData?.account?.type;
   const navigate = useNavigate();
+  console.log("dataaaaaaa from notf", data);
   const handleNavigate = (id) => {
     const url = getNotificationLink(data.type, role, data?.realty_id);
     navigate(url);

@@ -624,6 +624,13 @@ export const dashboardLinks = [
     role: ["admin", "super_admin"],
     list: [],
   },
+  {
+    title: "packages payments",
+    icon: <MdOutlinePayment size={20} />,
+    path: "/dashboard/packages-payments",
+    role: ["admin", "super_admin"],
+    list: [],
+  },
 ];
 export const tableStatus = [
   {

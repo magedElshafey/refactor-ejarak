@@ -11,7 +11,12 @@ const getNotificationLink = (type, userType, id) => {
     case "fee_payment":
     case "reject_realty":
       return `/website/my-reservations`;
-
+    case "new_realstate":
+      if (userType === "admin" || userType === "super_admin") {
+        return `/dashboard/realstates`;
+      } else {
+        return `/website/realstate/${id}`;
+      }
     default:
       return "/";
   }
