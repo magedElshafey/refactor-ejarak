@@ -100,19 +100,13 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data, owner }) => {
         title: periodError,
       });
       return;
-    } else if (owner === "owner" && !userType) {
-      Swal.fire({
-        icon: "error",
-        title: t("please fill all fields"),
-      });
-      return;
     } else {
       const v = {
         realty_id: data.id,
         owner_id: data.user.id,
         contract_period: period,
         family_number: familyNum,
-        contract_fee_payer: userType,
+        contract_fee_payer: global.account_type[0].id,
         contract_start_date: startDate,
       };
       mutate(v);
@@ -195,7 +189,7 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data, owner }) => {
               ) : null}
             </div>
           ) : null}
-          {owner === "admin" || owner === "super_admin" ? null : (
+          {/* {owner === "admin" || owner === "super_admin" ? null : (
             <div className="mb-3 md:mb-4 lg:mb-5">
               <label
                 htmlFor="startDate"
@@ -212,7 +206,7 @@ const BookingForm = ({ showBookingForm, setShowBookingForm, data, owner }) => {
                 onSelect={handleUserTypeChange}
               />
             </div>
-          )}
+          )} */}
 
           <div className="flex items-center justify-center gap-6 md:gap-8 lg:gap-12">
             {isLoading ? (

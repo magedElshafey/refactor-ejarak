@@ -10,6 +10,7 @@ import PayBtn from "./PayBtn";
 import CreateContractBtn from "./CreateContractBtn";
 const ReservationCard = ({ data, index, role, created_at, dep }) => {
   const { t, i18n } = useTranslation();
+  console.log("data in reservation card", data);
   return (
     <div className="w-full flex gap-3 mb-5">
       <div className="p-3 rounded-md flex items-center  w-8 bg-[#f5f5fa]">
@@ -68,6 +69,14 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               </p>
             </div>
           </div>
+          {!data?.payed ? (
+            <p className="my-4 text-sm text-red-600">
+              *{" "}
+              {t(
+                "Please pay the application fee in order to accept the reservation."
+              )}
+            </p>
+          ) : null}
           <div className="flex items-center justify-between flex-col md:flex-row gap-3 md:gap-0 mb-3">
             <UserContactCard
               role={role}
@@ -75,7 +84,11 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               whatsapp={`tel:${data?.tenant?.phone?.country_code}${data?.tenant?.phone?.number}`}
               chat={`/website/chat/${data?.tenant?.id}`}
             />
+
             <div className="flex items-center gap-3 flex-wrap">
+              {data?.status === "pending" && role === "owner" ? (
+                <PayBtn id={data?.id} dep={dep} />
+              ) : null}
               {data?.status === "pending" && role === "owner" ? (
                 <AcceptReservationBtn
                   data={created_at}
@@ -83,6 +96,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
                   dep={dep}
                 />
               ) : null}
+
               {data?.status === "pending" && role === "owner" ? (
                 <RefusedReservationBtn
                   data={created_at}
@@ -94,10 +108,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
               (data.status === "pending" && role === "tenant") ? (
                 <ReservationDetailsBtn id={data?.id} />
               ) : null}
-              {data?.status === "completed" &&
-              role === data?.contract_fee_payer ? (
-                <PayBtn id={data?.id} dep={dep} />
-              ) : null}
+
               {data?.status === "completed" && role === "owner" ? (
                 <CreateContractBtn id={data?.id} />
               ) : null}
