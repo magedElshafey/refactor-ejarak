@@ -6,6 +6,7 @@ import { getContractsPayments } from "../../../services/get/dashboard/getContrac
 import { useQuery } from "react-query";
 import Spinner from "../../../components/common/Spinner";
 import { useTranslation } from "react-i18next";
+import ExportButton from "../../../components/common/ExportButton";
 const itemsPerPage = 10;
 const ContractsPayments = () => {
   const { t } = useTranslation();
@@ -98,8 +99,15 @@ const ContractsPayments = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="w-full md:w-1/2 mb-5">
-            <SearchInput onSearchChange={setSearch} />
+          <div className="flex items-center justify-between">
+            <div className="w-full md:w-1/2 mb-5">
+              <SearchInput onSearchChange={setSearch} />
+            </div>
+            <ExportButton
+              excelEndpoint="/Dashboard/transactions/export?type=contractFees"
+              pdfEndpoint="/Dashboard/transactions/export_pdf?type=contractFees"
+              fileName="bookings"
+            />
           </div>
           <Table
             columns={columns}

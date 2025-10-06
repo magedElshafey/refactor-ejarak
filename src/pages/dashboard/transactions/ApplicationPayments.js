@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import Spinner from "../../../components/common/Spinner";
 import { useTranslation } from "react-i18next";
 import { getApplicationPayment } from "../../../services/get/dashboard/getApplicationPayment";
+import ExportButton from "../../../components/common/ExportButton";
 const itemsPerPage = 10;
 const ApplicationPayments = () => {
   const { t } = useTranslation();
@@ -96,9 +97,17 @@ const ApplicationPayments = () => {
         <Spinner />
       ) : (
         <div className="container mx-auto px-8 mt-6">
-          <div className="w-full md:w-1/2 mb-5">
-            <SearchInput onSearchChange={setSearch} />
+          <div className="flex items-center justify-between">
+            <div className="w-full md:w-1/2 mb-5">
+              <SearchInput onSearchChange={setSearch} />
+            </div>
+            <ExportButton
+              excelEndpoint={`/Dashboard/transactions/export?type=appFess`}
+              pdfEndpoint="/Dashboard/transactions/export_pdf?type=appFess"
+              fileName="bookings"
+            />
           </div>
+
           <Table
             columns={columns}
             bodyData={filterdData?.slice(offset, offset + itemsPerPage) || []}

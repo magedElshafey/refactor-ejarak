@@ -86,7 +86,9 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
             />
 
             <div className="flex items-center gap-3 flex-wrap">
-              {data?.status === "pending" && role === "owner" ? (
+              {data?.status === "pending" &&
+              role === "owner" &&
+              !data?.payed ? (
                 <PayBtn id={data?.id} dep={dep} />
               ) : null}
               {data?.status === "pending" && role === "owner" ? (

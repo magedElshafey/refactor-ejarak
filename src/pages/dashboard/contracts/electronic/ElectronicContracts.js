@@ -51,6 +51,7 @@ const ElectronicContracts = () => {
       title: "properties",
       dataIndex: "",
       render: (value, row) => {
+        console.log("row from reservation details in electronic contract", row);
         return (
           <TableProperties
             hasEdit={false}
@@ -58,7 +59,12 @@ const ElectronicContracts = () => {
             hasDelete={false}
             viewAction={() =>
               navigate(
-                `/dashboard/electronic-contracts-details/${row.booking.id}`
+                `/dashboard/electronic-contracts-details/${row.booking.id}`,
+                {
+                  state: {
+                    contractId: row?.id,
+                  },
+                }
               )
             }
           />
@@ -137,13 +143,6 @@ const ElectronicContracts = () => {
               pdfEndpoint="/Dashboard/eleAgent/contract/export_pdf"
               fileName="elegant-contract"
             />
-            {/* <button
-              disabled={isLoadingExport}
-              onClick={() => refetch()}
-              className="w-10 h-10 flex items-center justify-center border bg-white text-maincolorgreen disabled:bg-opacity-30 disabled:cursor-not-allowed"
-            >
-              <FaFileExport size={20} />
-            </button> */}
           </div>
 
           <Table
