@@ -10,7 +10,6 @@ const AcceptReservationBtn = ({ id, data, dep }) => {
   const { isLoading, mutate } = useMutation(
     () =>
       handleAcceptReservation(id, {
-        ...data,
         status: "completed",
         accepted_at: getCurrentDate(),
       }),

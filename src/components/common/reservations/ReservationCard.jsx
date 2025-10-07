@@ -92,11 +92,7 @@ const ReservationCard = ({ data, index, role, created_at, dep }) => {
                 <PayBtn id={data?.id} dep={dep} />
               ) : null}
               {data?.status === "pending" && role === "owner" ? (
-                <AcceptReservationBtn
-                  data={created_at}
-                  id={data?.id}
-                  dep={dep}
-                />
+                <AcceptReservationBtn data={data} id={data?.id} dep={dep} />
               ) : null}
 
               {data?.status === "pending" && role === "owner" ? (
