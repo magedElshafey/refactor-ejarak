@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import langImg from "../../assets/Group 17.svg";
 import { useTranslation } from "react-i18next";
@@ -14,11 +14,19 @@ import { changeLanguage } from "../../services/post/changeLangauge";
 import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import ChatMenu from "../common/navbar/ChatMenu";
+import useListenToMessages from "../../hooks/useListenToMessages.js";
+import echo from "../../echo.js";
+import notificationSound from "../../assets/sounds/notification.wav";
+import { useQueryClient } from "react-query";
+const notificationAudio = new Audio(notificationSound);
 const DashboardNavbar = () => {
   const { ejarakLogin } = useSelector((state) => state.authSlice);
   const { i18n, t } = useTranslation();
   const [showSidebar, setShowSidebar] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const loggedUser = useSelector((state) => state?.authSlice?.userData);
+  const queryClient = useQueryClient();
+
   const { pathname } = useLocation();
   const handleActiveIndexClick = (index, item) => {
     if (item.list.length > 0) {
@@ -56,6 +64,69 @@ const DashboardNavbar = () => {
       return;
     }
   };
+  const addNotification = (newNotification) => {
+    const newNotifications = [
+      {
+        ...newNotification,
+        description: newNotification.notification,
+        seen: Boolean(newNotification.seen),
+        date: new Date(Date.parse(newNotification.time)),
+        created_at: new Date(Date.parse(newNotification.time)),
+        path: newNotification.realty_id
+          ? `/user-ad-details/${newNotification.realty_id}`
+          : "",
+        id: newNotification.notification_id,
+      },
+    ];
+    return setNotifications(newNotifications, +1, true);
+  };
+
+  useListenToMessages();
+
+  // Subscribing to the Event Manager.
+  useEffect(() => {
+    if (loggedUser) {
+      echo
+        .private(`privateNotification.${loggedUser?.id}`)
+        .listen(".private-notification", (e) => {
+          //play the sound of the notification.
+          notificationAudio.play().catch((e) => {
+            if (e.name === "NotAllowedError") {
+              // handle autoplay errors, for reference https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
+              return;
+            }
+            throw new Error("unexpected behaviour from the audio player.");
+          });
+          addNotification(e);
+        });
+    }
+
+    return () => {
+      echo
+        .private(`privateNotification.${loggedUser?.id}`)
+        .stopListening(".private-notification");
+    };
+  }, [loggedUser]);
+
+  const setNotifications = (notifications, unseen = 0, isNew = false) => {
+    queryClient.setQueryData("all-notfications", (response) => {
+      const results = response?.data?.data || [];
+      const newNotifications = isNew
+        ? [...notifications, ...results]
+        : notifications;
+      const oldUnseen = response?.data?.un_seen || 0;
+      const newData = {
+        ...response,
+        data: {
+          ...response.data,
+          data: newNotifications,
+          un_seen: oldUnseen + unseen,
+        },
+      };
+      return newData;
+    });
+  };
+
   return (
     <>
       <div className="w-full  flex items-center lg:mt-8 mb-2 bg-[#f7f7f7] rounded-lg p-3">
